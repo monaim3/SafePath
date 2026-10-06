@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Recurring hotspot: alert pin over rings, clock badge = "keeps happening" -->
+  <defs>
+    <linearGradient id="pin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff7043"/>
+      <stop offset="1" stop-color="#c62828"/>
+    </linearGradient>
+    <linearGradient id="clock" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4da3ff"/>
+      <stop offset="1" stop-color="#1557c0"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="30" cy="55" rx="20" ry="6" fill="#e53935" opacity="0.15"/>
+  <ellipse cx="30" cy="55" rx="12" ry="3.6" fill="#e53935" opacity="0.28"/>
+
+  <path d="M30 5 C18.5 5 10 13.5 10 25 C10 39 30 55 30 55 C30 55 50 39 50 25 C50 13.5 41.5 5 30 5 Z" fill="url(#pin)"/>
+  <path d="M19 13 C22 9 26 7.5 30 7.5" stroke="#ffffff" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <circle cx="30" cy="25" r="11.5" fill="#ffffff"/>
+  <rect x="28.2" y="16.5" width="3.6" height="10.5" rx="1.8" fill="#c62828"/>
+  <circle cx="30" cy="31.5" r="2.2" fill="#c62828"/>
+
+  <circle cx="49" cy="13" r="10" fill="#ffffff"/>
+  <circle cx="49" cy="13" r="8" fill="url(#clock)"/>
+  <path d="M49 8.5 V13 L52.5 15" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* Brand — sampled from public/Images/logo.png */
+  --brand-navy: #06307f;
+  --brand-blue: #0a6fd6;
+  --brand-cyan: #12b5ea;
+  --brand-teal: #00b8b0;
+  --brand-green: #4cbb3f;
+  --grad-brand: linear-gradient(115deg, #4cbb3f 0%, #00b8b0 42%, #0a6fd6 78%, #06307f 100%);
+  --grad-brand-text: linear-gradient(100deg, #4cbb3f 0%, #00a99d 40%, #0a6fd6 85%);
+
+  --bg: #f4f8fb;
+  --surface: #ffffff;
+  --surface-2: #eaf1f7;
+  --ink: #0a1f3d;
+  --ink-2: #45597a;
+  --ink-3: #8193ad;
+  --line: #dbe5ef;
+  --accent: #0a6fd6;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2effc;
+  --positive: #23964a;
+  --positive-soft: #e2f5e5;
+  --glass: rgb(255 255 255 / 0.8);
+  --shadow: 0 1px 2px rgb(10 31 61 / 0.05), 0 10px 28px -10px rgb(10 47 115 / 0.18);
+
+  /* Illustrated hero map (Google-Maps-like palette) */
+  --map-land: #f3f1ec;
+  --map-block: #e6e2d9;
+  --map-water: #a9d3f2;
+  --map-park: #c6e8c0;
+  --map-street: #ffffff;
+  --map-major: #fbd97a;
+  --map-major-casing: #ecc15a;
+  --map-label: #7b8794;
+
+  /* Reported Activity Level — green → yellow → orange → red (Google-traffic style) */
+  --ral-0: #1e9e4a;
+  --ral-1: #8bc34a;
+  --ral-2: #fbc02d;
+  --ral-3: #fb8c00;
+  --ral-4: #e53935;
+  --ral-5: #9b1c1c;
+}
+
+[data-theme="dark"] {
+  --grad-brand-text: linear-gradient(100deg, #7ad66a 0%, #2fd3c8 40%, #58a8ff 85%);
+
+  --bg: #06101e;
+  --surface: #0c1a2d;
+  --surface-2: #12243c;
+  --ink: #e8f1fb;
+  --ink-2: #a6b8cf;
+  --ink-3: #6b809c;
+  --line: #1c3150;
+  --accent: #4da3ff;
+  --accent-ink: #04152b;
+  --accent-soft: #0f2b4d;
+  --positive: #5fd07a;
+  --positive-soft: #10301c;
+  --glass: rgb(12 26 45 / 0.8);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 14px 34px -12px rgb(0 0 0 / 0.65);
+
+  --map-land: #18212d;
+  --map-block: #212c3a;
+  --map-water: #0f3556;
+  --map-park: #1b3a2a;
+  --map-street: #2c3a4c;
+  --map-major: #5d5236;
+  --map-major-casing: #4a4230;
+  --map-label: #7e8fa5;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-glass: var(--glass);
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-green: var(--brand-green);
+  --color-ral-0: var(--ral-0);
+  --color-ral-1: var(--ral-1);
+  --color-ral-2: var(--ral-2);
+  --color-ral-3: var(--ral-3);
+  --color-ral-4: var(--ral-4);
+  --color-ral-5: var(--ral-5);
+
+  --font-sans: var(--font-body), var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-latin), var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: var(--shadow);
+  --radius-4xl: 2rem;
+}
+
+/* ---------- Brand utilities ---------- */
+@utility bg-brand {
+  background-image: var(--grad-brand);
+}
+@utility text-brand {
+  background-image: var(--grad-brand-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--bg);
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip; /* decorative glows may extend past the viewport */
+}
+
+/* Latin fonts have no Bengali glyphs, so Bangla text falls through to --font-bangla. */
+html:lang(bn) body {
+  line-height: 1.65;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* In the base layer so components can opt out (e.g. text inputs whose wrapper shows focus). */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+/* ---------- Motion ---------- */
+/* Hero map: zone border slowly rotates. */
+
+@keyframes zone-spin { to { transform: rotate(360deg); } }
+.zone-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zone-spin 30s linear infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zone-spin, .rise { animation: none; }
+}
+
+/* ---------- MapLibre overrides ---------- */
+.maplibregl-ctrl-group {
+  background: var(--glass) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: 14px !important;
+  box-shadow: var(--shadow) !important;
+  overflow: hidden;
+}
+.maplibregl-ctrl-group button + button { border-top-color: var(--line) !important; }
+[data-theme="dark"] .maplibregl-ctrl-icon { filter: invert(1); }
+.maplibregl-ctrl-attrib {
+  background: var(--glass) !important;
+  color: var(--ink-3);
+  font-size: 10px;
+}
+.maplibregl-ctrl-attrib a { color: var(--ink-2) !important; }

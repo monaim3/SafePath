@@ -1,0 +1,21 @@
+# Secrets & local config
+.env
+.env.local
+.env.*.local
+
+# Dependencies & builds
+node_modules/
+.next/
+.venv/
+__pycache__/
+*.pyc
+backend/staticfiles/
+
+# Local data & tool output
+db.sqlite3
+.pytest_cache/
+.playwright-mcp/
+
+# OS / editor
+.DS_Store
+Thumbs.db
