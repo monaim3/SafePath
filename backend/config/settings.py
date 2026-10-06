@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qsl, unquote, urlparse
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -53,8 +53,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "config.health.HealthCheckMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # serves admin static files when no Caddy is in front
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -83,17 +85,21 @@ TEMPLATES = [
 
 
 def database_from_url(url: str) -> dict:
-    """sqlite (default, local dev) or postgres://user:pass@host:port/name."""
+    """sqlite (default, local dev) or postgres://user:pass@host:port/name?sslmode=require."""
     if not url:
         return {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
     parts = urlparse(url)
     return {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": parts.path.lstrip("/"),
-        "USER": parts.username or "",
-        "PASSWORD": parts.password or "",
+        "USER": unquote(parts.username or ""),
+        "PASSWORD": unquote(parts.password or ""),
         "HOST": parts.hostname or "",
         "PORT": str(parts.port or 5432),
+        "CONN_MAX_AGE": 60,
+        "CONN_HEALTH_CHECKS": True,
+        # Query-string options (sslmode, channel_binding, ...) go straight to libpq — Neon needs them.
+        "OPTIONS": dict(parse_qsl(parts.query)),
     }
 
 
@@ -105,7 +111,7 @@ TIME_ZONE = "Asia/Dhaka"
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"  # filled by collectstatic, served by Caddy in production
+STATIC_ROOT = BASE_DIR / "staticfiles"  # filled by collectstatic, served by Caddy or WhiteNoise
 
 REST_FRAMEWORK = {
     # Moderators (Next.js dashboard, other origin) use tokens; the Django admin uses sessions.
@@ -140,3 +146,6 @@ SAFEPATH_HASH_SALT = env("SAFEPATH_HASH_SALT", "dev-only-salt")
 TURNSTILE_SECRET = env("TURNSTILE_SECRET")
 # Proxies whose X-Forwarded-For we trust (e.g. Caddy/Nginx in front of the app).
 TRUSTED_PROXY_COUNT = int(env("TRUSTED_PROXY_COUNT", "0"))
+# Header carrying the real client IP, set by an edge proxy that clients cannot spoof through.
+# On Render: HTTP_CF_CONNECTING_IP (Render appends to, never resets, X-Forwarded-For).
+CLIENT_IP_HEADER = env("CLIENT_IP_HEADER")

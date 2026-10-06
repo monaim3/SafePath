@@ -18,6 +18,11 @@ REJECTION_STATUS = {
 
 def client_ip(request: Request) -> str:
     """Remote address, honouring X-Forwarded-For only from configured trusted proxies."""
+    if settings.CLIENT_IP_HEADER:
+        # Set by an edge proxy that overwrites any client-sent value (e.g. Cloudflare on Render).
+        ip = request.META.get(settings.CLIENT_IP_HEADER, "").strip()
+        if ip:
+            return ip
     hops = settings.TRUSTED_PROXY_COUNT
     forwarded = request.META.get("HTTP_X_FORWARDED_FOR", "")
     if hops and forwarded:

@@ -20,7 +20,27 @@ Everything else is ready: `deploy/docker-compose.prod.yml` (database, API, Caddy
 
 Local development keeps using Cloudflare's official test keys (`1x000…AA`), which always pass.
 
-## 2. Backend server (Oracle Cloud Always Free)
+## 2a. Backend without a card: Render + Neon (current setup)
+
+1. **Neon** (neon.tech, sign in with GitHub) → new project `safepath`, region **Singapore**, Postgres 16. Copy the connection string (`postgresql://…?sslmode=require`).
+2. **Render** (render.com, sign in with GitHub) → **New → Blueprint** → pick this repo. `render.yaml` creates `safepath-api` (free, Docker, Singapore). Enter the secrets it asks for:
+   - `DATABASE_URL` — the Neon connection string
+   - `DJANGO_SECRET_KEY`, `SAFEPATH_HASH_SALT`, `TURNSTILE_SECRET` — same values as `deploy/.env`
+   - `CORS_ALLOWED_ORIGINS` — the Vercel URL (no trailing slash)
+3. Migrations run on every start. Render's free plan has no shell, so create the moderator from your PC against Neon:
+
+```powershell
+cd backend
+$env:DATABASE_URL = "<neon connection string>"
+.venv\Scripts\python manage.py create_moderator <name>
+Remove-Item Env:DATABASE_URL
+```
+
+Check: `https://safepath-api.onrender.com/healthz` → `ok`, `/api/v1/map/time-profile` → JSON.
+
+The free service sleeps after 15 idle minutes (first request then takes ~1 minute). A free UptimeRobot HTTP monitor on `/healthz` every 5 minutes keeps it awake; 750 free hours cover one service for a whole month.
+
+## 2b. Backend server (Oracle Cloud Always Free, needs a card)
 
 1. Create an **Ampere A1** instance (Ubuntu 24.04, up to 4 OCPU / 24 GB — free).
 2. In the VCN security list, allow inbound **TCP 80 and 443**.
