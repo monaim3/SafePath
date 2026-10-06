@@ -1,0 +1,84 @@
+- generic [active] [ref=f41e1]:
+  - main [ref=f41e2]:
+    - generic [ref=f41e3]:
+      - region "রিপোর্টকৃত কার্যকলাপ" [ref=f41e4]:
+        - generic [ref=f41e5]:
+          - region "Map" [ref=f41e200]
+          - generic:
+            - generic:
+              - button "Find my location" [ref=f41e202] [cursor=pointer]
+              - generic [ref=f41e204]:
+                - button "Zoom in" [ref=f41e205] [cursor=pointer]
+                - button "Zoom out" [ref=f41e207] [cursor=pointer]
+              - group [ref=f41e209]:
+                - generic "Toggle attribution" [ref=f41e210] [cursor=pointer]
+                - generic [ref=f41e211]:
+                  - text: Imagery © Esri, Maxar, Earthstar Geographics |
+                  - link "OpenFreeMap" [ref=f41e212] [cursor=pointer]:
+                    - /url: https://openfreemap.org
+                  - link "© OpenMapTiles" [ref=f41e213] [cursor=pointer]:
+                    - /url: https://www.openmaptiles.org/
+                  - text: Data from
+                  - link "OpenStreetMap" [ref=f41e214] [cursor=pointer]:
+                    - /url: https://www.openstreetmap.org/copyright
+      - generic [ref=f41e6]:
+        - link "SafePath home" [ref=f41e7] [cursor=pointer]:
+          - /url: /bn
+          - generic [ref=f41e8]: SafePath
+        - navigation [ref=f41e10]:
+          - link "ম্যাপ" [ref=f41e11] [cursor=pointer]:
+            - /url: /bn/map
+          - link "সচেতন থাকুন" [ref=f41e12] [cursor=pointer]:
+            - /url: /bn/safety
+        - generic [ref=f41e13]:
+          - link "English" [ref=f41e14] [cursor=pointer]:
+            - /url: /en/map
+          - button "ডার্ক থিম" [ref=f41e15]
+          - link "যা দেখেছেন জানান" [ref=f41e20] [cursor=pointer]:
+            - /url: /bn/report
+      - generic [ref=f41e216]:
+        - generic [ref=f41e217]:
+          - generic [ref=f41e218]:
+            - button "বন্ধ করুন" [ref=f41e219]
+            - heading "পথের অবস্থা দেখুন" [level=2] [ref=f41e223]
+            - generic [ref=f41e224]:
+              - button "গাড়ি / রিকশা" [pressed] [ref=f41e225]
+              - button "হেঁটে" [ref=f41e231]
+          - generic [ref=f41e236]:
+            - generic [ref=f41e237]:
+              - generic [ref=f41e239]:
+                - generic [ref=f41e242]: কোথা থেকে
+                - combobox "কোথা থেকে" [ref=f41e243]
+              - generic [ref=f41e245]:
+                - generic [ref=f41e249]: কোথায় যাবেন?
+                - combobox "কোথায় যাবেন?" [ref=f41e250]
+            - button "শুরু ও গন্তব্য অদলবদল" [ref=f41e251]
+          - button "আমার অবস্থান" [ref=f41e256]
+        - paragraph [ref=f41e261]: কোথা থেকে শুরু আর কোথায় যাবেন, বেছে নিন।
+      - button "ম্যাপ" [ref=f41e57]
+      - region "দিনের সময়" [ref=f41e65]:
+        - generic [ref=f41e66]:
+          - generic [ref=f41e71]:
+            - paragraph [ref=f41e72]: পুরো শহরে
+            - paragraph [ref=f41e73]:
+              - generic [ref=f41e74]: সারাদিন
+          - generic [ref=f41e75]:
+            - button "এখন" [ref=f41e76]
+            - button "সারাদিন" [pressed] [ref=f41e77]
+        - slider "টেনে বা ট্যাপ করে সময় বেছে নিন" [ref=f41e128] [cursor=pointer]: "12"
+        - generic [aria-hidden] [ref=f41e129]:
+          - generic [ref=f41e130]: রাত ১২টা
+          - generic [ref=f41e133]: সকাল ৬টা
+          - generic [ref=f41e140]: দুপুর ১২টা
+          - generic [ref=f41e147]: সন্ধ্যা ৬টা
+        - generic [ref=f41e150]:
+          - button "ভোর" [ref=f41e151]
+          - button "সকাল" [ref=f41e157]
+          - button "দুপুর" [ref=f41e163]
+          - button "বিকাল" [ref=f41e170]
+          - button "সন্ধ্যা" [ref=f41e177]
+          - button "রাত" [ref=f41e183]
+          - button "গভীর রাত" [ref=f41e186]
+        - generic [ref=f41e189]: টেনে বা ট্যাপ করে সময় বেছে নিন
+  - button "Open Next.js Dev Tools" [ref=f41e196] [cursor=pointer]
+  - alert [ref=f41e215]

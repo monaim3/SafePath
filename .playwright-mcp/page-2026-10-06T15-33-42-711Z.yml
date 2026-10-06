@@ -1,0 +1,89 @@
+- generic [active] [ref=f63e1]:
+  - banner [ref=f63e2]:
+    - generic [ref=f63e3]:
+      - link "SafePath home" [ref=f63e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f63e5]: SafePath
+      - navigation [ref=f63e7]:
+        - link "ম্যাপ" [ref=f63e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f63e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f63e10]:
+        - link "English" [ref=f63e11] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f63e12]
+        - link "যা দেখেছেন জানান" [ref=f63e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f63e19]:
+    - generic [ref=f63e20]:
+      - generic [ref=f63e21]:
+        - heading "ছিনতাইয়ের তথ্য জানান" [level=1] [ref=f63e22]
+        - paragraph [ref=f63e23]: এক মিনিটও লাগবে না। নাম বা ফোন নম্বর লাগবে না।
+      - generic [ref=f63e24]:
+        - list "Progress" [ref=f63e25]:
+          - listitem [ref=f63e26]:
+            - generic [ref=f63e28]: কী
+          - listitem [ref=f63e29]:
+            - generic [ref=f63e31]: কোথায়
+          - listitem [ref=f63e32]:
+            - generic [ref=f63e34]: কখন
+          - listitem [ref=f63e35]:
+            - generic [ref=f63e37]: বিস্তারিত
+        - generic [ref=f63e39]:
+          - generic [ref=f63e40]:
+            - heading "আপনি কী জানাতে চান?" [level=2] [ref=f63e41]
+            - generic [ref=f63e42]:
+              - button "ছিনতাই হয়েছে আমার সাথে বা আমার চোখের সামনে" [pressed] [ref=f63e43]:
+                - generic [ref=f63e45]:
+                  - generic [ref=f63e46]: ছিনতাই হয়েছে
+                  - generic [ref=f63e47]: আমার সাথে বা আমার চোখের সামনে
+              - button "এখানে প্রায়ই ছিনতাই হয় এলাকার মানুষ হিসেবে যা জানি" [ref=f63e51]:
+                - generic [ref=f63e53]:
+                  - generic [ref=f63e54]: এখানে প্রায়ই ছিনতাই হয়
+                  - generic [ref=f63e55]: এলাকার মানুষ হিসেবে যা জানি
+              - button "ভালো দিক জানাতে চাই আলো, টহল, খোলা দোকান" [ref=f63e56]:
+                - generic [ref=f63e58]:
+                  - generic [ref=f63e59]: ভালো দিক জানাতে চাই
+                  - generic [ref=f63e60]: আলো, টহল, খোলা দোকান
+          - generic [ref=f63e61]:
+            - heading "কীভাবে হয়েছে?" [level=2] [ref=f63e62]
+            - generic [ref=f63e63]:
+              - button "মোটরসাইকেল থেকে টান চলন্ত বাইক থেকে ব্যাগ বা ফোন টেনে নেওয়া" [ref=f63e64]:
+                - generic [ref=f63e66]:
+                  - generic [ref=f63e67]: মোটরসাইকেল থেকে টান
+                  - generic [ref=f63e68]: চলন্ত বাইক থেকে ব্যাগ বা ফোন টেনে নেওয়া
+              - button "রিকশা বা সিএনজিতে থাকা অবস্থায় চলার পথে পাশ থেকে টান দেওয়া" [ref=f63e69]:
+                - generic [ref=f63e71]:
+                  - generic [ref=f63e72]: রিকশা বা সিএনজিতে থাকা অবস্থায়
+                  - generic [ref=f63e73]: চলার পথে পাশ থেকে টান দেওয়া
+              - button "হেঁটে যাওয়ার সময় ফুটপাত বা রাস্তার পাশে" [ref=f63e74]:
+                - generic [ref=f63e76]:
+                  - generic [ref=f63e77]: হেঁটে যাওয়ার সময়
+                  - generic [ref=f63e78]: ফুটপাত বা রাস্তার পাশে
+              - button "বাসে বা বাসস্ট্যান্ডে জানালা দিয়ে বা ভিড়ের মধ্যে" [ref=f63e79]:
+                - generic [ref=f63e81]:
+                  - generic [ref=f63e82]: বাসে বা বাসস্ট্যান্ডে
+                  - generic [ref=f63e83]: জানালা দিয়ে বা ভিড়ের মধ্যে
+              - button "ছুরি বা অস্ত্র দেখিয়ে ভয় দেখিয়ে জিনিস নিয়ে যাওয়া" [ref=f63e84]:
+                - generic [ref=f63e86]:
+                  - generic [ref=f63e87]: ছুরি বা অস্ত্র দেখিয়ে
+                  - generic [ref=f63e88]: ভয় দেখিয়ে জিনিস নিয়ে যাওয়া
+        - button "পরবর্তী" [ref=f63e90]
+  - contentinfo [ref=f63e93]:
+    - generic [ref=f63e94]:
+      - generic [ref=f63e95]:
+        - generic [ref=f63e96]: SafePath
+        - paragraph [ref=f63e98]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f63e99]:
+        - paragraph [ref=f63e100]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f63e101]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f63e102]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f63e103] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f63e104] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f63e110] [cursor=pointer]
+  - alert [ref=f63e114]

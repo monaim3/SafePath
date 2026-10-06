@@ -1,0 +1,80 @@
+[     341ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     384ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   14091ms] [WARNING] [Cloudflare Turnstile] Language bn is not supported, falling back to: en-us. @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   70887ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   71128ms] [LOG] [Fast Refresh] done in 142ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1170920ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1170962ms] [LOG] [Fast Refresh] done in 29ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1175581ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1175760ms] [LOG] [Fast Refresh] done in 185ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1175790ms] [LOG] [Fast Refresh] done in 185ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1177406ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1177568ms] [ERROR] ./src/features/report/QuickReport.tsx:449:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  447 |     </form>
+  448 |   );
+> 449 | }
+      | ^
+  450 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./src/features/report/QuickReport.tsx
+    ./src/app/[lang]/(site)/report/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1177738ms] [ERROR] ./src/features/report/QuickReport.tsx:449:1
+Error: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  447 |     </form>
+  448 |   );
+> 449 | }
+      | ^
+  450 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./src/features/report/QuickReport.tsx
+    ./src/app/[lang]/(site)/report/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1182172ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1182315ms] [LOG] [Fast Refresh] done in 32ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1183724ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1183750ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1183757ms] [LOG] [Fast Refresh] done in 82ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1184096ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1184152ms] [LOG] [Fast Refresh] done in 164ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1185296ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3100/bn/report:0
+[ 1185390ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1185506ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1185583ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1185748ms] ReferenceError: UserX is not defined
+    at module evaluation (http://localhost:3100/_next/static/chunks/src_0u5c8uc._.js:1849:5)
+    at http://localhost:3100/_next/static/chunks/turbopack-_08bm286._.js:1499:27
+    at runModuleExecutionHooks (http://localhost:3100/_next/static/chunks/turbopack-_08bm286._.js:1828:13)
+    at instantiateModuleShared (http://localhost:3100/_next/static/chunks/turbopack-_08bm286._.js:1497:9)
+    at instantiateModule (http://localhost:3100/_next/static/chunks/turbopack-_08bm286._.js:1813:12)
+    at getOrInstantiateModuleFromParent (http://localhost:3100/_next/static/chunks/turbopack-_08bm286._.js:1796:12)
+    at DevContext.commonJsRequire [as r] (http://localhost:3100/_next/static/chunks/turbopack-_08bm286._.js:375:12)
+    at requireModule (http://localhost:3100/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:95:84)
+    at initializeModuleChunk (http://localhost:3100/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:1126:25)
+    at resolveModuleChunk (http://localhost:3100/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:1046:43)
+    at http://localhost:3100/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:1776:24
+[ 1188834ms] [WARNING] The resource http://localhost:3100/_next/static/chunks/%5Broot-of-the-server%5D__19vuu3q._.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3100/bn/report:0
+[ 1188834ms] [WARNING] The resource http://localhost:3100/_next/static/chunks/node_modules_maplibre-gl_dist_maplibre-gl_1qepm5m.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3100/bn/report:0
+[ 1190953ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1191058ms] [LOG] [Fast Refresh] done in 209ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1192047ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1192089ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1197359ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1197785ms] [LOG] [Fast Refresh] done in 547ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1198888ms] [LOG] [Fast Refresh] done in 547ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1201316ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1201922ms] [LOG] [Fast Refresh] done in 697ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

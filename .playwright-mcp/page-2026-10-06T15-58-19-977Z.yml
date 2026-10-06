@@ -1,0 +1,51 @@
+- generic [active] [ref=f69e1]:
+  - banner [ref=f69e2]:
+    - generic [ref=f69e3]:
+      - link "SafePath home" [ref=f69e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f69e5]: SafePath
+      - navigation [ref=f69e7]:
+        - link "ম্যাপ" [ref=f69e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f69e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f69e10]:
+        - link "English" [ref=f69e11] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f69e12]
+        - link "যা দেখেছেন জানান" [ref=f69e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f69e19]:
+    - generic [ref=f69e21]:
+      - heading "ধন্যবাদ। আপনার রিপোর্ট জমা হয়েছে।" [level=1] [ref=f69e219]
+      - paragraph [ref=f69e220]: একজন মডারেটর এটি পর্যালোচনা করবেন। ততক্ষণ এলাকার মাত্রায় এর প্রভাব সামান্য থাকবে — এতে ম্যাপ সৎ থাকে।
+      - generic [ref=f69e221]:
+        - heading "রিপোর্ট কীভাবে যাচাই হয়" [level=2] [ref=f69e222]
+        - list [ref=f69e226]:
+          - listitem [ref=f69e227]: নাম বা ফোন নম্বর লাগে না — আপনার পরিচয় গোপন থাকে।
+          - listitem [ref=f69e233]: একটি রিপোর্ট একা ম্যাপ বদলায় না; কোনো এলাকা দেখাতে কমপক্ষে ৩টি আলাদা রিপোর্ট লাগে।
+          - listitem [ref=f69e238]: অন্যরা একই ঘটনা জানালে বা “আমিও দেখেছি” চাপলে রিপোর্টের গুরুত্ব বাড়ে।
+          - listitem [ref=f69e244]: একজন মডারেটর পর্যালোচনা করেন; তারপরই এটি যাচাইকৃত হিসেবে দেখানো হয়।
+          - listitem [ref=f69e248]: ক্যাপচা ও দৈনিক সীমা বট ও ভুয়া রিপোর্ট আটকায়।
+          - listitem [ref=f69e252]: পুরোনো রিপোর্টের গুরুত্ব সময়ের সাথে ধীরে ধীরে কমে।
+      - generic [ref=f69e256]:
+        - button "আরেকটি শেয়ার করুন" [ref=f69e257]
+        - link "ম্যাপে ফিরুন" [ref=f69e258] [cursor=pointer]:
+          - /url: /bn/map
+  - contentinfo [ref=f69e93]:
+    - generic [ref=f69e94]:
+      - generic [ref=f69e95]:
+        - generic [ref=f69e96]: SafePath
+        - paragraph [ref=f69e98]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f69e99]:
+        - paragraph [ref=f69e100]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f69e101]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f69e102]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f69e103] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f69e104] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f69e110] [cursor=pointer]
+  - alert [ref=f69e114]

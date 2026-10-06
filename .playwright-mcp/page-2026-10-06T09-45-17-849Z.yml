@@ -1,0 +1,117 @@
+- generic [ref=f8e1]:
+  - note [ref=f8e2]: ডেমো ডেটা — এগুলো আসল রিপোর্ট নয়। শুধু ডিজাইন দেখানোর জন্য।
+  - banner [ref=f8e3]:
+    - generic [ref=f8e4]:
+      - link "SafePath home" [ref=f8e5] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f8e6]: SafePath
+      - navigation [ref=f8e12]:
+        - link "ম্যাপ" [ref=f8e13] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f8e14] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f8e15]:
+        - link "English" [ref=f8e16] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f8e17]
+        - link "যা দেখেছেন জানান" [ref=f8e21] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f8e23]:
+    - generic [ref=f8e24]:
+      - generic [ref=f8e25]:
+        - heading "আপনার জানা তথ্য শেয়ার করুন" [level=1] [ref=f8e26]
+        - paragraph [ref=f8e27]: এক মিনিটও লাগবে না। নাম বা ফোন নম্বর লাগবে না।
+      - generic [ref=f8e28]:
+        - list "Progress" [ref=f8e29]:
+          - listitem [ref=f8e30]:
+            - generic [ref=f8e32]: কী
+          - listitem [ref=f8e33]:
+            - generic [ref=f8e35]: কোথায়
+          - listitem [ref=f8e36]:
+            - generic [ref=f8e38]: কখন
+          - listitem [ref=f8e39]:
+            - generic [ref=f8e41]: বিস্তারিত
+        - generic [ref=f8e43]:
+          - generic [ref=f8e44]:
+            - heading "আপনি কী শেয়ার করছেন?" [level=2] [ref=f8e45]
+            - generic [ref=f8e46]:
+              - button "কিছু ঘটেছে আমার সাথে, বা আমি দেখেছি" [pressed] [ref=f8e47]:
+                - generic [ref=f8e48]: কিছু ঘটেছে
+                - generic [ref=f8e49]: আমার সাথে, বা আমি দেখেছি
+              - button "এখানে যা প্রায়ই ঘটে এলাকার মানুষ যে ধরন জানে" [ref=f8e50]:
+                - generic [ref=f8e51]: এখানে যা প্রায়ই ঘটে
+                - generic [ref=f8e52]: এলাকার মানুষ যে ধরন জানে
+          - generic [ref=f8e53]:
+            - heading "কী ধরনের?" [level=2] [ref=f8e54]
+            - generic [ref=f8e55]:
+              - paragraph [ref=f8e56]: ব্যক্তিগত নিরাপত্তা
+              - generic [ref=f8e57]:
+                - button "ছিনতাই" [active] [pressed] [ref=f8e58]:
+                  - generic [aria-hidden] [ref=f8e59]: 👜
+                  - text: ছিনতাই
+                - button "হাইজ্যাকিং" [ref=f8e60]:
+                  - generic [aria-hidden] [ref=f8e61]: 🛺
+                  - text: হাইজ্যাকিং
+                - button "মোবাইল ছিনতাই" [ref=f8e62]:
+                  - generic [aria-hidden] [ref=f8e63]: 📱
+                  - text: মোবাইল ছিনতাই
+                - button "ব্যাগ / মানিব্যাগ ছিনতাই" [ref=f8e64]:
+                  - generic [aria-hidden] [ref=f8e65]: 👛
+                  - text: ব্যাগ / মানিব্যাগ ছিনতাই
+                - button "ডাকাতি" [ref=f8e66]:
+                  - generic [aria-hidden] [ref=f8e67]: ⚠️
+                  - text: ডাকাতি
+                - button "হয়রানি" [ref=f8e68]:
+                  - generic [aria-hidden] [ref=f8e69]: ✋
+                  - text: হয়রানি
+                - button "যানবাহনে হয়রানি" [ref=f8e70]:
+                  - generic [aria-hidden] [ref=f8e71]: 🚌
+                  - text: যানবাহনে হয়রানি
+                - button "সন্দেহজনক কার্যকলাপ" [ref=f8e72]:
+                  - generic [aria-hidden] [ref=f8e73]: 👀
+                  - text: সন্দেহজনক কার্যকলাপ
+            - generic [ref=f8e74]:
+              - paragraph [ref=f8e75]: রাস্তা ও অবকাঠামো
+              - generic [ref=f8e76]:
+                - button "অন্ধকার / নির্জন রাস্তা" [ref=f8e77]:
+                  - generic [aria-hidden] [ref=f8e78]: 🌑
+                  - text: অন্ধকার / নির্জন রাস্তা
+                - button "নষ্ট স্ট্রিট লাইট" [ref=f8e79]:
+                  - generic [aria-hidden] [ref=f8e80]: 💡
+                  - text: নষ্ট স্ট্রিট লাইট
+                - button "খোলা ম্যানহোল / ড্রেন" [ref=f8e81]:
+                  - generic [aria-hidden] [ref=f8e82]: 🕳️
+                  - text: খোলা ম্যানহোল / ড্রেন
+            - generic [ref=f8e83]:
+              - paragraph [ref=f8e84]: ভালো দিক
+              - generic [ref=f8e85]:
+                - button "ভালো আলো আছে" [ref=f8e86]:
+                  - generic [aria-hidden] [ref=f8e87]: ✨
+                  - text: ভালো আলো আছে
+                - button "রাত পর্যন্ত লোকজন থাকে" [ref=f8e88]:
+                  - generic [aria-hidden] [ref=f8e89]: 🏪
+                  - text: রাত পর্যন্ত লোকজন থাকে
+                - button "টহল দেখা গেছে" [ref=f8e90]:
+                  - generic [aria-hidden] [ref=f8e91]: 🚓
+                  - text: টহল দেখা গেছে
+                - button "সিসিটিভি আছে" [ref=f8e92]:
+                  - generic [aria-hidden] [ref=f8e93]: 📹
+                  - text: সিসিটিভি আছে
+        - button "পরবর্তী" [ref=f8e95]
+  - contentinfo [ref=f8e98]:
+    - generic [ref=f8e99]:
+      - generic [ref=f8e100]:
+        - generic [ref=f8e101]: SafePath
+        - paragraph [ref=f8e107]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f8e108]:
+        - paragraph [ref=f8e109]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f8e110]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f8e111]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f8e112] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f8e113] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f8e119] [cursor=pointer]
+  - alert [ref=f8e123]

@@ -1,0 +1,219 @@
+- generic [active] [ref=f7e1]:
+  - note [ref=f7e2]: Demo data — these are not real reports. Shown only to preview the design.
+  - banner [ref=f7e3]:
+    - generic [ref=f7e4]:
+      - link "SafePath home" [ref=f7e5] [cursor=pointer]:
+        - /url: /en
+        - generic [ref=f7e6]: SafePath
+      - navigation [ref=f7e12]:
+        - link "Map" [ref=f7e13] [cursor=pointer]:
+          - /url: /en/map
+        - link "Stay aware" [ref=f7e14] [cursor=pointer]:
+          - /url: /en/safety
+      - generic [ref=f7e15]:
+        - link "বাংলা" [ref=f7e16] [cursor=pointer]:
+          - /url: /bn/area/883cf10eb1fffff
+        - button "Dark theme" [ref=f7e17]
+        - link "Share what you saw" [ref=f7e21] [cursor=pointer]:
+          - /url: /en/report
+  - main [ref=f7e23]:
+    - generic [ref=f7e24]:
+      - link "Map" [ref=f7e25] [cursor=pointer]:
+        - /url: /en/map
+      - generic [ref=f7e28]:
+        - generic [ref=f7e33]:
+          - generic [ref=f7e34]: "73"
+          - generic [ref=f7e35]: / 100
+        - generic [ref=f7e36]:
+          - paragraph [ref=f7e37]: Reported activity level
+          - heading "Demo zone F10E" [level=1] [ref=f7e38]
+          - generic [ref=f7e39]:
+            - generic [ref=f7e40]: High
+            - generic [ref=f7e41]: "Confidence: Moderate"
+            - generic [ref=f7e47]: 32 reports · 75% verified
+        - link "Report in this area" [ref=f7e48] [cursor=pointer]:
+          - /url: /en/report?h3=883cf10eb1fffff
+      - paragraph [ref=f7e50]: This is a very busy area. More people passing through usually means more reports — the level reflects report volume, not individual likelihood.
+      - generic [ref=f7e53]:
+        - generic [ref=f7e54]:
+          - heading "Why this level?" [level=2] [ref=f7e55]
+          - list [ref=f7e56]:
+            - listitem [ref=f7e57]: 15 reports in the last 30 days
+            - listitem [ref=f7e61]: Most reports between 6–9 PM
+            - listitem [ref=f7e65]: 31% involve Suspicious activity
+            - listitem [ref=f7e69]: Reports increased compared with last month
+            - listitem [ref=f7e73]: 75% of recent reports were verified
+        - generic [ref=f7e77]:
+          - heading "Recent activity" [level=2] [ref=f7e78]
+          - generic [ref=f7e79]:
+            - generic [ref=f7e80]:
+              - definition [ref=f7e81]: "5"
+              - term [ref=f7e82]: Last 7 days
+            - generic [ref=f7e83]:
+              - definition [ref=f7e84]: "15"
+              - term [ref=f7e85]: Last 30 days
+            - generic [ref=f7e86]:
+              - definition [ref=f7e87]: "32"
+              - term [ref=f7e88]: Last 90 days
+          - generic [ref=f7e94]:
+            - paragraph [ref=f7e95]: "Trend: Increasing"
+            - paragraph [ref=f7e96]: 15 this month vs 12 last month
+        - generic [ref=f7e97]:
+          - heading "When reports happen" [level=2] [ref=f7e98]
+          - paragraph [ref=f7e99]: Activity by time of day
+          - list [ref=f7e101]:
+            - listitem [ref=f7e102]:
+              - generic "12–3 AM — Elevated" [ref=f7e104]
+              - generic [ref=f7e105]: 12–3 AM
+              - generic [ref=f7e106]: Elevated
+            - listitem [ref=f7e107]:
+              - generic "3–6 AM — Low" [ref=f7e109]
+              - generic [ref=f7e110]: 3–6 AM
+              - generic [ref=f7e111]: Low
+            - listitem [ref=f7e112]:
+              - generic "6–9 AM — Low" [ref=f7e114]
+              - generic [ref=f7e115]: 6–9 AM
+              - generic [ref=f7e116]: Low
+            - listitem [ref=f7e117]:
+              - generic "9 AM–12 PM — Moderate" [ref=f7e119]
+              - generic [ref=f7e120]: 9 AM–12 PM
+              - generic [ref=f7e121]: Moderate
+            - listitem [ref=f7e122]:
+              - generic "12–3 PM — Elevated" [ref=f7e124]
+              - generic [ref=f7e125]: 12–3 PM
+              - generic [ref=f7e126]: Elevated
+            - listitem [ref=f7e127]:
+              - generic "3–6 PM — High" [ref=f7e129]
+              - generic [ref=f7e130]: 3–6 PM
+              - generic [ref=f7e131]: High
+            - listitem [ref=f7e132]:
+              - generic "6–9 PM — Very high" [ref=f7e134]
+              - generic [ref=f7e135]: 6–9 PM
+              - generic [ref=f7e136]: Very high
+            - listitem [ref=f7e137]:
+              - generic "9 PM–12 AM — Very high" [ref=f7e139]
+              - generic [ref=f7e140]: 9 PM–12 AM
+              - generic [ref=f7e141]: Very high
+        - generic [ref=f7e142]:
+          - heading "Most reported" [level=2] [ref=f7e143]
+          - list [ref=f7e144]:
+            - listitem [ref=f7e145]:
+              - generic [ref=f7e146]:
+                - generic [ref=f7e147]: 👀 Suspicious activity
+                - generic [ref=f7e148]: "10"
+            - listitem [ref=f7e151]:
+              - generic [ref=f7e152]:
+                - generic [ref=f7e153]: 🚌 Harassment on transport
+                - generic [ref=f7e154]: "10"
+            - listitem [ref=f7e157]:
+              - generic [ref=f7e158]:
+                - generic [ref=f7e159]: 👛 Bag / wallet snatching
+                - generic [ref=f7e160]: "9"
+            - listitem [ref=f7e163]:
+              - generic [ref=f7e164]:
+                - generic [ref=f7e165]: ✋ Harassment
+                - generic [ref=f7e166]: "3"
+        - generic [ref=f7e169]:
+          - heading "What locals say" [level=2] [ref=f7e170]
+          - paragraph [ref=f7e171]: Community knowledge — patterns people have noticed
+          - list [ref=f7e173]:
+            - listitem [ref=f7e174]:
+              - generic [ref=f7e175]:
+                - generic [aria-hidden] [ref=f7e176]: 👀
+                - generic [ref=f7e177]:
+                  - paragraph [ref=f7e178]:
+                    - text: Suspicious activity
+                    - generic [ref=f7e179]: · 6–9 PM → 9 PM–12 AM
+                  - generic [ref=f7e180]:
+                    - generic [ref=f7e181]: Every day
+                    - generic [ref=f7e182]: 25+ confirmed
+                    - generic [ref=f7e188]: Not verified
+              - generic [ref=f7e189]:
+                - button "I've seen this too" [ref=f7e190]
+                - button "Seems wrong" [ref=f7e196]
+            - listitem [ref=f7e199]:
+              - generic [ref=f7e200]:
+                - generic [aria-hidden] [ref=f7e201]: 🌑
+                - generic [ref=f7e202]:
+                  - paragraph [ref=f7e203]:
+                    - text: Dark / isolated road
+                    - generic [ref=f7e204]: · 6–9 PM → 9 PM–12 AM
+                  - generic [ref=f7e205]:
+                    - generic [ref=f7e206]: Every day
+                    - generic [ref=f7e207]: 3+ confirmed
+                    - generic [ref=f7e213]: Not verified
+              - generic [ref=f7e214]:
+                - button "I've seen this too" [ref=f7e215]
+                - button "Seems wrong" [ref=f7e221]
+        - generic [ref=f7e224]:
+          - heading "Where this comes from" [level=2] [ref=f7e225]
+          - list [ref=f7e230]:
+            - listitem [ref=f7e231]:
+              - generic [ref=f7e233]: Community
+              - generic [ref=f7e234]: "7"
+            - listitem [ref=f7e235]:
+              - generic [ref=f7e237]: Verified
+              - generic [ref=f7e238]: "22"
+            - listitem [ref=f7e239]:
+              - generic [ref=f7e241]: Media-reported
+              - generic [ref=f7e242]: "3"
+            - listitem [ref=f7e243]:
+              - generic [ref=f7e245]: Official
+              - generic [ref=f7e246]: "0"
+        - generic [ref=f7e248]:
+          - generic [ref=f7e249]:
+            - heading "Good signs" [level=2] [ref=f7e250]
+            - list [ref=f7e251]:
+              - listitem [ref=f7e252]: ✨ Well-lit · 6
+              - listitem [ref=f7e253]: 🚓 Patrol seen · 6
+          - generic [ref=f7e254]:
+            - heading "Street problems" [level=2] [ref=f7e255]
+            - list [ref=f7e256]:
+              - listitem [ref=f7e257]:
+                - generic [ref=f7e258]: 💡 Broken street light · 3
+      - generic [ref=f7e259]:
+        - generic [ref=f7e260]:
+          - heading "Stay aware here — Walking at night" [level=2] [ref=f7e261]
+          - list [ref=f7e262]:
+            - listitem [ref=f7e263]: Prefer main roads with shops open, even if a little longer.
+            - listitem [ref=f7e265]: Check the map's time view for the hour you'll be out.
+            - listitem [ref=f7e267]: Keep one earphone out so you stay aware of surroundings.
+            - listitem [ref=f7e269]: Note nearby open shops, pharmacies, or police boxes along your way.
+        - generic [ref=f7e271]:
+          - heading "If something happens" [level=2] [ref=f7e272]
+          - paragraph [ref=f7e273]: Get to a busy, lit place first. Then call for help.
+          - list [ref=f7e274]:
+            - listitem [ref=f7e275]:
+              - link "999 National emergency — police, fire, ambulance" [ref=f7e276] [cursor=pointer]:
+                - /url: tel:999
+                - generic [ref=f7e279]: "999"
+                - generic [ref=f7e280]: National emergency — police, fire, ambulance
+            - listitem [ref=f7e281]:
+              - link "109 Violence against women & children helpline" [ref=f7e282] [cursor=pointer]:
+                - /url: tel:109
+                - generic [ref=f7e285]: "109"
+                - generic [ref=f7e286]: Violence against women & children helpline
+            - listitem [ref=f7e287]:
+              - link "1098 Child helpline" [ref=f7e288] [cursor=pointer]:
+                - /url: tel:1098
+                - generic [ref=f7e291]: "1098"
+                - generic [ref=f7e292]: Child helpline
+          - link "Read the guide" [ref=f7e293] [cursor=pointer]:
+            - /url: /en/safety
+      - paragraph [ref=f7e296]: Safety information on SafePath is based on community reports and available data. It may be incomplete or inaccurate and is not an official crime statistic or a guarantee of safety.
+  - contentinfo [ref=f7e297]:
+    - generic [ref=f7e298]:
+      - generic [ref=f7e299]:
+        - generic [ref=f7e300]: SafePath
+        - paragraph [ref=f7e306]: Free, open, community-powered safety awareness.
+      - generic [ref=f7e307]:
+        - paragraph [ref=f7e308]: Safety information on SafePath is based on community reports and available data. It may be incomplete or inaccurate and is not an official crime statistic or a guarantee of safety.
+        - paragraph [ref=f7e309]: Not an emergency service. Not an official crime database.
+        - paragraph [ref=f7e310]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f7e311] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f7e312] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f7e318] [cursor=pointer]

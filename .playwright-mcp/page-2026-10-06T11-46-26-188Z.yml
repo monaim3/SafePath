@@ -1,0 +1,58 @@
+- generic [active] [ref=f39e1]:
+  - main [ref=f39e2]:
+    - generic [ref=f39e3]:
+      - region "রিপোর্টকৃত কার্যকলাপ" [ref=f39e4]
+      - generic [ref=f39e6]:
+        - link "SafePath home" [ref=f39e7] [cursor=pointer]:
+          - /url: /bn
+          - generic [ref=f39e8]: SafePath
+        - navigation [ref=f39e10]:
+          - link "ম্যাপ" [ref=f39e11] [cursor=pointer]:
+            - /url: /bn/map
+          - link "সচেতন থাকুন" [ref=f39e12] [cursor=pointer]:
+            - /url: /bn/safety
+        - generic [ref=f39e13]:
+          - link "English" [ref=f39e14] [cursor=pointer]:
+            - /url: /en/map
+          - button "ডার্ক থিম" [ref=f39e15]
+          - link "যা দেখেছেন জানান" [ref=f39e20] [cursor=pointer]:
+            - /url: /bn/report
+      - generic [ref=f39e22]:
+        - generic [ref=f39e24]:
+          - generic [ref=f39e28]: এলাকা বা রাস্তা খুঁজুন
+          - combobox "এলাকা বা রাস্তা খুঁজুন" [ref=f39e29]
+        - paragraph [ref=f39e30]: ষড়ভুজে ট্যাপ করে সেখানকার ছিনতাইয়ের রিপোর্ট দেখুন
+      - button "ম্যাপ" [ref=f39e36]
+      - complementary [ref=f39e42]:
+        - paragraph [ref=f39e43]: রিপোর্টকৃত কার্যকলাপ
+        - paragraph [ref=f39e44]: রিপোর্টের ভিত্তিতে, নিশ্চিত নয়
+        - generic [ref=f39e52]:
+          - generic [ref=f39e53]: খুব কম
+          - generic [ref=f39e54]: খুব উচ্চ
+        - paragraph [ref=f39e55]: দাগকাটা = কম রিপোর্ট, কম নির্ভরযোগ্য
+        - paragraph [ref=f39e57]: ডেমো ডেটা — এগুলো আসল রিপোর্ট নয়। শুধু ডিজাইন দেখানোর জন্য।
+      - region "দিনের সময়" [ref=f39e59]:
+        - generic [ref=f39e60]:
+          - generic [ref=f39e65]:
+            - paragraph [ref=f39e66]: পুরো শহরে
+            - paragraph [ref=f39e67]:
+              - generic [ref=f39e68]: সারাদিন
+          - generic [ref=f39e69]:
+            - button "এখন" [ref=f39e70]
+            - button "সারাদিন" [pressed] [ref=f39e71]
+        - slider "টেনে বা ট্যাপ করে সময় বেছে নিন" [ref=f39e122] [cursor=pointer]: "12"
+        - generic [aria-hidden] [ref=f39e123]:
+          - generic [ref=f39e124]: রাত ১২টা
+          - generic [ref=f39e127]: সকাল ৬টা
+          - generic [ref=f39e134]: দুপুর ১২টা
+          - generic [ref=f39e141]: সন্ধ্যা ৬টা
+        - generic [ref=f39e144]:
+          - button "ভোর" [ref=f39e145]
+          - button "সকাল" [ref=f39e151]
+          - button "দুপুর" [ref=f39e157]
+          - button "বিকাল" [ref=f39e164]
+          - button "সন্ধ্যা" [ref=f39e171]
+          - button "রাত" [ref=f39e177]
+          - button "গভীর রাত" [ref=f39e180]
+        - generic [ref=f39e183]: টেনে বা ট্যাপ করে সময় বেছে নিন
+  - button "Open Next.js Dev Tools" [ref=f39e190] [cursor=pointer]

@@ -1,0 +1,38 @@
+- generic [active] [ref=f60e1]:
+  - banner [ref=f60e2]:
+    - generic [ref=f60e3]:
+      - link "SafePath home" [ref=f60e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f60e5]: SafePath
+      - navigation [ref=f60e7]:
+        - link "ম্যাপ" [ref=f60e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f60e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f60e10]:
+        - link "English" [ref=f60e11] [cursor=pointer]:
+          - /url: /en/mod
+        - button "ডার্ক থিম" [ref=f60e12]
+        - link "যা দেখেছেন জানান" [ref=f60e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f60e19]:
+    - generic [ref=f60e20]:
+      - heading "মডারেশন" [level=1] [ref=f60e21]
+      - paragraph [ref=f60e22]: নতুন রিপোর্ট পর্যালোচনা করুন। প্রতিটি সিদ্ধান্ত অডিট লগে সংরক্ষিত হয়।
+      - img "লোড হচ্ছে…" [ref=f60e23]
+  - contentinfo [ref=f60e25]:
+    - generic [ref=f60e26]:
+      - generic [ref=f60e27]:
+        - generic [ref=f60e28]: SafePath
+        - paragraph [ref=f60e30]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f60e31]:
+        - paragraph [ref=f60e32]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f60e33]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f60e34]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f60e35] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f60e36] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f60e42] [cursor=pointer]

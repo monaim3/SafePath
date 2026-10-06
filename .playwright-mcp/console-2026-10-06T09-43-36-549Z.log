@@ -1,0 +1,9 @@
+[      92ms] [LOG] [Fast Refresh] done in 10ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     220ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     247ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     714ms] [WARNING] layers[highway-shield-non-us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false. @ http://localhost:3100/maplibre/maplibre-gl-shared.mjs:4
+[     714ms] [WARNING] layers[highway-shield-us-interstate].filter[1]: Expected value to be of type number, but found null instead. Falling back to false. @ http://localhost:3100/maplibre/maplibre-gl-shared.mjs:4
+[     715ms] [WARNING] layers[road_shield_us].filter[1]: Expected value to be of type number, but found null instead. Falling back to false. @ http://localhost:3100/maplibre/maplibre-gl-shared.mjs:4
+[   25565ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   25620ms] [LOG] [Fast Refresh] done in 10ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   25688ms] [LOG] [Fast Refresh] done in 10ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

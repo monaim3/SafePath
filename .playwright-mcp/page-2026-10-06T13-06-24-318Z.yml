@@ -1,0 +1,74 @@
+- generic [ref=f50e1]:
+  - banner [ref=f50e2]:
+    - generic [ref=f50e3]:
+      - link "SafePath home" [ref=f50e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f50e5]: SafePath
+      - navigation [ref=f50e7]:
+        - link "ম্যাপ" [ref=f50e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f50e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f50e10]:
+        - link "English" [ref=f50e11] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f50e12]
+        - link "যা দেখেছেন জানান" [ref=f50e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f50e19]:
+    - generic [ref=f50e20]:
+      - generic [ref=f50e21]:
+        - heading "ছিনতাইয়ের তথ্য জানান" [level=1] [ref=f50e22]
+        - paragraph [ref=f50e23]: এক মিনিটও লাগবে না। নাম বা ফোন নম্বর লাগবে না।
+      - generic [ref=f50e210]:
+        - list "Progress" [ref=f50e211]:
+          - listitem [ref=f50e212]:
+            - generic [ref=f50e214]: কী
+          - listitem [ref=f50e215]:
+            - generic [ref=f50e217]: কোথায়
+          - listitem [ref=f50e218]:
+            - generic [ref=f50e220]: কখন
+          - listitem [ref=f50e221]:
+            - generic [ref=f50e223]: বিস্তারিত
+        - generic [ref=f50e343]:
+          - generic [ref=f50e344]:
+            - heading "কখন ঘটেছে?" [level=2] [ref=f50e345]
+            - generic [ref=f50e346]:
+              - button "এইমাত্র" [ref=f50e347]
+              - button "আজ" [ref=f50e348]
+              - button "গতকাল" [active] [pressed] [ref=f50e349]
+              - button "অন্য দিন" [ref=f50e350]
+          - generic [ref=f50e351]:
+            - heading "আনুমানিক কোন সময়ে?" [level=2] [ref=f50e352]
+            - generic [ref=f50e353]:
+              - button "রাত ১২–৩টা" [ref=f50e354]
+              - button "ভোর ৩–৬টা" [ref=f50e355]
+              - button "সকাল ৬–৯টা" [ref=f50e356]
+              - button "সকাল ৯–দুপুর ১২টা" [ref=f50e357]
+              - button "দুপুর ১২–৩টা" [ref=f50e358]
+              - button "বিকাল ৩–৬টা" [ref=f50e359]
+              - button "সন্ধ্যা ৬–৯টা" [ref=f50e360]
+              - button "রাত ৯–১২টা" [ref=f50e361]
+            - generic [ref=f50e363] [cursor=pointer]:
+              - checkbox "সঠিক সময় জানি" [ref=f50e364]
+              - text: সঠিক সময় জানি
+        - generic [ref=f50e275]:
+          - button "পেছনে" [ref=f50e336]
+          - button "পরবর্তী" [ref=f50e276]
+  - contentinfo [ref=f50e93]:
+    - generic [ref=f50e94]:
+      - generic [ref=f50e95]:
+        - generic [ref=f50e96]: SafePath
+        - paragraph [ref=f50e98]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f50e99]:
+        - paragraph [ref=f50e100]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f50e101]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f50e102]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f50e103] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f50e104] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f50e110] [cursor=pointer]
+  - alert [ref=f50e114]

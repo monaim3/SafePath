@@ -1,0 +1,64 @@
+- generic [active] [ref=f50e1]:
+  - banner [ref=f50e2]:
+    - generic [ref=f50e3]:
+      - link "SafePath home" [ref=f50e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f50e5]: SafePath
+      - navigation [ref=f50e7]:
+        - link "ম্যাপ" [ref=f50e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f50e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f50e10]:
+        - link "English" [ref=f50e11] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f50e12]
+        - link "যা দেখেছেন জানান" [ref=f50e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f50e19]:
+    - generic [ref=f50e20]:
+      - generic [ref=f50e21]:
+        - heading "ছিনতাইয়ের তথ্য জানান" [level=1] [ref=f50e22]
+        - paragraph [ref=f50e23]: এক মিনিটও লাগবে না। নাম বা ফোন নম্বর লাগবে না।
+      - generic [ref=f50e210]:
+        - list "Progress" [ref=f50e211]:
+          - listitem [ref=f50e212]:
+            - generic [ref=f50e214]: কী
+          - listitem [ref=f50e215]:
+            - generic [ref=f50e217]: কোথায়
+          - listitem [ref=f50e218]:
+            - generic [ref=f50e220]: কখন
+          - listitem [ref=f50e221]:
+            - generic [ref=f50e223]: বিস্তারিত
+        - generic [ref=f50e366]:
+          - generic [ref=f50e367]:
+            - heading "আপনি কীভাবে জানেন?" [level=2] [ref=f50e368]
+            - generic [ref=f50e369]:
+              - button "আমার সাথে ঘটেছে" [ref=f50e370]
+              - button "আমি দেখেছি" [ref=f50e371]
+              - button "অন্যদের কাছে শুনেছি" [ref=f50e372]
+          - generic [ref=f50e373]:
+            - text: আর কিছু? (ঐচ্ছিক)
+            - textbox "আর কিছু? (ঐচ্ছিক)" [ref=f50e374]
+            - paragraph [ref=f50e375]: অনুগ্রহ করে নাম, ফোন নম্বর বা ঠিকানা লিখবেন না — এগুলো স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে।
+        - alert [ref=f50e379]: এই ডিভাইস বা নেটওয়ার্ক থেকে অনেকগুলো রিপোর্ট এসেছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।
+        - generic [ref=f50e275]:
+          - button "পেছনে" [ref=f50e336]
+          - button "রিপোর্ট জমা দিন" [ref=f50e380]
+  - contentinfo [ref=f50e93]:
+    - generic [ref=f50e94]:
+      - generic [ref=f50e95]:
+        - generic [ref=f50e96]: SafePath
+        - paragraph [ref=f50e98]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f50e99]:
+        - paragraph [ref=f50e100]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f50e101]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f50e102]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f50e103] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f50e104] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f50e110] [cursor=pointer]
+  - alert [ref=f50e114]

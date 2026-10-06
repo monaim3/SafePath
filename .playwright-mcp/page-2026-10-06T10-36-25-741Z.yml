@@ -1,0 +1,100 @@
+- generic [active] [ref=f21e1]:
+  - banner [ref=f21e2]:
+    - generic [ref=f21e3]:
+      - link "SafePath home" [ref=f21e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f21e5]: SafePath
+      - navigation [ref=f21e7]:
+        - link "ম্যাপ" [ref=f21e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f21e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f21e10]:
+        - link "English" [ref=f21e11] [cursor=pointer]:
+          - /url: /en
+        - button "ডার্ক থিম" [ref=f21e12]
+        - link "যা দেখেছেন জানান" [ref=f21e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f21e19]:
+    - generic [ref=f21e21]:
+      - generic [ref=f21e22]:
+        - heading "রাস্তায় নামার আগে রাস্তা চিনুন।" [level=1] [ref=f21e23]: রাস্তায় নামার আগেরাস্তা চিনুন।
+        - paragraph [ref=f21e24]: কোথায়, কখন মানুষ ঘটনার কথা জানাচ্ছে দেখুন, কেন একটি এলাকা এমন দেখাচ্ছে বুঝুন, আর আপনার জানা তথ্য শেয়ার করুন — শান্তভাবে, গোপনীয়তা রেখে, বিনামূল্যে।
+        - generic [ref=f21e25]:
+          - link "ম্যাপ খুলুন" [ref=f21e26] [cursor=pointer]:
+            - /url: /bn/map
+          - link "যা দেখেছেন জানান" [ref=f21e29] [cursor=pointer]:
+            - /url: /bn/report
+      - link "ডেমো এলাকা F139" [ref=f21e31] [cursor=pointer]:
+        - /url: /bn/area/883cf1396bfffff
+        - generic [ref=f21e32]:
+          - generic [ref=f21e33]:
+            - generic [ref=f21e69]: রাত ১২–৩টা
+            - generic [ref=f21e77]:
+              - generic [ref=f21e78]:
+                - text: কম রিপোর্টের পথ
+                - generic [ref=f21e80]: · +৩ মিনিট
+              - generic [ref=f21e81]: দ্রুততম
+          - generic [ref=f21e83]:
+            - generic [ref=f21e84]:
+              - generic [ref=f21e85]: ডেমো এলাকা F139
+              - generic [ref=f21e86]: খুব উচ্চ
+            - generic [ref=f21e88]:
+              - generic [ref=f21e89]: ৮৩
+              - generic [ref=f21e90]: / ১০০
+            - generic [ref=f21e100]:
+              - generic [ref=f21e101]: "নির্ভরযোগ্যতা: উচ্চ"
+              - generic [ref=f21e107]: ২৫+ জন নিশ্চিত করেছেন
+    - generic [ref=f21e113]:
+      - heading "তিনটি ট্যাপ। কোনো নাম নয়। কোনো আতঙ্ক নয়।" [level=2] [ref=f21e114]
+      - list [ref=f21e115]:
+        - listitem [ref=f21e116]:
+          - generic [ref=f21e117]: ১
+          - heading "দেখুন" [level=3] [ref=f21e123]
+          - paragraph [ref=f21e124]: এলাকা ও দিনের সময় অনুযায়ী রিপোর্ট দেখুন। যেকোনো ঘণ্টা বেছে নিয়ে দেখুন কীভাবে বদলায়।
+        - listitem [ref=f21e125]:
+          - generic [ref=f21e126]: ২
+          - heading "বুঝুন" [level=3] [ref=f21e131]
+          - paragraph [ref=f21e132]: প্রতিটি লেভেলের সাথে সহজ কারণ, নির্ভরযোগ্যতা ও তথ্যের উৎস দেখানো হয়।
+        - listitem [ref=f21e133]:
+          - generic [ref=f21e134]: ৩
+          - heading "শেয়ার করুন" [level=3] [ref=f21e139]
+          - paragraph [ref=f21e140]: যা ঘটেছে জানান, অথবা এলাকার মানুষ যা জানে — যেমন “এখানে রাত ১০টার পর ছিনতাই হয়”।
+    - generic [ref=f21e145]:
+      - heading "চারটি প্রতিশ্রুতির উপর তৈরি" [level=2] [ref=f21e146]
+      - generic [ref=f21e147]:
+        - generic [ref=f21e152]:
+          - heading "রিপোর্ট ≠ নিশ্চিত" [level=3] [ref=f21e153]
+          - paragraph [ref=f21e154]: প্রতিটি সংখ্যায় দেখানো হয় এটি কমিউনিটি রিপোর্ট, যাচাইকৃত, নাকি সরকারি সূত্র।
+        - generic [ref=f21e159]:
+          - heading "গোপনীয়তা আগে" [level=3] [ref=f21e160]
+          - paragraph [ref=f21e161]: শুধু আনুমানিক এলাকা। কোনো নাম, ঠিকানা বা ভুক্তভোগীর তথ্য — কখনোই নয়।
+        - generic [ref=f21e165]:
+          - heading "প্রতিটি লেভেলের ব্যাখ্যা" [level=3] [ref=f21e166]
+          - paragraph [ref=f21e167]: কোনো লুকানো স্কোর নয়। কেন একটি এলাকা এমন দেখাচ্ছে, সবসময় দেখতে পাবেন।
+        - generic [ref=f21e173]:
+          - heading "সচেতনতা, আতঙ্ক নয়" [level=3] [ref=f21e174]
+          - paragraph [ref=f21e175]: ভালো দিক ও সমাধান হওয়া সমস্যাও দেখাই। কম রিপোর্ট মানেই “নিরাপদ” বলি না।
+    - link [ref=f21e184] [cursor=pointer]:
+      - /url: /bn/safety
+      - generic [ref=f21e185]:
+        - heading "সচেতন থাকুন, ভয় নয়" [level=2] [ref=f21e186]
+        - paragraph [ref=f21e187]: ছিনতাই, যানবাহন, রাতে হাঁটা ও ফোন প্রতারণা নিয়ে কাজের টিপস — আর কিছু ঘটলে ঠিক কী করবেন।
+      - generic [ref=f21e188]: গাইড পড়ুন
+  - contentinfo [ref=f21e191]:
+    - generic [ref=f21e192]:
+      - generic [ref=f21e193]:
+        - generic [ref=f21e194]: SafePath
+        - paragraph [ref=f21e196]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f21e197]:
+        - paragraph [ref=f21e198]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f21e199]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f21e200]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f21e201] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f21e202] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f21e208] [cursor=pointer]
+  - alert [ref=f21e212]

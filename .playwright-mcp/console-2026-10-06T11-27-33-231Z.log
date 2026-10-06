@@ -1,0 +1,79 @@
+[    1590ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    8708ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    8746ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  282446ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export H3_RES doesn't exist in target module
+   8 | import { fetchCityTimeProfile, fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | import { BAND_COLORS, BANDS, scoreToBand } from "@/lib/safety/bands";
+> 10 | import { H3_RES } from "@/lib/safety/demo-data";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { currentTimeBlock, TIME_BLOCKS, type TimeBlock } from "@/lib/safety/types";
+  12 | import { cn } from "@/components/ui/cn";
+  13 | import { AreaPeek } from "./AreaPeek";
+
+The export H3_RES was not found in module [project]/src/lib/safety/demo-data.ts [app-client] (ecmascript).
+Did you mean to import DHAKA_CENTER?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  282447ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export H3_RES doesn't exist in target module
+   8 | import { fetchCityTimeProfile, fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | import { BAND_COLORS, BANDS, scoreToBand } from "@/lib/safety/bands";
+> 10 | import { H3_RES } from "@/lib/safety/demo-data";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { currentTimeBlock, TIME_BLOCKS, type TimeBlock } from "@/lib/safety/types";
+  12 | import { cn } from "@/components/ui/cn";
+  13 | import { AreaPeek } from "./AreaPeek";
+
+The export H3_RES was not found in module [project]/src/lib/safety/demo-data.ts [app-ssr] (ecmascript).
+Did you mean to import DHAKA_CENTER?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  282493ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  282582ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export H3_RES doesn't exist in target module
+   8 | import { fetchCityTimeProfile, fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | import { BAND_COLORS, BANDS, scoreToBand } from "@/lib/safety/bands";
+> 10 | import { H3_RES } from "@/lib/safety/demo-data";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { currentTimeBlock, TIME_BLOCKS, type TimeBlock } from "@/lib/safety/types";
+  12 | import { cn } from "@/components/ui/cn";
+  13 | import { AreaPeek } from "./AreaPeek";
+
+The export H3_RES was not found in module [project]/src/lib/safety/demo-data.ts [app-client] (ecmascript).
+Did you mean to import DHAKA_CENTER?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  282582ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export H3_RES doesn't exist in target module
+   8 | import { fetchCityTimeProfile, fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | import { BAND_COLORS, BANDS, scoreToBand } from "@/lib/safety/bands";
+> 10 | import { H3_RES } from "@/lib/safety/demo-data";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { currentTimeBlock, TIME_BLOCKS, type TimeBlock } from "@/lib/safety/types";
+  12 | import { cn } from "@/components/ui/cn";
+  13 | import { AreaPeek } from "./AreaPeek";
+
+The export H3_RES was not found in module [project]/src/lib/safety/demo-data.ts [app-ssr] (ecmascript).
+Did you mean to import DHAKA_CENTER?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  302514ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  302771ms] [LOG] [Fast Refresh] done in 46ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  302772ms] [LOG] [Fast Refresh] done in 46ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

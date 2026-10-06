@@ -1,0 +1,46 @@
+- generic [ref=f59e1]:
+  - banner [ref=f59e2]:
+    - generic [ref=f59e3]:
+      - link "SafePath home" [ref=f59e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f59e5]: SafePath
+      - navigation [ref=f59e7]:
+        - link "ম্যাপ" [ref=f59e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f59e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f59e10]:
+        - link "English" [ref=f59e11] [cursor=pointer]:
+          - /url: /en/mod
+        - button "ডার্ক থিম" [ref=f59e12]
+        - link "যা দেখেছেন জানান" [ref=f59e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f59e19]:
+    - generic [ref=f59e20]:
+      - heading "মডারেশন" [level=1] [ref=f59e21]
+      - paragraph [ref=f59e22]: নতুন রিপোর্ট পর্যালোচনা করুন। প্রতিটি সিদ্ধান্ত অডিট লগে সংরক্ষিত হয়।
+      - generic [ref=f59e46]:
+        - generic [ref=f59e51]:
+          - text: ইউজারনেম
+          - textbox "ইউজারনেম" [active] [ref=f59e52]
+        - generic [ref=f59e53]:
+          - text: পাসওয়ার্ড
+          - textbox "পাসওয়ার্ড" [ref=f59e54]: JfYnuF2EM3KSqH
+        - button "লগইন" [ref=f59e55]
+  - contentinfo [ref=f59e25]:
+    - generic [ref=f59e26]:
+      - generic [ref=f59e27]:
+        - generic [ref=f59e28]: SafePath
+        - paragraph [ref=f59e30]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f59e31]:
+        - paragraph [ref=f59e32]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f59e33]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f59e34]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f59e35] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f59e36] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f59e42] [cursor=pointer]
+  - alert [ref=f59e56]

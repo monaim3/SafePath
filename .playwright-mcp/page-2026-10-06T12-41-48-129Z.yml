@@ -1,0 +1,116 @@
+- generic [ref=f48e1]:
+  - banner [ref=f48e2]:
+    - generic [ref=f48e3]:
+      - link "SafePath home" [ref=f48e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f48e5]: SafePath
+      - navigation [ref=f48e7]:
+        - link "ম্যাপ" [ref=f48e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f48e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f48e10]:
+        - link "English" [ref=f48e11] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f48e12]
+        - link "যা দেখেছেন জানান" [ref=f48e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f48e19]:
+    - generic [ref=f48e20]:
+      - generic [ref=f48e21]:
+        - heading "ছিনতাইয়ের তথ্য জানান" [level=1] [ref=f48e22]
+        - paragraph [ref=f48e23]: এক মিনিটও লাগবে না। নাম বা ফোন নম্বর লাগবে না।
+      - generic [ref=f48e24]:
+        - list "Progress" [ref=f48e25]:
+          - listitem [ref=f48e26]:
+            - generic [ref=f48e28]: কী
+          - listitem [ref=f48e29]:
+            - generic [ref=f48e31]: কোথায়
+          - listitem [ref=f48e32]:
+            - generic [ref=f48e34]: কখন
+          - listitem [ref=f48e35]:
+            - generic [ref=f48e37]: বিস্তারিত
+        - generic [ref=f48e179]:
+          - generic [ref=f48e180]:
+            - heading "কখন ঘটেছে?" [level=2] [ref=f48e181]
+            - generic [ref=f48e182]:
+              - button "এইমাত্র" [ref=f48e183]
+              - button "আজ" [ref=f48e184]
+              - button "গতকাল" [ref=f48e185]
+              - button "অন্য দিন" [pressed] [ref=f48e186]
+            - generic [ref=f48e202]:
+              - paragraph [ref=f48e203]: কোন দিন?
+              - generic [ref=f48e204]:
+                - button "রবি ৪ অক্টো" [ref=f48e205]
+                - button "শনি ৩ অক্টো" [ref=f48e206]
+                - button "শুক্র ২ অক্টো" [ref=f48e207]
+                - button "বৃহস্পতি ১ অক্টো" [ref=f48e208]
+                - button "বুধ ৩০ সেপ" [ref=f48e209]
+                - button "মঙ্গল ২৯ সেপ" [ref=f48e210]
+              - generic [ref=f48e211]:
+                - text: আরও পুরোনো তারিখ
+                - textbox "আরও পুরোনো তারিখ" [ref=f48e214]
+          - generic [ref=f48e187]:
+            - heading "আনুমানিক কোন সময়ে?" [level=2] [ref=f48e188]
+            - generic [ref=f48e189]:
+              - button "রাত ১২–৩টা" [ref=f48e190]
+              - button "ভোর ৩–৬টা" [ref=f48e191]
+              - button "সকাল ৬–৯টা" [ref=f48e192]
+              - button "সকাল ৯–দুপুর ১২টা" [ref=f48e193]
+              - button "দুপুর ১২–৩টা" [ref=f48e194]
+              - button "বিকাল ৩–৬টা" [ref=f48e195]
+              - button "সন্ধ্যা ৬–৯টা" [ref=f48e196]
+              - button "রাত ৯–১২টা" [ref=f48e197]
+            - generic [ref=f48e198]:
+              - generic [ref=f48e199] [cursor=pointer]:
+                - checkbox "সঠিক সময় জানি" [checked] [active] [ref=f48e200]
+                - text: সঠিক সময় জানি
+              - generic [ref=f48e215]:
+                - text: ঘণ্টা বেছে নিন
+                - combobox "ঘণ্টা বেছে নিন" [ref=f48e219]:
+                  - option "—" [disabled] [selected]
+                  - option "রাত ১২টা"
+                  - option "রাত ১টা"
+                  - option "রাত ২টা"
+                  - option "রাত ৩টা"
+                  - option "ভোর ৪টা"
+                  - option "ভোর ৫টা"
+                  - option "সকাল ৬টা"
+                  - option "সকাল ৭টা"
+                  - option "সকাল ৮টা"
+                  - option "সকাল ৯টা"
+                  - option "সকাল ১০টা"
+                  - option "সকাল ১১টা"
+                  - option "দুপুর ১২টা"
+                  - option "দুপুর ১টা"
+                  - option "দুপুর ২টা"
+                  - option "বিকাল ৩টা"
+                  - option "বিকাল ৪টা"
+                  - option "বিকাল ৫টা"
+                  - option "সন্ধ্যা ৬টা"
+                  - option "সন্ধ্যা ৭টা"
+                  - option "রাত ৮টা"
+                  - option "রাত ৯টা"
+                  - option "রাত ১০টা"
+                  - option "রাত ১১টা"
+            - alert [ref=f48e201]: সময় বেছে নিন
+        - generic [ref=f48e89]:
+          - button "পেছনে" [ref=f48e172]
+          - button "পরবর্তী" [ref=f48e90]
+  - contentinfo [ref=f48e93]:
+    - generic [ref=f48e94]:
+      - generic [ref=f48e95]:
+        - generic [ref=f48e96]: SafePath
+        - paragraph [ref=f48e98]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f48e99]:
+        - paragraph [ref=f48e100]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f48e101]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f48e102]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f48e103] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f48e104] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f48e110] [cursor=pointer]
+  - alert [ref=f48e117]

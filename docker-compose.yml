@@ -1,0 +1,24 @@
+# Local development database (PostgreSQL + PostGIS).
+#   docker compose up -d db
+# Then in backend/.env:  DATABASE_URL=postgres://safepath:safepath@127.0.0.1:5433/safepath   (127.0.0.1, not localhost: avoids a slow IPv6 attempt on Windows)
+# Port 5433 avoids clashing with any PostgreSQL already installed on the machine.
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: safepath
+      POSTGRES_USER: safepath
+      POSTGRES_PASSWORD: safepath  # local only — production uses deploy/docker-compose.prod.yml + secrets
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U safepath -d safepath"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:

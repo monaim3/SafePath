@@ -1,0 +1,2439 @@
+[     364ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     390ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  133479ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  133480ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  133480ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  133481ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  133481ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  133535ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  241577ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  241624ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  241625ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  241625ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  241626ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  241626ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  241627ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253615ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253616ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253616ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253616ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253617ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253617ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  253632ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  257048ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  257048ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  257048ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  257049ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  257049ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  257049ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  257062ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  258265ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  258266ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  258266ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  258267ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  258267ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  258268ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  258278ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  260096ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  260096ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  260097ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  260097ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  260098ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  260098ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  260116ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  262620ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  263152ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  263152ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  263153ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  263153ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  263153ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  263153ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264079ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264080ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264081ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264081ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264083ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264084ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  264088ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  265439ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  265568ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  265568ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  265569ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  265569ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  265569ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  265570ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267425ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267425ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267426ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267428ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267429ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267431ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  267438ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  268643ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  268750ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  268751ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  268752ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  268752ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  268756ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  268757ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269669ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269670ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269670ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269670ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269671ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269671ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  269678ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  270760ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  270761ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  270761ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  270761ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  270762ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  270762ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  270783ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  271896ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  271903ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  271904ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  271904ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  271905ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  271905ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  271905ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272957ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272957ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272957ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272958ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272958ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272960ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  272965ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  276374ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  276375ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  276376ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  276376ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  276376ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  276376ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  276377ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  278582ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  278586ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  278586ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-rsc] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/lib/safety/demo-data.ts
+    ./src/lib/api/safety.ts
+    ./src/app/[lang]/(site)/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  278586ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  278587ms] [ERROR] ./src/lib/safety/demo-data.ts:9:1
+Error: Export INCIDENT_CATEGORIES doesn't exist in target module
+   7 | import { cellToLatLng, gridDisk, isValidCell, latLngToCell } from "h3-js";
+   8 | import { confidenceFor, K_ANONYMITY, scoreToBand } from "./bands";
+>  9 | import { INCIDENT_CATEGORIES } from "./categories";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import type {
+  11 |   AreaDetail,
+  12 |   CategoryCount,
+
+The export INCIDENT_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/lib/safety/demo-data.ts [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Client Component Browser]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/safety/demo-data.ts [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Client Component SSR]
+    ./src/features/map/MapScreen.tsx [Server Component]
+    ./src/app/[lang]/map/page.tsx [Server Component] @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  278587ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  278588ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  354794ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  354914ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  354914ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  354914ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  363530ms] [ERROR] ./src/i18n/en.ts:158:5
+Error: Expected ',', got 'ident'
+  156 |     d90: "Last 90 days",
+  157 |     mostReported: "How it happens"
+> 158 |     whenTitle: "When reports happen",
+      |     ^^^^^^^^^
+  159 |     whenHint: "Activity by time of day",
+  160 |     trendTitle: "Trend",
+  161 |     trend: {
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Middleware:
+    ./src/i18n/en.ts
+    ./src/i18n/index.ts
+    ./src/proxy.ts @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  363531ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  363531ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  369686ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  369686ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  369714ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  391213ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  391214ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  401396ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  401397ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  401455ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  408029ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  408030ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  408230ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  408274ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  408274ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  413225ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  413281ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-client] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  413281ms] [ERROR] ./src/features/map/MapScreen.tsx:10:1
+Error: Export MAP_FILTER_CATEGORIES doesn't exist in target module
+   8 | ... { fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+   9 | ... { BANDS } from "@/lib/safety/bands";
+> 10 | ... { CATEGORY_BY_KEY, MAP_FILTER_CATEGORIES, type CategoryKey } from "@/lib/safety/catego...
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | ... { H3_RES } from "@/lib/safety/demo-data";
+  12 | ... { currentTimeBlock, type TimeBlock } from "@/lib/safety/types";
+  13 | ... { cn } from "@/components/ui/cn";
+
+The export MAP_FILTER_CATEGORIES was not found in module [project]/src/lib/safety/categories.ts [app-ssr] (ecmascript).
+Did you mean to import POSITIVE_CATEGORIES?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./src/features/map/MapScreen.tsx
+    ./src/app/[lang]/map/page.tsx @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[  444531ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[  444649ms] [LOG] [Fast Refresh] done in 169ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

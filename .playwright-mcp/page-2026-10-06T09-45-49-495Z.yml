@@ -1,0 +1,50 @@
+- generic [active] [ref=f10e1]:
+  - main [ref=f10e2]:
+    - generic [ref=f10e3]:
+      - region "রিপোর্টকৃত কার্যকলাপ" [ref=f10e4]
+      - generic [ref=f10e6]:
+        - link "SafePath home" [ref=f10e7] [cursor=pointer]:
+          - /url: /bn
+          - generic [ref=f10e8]: SafePath
+        - generic [ref=f10e14]:
+          - link "English" [ref=f10e15] [cursor=pointer]:
+            - /url: /en/map
+          - button "লাইট থিম" [ref=f10e16]
+          - link "যা দেখেছেন জানান" [ref=f10e24] [cursor=pointer]:
+            - /url: /bn/report
+      - generic [ref=f10e28]:
+        - generic [ref=f10e32]: এলাকা বা রাস্তা খুঁজুন
+        - combobox "এলাকা বা রাস্তা খুঁজুন" [ref=f10e33]
+      - generic [ref=f10e35]:
+        - generic [ref=f10e36]:
+          - generic [ref=f10e40]: দিনের সময়
+          - generic [ref=f10e41]: 24h
+          - generic [ref=f10e42]:
+            - button "এখন" [ref=f10e43]
+            - button "24h" [pressed] [ref=f10e44]
+        - slider "দিনের সময়" [ref=f10e45]: "0"
+        - generic [aria-hidden] [ref=f10e46]:
+          - generic [ref=f10e47]: 12a
+          - generic [ref=f10e48]: 3a
+          - generic [ref=f10e49]: 6a
+          - generic [ref=f10e50]: 9a
+          - generic [ref=f10e51]: 12p
+          - generic [ref=f10e52]: 3p
+          - generic [ref=f10e53]: 6p
+          - generic [ref=f10e54]: 9p
+        - generic [ref=f10e55]:
+          - button "সব" [pressed] [ref=f10e56]
+          - button "👜 ছিনতাই" [ref=f10e57]
+          - button "🛺 হাইজ্যাকিং" [ref=f10e58]
+          - button "📱 মোবাইল ছিনতাই" [ref=f10e59]
+          - button "✋ হয়রানি" [ref=f10e60]
+          - button "🌑 অন্ধকার / নির্জন রাস্তা" [ref=f10e61]
+        - generic [ref=f10e62]:
+          - generic [ref=f10e63]:
+            - generic [ref=f10e64]: রিপোর্টকৃত কার্যকলাপ
+            - generic [ref=f10e65]: রিপোর্টের ভিত্তিতে, নিশ্চিত নয়
+          - generic [ref=f10e73]:
+            - generic [ref=f10e74]: খুব কম
+            - generic [ref=f10e75]: খুব উচ্চ
+          - paragraph [ref=f10e76]: ডেমো ডেটা — এগুলো আসল রিপোর্ট নয়। শুধু ডিজাইন দেখানোর জন্য।
+  - button "Open Next.js Dev Tools" [ref=f10e82] [cursor=pointer]

@@ -1,0 +1,60 @@
+- generic [active] [ref=f32e1]:
+  - main [ref=f32e2]:
+    - generic [ref=f32e3]:
+      - region "রিপোর্টকৃত কার্যকলাপ" [ref=f32e4]
+      - generic [ref=f32e6]:
+        - link "SafePath home" [ref=f32e7] [cursor=pointer]:
+          - /url: /bn
+          - generic [ref=f32e8]: SafePath
+        - navigation [ref=f32e10]:
+          - link "ম্যাপ" [ref=f32e11] [cursor=pointer]:
+            - /url: /bn/map
+          - link "সচেতন থাকুন" [ref=f32e12] [cursor=pointer]:
+            - /url: /bn/safety
+        - generic [ref=f32e13]:
+          - link "English" [ref=f32e14] [cursor=pointer]:
+            - /url: /en/map
+          - button "ডার্ক থিম" [ref=f32e15]
+          - link "যা দেখেছেন জানান" [ref=f32e20] [cursor=pointer]:
+            - /url: /bn/report
+      - generic [ref=f32e22]:
+        - generic [ref=f32e24]:
+          - generic [ref=f32e28]: এলাকা বা রাস্তা খুঁজুন
+          - combobox "এলাকা বা রাস্তা খুঁজুন" [ref=f32e29]
+        - paragraph [ref=f32e30]: ষড়ভুজে ট্যাপ করে সেখানকার ছিনতাইয়ের রিপোর্ট দেখুন
+      - complementary [ref=f32e36]:
+        - paragraph [ref=f32e37]: রিপোর্টকৃত কার্যকলাপ
+        - paragraph [ref=f32e38]: রিপোর্টের ভিত্তিতে, নিশ্চিত নয়
+        - generic [ref=f32e46]:
+          - generic [ref=f32e47]: খুব কম
+          - generic [ref=f32e48]: খুব উচ্চ
+        - paragraph [ref=f32e49]: দাগকাটা = কম রিপোর্ট, কম নির্ভরযোগ্য
+        - paragraph [ref=f32e51]: ডেমো ডেটা — এগুলো আসল রিপোর্ট নয়। শুধু ডিজাইন দেখানোর জন্য।
+      - region "দিনের সময়" [ref=f32e53]:
+        - generic [ref=f32e54]:
+          - generic [ref=f32e58]: দিনের সময়
+          - generic [ref=f32e59]: সারাদিন
+          - generic [ref=f32e60]:
+            - button "এখন" [ref=f32e61]
+            - button "সারাদিন" [pressed] [ref=f32e62]
+        - group "সময়ে ট্যাপ করে ম্যাপে দেখুন" [ref=f32e63]:
+          - button "রাত ১২–৩টা — খুব কম" [ref=f32e64]:
+            - generic [ref=f32e67]: 12a
+          - button "ভোর ৩–৬টা — খুব কম" [ref=f32e68]:
+            - generic [ref=f32e71]: 3a
+          - button "সকাল ৬–৯টা — খুব কম" [ref=f32e72]:
+            - generic [ref=f32e75]: 6a
+          - button "সকাল ৯–দুপুর ১২টা — খুব কম" [ref=f32e76]:
+            - generic [ref=f32e79]: 9a
+          - button "দুপুর ১২–৩টা — খুব কম" [ref=f32e80]:
+            - generic [ref=f32e83]: 12p
+          - button "বিকাল ৩–৬টা — খুব কম" [ref=f32e84]:
+            - generic [ref=f32e87]: 3p
+          - button "সন্ধ্যা ৬–৯টা — খুব কম" [ref=f32e88]:
+            - generic [ref=f32e91]: 6p
+          - button "রাত ৯–১২টা — খুব কম" [ref=f32e92]:
+            - generic [ref=f32e95]: 9p
+        - generic [ref=f32e96]:
+          - generic [ref=f32e97]: পুরো শহরে
+          - generic [ref=f32e98]: সময়ে ট্যাপ করে ম্যাপে দেখুন
+  - button "Open Next.js Dev Tools" [ref=f32e104] [cursor=pointer]

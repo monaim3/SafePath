@@ -1,0 +1,50 @@
+[     243ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[     628ms] [LOG] [Fast Refresh] done in 486ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    2156ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[    2178ms] [LOG] [HMR] connected @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   12347ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   12353ms] [ERROR] ./src/app/[lang]/(site)/area/[h3]/page.tsx:320:16
+Error: Expected '</', got 'jsx text'
+  318 |             <ArrowRight className="size-4" aria-hidden />
+  319 |           </Link>
+> 320 |         </Card>
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 321 |       </div>
+      | ^^^^^^
+  322 |
+  323 |       <p className="mt-6 text-xs leading-relaxed text-ink-3">{dict.common.disclaimer}</p>
+  324 |     </div>
+
+Parsing ecmascript source code failed @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[   12535ms] [ERROR] ./src/app/[lang]/(site)/area/[h3]/page.tsx:320:16
+Error: Expected '</', got 'jsx text'
+  318 |             <ArrowRight className="size-4" aria-hidden />
+  319 |           </Link>
+> 320 |         </Card>
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 321 |       </div>
+      | ^^^^^^
+  322 |
+  323 |       <p className="mt-6 text-xs leading-relaxed text-ink-3">{dict.common.disclaimer}</p>
+  324 |     </div>
+
+Parsing ecmascript source code failed @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[   12647ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   13434ms] [ERROR] ./src/app/[lang]/(site)/area/[h3]/page.tsx:320:16
+Error: Expected '</', got 'jsx text'
+  318 |             <ArrowRight className="size-4" aria-hidden />
+  319 |           </Link>
+> 320 |         </Card>
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 321 |       </div>
+      | ^^^^^^
+  322 |
+  323 |       <p className="mt-6 text-xs leading-relaxed text-ink-3">{dict.common.disclaimer}</p>
+  324 |     </div>
+
+Parsing ecmascript source code failed @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[   13653ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   13804ms] [LOG] [Fast Refresh] done in 249ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   24548ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   24590ms] [LOG] [Fast Refresh] done in 5ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[   24661ms] [LOG] [Fast Refresh] done in 5ms @ http://localhost:3100/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776

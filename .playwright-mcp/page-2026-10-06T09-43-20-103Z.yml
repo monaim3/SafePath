@@ -1,0 +1,58 @@
+- generic [active] [ref=f3e1]:
+  - main [ref=f3e2]:
+    - generic [ref=f3e3]:
+      - region "রিপোর্টকৃত কার্যকলাপ" [ref=f3e4]
+      - generic [ref=f3e5]:
+        - link "SafePath home" [ref=f3e6] [cursor=pointer]:
+          - /url: /bn
+          - generic [ref=f3e7]: SafePath
+        - navigation [ref=f3e13]:
+          - link "ম্যাপ" [ref=f3e14] [cursor=pointer]:
+            - /url: /bn/map
+          - link "সচেতন থাকুন" [ref=f3e15] [cursor=pointer]:
+            - /url: /bn/safety
+        - generic [ref=f3e16]:
+          - link "English" [ref=f3e17] [cursor=pointer]:
+            - /url: /en/map
+          - button "ডার্ক থিম" [ref=f3e18]
+          - link "যা দেখেছেন জানান" [ref=f3e22] [cursor=pointer]:
+            - /url: /bn/report
+      - generic [ref=f3e24]:
+        - generic [ref=f3e26]:
+          - generic [ref=f3e30]: এলাকা বা রাস্তা খুঁজুন
+          - combobox "এলাকা বা রাস্তা খুঁজুন" [ref=f3e31]
+        - paragraph [ref=f3e32]: কোনো ষড়ভুজে ট্যাপ করে দেখুন সেখানে কী রিপোর্ট হয়েছে
+      - generic [ref=f3e39]:
+        - generic [ref=f3e40]:
+          - generic [ref=f3e44]: দিনের সময়
+          - generic [ref=f3e45]: 24h
+          - generic [ref=f3e46]:
+            - button "এখন" [ref=f3e47]
+            - button "24h" [pressed] [ref=f3e48]
+        - slider "দিনের সময়" [ref=f3e49]: "0"
+        - generic [aria-hidden] [ref=f3e50]:
+          - generic [ref=f3e51]: 12a
+          - generic [ref=f3e52]: 3a
+          - generic [ref=f3e53]: 6a
+          - generic [ref=f3e54]: 9a
+          - generic [ref=f3e55]: 12p
+          - generic [ref=f3e56]: 3p
+          - generic [ref=f3e57]: 6p
+          - generic [ref=f3e58]: 9p
+        - generic [ref=f3e59]:
+          - button "সব" [pressed] [ref=f3e60]
+          - button "👜 ছিনতাই" [ref=f3e61]
+          - button "🛺 হাইজ্যাকিং" [ref=f3e62]
+          - button "📱 মোবাইল ছিনতাই" [ref=f3e63]
+          - button "✋ হয়রানি" [ref=f3e64]
+          - button "🌑 অন্ধকার / নির্জন রাস্তা" [ref=f3e65]
+        - generic [ref=f3e66]:
+          - generic [ref=f3e67]:
+            - generic [ref=f3e68]: রিপোর্টকৃত কার্যকলাপ
+            - generic [ref=f3e69]: রিপোর্টের ভিত্তিতে, নিশ্চিত নয়
+          - generic [ref=f3e77]:
+            - generic [ref=f3e78]: খুব কম
+            - generic [ref=f3e79]: খুব উচ্চ
+          - paragraph [ref=f3e80]: দাগকাটা = কম রিপোর্ট, কম নির্ভরযোগ্য
+          - paragraph [ref=f3e81]: ডেমো ডেটা — এগুলো আসল রিপোর্ট নয়। শুধু ডিজাইন দেখানোর জন্য।
+  - button "Open Next.js Dev Tools" [ref=f3e87] [cursor=pointer]

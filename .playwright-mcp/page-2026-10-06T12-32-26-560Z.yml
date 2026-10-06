@@ -1,0 +1,88 @@
+- generic [ref=f46e1]:
+  - banner [ref=f46e2]:
+    - generic [ref=f46e3]:
+      - link "SafePath home" [ref=f46e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f46e5]: SafePath
+      - navigation [ref=f46e7]:
+        - link "ম্যাপ" [ref=f46e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f46e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f46e10]:
+        - link "English" [ref=f46e11] [cursor=pointer]:
+          - /url: /en/report
+        - button "ডার্ক থিম" [ref=f46e12]
+        - link "যা দেখেছেন জানান" [ref=f46e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f46e19]:
+    - generic [ref=f46e20]:
+      - generic [ref=f46e21]:
+        - heading "ছিনতাইয়ের তথ্য জানান" [level=1] [ref=f46e22]
+        - paragraph [ref=f46e23]: এক মিনিটও লাগবে না। নাম বা ফোন নম্বর লাগবে না।
+      - generic [ref=f46e24]:
+        - list "Progress" [ref=f46e25]:
+          - listitem [ref=f46e26]:
+            - generic [ref=f46e28]: কী
+          - listitem [ref=f46e29]:
+            - generic [ref=f46e31]: কোথায়
+          - listitem [ref=f46e32]:
+            - generic [ref=f46e34]: কখন
+          - listitem [ref=f46e35]:
+            - generic [ref=f46e37]: বিস্তারিত
+        - generic [ref=f46e119]:
+          - heading "কোথায়?" [level=2] [ref=f46e120]
+          - paragraph [ref=f46e121]: ম্যাপে ট্যাপ করুন। প্রকাশ্যে শুধু আনুমানিক এলাকা (প্রায় ১৫০ মিটার) দেখানো হয়।
+          - generic [ref=f46e126]:
+            - generic [ref=f46e127]:
+              - generic [ref=f46e130]:
+                - generic [ref=f46e134]: এলাকা, রাস্তা বা পরিচিত জায়গা খুঁজুন
+                - combobox "এলাকা, রাস্তা বা পরিচিত জায়গা খুঁজুন" [ref=f46e135]
+              - button "আমার অবস্থান" [ref=f46e136]
+            - generic [ref=f46e141]:
+              - region "কোথায়?" [ref=f46e142]:
+                - generic [ref=f46e143]:
+                  - region "Map" [ref=f46e144]
+                  - generic:
+                    - generic:
+                      - button "Find my location" [ref=f46e146] [cursor=pointer]
+                      - generic [ref=f46e148]:
+                        - button "Zoom in" [ref=f46e149] [cursor=pointer]
+                        - button "Zoom out" [ref=f46e151] [cursor=pointer]
+                      - group [ref=f46e153]:
+                        - generic "Toggle attribution" [ref=f46e154] [cursor=pointer]
+                        - generic [ref=f46e155]:
+                          - text: Imagery © Esri, Maxar, Earthstar Geographics |
+                          - link "OpenFreeMap" [ref=f46e156] [cursor=pointer]:
+                            - /url: https://openfreemap.org
+                          - link "© OpenMapTiles" [ref=f46e157] [cursor=pointer]:
+                            - /url: https://www.openmaptiles.org/
+                          - text: Data from
+                          - link "OpenStreetMap" [ref=f46e158] [cursor=pointer]:
+                            - /url: https://www.openstreetmap.org/copyright
+              - paragraph: ম্যাপ সরিয়ে পিনটি সঠিক জায়গায় আনুন
+              - generic [ref=f46e159]:
+                - generic [ref=f46e164]:
+                  - paragraph [ref=f46e165]: Gausul Azam Masjid
+                  - paragraph [ref=f46e166]: Road Number 01, Korail
+                - button "এই জায়গা বেছে নিন" [ref=f46e167]
+        - generic [ref=f46e89]:
+          - button "পেছনে" [ref=f46e168]
+          - button "পরবর্তী" [active] [ref=f46e90]
+  - contentinfo [ref=f46e93]:
+    - generic [ref=f46e94]:
+      - generic [ref=f46e95]:
+        - generic [ref=f46e96]: SafePath
+        - paragraph [ref=f46e98]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f46e99]:
+        - paragraph [ref=f46e100]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f46e101]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f46e102]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f46e103] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f46e104] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f46e110] [cursor=pointer]
+  - alert [ref=f46e117]

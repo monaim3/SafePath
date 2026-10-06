@@ -1,0 +1,154 @@
+- generic [active] [ref=f29e1]:
+  - banner [ref=f29e2]:
+    - generic [ref=f29e3]:
+      - link "SafePath home" [ref=f29e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f29e5]: SafePath
+      - navigation [ref=f29e7]:
+        - link "ম্যাপ" [ref=f29e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f29e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f29e10]:
+        - link "English" [ref=f29e11] [cursor=pointer]:
+          - /url: /en
+        - button "ডার্ক থিম" [ref=f29e12]
+        - link "যা দেখেছেন জানান" [ref=f29e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f29e19]:
+    - generic [ref=f29e21]:
+      - generic [ref=f29e22]:
+        - heading "কোন পথে ঝুঁকি কম, আগেই জেনে নিন।" [level=1] [ref=f29e23]:
+          - generic [ref=f29e24]: কোন পথে ঝুঁকি কম,
+          - generic [ref=f29e25]: আগেই জেনে নিন।
+        - paragraph [ref=f29e26]: এলাকা ও সময় অনুযায়ী মানুষের রিপোর্ট দেখুন, কেন কোনো জায়গা ঝুঁকিপূর্ণ মনে হচ্ছে বুঝুন, আর তুলনামূলক কম ঝুঁকির পথ বেছে নিন — বিনামূল্যে, পরিচয় গোপন রেখে।
+        - generic [ref=f29e27]:
+          - link "ম্যাপ খুলুন" [ref=f29e28] [cursor=pointer]:
+            - /url: /bn/map
+          - link "যা দেখেছেন জানান" [ref=f29e31] [cursor=pointer]:
+            - /url: /bn/report
+      - link "ডেমো এলাকা F139" [ref=f29e33] [cursor=pointer]:
+        - /url: /bn/area/883cf1396bfffff
+        - generic [ref=f29e34]:
+          - generic [ref=f29e35]:
+            - generic [ref=f29e71]: রাত ১২–৩টা
+            - generic [ref=f29e79]:
+              - generic [ref=f29e80]:
+                - text: কম রিপোর্টের পথ
+                - generic [ref=f29e82]: · +৩ মিনিট
+              - generic [ref=f29e83]: দ্রুততম
+          - generic [ref=f29e85]:
+            - generic [ref=f29e86]:
+              - generic [ref=f29e87]: ডেমো এলাকা F139
+              - generic [ref=f29e88]: খুব উচ্চ
+            - generic [ref=f29e90]:
+              - generic [ref=f29e91]: ৮৩
+              - generic [ref=f29e92]: / ১০০
+            - generic [ref=f29e102]:
+              - generic [ref=f29e103]: "নির্ভরযোগ্যতা: উচ্চ"
+              - generic [ref=f29e109]: ২৫+ জন নিশ্চিত করেছেন
+    - generic [ref=f29e115]:
+      - generic [ref=f29e116]:
+        - generic [ref=f29e117]:
+          - paragraph [ref=f29e118]: কীভাবে কাজ করে
+          - heading "বের হওয়ার আগে তিনটি ধাপ" [level=2] [ref=f29e119]
+        - paragraph [ref=f29e120]: মানুষের রিপোর্ট থেকে — কোথায় কী ঘটছে, কখন ঘটছে, আর কেন — সব এক জায়গায়।
+      - list [ref=f29e121]:
+        - listitem [ref=f29e122]:
+          - generic [ref=f29e124]:
+            - generic [ref=f29e125]: এলাকা বা রাস্তা খুঁজুন
+            - generic [ref=f29e131]:
+              - paragraph [ref=f29e132]: দিনের সময়
+              - generic [ref=f29e136]:
+                - generic [ref=f29e137]: বিকাল ৩–৬টা
+                - generic [ref=f29e138]: সন্ধ্যা ৬–৯টা
+                - generic [ref=f29e139]: রাত ৯–১২টা
+          - heading "এলাকা খুঁজুন" [level=3] [ref=f29e140]
+          - paragraph [ref=f29e141]: যে এলাকা বা রাস্তা দিয়ে যাবেন, ম্যাপে খুঁজুন। যাওয়ার সময় বেছে নিলে সেই সময়ের অবস্থা দেখাবে।
+        - listitem [ref=f29e142]:
+          - generic [ref=f29e144]:
+            - generic [ref=f29e145]:
+              - generic [ref=f29e146]: কেন এই মাত্রা?
+              - generic [ref=f29e147]:
+                - generic [ref=f29e148]: ৮৩
+                - generic [ref=f29e149]: খুব উচ্চ
+            - list [ref=f29e150]:
+              - listitem [ref=f29e151]: গত ৩০ দিনে ১৮টি রিপোর্ট
+              - listitem [ref=f29e155]: বেশিরভাগ রিপোর্ট রাত ১২–৩টা
+              - listitem [ref=f29e159]: ৪৫% রিপোর্ট সন্দেহজনক কার্যকলাপ
+          - heading "কারণ জানুন" [level=3] [ref=f29e163]
+          - paragraph [ref=f29e164]: কোন ধরনের ঘটনা বেশি, কখন বেশি, কতটা যাচাইকৃত — প্রতিটি মাত্রার পেছনের কারণ সহজ ভাষায়।
+        - listitem [ref=f29e165]:
+          - generic [ref=f29e167]:
+            - generic [ref=f29e168]:
+              - generic [ref=f29e170]: কম রিপোর্টের পথ
+              - generic [ref=f29e171]: +৩ মিনিট
+              - generic [ref=f29e172]: কম
+            - generic [ref=f29e173]:
+              - generic [ref=f29e175]: দ্রুততম
+              - generic [ref=f29e176]: উচ্চ
+            - generic [ref=f29e177]: + যা দেখেছেন জানান
+          - heading "পথ বেছে নিন" [level=3] [ref=f29e178]
+          - paragraph [ref=f29e179]: তুলনামূলক কম ঝুঁকির পথ বা সময় বেছে নিন। কিছু দেখলে তিন ট্যাপে জানান — নাম লাগবে না।
+    - generic [ref=f29e188]:
+      - generic [ref=f29e189]:
+        - generic [ref=f29e190]: আমাদের প্রতিশ্রুতি
+        - heading "চারটি প্রতিশ্রুতির উপর তৈরি" [level=2] [ref=f29e191]
+        - paragraph [ref=f29e192]: নিরাপত্তার তথ্য দায়িত্ব নিয়ে দেখাতে হয়। SafePath-এর প্রতিটি ফিচার এই চারটি নিয়ম মেনে তৈরি।
+        - generic [ref=f29e193]:
+          - paragraph [ref=f29e194]: যেভাবে মাত্রা দেখাই
+          - generic [ref=f29e202]:
+            - generic [ref=f29e203]: খুব কম
+            - generic [ref=f29e204]: খুব উচ্চ
+          - paragraph [ref=f29e205]: এই স্কেলে সবুজ রং নেই — কারণ কম রিপোর্ট মানেই “নিরাপদ” নয়।
+      - list [ref=f29e206]:
+        - listitem [ref=f29e207]:
+          - heading "রিপোর্ট ≠ নিশ্চিত" [level=3] [ref=f29e212]
+          - paragraph [ref=f29e213]: প্রতিটি সংখ্যায় দেখানো হয় এটি কমিউনিটি রিপোর্ট, যাচাইকৃত, নাকি সরকারি সূত্র।
+          - list "রিপোর্ট ≠ নিশ্চিত" [ref=f29e214]:
+            - listitem [ref=f29e215]: কমিউনিটি
+            - listitem [ref=f29e216]: যাচাইকৃত
+            - listitem [ref=f29e217]: সরকারি সূত্র
+        - listitem [ref=f29e218]:
+          - heading "গোপনীয়তা আগে" [level=3] [ref=f29e223]
+          - paragraph [ref=f29e224]: শুধু আনুমানিক এলাকা। কোনো নাম, ঠিকানা বা ভুক্তভোগীর তথ্য — কখনোই নয়।
+          - list "গোপনীয়তা আগে" [ref=f29e225]:
+            - listitem [ref=f29e226]: ~১৫০ মিটার এলাকা
+            - listitem [ref=f29e227]: নাম নেই
+            - listitem [ref=f29e228]: ঠিকানা নেই
+        - listitem [ref=f29e229]:
+          - heading "প্রতিটি মাত্রার ব্যাখ্যা" [level=3] [ref=f29e233]
+          - paragraph [ref=f29e234]: কোনো লুকানো স্কোর নয়। কেন একটি এলাকা এমন দেখাচ্ছে, সবসময় দেখতে পাবেন।
+          - list "প্রতিটি মাত্রার ব্যাখ্যা" [ref=f29e235]:
+            - listitem [ref=f29e236]: কেন এই মাত্রা?
+            - listitem [ref=f29e237]: নির্ভরযোগ্যতা
+            - listitem [ref=f29e238]: তথ্যের উৎস
+        - listitem [ref=f29e239]:
+          - heading "সচেতনতা, আতঙ্ক নয়" [level=3] [ref=f29e244]
+          - paragraph [ref=f29e245]: ভালো দিক ও সমাধান হওয়া সমস্যাও দেখাই। কম রিপোর্ট মানেই “নিরাপদ” বলি না।
+          - list "সচেতনতা, আতঙ্ক নয়" [ref=f29e246]:
+            - listitem [ref=f29e247]: ভালো আলো আছে
+            - listitem [ref=f29e248]: টহল দেখা গেছে
+            - listitem [ref=f29e249]: লাইট ঠিক হয়েছে
+    - link [ref=f29e251] [cursor=pointer]:
+      - /url: /bn/safety
+      - generic [ref=f29e252]:
+        - heading "সচেতন থাকুন, ভয় নয়" [level=2] [ref=f29e253]
+        - paragraph [ref=f29e254]: ছিনতাই, যানবাহন, রাতে হাঁটা ও ফোন প্রতারণা নিয়ে কাজের টিপস — আর কিছু ঘটলে ঠিক কী করবেন।
+      - generic [ref=f29e255]: গাইড পড়ুন
+  - contentinfo [ref=f29e258]:
+    - generic [ref=f29e259]:
+      - generic [ref=f29e260]:
+        - generic [ref=f29e261]: SafePath
+        - paragraph [ref=f29e263]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f29e264]:
+        - paragraph [ref=f29e265]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f29e266]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f29e267]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f29e268] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f29e269] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f29e275] [cursor=pointer]

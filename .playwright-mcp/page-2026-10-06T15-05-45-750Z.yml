@@ -1,0 +1,1868 @@
+- generic [active] [ref=f60e1]:
+  - banner [ref=f60e2]:
+    - generic [ref=f60e3]:
+      - link "SafePath home" [ref=f60e4] [cursor=pointer]:
+        - /url: /bn
+        - generic [ref=f60e5]: SafePath
+      - navigation [ref=f60e7]:
+        - link "ম্যাপ" [ref=f60e8] [cursor=pointer]:
+          - /url: /bn/map
+        - link "সচেতন থাকুন" [ref=f60e9] [cursor=pointer]:
+          - /url: /bn/safety
+      - generic [ref=f60e10]:
+        - link "English" [ref=f60e11] [cursor=pointer]:
+          - /url: /en/mod
+        - button "ডার্ক থিম" [ref=f60e12]
+        - link "যা দেখেছেন জানান" [ref=f60e17] [cursor=pointer]:
+          - /url: /bn/report
+  - main [ref=f60e19]:
+    - generic [ref=f60e20]:
+      - heading "মডারেশন" [level=1] [ref=f60e21]
+      - paragraph [ref=f60e22]: নতুন রিপোর্ট পর্যালোচনা করুন। প্রতিটি সিদ্ধান্ত অডিট লগে সংরক্ষিত হয়।
+      - generic [ref=f60e46]:
+        - generic [ref=f60e47]:
+          - paragraph [ref=f60e48]: moderator হিসেবে লগইন
+          - button "লগআউট" [ref=f60e49]
+        - generic [ref=f60e53]:
+          - generic [ref=f60e54]:
+            - definition [ref=f60e55]: ০
+            - term [ref=f60e56]: ভালোভাবে দেখা দরকার
+          - generic [ref=f60e57]:
+            - definition [ref=f60e58]: ১,০২৪
+            - term [ref=f60e59]: অপেক্ষমাণ
+          - generic [ref=f60e60]:
+            - definition [ref=f60e61]: ০
+            - term [ref=f60e62]: এলাকা সতর্কতা
+          - generic [ref=f60e63]:
+            - definition [ref=f60e64]: ৬৯
+            - term [ref=f60e65]: গত ২৪ ঘণ্টা
+          - generic [ref=f60e66]:
+            - definition [ref=f60e67]: ১,১০০
+            - term [ref=f60e68]: যাচাইকৃত
+          - generic [ref=f60e69]:
+            - definition [ref=f60e70]: ০
+            - term [ref=f60e71]: প্রত্যাখ্যাত
+        - tablist [ref=f60e72]:
+          - tab "সন্দেহজনক০" [ref=f60e73]
+          - tab "অপেক্ষমাণ১০০" [selected] [ref=f60e74]
+          - tab "এলাকা সতর্কতা০" [ref=f60e75]
+        - list [ref=f60e77]:
+          - listitem [ref=f60e78]:
+            - generic [ref=f60e79]:
+              - generic [ref=f60e81]:
+                - generic [ref=f60e82]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e83]
+                  - generic [ref=f60e84]: ছিনতাই হয়েছে
+                - paragraph [ref=f60e85]: ৬ অক্টো · রাত ৮টা · আমার সাথে ঘটেছে
+              - time [ref=f60e86]: ৬ অক্টো, ৮:৩০ PM
+            - paragraph [ref=f60e87]: test
+            - generic [ref=f60e92]:
+              - generic [ref=f60e93]: "রিপোর্টকারী: সাধারণ · ১টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e94] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1394507fff
+              - generic [ref=f60e99]: ০.২৪
+            - generic [ref=f60e101]:
+              - generic [ref=f60e3181]: "কারণ:"
+              - button "ভুয়া" [ref=f60e3182]
+              - button "ভুল জায়গা" [ref=f60e3183]
+              - button "স্প্যাম" [ref=f60e3184]
+              - button "আপত্তিকর" [ref=f60e3185]
+              - button "অন্য কারণ" [ref=f60e3186]
+              - button "বাতিল" [ref=f60e3187]
+          - listitem [ref=f60e113]:
+            - generic [ref=f60e114]:
+              - generic [ref=f60e116]:
+                - generic [ref=f60e117]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e118]
+                  - generic [ref=f60e119]: ছিনতাই হয়েছে
+                  - generic [ref=f60e120]: ডেমো
+                - paragraph [ref=f60e121]: ৬ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e122]: ৬ অক্টো, ৮:০৮ PM
+            - generic [ref=f60e123]:
+              - generic [ref=f60e124]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e125] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760317fff
+              - generic [ref=f60e130]: ০.২৮৫
+            - generic [ref=f60e132]:
+              - button "যাচাই করুন" [ref=f60e133]
+              - button "ডুপ্লিকেট" [ref=f60e136]
+              - button "প্রত্যাখ্যান" [ref=f60e140]
+          - listitem [ref=f60e144]:
+            - generic [ref=f60e145]:
+              - generic [ref=f60e147]:
+                - generic [ref=f60e148]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e149]
+                  - generic [ref=f60e150]: ছিনতাই হয়েছে
+                  - generic [ref=f60e151]: ডেমো
+                - paragraph [ref=f60e152]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e153]: ৬ অক্টো, ৮:০০ PM
+            - generic [ref=f60e154]:
+              - generic [ref=f60e155]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e156] [cursor=pointer]:
+                - /url: /bn/area/8a3cf139668ffff
+              - generic [ref=f60e161]: ০.২৯৪
+            - generic [ref=f60e163]:
+              - button "যাচাই করুন" [ref=f60e164]
+              - button "ডুপ্লিকেট" [ref=f60e167]
+              - button "প্রত্যাখ্যান" [ref=f60e171]
+          - listitem [ref=f60e175]:
+            - generic [ref=f60e176]:
+              - generic [ref=f60e178]:
+                - generic [ref=f60e179]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e180]
+                  - generic [ref=f60e181]: ছিনতাই হয়েছে
+                - paragraph [ref=f60e182]: ৫ অক্টো · সন্ধ্যা ৬–৯টা
+              - time [ref=f60e183]: ৬ অক্টো, ৭:০৬ PM
+            - generic [ref=f60e184]:
+              - generic [ref=f60e185]: "রিপোর্টকারী: সাধারণ · ২টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e186] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10c9a17fff
+              - generic [ref=f60e191]: ০.২৪
+            - generic [ref=f60e193]:
+              - button "যাচাই করুন" [ref=f60e194]
+              - button "ডুপ্লিকেট" [ref=f60e197]
+              - button "প্রত্যাখ্যান" [ref=f60e201]
+          - listitem [ref=f60e205]:
+            - generic [ref=f60e206]:
+              - generic [ref=f60e208]:
+                - generic [ref=f60e209]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e210]
+                  - generic [ref=f60e211]: ছিনতাই হয়েছে
+                - paragraph [ref=f60e212]: ৫ অক্টো · রাত ৯–১২টা
+              - time [ref=f60e213]: ৬ অক্টো, ৭:০৫ PM
+            - generic [ref=f60e214]:
+              - generic [ref=f60e215]: "রিপোর্টকারী: সাধারণ · ২টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e216] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10c9a17fff
+              - generic [ref=f60e221]: ০.২৪
+            - generic [ref=f60e223]:
+              - button "যাচাই করুন" [ref=f60e224]
+              - button "ডুপ্লিকেট" [ref=f60e227]
+              - button "প্রত্যাখ্যান" [ref=f60e231]
+          - listitem [ref=f60e235]:
+            - generic [ref=f60e236]:
+              - generic [ref=f60e238]:
+                - generic [ref=f60e239]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e240]
+                  - generic [ref=f60e241]: ছিনতাই হয়েছে
+                  - generic [ref=f60e242]: ডেমো
+                - paragraph [ref=f60e243]: ৬ অক্টো · রাত ১০টা · আমি দেখেছি
+              - time [ref=f60e244]: ৬ অক্টো, ৭:০৪ PM
+            - generic [ref=f60e245]:
+              - generic [ref=f60e246]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e247] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396a9ffff
+              - generic [ref=f60e252]: ০.৩৪৫
+            - generic [ref=f60e254]:
+              - button "যাচাই করুন" [ref=f60e255]
+              - button "ডুপ্লিকেট" [ref=f60e258]
+              - button "প্রত্যাখ্যান" [ref=f60e262]
+          - listitem [ref=f60e266]:
+            - generic [ref=f60e267]:
+              - generic [ref=f60e269]:
+                - generic [ref=f60e270]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e271]
+                  - generic [ref=f60e272]: ছিনতাই হয়েছে
+                  - generic [ref=f60e273]: ডেমো
+                - paragraph [ref=f60e274]: ৬ অক্টো · সকাল ১১টা · আমি দেখেছি
+              - time [ref=f60e275]: ৬ অক্টো, ৬:২২ PM
+            - generic [ref=f60e276]:
+              - generic [ref=f60e277]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e278] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1390467fff
+              - generic [ref=f60e283]: ০.২৭৩
+            - generic [ref=f60e285]:
+              - button "যাচাই করুন" [ref=f60e286]
+              - button "ডুপ্লিকেট" [ref=f60e289]
+              - button "প্রত্যাখ্যান" [ref=f60e293]
+          - listitem [ref=f60e297]:
+            - generic [ref=f60e298]:
+              - generic [ref=f60e300]:
+                - generic [ref=f60e301]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e302]
+                  - generic [ref=f60e303]: ছিনতাই হয়েছে
+                  - generic [ref=f60e304]: ডেমো
+                - paragraph [ref=f60e305]: ৬ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e306]: ৬ অক্টো, ৬:১৮ PM
+            - generic [ref=f60e307]:
+              - generic [ref=f60e308]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e309] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1390427fff
+              - generic [ref=f60e314]: ০.৩৫১
+            - generic [ref=f60e316]:
+              - button "যাচাই করুন" [ref=f60e317]
+              - button "ডুপ্লিকেট" [ref=f60e320]
+              - button "প্রত্যাখ্যান" [ref=f60e324]
+          - listitem [ref=f60e328]:
+            - generic [ref=f60e329]:
+              - generic [ref=f60e331]:
+                - generic [ref=f60e332]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e333]
+                  - generic [ref=f60e334]: ছিনতাই হয়েছে
+                  - generic [ref=f60e335]: ডেমো
+                - paragraph [ref=f60e336]: ৬ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e337]: ৬ অক্টো, ৬:০৯ PM
+            - generic [ref=f60e338]:
+              - generic [ref=f60e339]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e340] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b031ffff
+              - generic [ref=f60e345]: ০.২২২
+            - generic [ref=f60e347]:
+              - button "যাচাই করুন" [ref=f60e348]
+              - button "ডুপ্লিকেট" [ref=f60e351]
+              - button "প্রত্যাখ্যান" [ref=f60e355]
+          - listitem [ref=f60e359]:
+            - generic [ref=f60e360]:
+              - generic [ref=f60e362]:
+                - generic [ref=f60e363]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e364]
+                  - generic [ref=f60e365]: ছিনতাই হয়েছে
+                  - generic [ref=f60e366]: ডেমো
+                - paragraph [ref=f60e367]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e368]: ৬ অক্টো, ৫:৩৪ PM
+            - generic [ref=f60e369]:
+              - generic [ref=f60e370]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e371] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10cdc0ffff
+              - generic [ref=f60e376]: ০.২৬৪
+            - generic [ref=f60e378]:
+              - button "যাচাই করুন" [ref=f60e379]
+              - button "ডুপ্লিকেট" [ref=f60e382]
+              - button "প্রত্যাখ্যান" [ref=f60e386]
+          - listitem [ref=f60e390]:
+            - generic [ref=f60e391]:
+              - generic [ref=f60e393]:
+                - generic [ref=f60e394]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e395]
+                  - generic [ref=f60e396]: ছিনতাই হয়েছে
+                  - generic [ref=f60e397]: ডেমো
+                - paragraph [ref=f60e398]: ৬ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e399]: ৬ অক্টো, ৫:১৩ PM
+            - generic [ref=f60e400]:
+              - generic [ref=f60e401]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e402] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0b57fff
+              - generic [ref=f60e407]: ০.২৮২
+            - generic [ref=f60e409]:
+              - button "যাচাই করুন" [ref=f60e410]
+              - button "ডুপ্লিকেট" [ref=f60e413]
+              - button "প্রত্যাখ্যান" [ref=f60e417]
+          - listitem [ref=f60e421]:
+            - generic [ref=f60e422]:
+              - generic [ref=f60e424]:
+                - generic [ref=f60e425]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e426]
+                  - generic [ref=f60e427]: ছিনতাই হয়েছে
+                  - generic [ref=f60e428]: ডেমো
+                - paragraph [ref=f60e429]: ৬ অক্টো · রাত ১০টা · আমি দেখেছি
+              - time [ref=f60e430]: ৬ অক্টো, ৪:৪৯ PM
+            - generic [ref=f60e431]:
+              - generic [ref=f60e432]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e433] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176cc97fff
+              - generic [ref=f60e438]: ০.৩০৩
+            - generic [ref=f60e440]:
+              - button "যাচাই করুন" [ref=f60e441]
+              - button "ডুপ্লিকেট" [ref=f60e444]
+              - button "প্রত্যাখ্যান" [ref=f60e448]
+          - listitem [ref=f60e452]:
+            - generic [ref=f60e453]:
+              - generic [ref=f60e455]:
+                - generic [ref=f60e456]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e457]
+                  - generic [ref=f60e458]: ছিনতাই হয়েছে
+                  - generic [ref=f60e459]: ডেমো
+                - paragraph [ref=f60e460]: ৬ অক্টো · বিকাল ৪টা · আমি দেখেছি
+              - time [ref=f60e461]: ৬ অক্টো, ৪:২৭ PM
+            - generic [ref=f60e462]:
+              - generic [ref=f60e463]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e464] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b046ffff
+              - generic [ref=f60e469]: ০.২৭৩
+            - generic [ref=f60e471]:
+              - button "যাচাই করুন" [ref=f60e472]
+              - button "ডুপ্লিকেট" [ref=f60e475]
+              - button "প্রত্যাখ্যান" [ref=f60e479]
+          - listitem [ref=f60e483]:
+            - generic [ref=f60e484]:
+              - generic [ref=f60e486]:
+                - generic [ref=f60e487]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e488]
+                  - generic [ref=f60e489]: ছিনতাই হয়েছে
+                  - generic [ref=f60e490]: ডেমো
+                - paragraph [ref=f60e491]: ৬ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e492]: ৬ অক্টো, ৪:১৯ PM
+            - generic [ref=f60e493]:
+              - generic [ref=f60e494]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e495] [cursor=pointer]:
+                - /url: /bn/area/8a3cf139668ffff
+              - generic [ref=f60e500]: ০.২৯১
+            - generic [ref=f60e502]:
+              - button "যাচাই করুন" [ref=f60e503]
+              - button "ডুপ্লিকেট" [ref=f60e506]
+              - button "প্রত্যাখ্যান" [ref=f60e510]
+          - listitem [ref=f60e514]:
+            - generic [ref=f60e515]:
+              - generic [ref=f60e517]:
+                - generic [ref=f60e518]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e519]
+                  - generic [ref=f60e520]: ছিনতাই হয়েছে
+                  - generic [ref=f60e521]: ডেমো
+                - paragraph [ref=f60e522]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e523]: ৬ অক্টো, ৪:১৭ PM
+            - generic [ref=f60e524]:
+              - generic [ref=f60e525]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e526] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176579ffff
+              - generic [ref=f60e531]: ০.২২৮
+            - generic [ref=f60e533]:
+              - button "যাচাই করুন" [ref=f60e534]
+              - button "ডুপ্লিকেট" [ref=f60e537]
+              - button "প্রত্যাখ্যান" [ref=f60e541]
+          - listitem [ref=f60e545]:
+            - generic [ref=f60e546]:
+              - generic [ref=f60e548]:
+                - generic [ref=f60e549]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e550]
+                  - generic [ref=f60e551]: ছিনতাই হয়েছে
+                  - generic [ref=f60e552]: ডেমো
+                - paragraph [ref=f60e553]: ৬ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e554]: ৬ অক্টো, ৪:০৩ PM
+            - generic [ref=f60e555]:
+              - generic [ref=f60e556]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e557] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760b5ffff
+              - generic [ref=f60e562]: ০.২৪৯
+            - generic [ref=f60e564]:
+              - button "যাচাই করুন" [ref=f60e565]
+              - button "ডুপ্লিকেট" [ref=f60e568]
+              - button "প্রত্যাখ্যান" [ref=f60e572]
+          - listitem [ref=f60e576]:
+            - generic [ref=f60e577]:
+              - generic [ref=f60e579]:
+                - generic [ref=f60e580]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e581]
+                  - generic [ref=f60e582]: ছিনতাই হয়েছে
+                  - generic [ref=f60e583]: ডেমো
+                - paragraph [ref=f60e584]: ৬ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e585]: ৬ অক্টো, ৪:০৩ PM
+            - generic [ref=f60e586]:
+              - generic [ref=f60e587]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e588] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b54e7fff
+              - generic [ref=f60e593]: ০.২৮৮
+            - generic [ref=f60e595]:
+              - button "যাচাই করুন" [ref=f60e596]
+              - button "ডুপ্লিকেট" [ref=f60e599]
+              - button "প্রত্যাখ্যান" [ref=f60e603]
+          - listitem [ref=f60e607]:
+            - generic [ref=f60e608]:
+              - generic [ref=f60e610]:
+                - generic [ref=f60e611]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e612]
+                  - generic [ref=f60e613]: ছিনতাই হয়েছে
+                  - generic [ref=f60e614]: ডেমো
+                - paragraph [ref=f60e615]: ৬ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e616]: ৬ অক্টো, ৩:১০ PM
+            - generic [ref=f60e617]:
+              - generic [ref=f60e618]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e619] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b3927fff
+              - generic [ref=f60e624]: ০.৩৩
+            - generic [ref=f60e626]:
+              - button "যাচাই করুন" [ref=f60e627]
+              - button "ডুপ্লিকেট" [ref=f60e630]
+              - button "প্রত্যাখ্যান" [ref=f60e634]
+          - listitem [ref=f60e638]:
+            - generic [ref=f60e639]:
+              - generic [ref=f60e641]:
+                - generic [ref=f60e642]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e643]
+                  - generic [ref=f60e644]: ছিনতাই হয়েছে
+                  - generic [ref=f60e645]: ডেমো
+                - paragraph [ref=f60e646]: ৬ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e647]: ৬ অক্টো, ৩:০৬ PM
+            - generic [ref=f60e648]:
+              - generic [ref=f60e649]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e650] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176084ffff
+              - generic [ref=f60e655]: ০.২৭
+            - generic [ref=f60e657]:
+              - button "যাচাই করুন" [ref=f60e658]
+              - button "ডুপ্লিকেট" [ref=f60e661]
+              - button "প্রত্যাখ্যান" [ref=f60e665]
+          - listitem [ref=f60e669]:
+            - generic [ref=f60e670]:
+              - generic [ref=f60e672]:
+                - generic [ref=f60e673]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e674]
+                  - generic [ref=f60e675]: ছিনতাই হয়েছে
+                  - generic [ref=f60e676]: ডেমো
+                - paragraph [ref=f60e677]: ৬ অক্টো · সন্ধ্যা ৬টা · আমি দেখেছি
+              - time [ref=f60e678]: ৬ অক্টো, ৩:০৪ PM
+            - generic [ref=f60e679]:
+              - generic [ref=f60e680]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e681] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0b5ffff
+              - generic [ref=f60e686]: ০.২৮৫
+            - generic [ref=f60e688]:
+              - button "যাচাই করুন" [ref=f60e689]
+              - button "ডুপ্লিকেট" [ref=f60e692]
+              - button "প্রত্যাখ্যান" [ref=f60e696]
+          - listitem [ref=f60e700]:
+            - generic [ref=f60e701]:
+              - generic [ref=f60e703]:
+                - generic [ref=f60e704]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e705]
+                  - generic [ref=f60e706]: ছিনতাই হয়েছে
+                  - generic [ref=f60e707]: ডেমো
+                - paragraph [ref=f60e708]: ৬ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e709]: ৬ অক্টো, ৩:০০ PM
+            - generic [ref=f60e710]:
+              - generic [ref=f60e711]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e712] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b65a7fff
+              - generic [ref=f60e717]: ০.৩১২
+            - generic [ref=f60e719]:
+              - button "যাচাই করুন" [ref=f60e720]
+              - button "ডুপ্লিকেট" [ref=f60e723]
+              - button "প্রত্যাখ্যান" [ref=f60e727]
+          - listitem [ref=f60e731]:
+            - generic [ref=f60e732]:
+              - generic [ref=f60e734]:
+                - generic [ref=f60e735]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e736]
+                  - generic [ref=f60e737]: ছিনতাই হয়েছে
+                  - generic [ref=f60e738]: ডেমো
+                - paragraph [ref=f60e739]: ৬ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e740]: ৬ অক্টো, ২:৫৯ PM
+            - generic [ref=f60e741]:
+              - generic [ref=f60e742]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e743] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0c47fff
+              - generic [ref=f60e748]: ০.২৪৩
+            - generic [ref=f60e750]:
+              - button "যাচাই করুন" [ref=f60e751]
+              - button "ডুপ্লিকেট" [ref=f60e754]
+              - button "প্রত্যাখ্যান" [ref=f60e758]
+          - listitem [ref=f60e762]:
+            - generic [ref=f60e763]:
+              - generic [ref=f60e765]:
+                - generic [ref=f60e766]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e767]
+                  - generic [ref=f60e768]: ছিনতাই হয়েছে
+                  - generic [ref=f60e769]: ডেমো
+                - paragraph [ref=f60e770]: ৬ অক্টো · সকাল ৯–দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e771]: ৬ অক্টো, ২:৩৪ PM
+            - generic [ref=f60e772]:
+              - generic [ref=f60e773]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e774] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1761d8ffff
+              - generic [ref=f60e779]: ০.২৪৬
+            - generic [ref=f60e781]:
+              - button "যাচাই করুন" [ref=f60e782]
+              - button "ডুপ্লিকেট" [ref=f60e785]
+              - button "প্রত্যাখ্যান" [ref=f60e789]
+          - listitem [ref=f60e793]:
+            - generic [ref=f60e794]:
+              - generic [ref=f60e796]:
+                - generic [ref=f60e797]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e798]
+                  - generic [ref=f60e799]: ছিনতাই হয়েছে
+                  - generic [ref=f60e800]: ডেমো
+                - paragraph [ref=f60e801]: ৬ অক্টো · ভোর ৪টা · আমি দেখেছি
+              - time [ref=f60e802]: ৬ অক্টো, ২:১৮ PM
+            - generic [ref=f60e803]:
+              - generic [ref=f60e804]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e805] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b54c7fff
+              - generic [ref=f60e810]: ০.২৭৯
+            - generic [ref=f60e812]:
+              - button "যাচাই করুন" [ref=f60e813]
+              - button "ডুপ্লিকেট" [ref=f60e816]
+              - button "প্রত্যাখ্যান" [ref=f60e820]
+          - listitem [ref=f60e824]:
+            - generic [ref=f60e825]:
+              - generic [ref=f60e827]:
+                - generic [ref=f60e828]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e829]
+                  - generic [ref=f60e830]: ছিনতাই হয়েছে
+                  - generic [ref=f60e831]: ডেমো
+                - paragraph [ref=f60e832]: ৬ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e833]: ৬ অক্টো, ২:০৭ PM
+            - generic [ref=f60e834]:
+              - generic [ref=f60e835]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e836] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0207fff
+              - generic [ref=f60e841]: ০.২৩৭
+            - generic [ref=f60e843]:
+              - button "যাচাই করুন" [ref=f60e844]
+              - button "ডুপ্লিকেট" [ref=f60e847]
+              - button "প্রত্যাখ্যান" [ref=f60e851]
+          - listitem [ref=f60e855]:
+            - generic [ref=f60e856]:
+              - generic [ref=f60e858]:
+                - generic [ref=f60e859]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e860]
+                  - generic [ref=f60e861]: ছিনতাই হয়েছে
+                  - generic [ref=f60e862]: ডেমো
+                - paragraph [ref=f60e863]: ৬ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e864]: ৬ অক্টো, ২:০২ PM
+            - generic [ref=f60e865]:
+              - generic [ref=f60e866]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e867] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10cbd0ffff
+              - generic [ref=f60e872]: ০.২৭
+            - generic [ref=f60e874]:
+              - button "যাচাই করুন" [ref=f60e875]
+              - button "ডুপ্লিকেট" [ref=f60e878]
+              - button "প্রত্যাখ্যান" [ref=f60e882]
+          - listitem [ref=f60e886]:
+            - generic [ref=f60e887]:
+              - generic [ref=f60e889]:
+                - generic [ref=f60e890]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e891]
+                  - generic [ref=f60e892]: ছিনতাই হয়েছে
+                  - generic [ref=f60e893]: ডেমো
+                - paragraph [ref=f60e894]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e895]: ৬ অক্টো, ১:৫০ PM
+            - generic [ref=f60e896]:
+              - generic [ref=f60e897]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e898] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13958dffff
+              - generic [ref=f60e903]: ০.২৮৫
+            - generic [ref=f60e905]:
+              - button "যাচাই করুন" [ref=f60e906]
+              - button "ডুপ্লিকেট" [ref=f60e909]
+              - button "প্রত্যাখ্যান" [ref=f60e913]
+          - listitem [ref=f60e917]:
+            - generic [ref=f60e918]:
+              - generic [ref=f60e920]:
+                - generic [ref=f60e921]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e922]
+                  - generic [ref=f60e923]: ছিনতাই হয়েছে
+                  - generic [ref=f60e924]: ডেমো
+                - paragraph [ref=f60e925]: ৬ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e926]: ৬ অক্টো, ১:৪৪ PM
+            - generic [ref=f60e927]:
+              - generic [ref=f60e928]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e929] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0057fff
+              - generic [ref=f60e934]: ০.২৭৬
+            - generic [ref=f60e936]:
+              - button "যাচাই করুন" [ref=f60e937]
+              - button "ডুপ্লিকেট" [ref=f60e940]
+              - button "প্রত্যাখ্যান" [ref=f60e944]
+          - listitem [ref=f60e948]:
+            - generic [ref=f60e949]:
+              - generic [ref=f60e951]:
+                - generic [ref=f60e952]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e953]
+                  - generic [ref=f60e954]: ছিনতাই হয়েছে
+                  - generic [ref=f60e955]: ডেমো
+                - paragraph [ref=f60e956]: ৬ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e957]: ৬ অক্টো, ১:১৪ PM
+            - generic [ref=f60e958]:
+              - generic [ref=f60e959]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e960] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396b87fff
+              - generic [ref=f60e965]: ০.২৭৯
+            - generic [ref=f60e967]:
+              - button "যাচাই করুন" [ref=f60e968]
+              - button "ডুপ্লিকেট" [ref=f60e971]
+              - button "প্রত্যাখ্যান" [ref=f60e975]
+          - listitem [ref=f60e979]:
+            - generic [ref=f60e980]:
+              - generic [ref=f60e982]:
+                - generic [ref=f60e983]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e984]
+                  - generic [ref=f60e985]: ছিনতাই হয়েছে
+                  - generic [ref=f60e986]: ডেমো
+                - paragraph [ref=f60e987]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e988]: ৬ অক্টো, ১১:৫৮ AM
+            - generic [ref=f60e989]:
+              - generic [ref=f60e990]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e991] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396ae7fff
+              - generic [ref=f60e996]: ০.২৮২
+            - generic [ref=f60e998]:
+              - button "যাচাই করুন" [ref=f60e999]
+              - button "ডুপ্লিকেট" [ref=f60e1002]
+              - button "প্রত্যাখ্যান" [ref=f60e1006]
+          - listitem [ref=f60e1010]:
+            - generic [ref=f60e1011]:
+              - generic [ref=f60e1013]:
+                - generic [ref=f60e1014]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1015]
+                  - generic [ref=f60e1016]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1017]: ডেমো
+                - paragraph [ref=f60e1018]: ৬ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1019]: ৬ অক্টো, ১১:৫১ AM
+            - generic [ref=f60e1020]:
+              - generic [ref=f60e1021]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1022] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1761aa7fff
+              - generic [ref=f60e1027]: ০.২৪৩
+            - generic [ref=f60e1029]:
+              - button "যাচাই করুন" [ref=f60e1030]
+              - button "ডুপ্লিকেট" [ref=f60e1033]
+              - button "প্রত্যাখ্যান" [ref=f60e1037]
+          - listitem [ref=f60e1041]:
+            - generic [ref=f60e1042]:
+              - generic [ref=f60e1044]:
+                - generic [ref=f60e1045]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1046]
+                  - generic [ref=f60e1047]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1048]: ডেমো
+                - paragraph [ref=f60e1049]: ৬ অক্টো · সন্ধ্যা ৭টা · আমি দেখেছি
+              - time [ref=f60e1050]: ৬ অক্টো, ১০:৫০ AM
+            - generic [ref=f60e1051]:
+              - generic [ref=f60e1052]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1053] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb18ffff
+              - generic [ref=f60e1058]: ০.২৮২
+            - generic [ref=f60e1060]:
+              - button "যাচাই করুন" [ref=f60e1061]
+              - button "ডুপ্লিকেট" [ref=f60e1064]
+              - button "প্রত্যাখ্যান" [ref=f60e1068]
+          - listitem [ref=f60e1072]:
+            - generic [ref=f60e1073]:
+              - generic [ref=f60e1075]:
+                - generic [ref=f60e1076]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e1077]
+                  - generic [ref=f60e1078]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1079]: ডেমো
+                - paragraph [ref=f60e1080]: ৬ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e1081]: ৬ অক্টো, ১০:১১ AM
+            - generic [ref=f60e1082]:
+              - generic [ref=f60e1083]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1084] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760317fff
+              - generic [ref=f60e1089]: ০.২৬১
+            - generic [ref=f60e1091]:
+              - button "যাচাই করুন" [ref=f60e1092]
+              - button "ডুপ্লিকেট" [ref=f60e1095]
+              - button "প্রত্যাখ্যান" [ref=f60e1099]
+          - listitem [ref=f60e1103]:
+            - generic [ref=f60e1104]:
+              - generic [ref=f60e1106]:
+                - generic [ref=f60e1107]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1108]
+                  - generic [ref=f60e1109]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1110]: ডেমো
+                - paragraph [ref=f60e1111]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e1112]: ৬ অক্টো, ৯:৪৫ AM
+            - generic [ref=f60e1113]:
+              - generic [ref=f60e1114]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1115] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10ed187fff
+              - generic [ref=f60e1120]: ০.৩৫৭
+            - generic [ref=f60e1122]:
+              - button "যাচাই করুন" [ref=f60e1123]
+              - button "ডুপ্লিকেট" [ref=f60e1126]
+              - button "প্রত্যাখ্যান" [ref=f60e1130]
+          - listitem [ref=f60e1134]:
+            - generic [ref=f60e1135]:
+              - generic [ref=f60e1137]:
+                - generic [ref=f60e1138]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1139]
+                  - generic [ref=f60e1140]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1141]: ডেমো
+                - paragraph [ref=f60e1142]: ৬ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1143]: ৬ অক্টো, ৯:৪২ AM
+            - generic [ref=f60e1144]:
+              - generic [ref=f60e1145]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1146] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0c57fff
+              - generic [ref=f60e1151]: ০.২৭৩
+            - generic [ref=f60e1153]:
+              - button "যাচাই করুন" [ref=f60e1154]
+              - button "ডুপ্লিকেট" [ref=f60e1157]
+              - button "প্রত্যাখ্যান" [ref=f60e1161]
+          - listitem [ref=f60e1165]:
+            - generic [ref=f60e1166]:
+              - generic [ref=f60e1168]:
+                - generic [ref=f60e1169]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1170]
+                  - generic [ref=f60e1171]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1172]: ডেমো
+                - paragraph [ref=f60e1173]: ৬ অক্টো · রাত ১২টা · আমি দেখেছি
+              - time [ref=f60e1174]: ৬ অক্টো, ৯:২৩ AM
+            - generic [ref=f60e1175]:
+              - generic [ref=f60e1176]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1177] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396a07fff
+              - generic [ref=f60e1182]: ০.২৪৯
+            - generic [ref=f60e1184]:
+              - button "যাচাই করুন" [ref=f60e1185]
+              - button "ডুপ্লিকেট" [ref=f60e1188]
+              - button "প্রত্যাখ্যান" [ref=f60e1192]
+          - listitem [ref=f60e1196]:
+            - generic [ref=f60e1197]:
+              - generic [ref=f60e1199]:
+                - generic [ref=f60e1200]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1201]
+                  - generic [ref=f60e1202]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1203]: ডেমো
+                - paragraph [ref=f60e1204]: ৬ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e1205]: ৬ অক্টো, ৯:০৪ AM
+            - generic [ref=f60e1206]:
+              - generic [ref=f60e1207]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1208] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb017fff
+              - generic [ref=f60e1213]: ০.২৯১
+            - generic [ref=f60e1215]:
+              - button "যাচাই করুন" [ref=f60e1216]
+              - button "ডুপ্লিকেট" [ref=f60e1219]
+              - button "প্রত্যাখ্যান" [ref=f60e1223]
+          - listitem [ref=f60e1227]:
+            - generic [ref=f60e1228]:
+              - generic [ref=f60e1230]:
+                - generic [ref=f60e1231]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1232]
+                  - generic [ref=f60e1233]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1234]: ডেমো
+                - paragraph [ref=f60e1235]: ৬ অক্টো · সকাল ৯–দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e1236]: ৬ অক্টো, ৯:০২ AM
+            - generic [ref=f60e1237]:
+              - generic [ref=f60e1238]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1239] [cursor=pointer]:
+                - /url: /bn/area/8a3cf17600e7fff
+              - generic [ref=f60e1244]: ০.২৩১
+            - generic [ref=f60e1246]:
+              - button "যাচাই করুন" [ref=f60e1247]
+              - button "ডুপ্লিকেট" [ref=f60e1250]
+              - button "প্রত্যাখ্যান" [ref=f60e1254]
+          - listitem [ref=f60e1258]:
+            - generic [ref=f60e1259]:
+              - generic [ref=f60e1261]:
+                - generic [ref=f60e1262]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e1263]
+                  - generic [ref=f60e1264]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1265]: ডেমো
+                - paragraph [ref=f60e1266]: ৫ অক্টো · রাত ১০টা · আমি দেখেছি
+              - time [ref=f60e1267]: ৫ অক্টো, ৭:৫১ PM
+            - generic [ref=f60e1268]:
+              - generic [ref=f60e1269]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1270] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13968effff
+              - generic [ref=f60e1275]: ০.২১৯
+            - generic [ref=f60e1277]:
+              - button "যাচাই করুন" [ref=f60e1278]
+              - button "ডুপ্লিকেট" [ref=f60e1281]
+              - button "প্রত্যাখ্যান" [ref=f60e1285]
+          - listitem [ref=f60e1289]:
+            - generic [ref=f60e1290]:
+              - generic [ref=f60e1292]:
+                - generic [ref=f60e1293]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1294]
+                  - generic [ref=f60e1295]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1296]: ডেমো
+                - paragraph [ref=f60e1297]: ৫ অক্টো · সকাল ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e1298]: ৫ অক্টো, ৭:২৩ PM
+            - generic [ref=f60e1299]:
+              - generic [ref=f60e1300]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1301] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b324ffff
+              - generic [ref=f60e1306]: ০.২৫৮
+            - generic [ref=f60e1308]:
+              - button "যাচাই করুন" [ref=f60e1309]
+              - button "ডুপ্লিকেট" [ref=f60e1312]
+              - button "প্রত্যাখ্যান" [ref=f60e1316]
+          - listitem [ref=f60e1320]:
+            - generic [ref=f60e1321]:
+              - generic [ref=f60e1323]:
+                - generic [ref=f60e1324]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1325]
+                  - generic [ref=f60e1326]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1327]: ডেমো
+                - paragraph [ref=f60e1328]: ৫ অক্টো · সকাল ৯–দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e1329]: ৫ অক্টো, ৬:৩১ PM
+            - generic [ref=f60e1330]:
+              - generic [ref=f60e1331]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1332] [cursor=pointer]:
+                - /url: /bn/area/8a3cf17654affff
+              - generic [ref=f60e1337]: ০.৩৩৯
+            - generic [ref=f60e1339]:
+              - button "যাচাই করুন" [ref=f60e1340]
+              - button "ডুপ্লিকেট" [ref=f60e1343]
+              - button "প্রত্যাখ্যান" [ref=f60e1347]
+          - listitem [ref=f60e1351]:
+            - generic [ref=f60e1352]:
+              - generic [ref=f60e1354]:
+                - generic [ref=f60e1355]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1356]
+                  - generic [ref=f60e1357]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1358]: ডেমো
+                - paragraph [ref=f60e1359]: ৫ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1360]: ৫ অক্টো, ৬:০০ PM
+            - generic [ref=f60e1361]:
+              - generic [ref=f60e1362]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1363] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10c8a5ffff
+              - generic [ref=f60e1368]: ০.২২৮
+            - generic [ref=f60e1370]:
+              - button "যাচাই করুন" [ref=f60e1371]
+              - button "ডুপ্লিকেট" [ref=f60e1374]
+              - button "প্রত্যাখ্যান" [ref=f60e1378]
+          - listitem [ref=f60e1382]:
+            - generic [ref=f60e1383]:
+              - generic [ref=f60e1385]:
+                - generic [ref=f60e1386]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1387]
+                  - generic [ref=f60e1388]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1389]: ডেমো
+                - paragraph [ref=f60e1390]: ৫ অক্টো · বিকাল ৩টা · আমি দেখেছি
+              - time [ref=f60e1391]: ৫ অক্টো, ৫:৫৪ PM
+            - generic [ref=f60e1392]:
+              - generic [ref=f60e1393]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1394] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396367fff
+              - generic [ref=f60e1399]: ০.২৩৪
+            - generic [ref=f60e1401]:
+              - button "যাচাই করুন" [ref=f60e1402]
+              - button "ডুপ্লিকেট" [ref=f60e1405]
+              - button "প্রত্যাখ্যান" [ref=f60e1409]
+          - listitem [ref=f60e1413]:
+            - generic [ref=f60e1414]:
+              - generic [ref=f60e1416]:
+                - generic [ref=f60e1417]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e1418]
+                  - generic [ref=f60e1419]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1420]: ডেমো
+                - paragraph [ref=f60e1421]: ৫ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1422]: ৫ অক্টো, ৪:৪৮ PM
+            - generic [ref=f60e1423]:
+              - generic [ref=f60e1424]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1425] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13900b7fff
+              - generic [ref=f60e1430]: ০.৩২৪
+            - generic [ref=f60e1432]:
+              - button "যাচাই করুন" [ref=f60e1433]
+              - button "ডুপ্লিকেট" [ref=f60e1436]
+              - button "প্রত্যাখ্যান" [ref=f60e1440]
+          - listitem [ref=f60e1444]:
+            - generic [ref=f60e1445]:
+              - generic [ref=f60e1447]:
+                - generic [ref=f60e1448]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1449]
+                  - generic [ref=f60e1450]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1451]: ডেমো
+                - paragraph [ref=f60e1452]: ৫ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e1453]: ৫ অক্টো, ৪:৪৬ PM
+            - generic [ref=f60e1454]:
+              - generic [ref=f60e1455]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1456] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1761a87fff
+              - generic [ref=f60e1461]: ০.২৭
+            - generic [ref=f60e1463]:
+              - button "যাচাই করুন" [ref=f60e1464]
+              - button "ডুপ্লিকেট" [ref=f60e1467]
+              - button "প্রত্যাখ্যান" [ref=f60e1471]
+          - listitem [ref=f60e1475]:
+            - generic [ref=f60e1476]:
+              - generic [ref=f60e1478]:
+                - generic [ref=f60e1479]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1480]
+                  - generic [ref=f60e1481]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1482]: ডেমো
+                - paragraph [ref=f60e1483]: ৫ অক্টো · সকাল ৯–দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e1484]: ৫ অক্টো, ৪:২৫ PM
+            - generic [ref=f60e1485]:
+              - generic [ref=f60e1486]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1487] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b002ffff
+              - generic [ref=f60e1492]: ০.২২২
+            - generic [ref=f60e1494]:
+              - button "যাচাই করুন" [ref=f60e1495]
+              - button "ডুপ্লিকেট" [ref=f60e1498]
+              - button "প্রত্যাখ্যান" [ref=f60e1502]
+          - listitem [ref=f60e1506]:
+            - generic [ref=f60e1507]:
+              - generic [ref=f60e1509]:
+                - generic [ref=f60e1510]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1511]
+                  - generic [ref=f60e1512]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1513]: ডেমো
+                - paragraph [ref=f60e1514]: ৫ অক্টো · সকাল ৬টা · আমি দেখেছি
+              - time [ref=f60e1515]: ৫ অক্টো, ৩:৩৮ PM
+            - generic [ref=f60e1516]:
+              - generic [ref=f60e1517]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1518] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10cb8b7fff
+              - generic [ref=f60e1523]: ০.২৫২
+            - generic [ref=f60e1525]:
+              - button "যাচাই করুন" [ref=f60e1526]
+              - button "ডুপ্লিকেট" [ref=f60e1529]
+              - button "প্রত্যাখ্যান" [ref=f60e1533]
+          - listitem [ref=f60e1537]:
+            - generic [ref=f60e1538]:
+              - generic [ref=f60e1540]:
+                - generic [ref=f60e1541]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1542]
+                  - generic [ref=f60e1543]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1544]: ডেমো
+                - paragraph [ref=f60e1545]: ৫ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1546]: ৫ অক্টো, ২:০৪ PM
+            - generic [ref=f60e1547]:
+              - generic [ref=f60e1548]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1549] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760b0ffff
+              - generic [ref=f60e1554]: ০.২১৯
+            - generic [ref=f60e1556]:
+              - button "যাচাই করুন" [ref=f60e1557]
+              - button "ডুপ্লিকেট" [ref=f60e1560]
+              - button "প্রত্যাখ্যান" [ref=f60e1564]
+          - listitem [ref=f60e1568]:
+            - generic [ref=f60e1569]:
+              - generic [ref=f60e1571]:
+                - generic [ref=f60e1572]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1573]
+                  - generic [ref=f60e1574]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1575]: ডেমো
+                - paragraph [ref=f60e1576]: ৫ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e1577]: ৫ অক্টো, ১:২০ PM
+            - generic [ref=f60e1578]:
+              - generic [ref=f60e1579]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1580] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13a2cd7fff
+              - generic [ref=f60e1585]: ০.৩৪২
+            - generic [ref=f60e1587]:
+              - button "যাচাই করুন" [ref=f60e1588]
+              - button "ডুপ্লিকেট" [ref=f60e1591]
+              - button "প্রত্যাখ্যান" [ref=f60e1595]
+          - listitem [ref=f60e1599]:
+            - generic [ref=f60e1600]:
+              - generic [ref=f60e1602]:
+                - generic [ref=f60e1603]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e1604]
+                  - generic [ref=f60e1605]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1606]: ডেমো
+                - paragraph [ref=f60e1607]: ৫ অক্টো · রাত ১টা · আমি দেখেছি
+              - time [ref=f60e1608]: ৫ অক্টো, ১:০২ PM
+            - generic [ref=f60e1609]:
+              - generic [ref=f60e1610]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1611] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396a77fff
+              - generic [ref=f60e1616]: ০.২৭৬
+            - generic [ref=f60e1618]:
+              - button "যাচাই করুন" [ref=f60e1619]
+              - button "ডুপ্লিকেট" [ref=f60e1622]
+              - button "প্রত্যাখ্যান" [ref=f60e1626]
+          - listitem [ref=f60e1630]:
+            - generic [ref=f60e1631]:
+              - generic [ref=f60e1633]:
+                - generic [ref=f60e1634]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1635]
+                  - generic [ref=f60e1636]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1637]: ডেমো
+                - paragraph [ref=f60e1638]: ৫ অক্টো · সকাল ৬টা · আমি দেখেছি
+              - time [ref=f60e1639]: ৫ অক্টো, ১২:৫০ PM
+            - generic [ref=f60e1640]:
+              - generic [ref=f60e1641]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1642] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760867fff
+              - generic [ref=f60e1647]: ০.৩২৪
+            - generic [ref=f60e1649]:
+              - button "যাচাই করুন" [ref=f60e1650]
+              - button "ডুপ্লিকেট" [ref=f60e1653]
+              - button "প্রত্যাখ্যান" [ref=f60e1657]
+          - listitem [ref=f60e1661]:
+            - generic [ref=f60e1662]:
+              - generic [ref=f60e1664]:
+                - generic [ref=f60e1665]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e1666]
+                  - generic [ref=f60e1667]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1668]: ডেমো
+                - paragraph [ref=f60e1669]: ৫ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e1670]: ৫ অক্টো, ১২:৪২ PM
+            - generic [ref=f60e1671]:
+              - generic [ref=f60e1672]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1673] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396027fff
+              - generic [ref=f60e1678]: ০.৩৫৭
+            - generic [ref=f60e1680]:
+              - button "যাচাই করুন" [ref=f60e1681]
+              - button "ডুপ্লিকেট" [ref=f60e1684]
+              - button "প্রত্যাখ্যান" [ref=f60e1688]
+          - listitem [ref=f60e1692]:
+            - generic [ref=f60e1693]:
+              - generic [ref=f60e1695]:
+                - generic [ref=f60e1696]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1697]
+                  - generic [ref=f60e1698]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1699]: ডেমো
+                - paragraph [ref=f60e1700]: ৫ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1701]: ৫ অক্টো, ১১:৩৯ AM
+            - generic [ref=f60e1702]:
+              - generic [ref=f60e1703]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1704] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13958d7fff
+              - generic [ref=f60e1709]: ০.২২৫
+            - generic [ref=f60e1711]:
+              - button "যাচাই করুন" [ref=f60e1712]
+              - button "ডুপ্লিকেট" [ref=f60e1715]
+              - button "প্রত্যাখ্যান" [ref=f60e1719]
+          - listitem [ref=f60e1723]:
+            - generic [ref=f60e1724]:
+              - generic [ref=f60e1726]:
+                - generic [ref=f60e1727]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e1728]
+                  - generic [ref=f60e1729]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1730]: ডেমো
+                - paragraph [ref=f60e1731]: ৫ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e1732]: ৫ অক্টো, ১০:২৫ AM
+            - generic [ref=f60e1733]:
+              - generic [ref=f60e1734]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1735] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1390407fff
+              - generic [ref=f60e1740]: ০.৩৫১
+            - generic [ref=f60e1742]:
+              - button "যাচাই করুন" [ref=f60e1743]
+              - button "ডুপ্লিকেট" [ref=f60e1746]
+              - button "প্রত্যাখ্যান" [ref=f60e1750]
+          - listitem [ref=f60e1754]:
+            - generic [ref=f60e1755]:
+              - generic [ref=f60e1757]:
+                - generic [ref=f60e1758]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e1759]
+                  - generic [ref=f60e1760]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1761]: ডেমো
+                - paragraph [ref=f60e1762]: ৫ অক্টো · সন্ধ্যা ৭টা · আমি দেখেছি
+              - time [ref=f60e1763]: ৫ অক্টো, ১০:০৪ AM
+            - generic [ref=f60e1764]:
+              - generic [ref=f60e1765]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1766] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1395177fff
+              - generic [ref=f60e1771]: ০.৩০৩
+            - generic [ref=f60e1773]:
+              - button "যাচাই করুন" [ref=f60e1774]
+              - button "ডুপ্লিকেট" [ref=f60e1777]
+              - button "প্রত্যাখ্যান" [ref=f60e1781]
+          - listitem [ref=f60e1785]:
+            - generic [ref=f60e1786]:
+              - generic [ref=f60e1788]:
+                - generic [ref=f60e1789]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e1790]
+                  - generic [ref=f60e1791]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1792]: ডেমো
+                - paragraph [ref=f60e1793]: ৫ অক্টো · রাত ৯টা · আমি দেখেছি
+              - time [ref=f60e1794]: ৫ অক্টো, ৯:৪৫ AM
+            - generic [ref=f60e1795]:
+              - generic [ref=f60e1796]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1797] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13a668ffff
+              - generic [ref=f60e1802]: ০.২৬৪
+            - generic [ref=f60e1804]:
+              - button "যাচাই করুন" [ref=f60e1805]
+              - button "ডুপ্লিকেট" [ref=f60e1808]
+              - button "প্রত্যাখ্যান" [ref=f60e1812]
+          - listitem [ref=f60e1816]:
+            - generic [ref=f60e1817]:
+              - generic [ref=f60e1819]:
+                - generic [ref=f60e1820]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e1821]
+                  - generic [ref=f60e1822]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1823]: ডেমো
+                - paragraph [ref=f60e1824]: ৪ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e1825]: ৪ অক্টো, ৮:৩৫ PM
+            - generic [ref=f60e1826]:
+              - generic [ref=f60e1827]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1828] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13908cffff
+              - generic [ref=f60e1833]: ০.২২২
+            - generic [ref=f60e1835]:
+              - button "যাচাই করুন" [ref=f60e1836]
+              - button "ডুপ্লিকেট" [ref=f60e1839]
+              - button "প্রত্যাখ্যান" [ref=f60e1843]
+          - listitem [ref=f60e1847]:
+            - generic [ref=f60e1848]:
+              - generic [ref=f60e1850]:
+                - generic [ref=f60e1851]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1852]
+                  - generic [ref=f60e1853]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1854]: ডেমো
+                - paragraph [ref=f60e1855]: ৪ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e1856]: ৪ অক্টো, ৮:১১ PM
+            - generic [ref=f60e1857]:
+              - generic [ref=f60e1858]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1859] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396277fff
+              - generic [ref=f60e1864]: ০.২১৩
+            - generic [ref=f60e1866]:
+              - button "যাচাই করুন" [ref=f60e1867]
+              - button "ডুপ্লিকেট" [ref=f60e1870]
+              - button "প্রত্যাখ্যান" [ref=f60e1874]
+          - listitem [ref=f60e1878]:
+            - generic [ref=f60e1879]:
+              - generic [ref=f60e1881]:
+                - generic [ref=f60e1882]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e1883]
+                  - generic [ref=f60e1884]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1885]: ডেমো
+                - paragraph [ref=f60e1886]: ৪ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e1887]: ৪ অক্টো, ৭:৫০ PM
+            - generic [ref=f60e1888]:
+              - generic [ref=f60e1889]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1890] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1761717fff
+              - generic [ref=f60e1895]: ০.২৫৮
+            - generic [ref=f60e1897]:
+              - button "যাচাই করুন" [ref=f60e1898]
+              - button "ডুপ্লিকেট" [ref=f60e1901]
+              - button "প্রত্যাখ্যান" [ref=f60e1905]
+          - listitem [ref=f60e1909]:
+            - generic [ref=f60e1910]:
+              - generic [ref=f60e1912]:
+                - generic [ref=f60e1913]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1914]
+                  - generic [ref=f60e1915]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1916]: ডেমো
+                - paragraph [ref=f60e1917]: ৪ অক্টো · বিকাল ৫টা · আমি দেখেছি
+              - time [ref=f60e1918]: ৪ অক্টো, ৭:৪৭ PM
+            - generic [ref=f60e1919]:
+              - generic [ref=f60e1920]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1921] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1392d27fff
+              - generic [ref=f60e1926]: ০.৩২৪
+            - generic [ref=f60e1928]:
+              - button "যাচাই করুন" [ref=f60e1929]
+              - button "ডুপ্লিকেট" [ref=f60e1932]
+              - button "প্রত্যাখ্যান" [ref=f60e1936]
+          - listitem [ref=f60e1940]:
+            - generic [ref=f60e1941]:
+              - generic [ref=f60e1943]:
+                - generic [ref=f60e1944]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e1945]
+                  - generic [ref=f60e1946]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1947]: ডেমো
+                - paragraph [ref=f60e1948]: ৪ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e1949]: ৪ অক্টো, ৭:৪৬ PM
+            - generic [ref=f60e1950]:
+              - generic [ref=f60e1951]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1952] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b034ffff
+              - generic [ref=f60e1957]: ০.২৮৫
+            - generic [ref=f60e1959]:
+              - button "যাচাই করুন" [ref=f60e1960]
+              - button "ডুপ্লিকেট" [ref=f60e1963]
+              - button "প্রত্যাখ্যান" [ref=f60e1967]
+          - listitem [ref=f60e1971]:
+            - generic [ref=f60e1972]:
+              - generic [ref=f60e1974]:
+                - generic [ref=f60e1975]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e1976]
+                  - generic [ref=f60e1977]: ছিনতাই হয়েছে
+                  - generic [ref=f60e1978]: ডেমো
+                - paragraph [ref=f60e1979]: ৪ অক্টো · সন্ধ্যা ৬টা · আমি দেখেছি
+              - time [ref=f60e1980]: ৪ অক্টো, ৭:২৯ PM
+            - generic [ref=f60e1981]:
+              - generic [ref=f60e1982]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e1983] [cursor=pointer]:
+                - /url: /bn/area/8a3cf139460ffff
+              - generic [ref=f60e1988]: ০.২৬১
+            - generic [ref=f60e1990]:
+              - button "যাচাই করুন" [ref=f60e1991]
+              - button "ডুপ্লিকেট" [ref=f60e1994]
+              - button "প্রত্যাখ্যান" [ref=f60e1998]
+          - listitem [ref=f60e2002]:
+            - generic [ref=f60e2003]:
+              - generic [ref=f60e2005]:
+                - generic [ref=f60e2006]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2007]
+                  - generic [ref=f60e2008]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2009]: ডেমো
+                - paragraph [ref=f60e2010]: ৪ অক্টো · দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e2011]: ৪ অক্টো, ৭:১৯ PM
+            - generic [ref=f60e2012]:
+              - generic [ref=f60e2013]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2014] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10ebaf7fff
+              - generic [ref=f60e2019]: ০.৩৬
+            - generic [ref=f60e2021]:
+              - button "যাচাই করুন" [ref=f60e2022]
+              - button "ডুপ্লিকেট" [ref=f60e2025]
+              - button "প্রত্যাখ্যান" [ref=f60e2029]
+          - listitem [ref=f60e2033]:
+            - generic [ref=f60e2034]:
+              - generic [ref=f60e2036]:
+                - generic [ref=f60e2037]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2038]
+                  - generic [ref=f60e2039]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2040]: ডেমো
+                - paragraph [ref=f60e2041]: ৪ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e2042]: ৪ অক্টো, ৭:১৭ PM
+            - generic [ref=f60e2043]:
+              - generic [ref=f60e2044]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2045] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396af7fff
+              - generic [ref=f60e2050]: ০.২৫২
+            - generic [ref=f60e2052]:
+              - button "যাচাই করুন" [ref=f60e2053]
+              - button "ডুপ্লিকেট" [ref=f60e2056]
+              - button "প্রত্যাখ্যান" [ref=f60e2060]
+          - listitem [ref=f60e2064]:
+            - generic [ref=f60e2065]:
+              - generic [ref=f60e2067]:
+                - generic [ref=f60e2068]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2069]
+                  - generic [ref=f60e2070]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2071]: ডেমো
+                - paragraph [ref=f60e2072]: ৪ অক্টো · সকাল ৯টা · আমি দেখেছি
+              - time [ref=f60e2073]: ৪ অক্টো, ৭:১৪ PM
+            - generic [ref=f60e2074]:
+              - generic [ref=f60e2075]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2076] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760b6ffff
+              - generic [ref=f60e2081]: ০.২১৬
+            - generic [ref=f60e2083]:
+              - button "যাচাই করুন" [ref=f60e2084]
+              - button "ডুপ্লিকেট" [ref=f60e2087]
+              - button "প্রত্যাখ্যান" [ref=f60e2091]
+          - listitem [ref=f60e2095]:
+            - generic [ref=f60e2096]:
+              - generic [ref=f60e2098]:
+                - generic [ref=f60e2099]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2100]
+                  - generic [ref=f60e2101]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2102]: ডেমো
+                - paragraph [ref=f60e2103]: ৪ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e2104]: ৪ অক্টো, ৬:৩১ PM
+            - generic [ref=f60e2105]:
+              - generic [ref=f60e2106]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2107] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760aaffff
+              - generic [ref=f60e2112]: ০.২৫২
+            - generic [ref=f60e2114]:
+              - button "যাচাই করুন" [ref=f60e2115]
+              - button "ডুপ্লিকেট" [ref=f60e2118]
+              - button "প্রত্যাখ্যান" [ref=f60e2122]
+          - listitem [ref=f60e2126]:
+            - generic [ref=f60e2127]:
+              - generic [ref=f60e2129]:
+                - generic [ref=f60e2130]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2131]
+                  - generic [ref=f60e2132]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2133]: ডেমো
+                - paragraph [ref=f60e2134]: ৪ অক্টো · রাত ৯টা · আমি দেখেছি
+              - time [ref=f60e2135]: ৪ অক্টো, ৬:০৩ PM
+            - generic [ref=f60e2136]:
+              - generic [ref=f60e2137]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2138] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0a8ffff
+              - generic [ref=f60e2143]: ০.২৪৯
+            - generic [ref=f60e2145]:
+              - button "যাচাই করুন" [ref=f60e2146]
+              - button "ডুপ্লিকেট" [ref=f60e2149]
+              - button "প্রত্যাখ্যান" [ref=f60e2153]
+          - listitem [ref=f60e2157]:
+            - generic [ref=f60e2158]:
+              - generic [ref=f60e2160]:
+                - generic [ref=f60e2161]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2162]
+                  - generic [ref=f60e2163]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2164]: ডেমো
+                - paragraph [ref=f60e2165]: ৪ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e2166]: ৪ অক্টো, ৫:২৮ PM
+            - generic [ref=f60e2167]:
+              - generic [ref=f60e2168]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2169] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10e955ffff
+              - generic [ref=f60e2174]: ০.২৪৩
+            - generic [ref=f60e2176]:
+              - button "যাচাই করুন" [ref=f60e2177]
+              - button "ডুপ্লিকেট" [ref=f60e2180]
+              - button "প্রত্যাখ্যান" [ref=f60e2184]
+          - listitem [ref=f60e2188]:
+            - generic [ref=f60e2189]:
+              - generic [ref=f60e2191]:
+                - generic [ref=f60e2192]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e2193]
+                  - generic [ref=f60e2194]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2195]: ডেমো
+                - paragraph [ref=f60e2196]: ৪ অক্টো · সন্ধ্যা ৭টা · আমি দেখেছি
+              - time [ref=f60e2197]: ৪ অক্টো, ৫:০৪ PM
+            - generic [ref=f60e2198]:
+              - generic [ref=f60e2199]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2200] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176579ffff
+              - generic [ref=f60e2205]: ০.২২৫
+            - generic [ref=f60e2207]:
+              - button "যাচাই করুন" [ref=f60e2208]
+              - button "ডুপ্লিকেট" [ref=f60e2211]
+              - button "প্রত্যাখ্যান" [ref=f60e2215]
+          - listitem [ref=f60e2219]:
+            - generic [ref=f60e2220]:
+              - generic [ref=f60e2222]:
+                - generic [ref=f60e2223]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e2224]
+                  - generic [ref=f60e2225]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2226]: ডেমো
+                - paragraph [ref=f60e2227]: ৪ অক্টো · সন্ধ্যা ৬টা · আমি দেখেছি
+              - time [ref=f60e2228]: ৪ অক্টো, ৪:৫৫ PM
+            - generic [ref=f60e2229]:
+              - generic [ref=f60e2230]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2231] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1395097fff
+              - generic [ref=f60e2236]: ০.২৪৩
+            - generic [ref=f60e2238]:
+              - button "যাচাই করুন" [ref=f60e2239]
+              - button "ডুপ্লিকেট" [ref=f60e2242]
+              - button "প্রত্যাখ্যান" [ref=f60e2246]
+          - listitem [ref=f60e2250]:
+            - generic [ref=f60e2251]:
+              - generic [ref=f60e2253]:
+                - generic [ref=f60e2254]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2255]
+                  - generic [ref=f60e2256]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2257]: ডেমো
+                - paragraph [ref=f60e2258]: ৪ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e2259]: ৪ অক্টো, ৪:৫৪ PM
+            - generic [ref=f60e2260]:
+              - generic [ref=f60e2261]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2262] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1764147fff
+              - generic [ref=f60e2267]: ০.২১৩
+            - generic [ref=f60e2269]:
+              - button "যাচাই করুন" [ref=f60e2270]
+              - button "ডুপ্লিকেট" [ref=f60e2273]
+              - button "প্রত্যাখ্যান" [ref=f60e2277]
+          - listitem [ref=f60e2281]:
+            - generic [ref=f60e2282]:
+              - generic [ref=f60e2284]:
+                - generic [ref=f60e2285]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2286]
+                  - generic [ref=f60e2287]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2288]: ডেমো
+                - paragraph [ref=f60e2289]: ৪ অক্টো · রাত ৮টা · আমি দেখেছি
+              - time [ref=f60e2290]: ৪ অক্টো, ৪:১১ PM
+            - generic [ref=f60e2291]:
+              - generic [ref=f60e2292]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2293] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13946affff
+              - generic [ref=f60e2298]: ০.৩৩৩
+            - generic [ref=f60e2300]:
+              - button "যাচাই করুন" [ref=f60e2301]
+              - button "ডুপ্লিকেট" [ref=f60e2304]
+              - button "প্রত্যাখ্যান" [ref=f60e2308]
+          - listitem [ref=f60e2312]:
+            - generic [ref=f60e2313]:
+              - generic [ref=f60e2315]:
+                - generic [ref=f60e2316]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2317]
+                  - generic [ref=f60e2318]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2319]: ডেমো
+                - paragraph [ref=f60e2320]: ৪ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e2321]: ৪ অক্টো, ৪:০০ PM
+            - generic [ref=f60e2322]:
+              - generic [ref=f60e2323]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2324] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1396a1ffff
+              - generic [ref=f60e2329]: ০.৩৫১
+            - generic [ref=f60e2331]:
+              - button "যাচাই করুন" [ref=f60e2332]
+              - button "ডুপ্লিকেট" [ref=f60e2335]
+              - button "প্রত্যাখ্যান" [ref=f60e2339]
+          - listitem [ref=f60e2343]:
+            - generic [ref=f60e2344]:
+              - generic [ref=f60e2346]:
+                - generic [ref=f60e2347]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2348]
+                  - generic [ref=f60e2349]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2350]: ডেমো
+                - paragraph [ref=f60e2351]: ৪ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e2352]: ৪ অক্টো, ৩:০৮ PM
+            - generic [ref=f60e2353]:
+              - generic [ref=f60e2354]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2355] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176095ffff
+              - generic [ref=f60e2360]: ০.২৮৮
+            - generic [ref=f60e2362]:
+              - button "যাচাই করুন" [ref=f60e2363]
+              - button "ডুপ্লিকেট" [ref=f60e2366]
+              - button "প্রত্যাখ্যান" [ref=f60e2370]
+          - listitem [ref=f60e2374]:
+            - generic [ref=f60e2375]:
+              - generic [ref=f60e2377]:
+                - generic [ref=f60e2378]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2379]
+                  - generic [ref=f60e2380]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2381]: ডেমো
+                - paragraph [ref=f60e2382]: ৪ অক্টো · সকাল ৯–দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e2383]: ৪ অক্টো, ১:৫১ PM
+            - generic [ref=f60e2384]:
+              - generic [ref=f60e2385]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2386] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10cbc1ffff
+              - generic [ref=f60e2391]: ০.২৫৮
+            - generic [ref=f60e2393]:
+              - button "যাচাই করুন" [ref=f60e2394]
+              - button "ডুপ্লিকেট" [ref=f60e2397]
+              - button "প্রত্যাখ্যান" [ref=f60e2401]
+          - listitem [ref=f60e2405]:
+            - generic [ref=f60e2406]:
+              - generic [ref=f60e2408]:
+                - generic [ref=f60e2409]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2410]
+                  - generic [ref=f60e2411]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2412]: ডেমো
+                - paragraph [ref=f60e2413]: ৪ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e2414]: ৪ অক্টো, ১:৪৮ PM
+            - generic [ref=f60e2415]:
+              - generic [ref=f60e2416]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2417] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb1a7fff
+              - generic [ref=f60e2422]: ০.২২২
+            - generic [ref=f60e2424]:
+              - button "যাচাই করুন" [ref=f60e2425]
+              - button "ডুপ্লিকেট" [ref=f60e2428]
+              - button "প্রত্যাখ্যান" [ref=f60e2432]
+          - listitem [ref=f60e2436]:
+            - generic [ref=f60e2437]:
+              - generic [ref=f60e2439]:
+                - generic [ref=f60e2440]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e2441]
+                  - generic [ref=f60e2442]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2443]: ডেমো
+                - paragraph [ref=f60e2444]: ৪ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e2445]: ৪ অক্টো, ১:৪২ PM
+            - generic [ref=f60e2446]:
+              - generic [ref=f60e2447]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2448] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b02c7fff
+              - generic [ref=f60e2453]: ০.৩৬
+            - generic [ref=f60e2455]:
+              - button "যাচাই করুন" [ref=f60e2456]
+              - button "ডুপ্লিকেট" [ref=f60e2459]
+              - button "প্রত্যাখ্যান" [ref=f60e2463]
+          - listitem [ref=f60e2467]:
+            - generic [ref=f60e2468]:
+              - generic [ref=f60e2470]:
+                - generic [ref=f60e2471]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2472]
+                  - generic [ref=f60e2473]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2474]: ডেমো
+                - paragraph [ref=f60e2475]: ৪ অক্টো · রাত ২টা · আমি দেখেছি
+              - time [ref=f60e2476]: ৪ অক্টো, ১২:৪৮ PM
+            - generic [ref=f60e2477]:
+              - generic [ref=f60e2478]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2479] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b0367fff
+              - generic [ref=f60e2484]: ০.৩১৮
+            - generic [ref=f60e2486]:
+              - button "যাচাই করুন" [ref=f60e2487]
+              - button "ডুপ্লিকেট" [ref=f60e2490]
+              - button "প্রত্যাখ্যান" [ref=f60e2494]
+          - listitem [ref=f60e2498]:
+            - generic [ref=f60e2499]:
+              - generic [ref=f60e2501]:
+                - generic [ref=f60e2502]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2503]
+                  - generic [ref=f60e2504]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2505]: ডেমো
+                - paragraph [ref=f60e2506]: ৪ অক্টো · দুপুর ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e2507]: ৪ অক্টো, ১১:৪৯ AM
+            - generic [ref=f60e2508]:
+              - generic [ref=f60e2509]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2510] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb3affff
+              - generic [ref=f60e2515]: ০.৩৫১
+            - generic [ref=f60e2517]:
+              - button "যাচাই করুন" [ref=f60e2518]
+              - button "ডুপ্লিকেট" [ref=f60e2521]
+              - button "প্রত্যাখ্যান" [ref=f60e2525]
+          - listitem [ref=f60e2529]:
+            - generic [ref=f60e2530]:
+              - generic [ref=f60e2532]:
+                - generic [ref=f60e2533]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e2534]
+                  - generic [ref=f60e2535]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2536]: ডেমো
+                - paragraph [ref=f60e2537]: ৪ অক্টো · সকাল ৭টা · আমি দেখেছি
+              - time [ref=f60e2538]: ৪ অক্টো, ১১:৪৪ AM
+            - generic [ref=f60e2539]:
+              - generic [ref=f60e2540]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2541] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1761207fff
+              - generic [ref=f60e2546]: ০.২১৩
+            - generic [ref=f60e2548]:
+              - button "যাচাই করুন" [ref=f60e2549]
+              - button "ডুপ্লিকেট" [ref=f60e2552]
+              - button "প্রত্যাখ্যান" [ref=f60e2556]
+          - listitem [ref=f60e2560]:
+            - generic [ref=f60e2561]:
+              - generic [ref=f60e2563]:
+                - generic [ref=f60e2564]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e2565]
+                  - generic [ref=f60e2566]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2567]: ডেমো
+                - paragraph [ref=f60e2568]: ৪ অক্টো · দুপুর ১২টা · আমি দেখেছি
+              - time [ref=f60e2569]: ৪ অক্টো, ১১:০৫ AM
+            - generic [ref=f60e2570]:
+              - generic [ref=f60e2571]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2572] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b3937fff
+              - generic [ref=f60e2577]: ০.২৫৫
+            - generic [ref=f60e2579]:
+              - button "যাচাই করুন" [ref=f60e2580]
+              - button "ডুপ্লিকেট" [ref=f60e2583]
+              - button "প্রত্যাখ্যান" [ref=f60e2587]
+          - listitem [ref=f60e2591]:
+            - generic [ref=f60e2592]:
+              - generic [ref=f60e2594]:
+                - generic [ref=f60e2595]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2596]
+                  - generic [ref=f60e2597]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2598]: ডেমো
+                - paragraph [ref=f60e2599]: ৪ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e2600]: ৪ অক্টো, ১০:২৪ AM
+            - generic [ref=f60e2601]:
+              - generic [ref=f60e2602]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2603] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13a26d7fff
+              - generic [ref=f60e2608]: ০.৩০৩
+            - generic [ref=f60e2610]:
+              - button "যাচাই করুন" [ref=f60e2611]
+              - button "ডুপ্লিকেট" [ref=f60e2614]
+              - button "প্রত্যাখ্যান" [ref=f60e2618]
+          - listitem [ref=f60e2622]:
+            - generic [ref=f60e2623]:
+              - generic [ref=f60e2625]:
+                - generic [ref=f60e2626]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2627]
+                  - generic [ref=f60e2628]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2629]: ডেমো
+                - paragraph [ref=f60e2630]: ৪ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e2631]: ৪ অক্টো, ১০:০৪ AM
+            - generic [ref=f60e2632]:
+              - generic [ref=f60e2633]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2634] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1395097fff
+              - generic [ref=f60e2639]: ০.৩৪৫
+            - generic [ref=f60e2641]:
+              - button "যাচাই করুন" [ref=f60e2642]
+              - button "ডুপ্লিকেট" [ref=f60e2645]
+              - button "প্রত্যাখ্যান" [ref=f60e2649]
+          - listitem [ref=f60e2653]:
+            - generic [ref=f60e2654]:
+              - generic [ref=f60e2656]:
+                - generic [ref=f60e2657]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e2658]
+                  - generic [ref=f60e2659]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2660]: ডেমো
+                - paragraph [ref=f60e2661]: ৪ অক্টো · রাত ১২–৩টা · আমি দেখেছি
+              - time [ref=f60e2662]: ৪ অক্টো, ১০:০৪ AM
+            - generic [ref=f60e2663]:
+              - generic [ref=f60e2664]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2665] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b066ffff
+              - generic [ref=f60e2670]: ০.৩১৫
+            - generic [ref=f60e2672]:
+              - button "যাচাই করুন" [ref=f60e2673]
+              - button "ডুপ্লিকেট" [ref=f60e2676]
+              - button "প্রত্যাখ্যান" [ref=f60e2680]
+          - listitem [ref=f60e2684]:
+            - generic [ref=f60e2685]:
+              - generic [ref=f60e2687]:
+                - generic [ref=f60e2688]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2689]
+                  - generic [ref=f60e2690]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2691]: ডেমো
+                - paragraph [ref=f60e2692]: ৪ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e2693]: ৪ অক্টো, ৯:১৪ AM
+            - generic [ref=f60e2694]:
+              - generic [ref=f60e2695]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2696] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10ebccffff
+              - generic [ref=f60e2701]: ০.৩৩৩
+            - generic [ref=f60e2703]:
+              - button "যাচাই করুন" [ref=f60e2704]
+              - button "ডুপ্লিকেট" [ref=f60e2707]
+              - button "প্রত্যাখ্যান" [ref=f60e2711]
+          - listitem [ref=f60e2715]:
+            - generic [ref=f60e2716]:
+              - generic [ref=f60e2718]:
+                - generic [ref=f60e2719]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2720]
+                  - generic [ref=f60e2721]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2722]: ডেমো
+                - paragraph [ref=f60e2723]: ৩ অক্টো · সন্ধ্যা ৭টা · আমি দেখেছি
+              - time [ref=f60e2724]: ৩ অক্টো, ৮:২৫ PM
+            - generic [ref=f60e2725]:
+              - generic [ref=f60e2726]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2727] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760b57fff
+              - generic [ref=f60e2732]: ০.২৮৮
+            - generic [ref=f60e2734]:
+              - button "যাচাই করুন" [ref=f60e2735]
+              - button "ডুপ্লিকেট" [ref=f60e2738]
+              - button "প্রত্যাখ্যান" [ref=f60e2742]
+          - listitem [ref=f60e2746]:
+            - generic [ref=f60e2747]:
+              - generic [ref=f60e2749]:
+                - generic [ref=f60e2750]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2751]
+                  - generic [ref=f60e2752]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2753]: ডেমো
+                - paragraph [ref=f60e2754]: ৩ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e2755]: ৩ অক্টো, ৭:৩৬ PM
+            - generic [ref=f60e2756]:
+              - generic [ref=f60e2757]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2758] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb047fff
+              - generic [ref=f60e2763]: ০.২৫২
+            - generic [ref=f60e2765]:
+              - button "যাচাই করুন" [ref=f60e2766]
+              - button "ডুপ্লিকেট" [ref=f60e2769]
+              - button "প্রত্যাখ্যান" [ref=f60e2773]
+          - listitem [ref=f60e2777]:
+            - generic [ref=f60e2778]:
+              - generic [ref=f60e2780]:
+                - generic [ref=f60e2781]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2782]
+                  - generic [ref=f60e2783]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2784]: ডেমো
+                - paragraph [ref=f60e2785]: ৩ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e2786]: ৩ অক্টো, ৬:৫৪ PM
+            - generic [ref=f60e2787]:
+              - generic [ref=f60e2788]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2789] [cursor=pointer]:
+                - /url: /bn/area/8a3cf139084ffff
+              - generic [ref=f60e2794]: ০.২৮২
+            - generic [ref=f60e2796]:
+              - button "যাচাই করুন" [ref=f60e2797]
+              - button "ডুপ্লিকেট" [ref=f60e2800]
+              - button "প্রত্যাখ্যান" [ref=f60e2804]
+          - listitem [ref=f60e2808]:
+            - generic [ref=f60e2809]:
+              - generic [ref=f60e2811]:
+                - generic [ref=f60e2812]:
+                  - heading "ছুরি বা অস্ত্র দেখিয়ে" [level=3] [ref=f60e2813]
+                  - generic [ref=f60e2814]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2815]: ডেমো
+                - paragraph [ref=f60e2816]: ৩ অক্টো · সন্ধ্যা ৬–৯টা · আমি দেখেছি
+              - time [ref=f60e2817]: ৩ অক্টো, ৬:৫২ PM
+            - generic [ref=f60e2818]:
+              - generic [ref=f60e2819]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2820] [cursor=pointer]:
+                - /url: /bn/area/8a3cf13b031ffff
+              - generic [ref=f60e2825]: ০.২৯৭
+            - generic [ref=f60e2827]:
+              - button "যাচাই করুন" [ref=f60e2828]
+              - button "ডুপ্লিকেট" [ref=f60e2831]
+              - button "প্রত্যাখ্যান" [ref=f60e2835]
+          - listitem [ref=f60e2839]:
+            - generic [ref=f60e2840]:
+              - generic [ref=f60e2842]:
+                - generic [ref=f60e2843]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2844]
+                  - generic [ref=f60e2845]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2846]: ডেমো
+                - paragraph [ref=f60e2847]: ৩ অক্টো · সকাল ১১টা · আমি দেখেছি
+              - time [ref=f60e2848]: ৩ অক্টো, ৬:৩৩ PM
+            - generic [ref=f60e2849]:
+              - generic [ref=f60e2850]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2851] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10cb0f7fff
+              - generic [ref=f60e2856]: ০.৩৪২
+            - generic [ref=f60e2858]:
+              - button "যাচাই করুন" [ref=f60e2859]
+              - button "ডুপ্লিকেট" [ref=f60e2862]
+              - button "প্রত্যাখ্যান" [ref=f60e2866]
+          - listitem [ref=f60e2870]:
+            - generic [ref=f60e2871]:
+              - generic [ref=f60e2873]:
+                - generic [ref=f60e2874]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2875]
+                  - generic [ref=f60e2876]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2877]: ডেমো
+                - paragraph [ref=f60e2878]: ৩ অক্টো · ভোর ৪টা · আমি দেখেছি
+              - time [ref=f60e2879]: ৩ অক্টো, ৪:২৫ PM
+            - generic [ref=f60e2880]:
+              - generic [ref=f60e2881]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2882] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1390507fff
+              - generic [ref=f60e2887]: ০.২৮২
+            - generic [ref=f60e2889]:
+              - button "যাচাই করুন" [ref=f60e2890]
+              - button "ডুপ্লিকেট" [ref=f60e2893]
+              - button "প্রত্যাখ্যান" [ref=f60e2897]
+          - listitem [ref=f60e2901]:
+            - generic [ref=f60e2902]:
+              - generic [ref=f60e2904]:
+                - generic [ref=f60e2905]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e2906]
+                  - generic [ref=f60e2907]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2908]: ডেমো
+                - paragraph [ref=f60e2909]: ৩ অক্টো · সন্ধ্যা ৬টা · আমি দেখেছি
+              - time [ref=f60e2910]: ৩ অক্টো, ৪:২৪ PM
+            - generic [ref=f60e2911]:
+              - generic [ref=f60e2912]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2913] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb7a7fff
+              - generic [ref=f60e2918]: ০.৩০৩
+            - generic [ref=f60e2920]:
+              - button "যাচাই করুন" [ref=f60e2921]
+              - button "ডুপ্লিকেট" [ref=f60e2924]
+              - button "প্রত্যাখ্যান" [ref=f60e2928]
+          - listitem [ref=f60e2932]:
+            - generic [ref=f60e2933]:
+              - generic [ref=f60e2935]:
+                - generic [ref=f60e2936]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e2937]
+                  - generic [ref=f60e2938]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2939]: ডেমো
+                - paragraph [ref=f60e2940]: ৩ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e2941]: ৩ অক্টো, ৩:৫৩ PM
+            - generic [ref=f60e2942]:
+              - generic [ref=f60e2943]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2944] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1390c1ffff
+              - generic [ref=f60e2949]: ০.২৪৯
+            - generic [ref=f60e2951]:
+              - button "যাচাই করুন" [ref=f60e2952]
+              - button "ডুপ্লিকেট" [ref=f60e2955]
+              - button "প্রত্যাখ্যান" [ref=f60e2959]
+          - listitem [ref=f60e2963]:
+            - generic [ref=f60e2964]:
+              - generic [ref=f60e2966]:
+                - generic [ref=f60e2967]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e2968]
+                  - generic [ref=f60e2969]: ছিনতাই হয়েছে
+                  - generic [ref=f60e2970]: ডেমো
+                - paragraph [ref=f60e2971]: ৩ অক্টো · সকাল ৬টা · আমি দেখেছি
+              - time [ref=f60e2972]: ৩ অক্টো, ৩:২৮ PM
+            - generic [ref=f60e2973]:
+              - generic [ref=f60e2974]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e2975] [cursor=pointer]:
+                - /url: /bn/area/8a3cf10eb04ffff
+              - generic [ref=f60e2980]: ০.২৭৯
+            - generic [ref=f60e2982]:
+              - button "যাচাই করুন" [ref=f60e2983]
+              - button "ডুপ্লিকেট" [ref=f60e2986]
+              - button "প্রত্যাখ্যান" [ref=f60e2990]
+          - listitem [ref=f60e2994]:
+            - generic [ref=f60e2995]:
+              - generic [ref=f60e2997]:
+                - generic [ref=f60e2998]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e2999]
+                  - generic [ref=f60e3000]: ছিনতাই হয়েছে
+                  - generic [ref=f60e3001]: ডেমো
+                - paragraph [ref=f60e3002]: ৩ অক্টো · রাত ৯–১২টা · আমি দেখেছি
+              - time [ref=f60e3003]: ৩ অক্টো, ২:২৭ PM
+            - generic [ref=f60e3004]:
+              - generic [ref=f60e3005]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e3006] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760b17fff
+              - generic [ref=f60e3011]: ০.২১৯
+            - generic [ref=f60e3013]:
+              - button "যাচাই করুন" [ref=f60e3014]
+              - button "ডুপ্লিকেট" [ref=f60e3017]
+              - button "প্রত্যাখ্যান" [ref=f60e3021]
+          - listitem [ref=f60e3025]:
+            - generic [ref=f60e3026]:
+              - generic [ref=f60e3028]:
+                - generic [ref=f60e3029]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e3030]
+                  - generic [ref=f60e3031]: ছিনতাই হয়েছে
+                  - generic [ref=f60e3032]: ডেমো
+                - paragraph [ref=f60e3033]: ৩ অক্টো · রাত ১১টা · আমি দেখেছি
+              - time [ref=f60e3034]: ৩ অক্টো, ২:১৬ PM
+            - generic [ref=f60e3035]:
+              - generic [ref=f60e3036]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e3037] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176545ffff
+              - generic [ref=f60e3042]: ০.৩৫৭
+            - generic [ref=f60e3044]:
+              - button "যাচাই করুন" [ref=f60e3045]
+              - button "ডুপ্লিকেট" [ref=f60e3048]
+              - button "প্রত্যাখ্যান" [ref=f60e3052]
+          - listitem [ref=f60e3056]:
+            - generic [ref=f60e3057]:
+              - generic [ref=f60e3059]:
+                - generic [ref=f60e3060]:
+                  - heading "বাসে বা বাসস্ট্যান্ডে" [level=3] [ref=f60e3061]
+                  - generic [ref=f60e3062]: ছিনতাই হয়েছে
+                  - generic [ref=f60e3063]: ডেমো
+                - paragraph [ref=f60e3064]: ৩ অক্টো · ভোর ৪টা · আমি দেখেছি
+              - time [ref=f60e3065]: ৩ অক্টো, ১:২৫ PM
+            - generic [ref=f60e3066]:
+              - generic [ref=f60e3067]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e3068] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1393797fff
+              - generic [ref=f60e3073]: ০.২৪
+            - generic [ref=f60e3075]:
+              - button "যাচাই করুন" [ref=f60e3076]
+              - button "ডুপ্লিকেট" [ref=f60e3079]
+              - button "প্রত্যাখ্যান" [ref=f60e3083]
+          - listitem [ref=f60e3087]:
+            - generic [ref=f60e3088]:
+              - generic [ref=f60e3090]:
+                - generic [ref=f60e3091]:
+                  - heading "মোটরসাইকেল থেকে টান" [level=3] [ref=f60e3092]
+                  - generic [ref=f60e3093]: ছিনতাই হয়েছে
+                  - generic [ref=f60e3094]: ডেমো
+                - paragraph [ref=f60e3095]: ৩ অক্টো · বিকাল ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e3096]: ৩ অক্টো, ১:১৫ PM
+            - generic [ref=f60e3097]:
+              - generic [ref=f60e3098]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e3099] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1381cb7fff
+              - generic [ref=f60e3104]: ০.২১৩
+            - generic [ref=f60e3106]:
+              - button "যাচাই করুন" [ref=f60e3107]
+              - button "ডুপ্লিকেট" [ref=f60e3110]
+              - button "প্রত্যাখ্যান" [ref=f60e3114]
+          - listitem [ref=f60e3118]:
+            - generic [ref=f60e3119]:
+              - generic [ref=f60e3121]:
+                - generic [ref=f60e3122]:
+                  - heading "হেঁটে যাওয়ার সময়" [level=3] [ref=f60e3123]
+                  - generic [ref=f60e3124]: ছিনতাই হয়েছে
+                  - generic [ref=f60e3125]: ডেমো
+                - paragraph [ref=f60e3126]: ৩ অক্টো · ভোর ৩–৬টা · আমি দেখেছি
+              - time [ref=f60e3127]: ৩ অক্টো, ১২:৫৩ PM
+            - generic [ref=f60e3128]:
+              - generic [ref=f60e3129]: "রিপোর্টকারী: বেশি বিশ্বাসযোগ্য · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e3130] [cursor=pointer]:
+                - /url: /bn/area/8a3cf1760317fff
+              - generic [ref=f60e3135]: ০.৩৪২
+            - generic [ref=f60e3137]:
+              - button "যাচাই করুন" [ref=f60e3138]
+              - button "ডুপ্লিকেট" [ref=f60e3141]
+              - button "প্রত্যাখ্যান" [ref=f60e3145]
+          - listitem [ref=f60e3149]:
+            - generic [ref=f60e3150]:
+              - generic [ref=f60e3152]:
+                - generic [ref=f60e3153]:
+                  - heading "রিকশা বা সিএনজিতে থাকা অবস্থায়" [level=3] [ref=f60e3154]
+                  - generic [ref=f60e3155]: ছিনতাই হয়েছে
+                  - generic [ref=f60e3156]: ডেমো
+                - paragraph [ref=f60e3157]: ৩ অক্টো · রাত ১০টা · আমি দেখেছি
+              - time [ref=f60e3158]: ৩ অক্টো, ১২:০৪ PM
+            - generic [ref=f60e3159]:
+              - generic [ref=f60e3160]: "রিপোর্টকারী: সাধারণ · ০টি রিপোর্ট · ০টি প্রত্যাখ্যাত"
+              - link "এলাকা দেখুন" [ref=f60e3161] [cursor=pointer]:
+                - /url: /bn/area/8a3cf176cc87fff
+              - generic [ref=f60e3166]: ০.৩১২
+            - generic [ref=f60e3168]:
+              - button "যাচাই করুন" [ref=f60e3169]
+              - button "ডুপ্লিকেট" [ref=f60e3172]
+              - button "প্রত্যাখ্যান" [ref=f60e3176]
+  - contentinfo [ref=f60e25]:
+    - generic [ref=f60e26]:
+      - generic [ref=f60e27]:
+        - generic [ref=f60e28]: SafePath
+        - paragraph [ref=f60e30]: বিনামূল্যে, উন্মুক্ত, কমিউনিটি-চালিত নিরাপত্তা সচেতনতা।
+      - generic [ref=f60e31]:
+        - paragraph [ref=f60e32]: SafePath-এর তথ্য কমিউনিটি রিপোর্ট ও প্রাপ্ত ডেটার ভিত্তিতে তৈরি। এটি অসম্পূর্ণ বা ভুল হতে পারে এবং এটি কোনো সরকারি অপরাধ পরিসংখ্যান বা নিরাপত্তার নিশ্চয়তা নয়।
+        - paragraph [ref=f60e33]: এটি জরুরি সেবা নয়। এটি সরকারি অপরাধ ডেটাবেস নয়।
+        - paragraph [ref=f60e34]:
+          - text: Map data ©
+          - link "OpenStreetMap" [ref=f60e35] [cursor=pointer]:
+            - /url: https://www.openstreetmap.org/copyright
+          - text: contributors · Tiles
+          - link "OpenFreeMap" [ref=f60e36] [cursor=pointer]:
+            - /url: https://openfreemap.org
+  - button "Open Next.js Dev Tools" [ref=f60e42] [cursor=pointer]
+  - alert [ref=f60e3180]
