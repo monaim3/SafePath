@@ -69,6 +69,14 @@ export interface AreaVideo {
   date: string | null;
 }
 
+/** Response item of GET /api/v1/areas/{h3}/news — a published news report counted in this area. */
+export interface AreaNews {
+  outlet: string;
+  url: string;
+  date: string | null;
+  category: CategoryKey;
+}
+
 /** Signed, single-file Cloudinary upload, returned with a report that has footage. */
 export interface UploadTicket {
   url: string;

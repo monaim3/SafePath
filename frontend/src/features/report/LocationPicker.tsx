@@ -13,6 +13,9 @@ import { SafetyMap, type FlyTarget } from "@/features/map/SafetyMap";
 
 type LngLat = [lng: number, lat: number];
 
+/** Where the picker opens before a spot is chosen: Mohammadpur, Dhaka. */
+const MOHAMMADPUR: LngLat = [90.3605, 23.7625];
+
 /**
  * Google-style "drop a pin": search or move the map so the fixed centre pin is on the spot,
  * see the address under it, then confirm. Only the ~150 m cell is stored.
@@ -92,7 +95,8 @@ export function LocationPicker({
           onPick={(p) => fly(p, 16.5)}
           onCenterChange={handleCenter}
           flyTo={flyTo}
-          initialZoom={13}
+          initialCenter={MOHAMMADPUR}
+          initialZoom={14}
           basemap="satellite"
           ariaLabel={t.whereQ}
         />

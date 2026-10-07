@@ -3,7 +3,7 @@
  * Currently backed by synthetic demo data; each function documents the endpoint it will call.
  */
 import { demoArea, demoCityTimeProfile, demoMapCells, demoTopAreas } from "@/lib/safety/demo-data";
-import type { AreaDetail, AreaVideo, CellSummary, MapCellsQuery, UploadTicket } from "@/lib/safety/types";
+import type { AreaDetail, AreaNews, AreaVideo, CellSummary, MapCellsQuery, UploadTicket } from "@/lib/safety/types";
 import type { ReportInput } from "@/lib/validation/report";
 
 /** Django API base, e.g. http://localhost:8000. Unset = demo mode: synthetic data, nothing leaves the browser. */
@@ -50,6 +50,16 @@ export async function fetchAreaVideos(h3: string): Promise<AreaVideo[]> {
   if (!REPORTS_GO_TO_SERVER) return [];
   try {
     return (await getJson<{ videos: AreaVideo[] }>(`/areas/${encodeURIComponent(h3)}/videos`)).videos;
+  } catch {
+    return [];
+  }
+}
+
+/** GET /api/v1/areas/{h3}/news — published news reports behind this area; empty in demo mode or on error. */
+export async function fetchAreaNews(h3: string): Promise<AreaNews[]> {
+  if (!REPORTS_GO_TO_SERVER) return [];
+  try {
+    return (await getJson<{ news: AreaNews[] }>(`/areas/${encodeURIComponent(h3)}/news`)).news;
   } catch {
     return [];
   }

@@ -8,30 +8,33 @@ import {
   ArrowUpRight,
   AlertTriangle,
   CheckCircle2,
+  ExternalLink,
   Info,
   Minus,
   Phone,
   Plus,
 } from "lucide-react";
 import { fill, formatNumber, getDictionary, hasLocale } from "@/i18n";
-import { fetchArea, fetchAreaVideos } from "@/lib/api/safety";
+import { fetchArea, fetchAreaNews, fetchAreaVideos } from "@/lib/api/safety";
 import type { CategoryKey } from "@/lib/safety/categories";
 import { CategoryIcon } from "@/components/safety/CategoryIcon";
 import { explainArea } from "@/lib/safety/explain";
 import { formatReason } from "@/lib/safety/reason-text";
-import type { AreaDetail, SourceKey } from "@/lib/safety/types";
+import type { SourceKey } from "@/lib/safety/types";
 import { BandBadge, ConfidenceMeter } from "@/components/safety/BandBadge";
 import { ScoreRing } from "@/components/safety/ScoreRing";
 import { TimeStrip } from "@/components/safety/TimeStrip";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardHint, CardTitle } from "@/components/ui/Card";
 import { KnowledgeList } from "@/features/area/KnowledgeList";
+import { FollowAreaButton } from "@/features/watch/FollowAreaButton";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/area/[h3]">): Promise<Metadata> {
   const { lang, h3 } = await params;
   if (!hasLocale(lang)) return {};
   const area = await fetchArea(h3);
-  return { title: area ? `${getDictionary(lang).home.heroCardArea} ${area.code}` : undefined };
+  const home = getDictionary(lang).home;
+  return { title: area ? `${area.isDemo ? home.heroCardDemoArea : home.heroCardArea} ${area.code}` : undefined };
 }
 
 /** Which awareness section fits the way chhintai most often happens in an area. */
@@ -52,10 +55,7 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
   const { lang, h3 } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const [area, videos]: [AreaDetail | null, Awaited<ReturnType<typeof fetchAreaVideos>>] = await Promise.all([
-    fetchArea(h3),
-    fetchAreaVideos(h3),
-  ]);
+  const [area, videos, news] = await Promise.all([fetchArea(h3), fetchAreaVideos(h3), fetchAreaNews(h3)]);
   if (!area) notFound();
   const videoDate = new Intl.DateTimeFormat(lang === "bn" ? "bn-BD" : "en-GB", { day: "numeric", month: "short", year: "numeric" });
 
@@ -86,7 +86,7 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
         <div className="flex-1">
           <p className="text-sm text-ink-3">{dict.area.ralLabel}</p>
           <h1 className="mt-1 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            {dict.home.heroCardArea} {area.code}
+            {area.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} {area.code}
           </h1>
           {area.insufficient ? (
             <p className="mt-3 text-ink-2">
@@ -106,10 +106,13 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
             </div>
           )}
         </div>
-        <ButtonLink href={`/${lang}/report?h3=${area.h3}`} variant="accent" className="self-start md:self-center">
-          <Plus className="size-4" aria-hidden />
-          {dict.area.reportHere}
-        </ButtonLink>
+        <div className="flex flex-col gap-3 self-start md:self-center">
+          <ButtonLink href={`/${lang}/report?h3=${area.h3}`} variant="outline">
+            <Plus className="size-4" aria-hidden />
+            {dict.area.reportHere}
+          </ButtonLink>
+          <FollowAreaButton h3={area.h3} locale={lang} dict={dict} />
+        </div>
       </header>
 
       {area.busyArea && (
@@ -243,6 +246,36 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
             </Card>
           )}
         </div>
+      )}
+
+      {/* ---------- Published news reports behind this area ---------- */}
+      {news.length > 0 && (
+        <Card className="mt-4">
+          <CardTitle>{dict.area.newsTitle}</CardTitle>
+          <CardHint>{dict.area.newsHint}</CardHint>
+          <ul className="mt-4 divide-y divide-line">
+            {news.map((item) => (
+              <li key={item.url}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 py-3 first:pt-0 last:pb-0"
+                >
+                  <CategoryIcon category={item.category} size="sm" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-semibold group-hover:text-accent">{item.outlet}</span>
+                    <span className="block text-xs text-ink-3">
+                      {dict.categories[item.category]}
+                      {item.date && ` · ${videoDate.format(new Date(item.date))}`}
+                    </span>
+                  </span>
+                  <ExternalLink className="size-4 shrink-0 text-ink-3 group-hover:text-accent" aria-hidden />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Card>
       )}
 
       {/* ---------- Footage (moderator-approved, sound removed) ---------- */}

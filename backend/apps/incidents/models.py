@@ -46,6 +46,11 @@ class Report(models.Model):
     ]
     POSITIVE_CATEGORIES = {"well_lit", "busy_late", "patrol_seen", "cctv"}
 
+    class Source(models.TextChoices):
+        COMMUNITY = "community"  # someone reported it on SafePath
+        MEDIA = "media"  # imported from a published news report (link kept)
+        OFFICIAL = "official"  # police / government data
+
     class VideoStatus(models.TextChoices):
         NONE = ""
         AWAITING = "awaiting"  # upload ticket issued, file not confirmed yet
@@ -75,6 +80,10 @@ class Report(models.Model):
     ip_hash = models.CharField(max_length=64, db_index=True)
     text_fingerprint = models.CharField(max_length=64, blank=True, db_index=True)
     duplicate_of = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
+    # Where the report comes from. Media/official reports link to their public source.
+    source = models.CharField(max_length=16, choices=Source.choices, default=Source.COMMUNITY, db_index=True)
+    source_name = models.CharField(max_length=80, blank=True)  # e.g. "The Daily Star"
+    source_url = models.URLField(max_length=500, blank=True)
     # Optional video evidence. The file lives on Cloudinary; only its id is kept here.
     video_status = models.CharField(max_length=16, choices=VideoStatus.choices, default=VideoStatus.NONE, blank=True, db_index=True)
     video_public_id = models.CharField(max_length=128, blank=True)

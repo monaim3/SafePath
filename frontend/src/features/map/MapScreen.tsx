@@ -48,16 +48,17 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
   });
 
   // Route checks always use street-level cells, whatever the current zoom.
-  const { data: streetCells } = useQuery({
+  const { data: streetCells, isError: streetCellsFailed } = useQuery({
     queryKey: ["map-cells", hour, 10],
     queryFn: () => fetchMapCells({ hour, res: 10 }),
     enabled: directionsOpen,
   });
   const lookup = useMemo(() => {
-    if (!streetCells) return null;
+    // Activity data unavailable (API down): still show the route, just without risk colours.
+    if (!streetCells) return streetCellsFailed ? () => undefined : null;
     const scores = new Map(streetCells.map((c) => [c.h3, c.score]));
     return (h3: string) => scores.get(h3);
-  }, [streetCells]);
+  }, [streetCells, streetCellsFailed]);
 
   const handleOverlay = useCallback((next: RouteOverlay | null) => {
     setOverlay(next);
@@ -223,7 +224,7 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
           onPick={pickHour}
           values={areaMode ? selectedArea.hours : (cityProfile ?? EMPTY_DAY)}
           mode={areaMode ? "area" : "city"}
-          areaName={areaMode ? `${dict.home.heroCardArea} ${selectedArea.code}` : undefined}
+          areaName={areaMode ? `${selectedArea.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${selectedArea.code}` : undefined}
           footer={demoNote}
         />
         </div>

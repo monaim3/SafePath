@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "apps.audit",
     "apps.incidents",
     "apps.moderation",
+    "apps.watch",
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "DEFAULT_THROTTLE_RATES": {"mod_login": "5/min"},
+    "DEFAULT_THROTTLE_RATES": {"mod_login": "5/min", "watch": "30/hour"},
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
 }
@@ -151,6 +152,11 @@ if not DEBUG:
 SAFEPATH_HASH_SALT = env("SAFEPATH_HASH_SALT", "dev-only-salt")
 # Cloudflare Turnstile secret. Empty = verification skipped (local development only).
 TURNSTILE_SECRET = env("TURNSTILE_SECRET")
+# Area-watch notifications (free Web Push). Generate a key pair once; empty = feature off.
+VAPID_PUBLIC_KEY = env("VAPID_PUBLIC_KEY")
+VAPID_PRIVATE_KEY = env("VAPID_PRIVATE_KEY")
+# Contact URL or mailto: sent to push services with each message.
+VAPID_SUBJECT = env("VAPID_SUBJECT", "https://chintai-bd.vercel.app")
 # Optional CCTV/video evidence, stored on Cloudinary (never in our database).
 # cloudinary://<api_key>:<api_secret>@<cloud_name>, from the Cloudinary dashboard. Empty = video upload off.
 _cloudinary = urlparse(env("CLOUDINARY_URL"))

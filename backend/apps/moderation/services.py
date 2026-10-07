@@ -1,5 +1,7 @@
 """Moderator decisions. Every decision updates the reporter's hidden trust and is audit-logged."""
 
+import logging
+
 from django.db import transaction
 from django.utils import timezone
 
@@ -15,6 +17,15 @@ from .models import Flag
 
 def _resolve_flags(report: Report) -> None:
     Flag.objects.filter(report=report, status=Flag.Status.OPEN).update(status=Flag.Status.RESOLVED)
+
+
+def _notify_watchers(h3_cell: str) -> None:
+    from apps.watch.services import notify_verified
+
+    try:
+        notify_verified(h3_cell)
+    except Exception:  # a push failure must never undo or block a moderator's decision
+        logging.getLogger(__name__).exception("Area-watch notification failed")
 
 
 def _drop_video(report: Report) -> None:
@@ -39,6 +50,9 @@ def verify_report(report: Report, *, actor) -> Report:
     report.save(update_fields=["status", "weight"])
     _resolve_flags(report)
     transaction.on_commit(bump_data_version)
+    if not report.is_demo and report.kind != Report.Kind.POSITIVE:
+        # People following this area get a push notification (verified reports only).
+        transaction.on_commit(lambda: _notify_watchers(report.h3))
     record(
         action="report.verify", entity_type="report", entity_id=report.id, actor=actor,
         before=before, after={"status": report.status, "weight": report.weight},

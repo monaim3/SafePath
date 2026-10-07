@@ -43,14 +43,14 @@ def load_rows(cells: list[str] | None = None) -> list[Row]:
         qs = qs.filter(h3__in=cells)
     qs = qs.annotate(n_confirmations=Count("confirmations")).values(
         "id", "kind", "category", "h3", "block", "hour", "days", "status", "weight",
-        "corroborations", "n_confirmations", "device_id", "created_at",
+        "corroborations", "n_confirmations", "device_id", "created_at", "source",
     )
     return [
         Row(
             id=str(v["id"]), kind=v["kind"], category=v["category"], h3=v["h3"], block=v["block"],
             hour=v["hour"], days=v["days"], status=v["status"], weight=v["weight"],
             corroborations=v["corroborations"], confirmations=v["n_confirmations"],
-            device_id=str(v["device_id"]), created_at=v["created_at"],
+            device_id=str(v["device_id"]), created_at=v["created_at"], source=v["source"],
         )
         for v in qs
     ]
@@ -64,6 +64,17 @@ def report_cells_for(cell: str) -> list[str]:
 
 def has_demo_data() -> bool:
     return Report.objects.filter(is_demo=True).exists()
+
+
+def news_sources(cells: list[str], limit: int = 8) -> list[dict]:
+    """Published news reports behind an area's level, newest first — so people can check them."""
+    qs = Report.objects.filter(
+        h3__in=cells, source=Report.Source.MEDIA, status__in=PUBLIC_STATUSES, created_at__gte=timezone.now() - LOOKBACK
+    ).order_by("-created_at")[:limit]
+    return [
+        {"outlet": r.source_name, "url": r.source_url, "date": r.date.isoformat() if r.date else None, "category": r.category}
+        for r in qs
+    ]
 
 
 def approved_videos(cells: list[str], limit: int = 6) -> list[dict]:

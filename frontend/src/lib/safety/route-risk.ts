@@ -58,7 +58,7 @@ export type CellLookup = (h3: string) => number | undefined;
 const STEP_M = 30;
 const ELEVATED = 51;
 
-function metres(a: LngLat, b: LngLat): number {
+export function metres(a: LngLat, b: LngLat): number {
   const toRad = Math.PI / 180;
   const dLat = (b[1] - a[1]) * toRad;
   const dLng = (b[0] - a[0]) * toRad;

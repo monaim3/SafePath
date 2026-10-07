@@ -38,6 +38,7 @@ class Row:
     confirmations: int
     device_id: str
     created_at: datetime
+    source: str = "community"
 
 
 def band_for(score: float) -> str:
@@ -99,8 +100,14 @@ def group_by_cell(rows: list[Row], res: int) -> dict[str, list[Row]]:
 
 
 def is_public(rows: list[Row]) -> bool:
-    """k-anonymity: enough reports from enough different devices before anything is shown."""
+    """
+    k-anonymity: enough community reports from enough different devices before anything is shown,
+    so a lone report can't point at the person who sent it. A verified news or official report is
+    already public, so it can show an area by itself.
+    """
     counted = [r for r in rows if r.kind != "positive"]
+    if any(r.source in ("media", "official") and r.status == "verified" for r in counted):
+        return True
     return (
         len(counted) >= policy.K_ANONYMITY_REPORTS
         and len({r.device_id for r in counted}) >= policy.K_ANONYMITY_DEVICES
@@ -181,7 +188,8 @@ def area_detail(cell: str, rows: list[Row], now: datetime, *, is_demo: bool) -> 
         for r in sorted((r for r in rows if r.kind == "knowledge"), key=lambda r: -r.confirmations)[:5]
     ]
 
-    verified = sum(r.status == "verified" for r in incidents)
+    community = [r for r in incidents if r.source == "community"]
+    verified = sum(r.status == "verified" for r in community)
     return {
         **base,
         **summary,
@@ -198,7 +206,12 @@ def area_detail(cell: str, rows: list[Row], now: datetime, *, is_demo: bool) -> 
         "trend": {"prev": prev, "curr": d30, "direction": direction},
         "knowledge": knowledge,
         "positives": [{"key": k, "count": n} for k, n in Counter(r.category for r in positives).most_common()],
-        "sources": {"community": len(incidents) - verified, "verified": verified, "media": 0, "official": 0},
+        "sources": {
+            "community": len(community) - verified,
+            "verified": verified,
+            "media": sum(r.source == "media" for r in incidents),
+            "official": sum(r.source == "official" for r in incidents),
+        },
         # No footfall data yet; the "busy area" note stays off rather than guessing.
         "busyArea": False,
     }

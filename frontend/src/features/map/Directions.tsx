@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowDownUp, ArrowLeft, Car, Circle, Footprints, Loader2, LocateFixed, MapPin, Route } from "lucide-react";
+import { ArrowDownUp, ArrowLeft, Car, Circle, Footprints, Loader2, LocateFixed, MapPin, Navigation, Route } from "lucide-react";
 import { fill, formatHour, type Dictionary, type Locale } from "@/i18n";
 import type { PlaceResult } from "@/lib/api/safety";
 import { fetchRoutes } from "@/lib/api/routing";
@@ -18,6 +18,7 @@ import {
 import { BandBadge } from "@/components/safety/BandBadge";
 import { cn } from "@/components/ui/cn";
 import { PlaceSearch } from "./PlaceSearch";
+import { Announcer, TripMode } from "./TripMode";
 
 /** Google-style route blue for stretches with no reports. */
 export const ROUTE_BLUE = "#1a73e8";
@@ -86,6 +87,8 @@ export function Directions({
   const [picked, setPicked] = useState<number | null>(null);
   const [locating, setLocating] = useState(false);
   const [version, setVersion] = useState(0); // remounts the inputs after swap / my-location
+  // Set while a trip is running (voice alerts on). Created inside the tap so audio is allowed.
+  const [trip, setTrip] = useState<Announcer | null>(null);
 
   const { data: routes, isFetching, isError } = useQuery({
     queryKey: ["routes", from?.center, to?.center, mode],
@@ -224,6 +227,15 @@ export function Directions({
 
       {/* ---------- results ---------- */}
       <div className="min-h-0 flex-1 overflow-y-auto p-4" aria-live="polite">
+        {trip && (
+          <TripMode
+            locale={locale}
+            dict={dict}
+            route={routes?.[selected]?.coordinates ?? null}
+            announcer={trip}
+            onStop={() => setTrip(null)}
+          />
+        )}
         {(!from || !to) && <p className="text-sm text-ink-3">{t.pickBoth}</p>}
         {from && to && isFetching && (
           <p className="flex items-center gap-2 text-sm text-ink-3">
@@ -302,6 +314,17 @@ export function Directions({
                 );
               })}
             </ul>
+
+            {!trip && (
+              <button
+                type="button"
+                onClick={() => setTrip(new Announcer(locale))}
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-soft transition-transform active:scale-[0.98]"
+              >
+                <Navigation className="size-4" aria-hidden />
+                {t.tripStart}
+              </button>
+            )}
 
             {/* roads on the selected route */}
             <h3 className="mt-5 text-xs font-semibold text-ink-2">{fill(locale, t.roadsTitle, { time: timeLabel })}</h3>

@@ -12,7 +12,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
     <>
       <SiteHeader locale={lang} dict={dict} />
       <main>{children}</main>
-      <SiteFooter dict={dict} />
+      <SiteFooter locale={lang} dict={dict} />
     </>
   );
 }

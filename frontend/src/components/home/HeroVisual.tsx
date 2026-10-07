@@ -166,7 +166,7 @@ export function HeroVisual({ area, locale, dict }: { area: AreaDetail; locale: L
       <div className="absolute -bottom-2 right-4 w-[min(19rem,82%)] rounded-3xl border border-line bg-surface p-5 shadow-soft sm:-right-8 lg:-bottom-10">
         <div className="flex items-center justify-between gap-3">
           <span className="text-sm font-semibold">
-            {dict.home.heroCardArea} {area.code}
+            {area.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} {area.code}
           </span>
           <BandBadge band={area.band} label={dict.bands[area.band]} />
         </div>

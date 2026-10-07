@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .map_views import AreaVideosView, AreaView, MapCellsView, TimeProfileView, TopAreasView
+from .map_views import AreaNewsView, AreaVideosView, AreaView, MapCellsView, TimeProfileView, TopAreasView
 from .views import ConfirmView, ReportCreateView, VideoAttachView
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path("map/time-profile", TimeProfileView.as_view(), name="map-time-profile"),
     path("areas", TopAreasView.as_view(), name="areas-top"),
     path("areas/<str:cell>/videos", AreaVideosView.as_view(), name="area-videos"),
+    path("areas/<str:cell>/news", AreaNewsView.as_view(), name="area-news"),
     path("areas/<str:cell>", AreaView.as_view(), name="area-detail"),
 ]
