@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "@/i18n";
 import { fetchTopAreas } from "@/lib/api/safety";
+import { demoTopAreas } from "@/lib/safety/demo-data";
 import { ButtonLink } from "@/components/ui/Button";
 import { HeroVisual } from "@/components/home/HeroVisual";
 import { HowItWorks } from "@/components/home/HowItWorks";
@@ -12,7 +13,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const [preview] = await fetchTopAreas(1);
+  const [topArea] = await fetchTopAreas(1);
+  // No reports yet (fresh server): illustrate with a synthetic area, labelled as a demo, not linked.
+  const preview = topArea ?? demoTopAreas(1)[0];
 
   return (
     <>
@@ -42,14 +45,16 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           </div>
 
           <div className="rise [animation-delay:150ms]">
-            {preview && (
+            {topArea ? (
               <Link
-                href={`/${lang}/area/${preview.h3}`}
-                aria-label={`${dict.home.heroCardArea} ${preview.code}`}
+                href={`/${lang}/area/${topArea.h3}`}
+                aria-label={`${dict.home.heroCardArea} ${topArea.code}`}
                 className="block transition-transform duration-300 hover:-translate-y-1"
               >
-                <HeroVisual area={preview} locale={lang} dict={dict} />
+                <HeroVisual area={topArea} locale={lang} dict={dict} />
               </Link>
+            ) : (
+              preview && <HeroVisual area={preview} locale={lang} dict={dict} />
             )}
           </div>
         </div>
