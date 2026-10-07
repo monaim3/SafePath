@@ -42,3 +42,4 @@ next-env.d.ts
 
 # copied from node_modules by postinstall
 /public/maplibre/
+.vercel

@@ -4,11 +4,19 @@ Three accounts are needed. They require your own sign-up, so they are not automa
 
 | What | Service (free) | Why it needs you |
 |---|---|---|
-| Backend server (Django + PostgreSQL + HTTPS) | Oracle Cloud **Always Free** VM | Account + identity/card verification |
-| Website (Next.js) | **Vercel** Hobby | Account; or authorise the Vercel connector in claude.ai so Claude can deploy it |
+| Website (Next.js) and API (Django) | **Vercel** Hobby | Account (GitHub sign-in) |
+| Database (PostgreSQL) | **Neon** Free | Account (GitHub sign-in) |
 | CAPTCHA | **Cloudflare Turnstile** | Account; creates your site key + secret |
 
-Everything else is ready: `deploy/docker-compose.prod.yml` (database, API, Caddy with automatic HTTPS) was smoke-tested locally.
+None of these needs a card. Live today:
+
+| What | Where |
+|---|---|
+| Website | https://chintai-bd.vercel.app (Vercel project `safepath`, root `frontend`) |
+| API | https://safepath-api.vercel.app (Vercel project `safepath-api`, root `backend`) |
+| Database | Neon project `safepath`, AWS Singapore, Postgres 16 |
+
+A self-hosted alternative (Oracle VM + Docker + Caddy) is in section 2b.
 
 ---
 
@@ -20,25 +28,47 @@ Everything else is ready: `deploy/docker-compose.prod.yml` (database, API, Caddy
 
 Local development keeps using Cloudflare's official test keys (`1x000…AA`), which always pass.
 
-## 2a. Backend without a card: Render + Neon (current setup)
+## 2a. API on Vercel + database on Neon (current setup)
 
-1. **Neon** (neon.tech, sign in with GitHub) → new project `safepath`, region **Singapore**, Postgres 16. Copy the connection string (`postgresql://…?sslmode=require`).
-2. **Render** (render.com, sign in with GitHub) → **New → Blueprint** → pick this repo. `render.yaml` creates `safepath-api` (free, Docker, Singapore). Enter the secrets it asks for:
-   - `DATABASE_URL` — the Neon connection string
-   - `DJANGO_SECRET_KEY`, `SAFEPATH_HASH_SALT`, `TURNSTILE_SECRET` — same values as `deploy/.env`
-   - `CORS_ALLOWED_ORIGINS` — the Vercel URL (no trailing slash)
-3. Migrations run on every start. Render's free plan has no shell, so create the moderator from your PC against Neon:
+Render was tried first, but it now asks for a card even on the free plan.
 
-```powershell
+1. **Neon** (neon.tech) → new project `safepath`, region **AWS Asia Pacific (Singapore)**, Postgres 16.
+   **Connect** → turn **Connection pooling off** → copy the connection string (`postgresql://…?sslmode=require&channel_binding=require`).
+2. **Database setup, from your PC.** Vercel never runs migrations, so run these once and again after every new migration:
+
+```bash
 cd backend
-$env:DATABASE_URL = "<neon connection string>"
-.venv\Scripts\python manage.py create_moderator <name>
-Remove-Item Env:DATABASE_URL
+export DATABASE_URL="<neon connection string>"
+.venv/Scripts/python manage.py migrate
+DJANGO_CACHE=database .venv/Scripts/python manage.py createcachetable
+.venv/Scripts/python manage.py create_moderator <name>   # prompts for a password; rerun to reset it
+unset DATABASE_URL
 ```
 
-Check: `https://safepath-api.onrender.com/healthz` → `ok`, `/api/v1/map/time-profile` → JSON.
+3. **Vercel API project.** Django runs as one Python function (`backend/api/index.py`, routed by `backend/vercel.json`, region `sin1`):
 
-The free service sleeps after 15 idle minutes (first request then takes ~1 minute). A free UptimeRobot HTTP monitor on `/healthz` every 5 minutes keeps it awake; 750 free hours cover one service for a whole month.
+```bash
+cd backend
+vercel link --project safepath-api        # first time only
+vercel env add <NAME> production          # once per variable below; paste the value when asked
+vercel deploy --prod
+```
+
+| Variable | Value |
+|---|---|
+| `DJANGO_DEBUG` | `false` |
+| `DJANGO_ALLOWED_HOSTS` | `safepath-api.vercel.app` |
+| `DJANGO_SECRET_KEY`, `SAFEPATH_HASH_SALT` | long random strings (same values as `deploy/.env`) |
+| `TURNSTILE_SECRET` | Turnstile secret key |
+| `DATABASE_URL` | the Neon connection string |
+| `DJANGO_CACHE` | `database` — instances share the map cache and login throttle |
+| `CLIENT_IP_HEADER` | `HTTP_X_REAL_IP` — set by Vercel's edge, clients cannot spoof it |
+| `CORS_ALLOWED_ORIGINS` | website URL(s), comma-separated, no trailing slash |
+
+Check: `https://safepath-api.vercel.app/healthz` → `ok`, `/api/v1/map/time-profile` → JSON.
+`/` itself answers "Not Found" — the API has no home page.
+
+Nothing sleeps on Vercel, so no uptime pinger is needed. After a quiet spell the first request takes 1–2 s while Neon wakes up.
 
 ## 2b. Backend server (Oracle Cloud Always Free, needs a card)
 
@@ -66,16 +96,19 @@ Do **not** run `seed_demo` on the server — production starts with real reports
 
 ## 3. Website (Vercel)
 
-1. Import the `frontend/` folder as a Vercel project (framework: Next.js; root directory: `frontend`).
-2. Environment variables:
+1. `cd frontend`, `vercel link --project safepath` (first time only). `frontend/vercel.json` sets the framework to Next.js — without it Vercel serves a plain 404.
+2. Environment variables (`vercel env add <NAME> production`):
 
 | Name | Value |
 |---|---|
-| `NEXT_PUBLIC_API_URL` | `https://api.yourdomain.com` |
+| `NEXT_PUBLIC_API_URL` | `https://safepath-api.vercel.app` (or `https://api.yourdomain.com` on the Oracle stack) |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | site key from step 1 |
 | `NEXT_PUBLIC_DEMO_NOTICE` | `on` until real reports exist, then `off` |
 
-3. Deploy. Put the Vercel URL (or your domain) in `FRONTEND_ORIGIN` on the server and restart the api container.
+3. `vercel deploy --prod`. The address is a project domain: `vercel domains add chintai-bd.vercel.app`.
+4. **Every website address** must also be added in two places:
+   - the API's `CORS_ALLOWED_ORIGINS` (then redeploy the API; on the Oracle stack: `FRONTEND_ORIGIN`, then restart the api container)
+   - the Turnstile widget's hostnames in Cloudflare
 
 ## Before announcing it publicly
 

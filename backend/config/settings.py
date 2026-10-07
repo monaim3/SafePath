@@ -106,12 +106,19 @@ def database_from_url(url: str) -> dict:
 DATABASES = {"default": database_from_url(env("DATABASE_URL"))}
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Map cache and login throttle. Serverless hosts (Vercel) run many short-lived instances, so they
+# need a shared cache: DJANGO_CACHE=database (then run `manage.py createcachetable` once).
+if env("DJANGO_CACHE") == "database":
+    CACHES = {"default": {"BACKEND": "django.core.cache.backends.db.DatabaseCache", "LOCATION": "django_cache"}}
+
 LANGUAGE_CODE = "en"
 TIME_ZONE = "Asia/Dhaka"
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"  # filled by collectstatic, served by Caddy or WhiteNoise
+# Hosts that never run collectstatic (Vercel): WhiteNoise serves admin files straight from the apps.
+WHITENOISE_USE_FINDERS = not STATIC_ROOT.is_dir()
 
 REST_FRAMEWORK = {
     # Moderators (Next.js dashboard, other origin) use tokens; the Django admin uses sessions.
@@ -148,4 +155,5 @@ TURNSTILE_SECRET = env("TURNSTILE_SECRET")
 TRUSTED_PROXY_COUNT = int(env("TRUSTED_PROXY_COUNT", "0"))
 # Header carrying the real client IP, set by an edge proxy that clients cannot spoof through.
 # On Render: HTTP_CF_CONNECTING_IP (Render appends to, never resets, X-Forwarded-For).
+# On Vercel: HTTP_X_REAL_IP (set by Vercel's edge, client values are overwritten).
 CLIENT_IP_HEADER = env("CLIENT_IP_HEADER")
