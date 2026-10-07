@@ -60,6 +60,23 @@ export interface AreaDetail extends CellSummary {
   isDemo: boolean;
 }
 
+/** Response item of GET /api/v1/areas/{h3}/videos — moderator-approved footage, sound removed. */
+export interface AreaVideo {
+  id: string;
+  url: string;
+  poster: string;
+  category: CategoryKey;
+  date: string | null;
+}
+
+/** Signed, single-file Cloudinary upload, returned with a report that has footage. */
+export interface UploadTicket {
+  url: string;
+  fields: Record<string, string | number>;
+  maxBytes: number;
+  attachToken: string;
+}
+
 export interface MapCellsQuery {
   /** Hour of day 0–23, or the whole day. */
   hour: number | "all";

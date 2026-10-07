@@ -46,6 +46,13 @@ class Report(models.Model):
     ]
     POSITIVE_CATEGORIES = {"well_lit", "busy_late", "patrol_seen", "cctv"}
 
+    class VideoStatus(models.TextChoices):
+        NONE = ""
+        AWAITING = "awaiting"  # upload ticket issued, file not confirmed yet
+        PENDING = "pending"  # on Cloudinary, waiting for a moderator
+        APPROVED = "approved"  # shown publicly (audio removed)
+        REJECTED = "rejected"  # deleted from Cloudinary
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     kind = models.CharField(max_length=16, choices=Kind.choices)
     category = models.CharField(max_length=24, choices=CATEGORY_CHOICES)
@@ -68,6 +75,9 @@ class Report(models.Model):
     ip_hash = models.CharField(max_length=64, db_index=True)
     text_fingerprint = models.CharField(max_length=64, blank=True, db_index=True)
     duplicate_of = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
+    # Optional video evidence. The file lives on Cloudinary; only its id is kept here.
+    video_status = models.CharField(max_length=16, choices=VideoStatus.choices, default=VideoStatus.NONE, blank=True, db_index=True)
+    video_public_id = models.CharField(max_length=128, blank=True)
     # Synthetic rows from `manage.py seed_demo`. The UI labels any area containing them.
     is_demo = models.BooleanField(default=False, db_index=True)
     # Set by the intake service from the same clock its rate-limit and burst checks use.

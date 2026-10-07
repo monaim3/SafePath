@@ -64,9 +64,19 @@ vercel deploy --prod
 | `DJANGO_CACHE` | `database` — instances share the map cache and login throttle |
 | `CLIENT_IP_HEADER` | `HTTP_X_REAL_IP` — set by Vercel's edge, clients cannot spoof it |
 | `CORS_ALLOWED_ORIGINS` | website URL(s), comma-separated, no trailing slash |
+| `CLOUDINARY_URL` | optional — turns on CCTV/video evidence. Cloudinary console → Settings → API Keys: `cloudinary://<api_key>:<api_secret>@<cloud_name>` with the real key (digits) and revealed secret, not the placeholders |
 
 Check: `https://safepath-api.vercel.app/healthz` → `ok`, `/api/v1/map/time-profile` → JSON.
 `/` itself answers "Not Found" — the API has no home page.
+
+To get the live `DATABASE_URL` onto your PC for step 2: `vercel env pull .env.prod --environment=production` inside `backend/`
+(it writes a file — `/dev/stdout` does not work), use it, then delete `.env.prod`.
+Run new migrations **before** deploying code that needs them.
+
+**Video evidence (Cloudinary, free plan ≈ 25 GB/month storage + viewing).** Files go from the reporter's phone
+straight to Cloudinary with a single-use signed ticket issued only for an accepted report; our database keeps only
+the file id. Moderators approve or delete footage in the Videos tab; deleted or rejected footage is removed from
+Cloudinary. The public copy has its audio removed.
 
 Nothing sleeps on Vercel, so no uptime pinger is needed. After a quiet spell the first request takes 1–2 s while Neon wakes up.
 

@@ -30,6 +30,9 @@ export interface QueueReport {
   reporter_trust: number;
   reporter_reports: number;
   reporter_rejected: number;
+  video_status: "" | "awaiting" | "pending" | "approved" | "rejected";
+  /** Original footage with sound, for review. Null when there is nothing to review. */
+  video_url: string | null;
 }
 
 export interface AreaFlag {
@@ -44,12 +47,15 @@ export interface Queue {
   flags: AreaFlag[];
   flagged: QueueReport[];
   pending: QueueReport[];
+  /** Footage waiting for review, whatever the report's own status. */
+  videos: QueueReport[];
 }
 
 export interface ModStats {
   pending: number;
   flagged: number;
   areaAlerts: number;
+  videos: number;
   today: number;
   verified: number;
   rejected: number;
@@ -120,4 +126,7 @@ export const fetchStats = () => call<ModStats>("/stats");
 export const decide = (id: string, decision: Decision, reason?: RejectReason) =>
   call<QueueReport>(`/reports/${id}/${decision}`, { method: "POST", body: JSON.stringify(reason ? { reason } : {}) });
 
-export const resolveFlag = (id: string) => call<AreaFlag>(`/flags/${id}/resolve`, { method: "POST" });
+export const decideVideo = (id: string, decision: "approve" | "reject") =>
+  call<QueueReport>(`/reports/${id}/video/${decision}`, { method: "POST" });
+
+export const resolveFlag =(id: string) => call<AreaFlag>(`/flags/${id}/resolve`, { method: "POST" });

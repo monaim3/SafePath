@@ -8,17 +8,20 @@ import {
   Check,
   CircleSlash,
   Copy,
+  Eye,
   ExternalLink,
   Flag,
   Loader2,
   LogOut,
   MessageSquareQuote,
   ShieldCheck,
+  Trash2,
   Users,
 } from "lucide-react";
 import { fill, formatHour, formatNumber, type Dictionary, type Locale } from "@/i18n";
 import {
   decide,
+  decideVideo,
   fetchMe,
   fetchQueue,
   fetchStats,
@@ -36,7 +39,7 @@ import { CategoryIcon } from "@/components/safety/CategoryIcon";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/components/ui/cn";
 
-type Tab = "flagged" | "pending" | "alerts";
+type Tab = "flagged" | "pending" | "videos" | "alerts";
 const REASONS: RejectReason[] = ["fake", "wrong_place", "spam", "offensive", "other"];
 
 // ---------- login ----------
@@ -99,12 +102,15 @@ function ReportCard({
   dict,
   busy,
   onDecide,
+  onVideo,
 }: {
   report: QueueReport;
   locale: Locale;
   dict: Dictionary;
   busy: boolean;
   onDecide: (decision: Decision, reason?: RejectReason) => void;
+  /** Set in the Videos tab: the card decides on the footage, not the report. */
+  onVideo?: (decision: "approve" | "reject") => void;
 }) {
   const t = dict.mod;
   const [rejecting, setRejecting] = useState(false);
@@ -153,6 +159,25 @@ function ReportCard({
         </p>
       )}
 
+      {report.video_url && (
+        <div className="mt-3">
+          {/* Original with sound; the public copy has audio removed. */}
+          <video
+            src={report.video_url}
+            controls
+            preload="metadata"
+            playsInline
+            className="aspect-video w-full rounded-2xl bg-black"
+          />
+          {onVideo && (
+            <p className="mt-2 flex gap-2 text-xs leading-relaxed text-ink-3">
+              <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden />
+              {t.videoNote}
+            </p>
+          )}
+        </div>
+      )}
+
       {report.flags.length > 0 && (
         <ul className="mt-3 flex flex-wrap gap-1.5">
           {report.flags.map((f) => (
@@ -190,7 +215,27 @@ function ReportCard({
       </div>
 
       <div className="mt-4 border-t border-line pt-4">
-        {rejecting ? (
+        {onVideo ? (
+          <div className="flex flex-wrap items-center gap-2">
+            <Button size="md" variant="accent" disabled={busy} onClick={() => onVideo("approve")}>
+              <Eye className="size-4" aria-hidden />
+              {t.approveVideo}
+            </Button>
+            <Button
+              size="md"
+              variant="outline"
+              disabled={busy}
+              onClick={() => onVideo("reject")}
+              className="text-ral-4 hover:border-ral-4"
+            >
+              <Trash2 className="size-4" aria-hidden />
+              {t.rejectVideo}
+            </Button>
+            <span className="ml-auto rounded-full bg-surface-2 px-2.5 py-1 text-xs text-ink-2">
+              {t.reportStatus[report.status as keyof typeof t.reportStatus] ?? report.status}
+            </span>
+          </div>
+        ) : rejecting ? (
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm font-medium text-ink-2">{t.rejectAs}</span>
             {REASONS.map((r) => (
@@ -305,12 +350,17 @@ function Dashboard({
     onSettled: refresh,
   });
   const resolve = useMutation({ mutationFn: resolveFlag, onSettled: refresh });
+  const videoAction = useMutation({
+    mutationFn: ({ id, decision }: { id: string; decision: "approve" | "reject" }) => decideVideo(id, decision),
+    onSettled: refresh,
+  });
 
   const s = stats.data;
   const tiles: { key: keyof Dictionary["mod"]["stats"]; value?: number; tone?: string }[] = [
     { key: "flagged", value: s?.flagged, tone: "text-[#b26a00]" },
     { key: "pending", value: s?.pending },
     { key: "areaAlerts", value: s?.areaAlerts, tone: "text-ral-4" },
+    { key: "videos", value: s?.videos, tone: "text-accent" },
     { key: "today", value: s?.today },
     { key: "verified", value: s?.verified, tone: "text-positive" },
     { key: "rejected", value: s?.rejected },
@@ -318,12 +368,21 @@ function Dashboard({
   const counts: Record<Tab, number> = {
     flagged: queue.data?.flagged.length ?? 0,
     pending: queue.data?.pending.length ?? 0,
+    videos: queue.data?.videos.length ?? 0,
     alerts: queue.data?.flags.length ?? 0,
   };
   const tab: Tab =
-    picked ?? (counts.flagged > 0 ? "flagged" : counts.alerts > 0 ? "alerts" : "pending");
+    picked ??
+    (counts.flagged > 0 ? "flagged" : counts.alerts > 0 ? "alerts" : counts.videos > 0 ? "videos" : "pending");
   const setTab = setPicked;
-  const reports = tab === "flagged" ? queue.data?.flagged : tab === "pending" ? queue.data?.pending : undefined;
+  const reports =
+    tab === "flagged"
+      ? queue.data?.flagged
+      : tab === "pending"
+        ? queue.data?.pending
+        : tab === "videos"
+          ? queue.data?.videos
+          : undefined;
 
   return (
     <div className="mt-6">
@@ -335,7 +394,7 @@ function Dashboard({
         </Button>
       </div>
 
-      <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
         {tiles.map(({ key, value, tone }) => (
           <div key={key} className="rounded-2xl border border-line bg-surface p-4">
             <dd className={cn("font-display text-3xl font-extrabold tabular-nums", tone)}>
@@ -347,7 +406,7 @@ function Dashboard({
       </dl>
 
       <div className="mt-8 flex gap-1 rounded-full bg-surface-2 p-1" role="tablist">
-        {(["flagged", "pending", "alerts"] as const).map((key) => (
+        {(["flagged", "pending", "videos", "alerts"] as const).map((key) => (
           <button
             key={key}
             role="tab"
@@ -366,7 +425,7 @@ function Dashboard({
         ))}
       </div>
 
-      {action.isError && (
+      {(action.isError || videoAction.isError) && (
         <p role="alert" className="mt-4 rounded-xl bg-ral-4/10 px-4 py-3 text-sm text-ral-4">
           {t.actionFailed}
         </p>
@@ -405,8 +464,14 @@ function Dashboard({
                 report={report}
                 locale={locale}
                 dict={dict}
-                busy={action.isPending && action.variables?.id === report.id}
+                busy={
+                  (action.isPending && action.variables?.id === report.id) ||
+                  (videoAction.isPending && videoAction.variables?.id === report.id)
+                }
                 onDecide={(decision, reason) => action.mutate({ id: report.id, decision, reason })}
+                onVideo={
+                  tab === "videos" ? (decision) => videoAction.mutate({ id: report.id, decision }) : undefined
+                }
               />
             ))}
           </ul>

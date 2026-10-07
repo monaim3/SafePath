@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  AlertTriangle,
   CheckCircle2,
   Info,
   Minus,
@@ -13,7 +14,7 @@ import {
   Plus,
 } from "lucide-react";
 import { fill, formatNumber, getDictionary, hasLocale } from "@/i18n";
-import { fetchArea } from "@/lib/api/safety";
+import { fetchArea, fetchAreaVideos } from "@/lib/api/safety";
 import type { CategoryKey } from "@/lib/safety/categories";
 import { CategoryIcon } from "@/components/safety/CategoryIcon";
 import { explainArea } from "@/lib/safety/explain";
@@ -51,8 +52,12 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
   const { lang, h3 } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const area: AreaDetail | null = await fetchArea(h3);
+  const [area, videos]: [AreaDetail | null, Awaited<ReturnType<typeof fetchAreaVideos>>] = await Promise.all([
+    fetchArea(h3),
+    fetchAreaVideos(h3),
+  ]);
   if (!area) notFound();
+  const videoDate = new Intl.DateTimeFormat(lang === "bn" ? "bn-BD" : "en-GB", { day: "numeric", month: "short", year: "numeric" });
 
   const n = (v: number) => formatNumber(lang, v);
   const reasons = explainArea(area);
@@ -238,6 +243,37 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
             </Card>
           )}
         </div>
+      )}
+
+      {/* ---------- Footage (moderator-approved, sound removed) ---------- */}
+      {videos.length > 0 && (
+        <Card className="mt-4">
+          <CardTitle>{dict.area.videosTitle}</CardTitle>
+          <p className="mt-1 flex items-start gap-2 text-sm text-ink-3">
+            <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden />
+            {dict.area.videosHint}
+          </p>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {videos.map((v) => (
+              <li key={v.id}>
+                <video
+                  src={v.url}
+                  poster={v.poster}
+                  controls
+                  muted
+                  preload="none"
+                  playsInline
+                  className="aspect-video w-full rounded-2xl bg-black"
+                />
+                <p className="mt-2 flex items-center gap-2 text-sm text-ink-2">
+                  <CategoryIcon category={v.category} size="sm" />
+                  <span className="truncate">{dict.categories[v.category]}</span>
+                  {v.date && <span className="ml-auto shrink-0 text-xs text-ink-3">{videoDate.format(new Date(v.date))}</span>}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Card>
       )}
 
       {/* ---------- Awareness ---------- */}

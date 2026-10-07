@@ -27,6 +27,8 @@ class ReportInputSerializer(serializers.Serializer):
     days = serializers.ChoiceField(choices=["every_day", "weekdays", "weekends"], required=False)
     relation = serializers.ChoiceField(choices=["experienced", "witnessed", "heard"], required=False)
     description = serializers.CharField(max_length=500, required=False, allow_blank=True, default="")
+    # The reporter has footage to upload; the response then carries a signed upload ticket.
+    has_video = serializers.BooleanField(required=False, default=False)
 
     # Not stored: used only for checks.
     device_id = serializers.CharField(min_length=16, max_length=64)
@@ -53,3 +55,7 @@ class ReportInputSerializer(serializers.Serializer):
 
 class ConfirmSerializer(serializers.Serializer):
     device_id = serializers.CharField(min_length=16, max_length=64)
+
+
+class VideoAttachSerializer(serializers.Serializer):
+    token = serializers.CharField(max_length=128)

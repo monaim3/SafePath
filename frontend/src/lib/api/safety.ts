@@ -3,7 +3,7 @@
  * Currently backed by synthetic demo data; each function documents the endpoint it will call.
  */
 import { demoArea, demoCityTimeProfile, demoMapCells, demoTopAreas } from "@/lib/safety/demo-data";
-import type { AreaDetail, CellSummary, MapCellsQuery } from "@/lib/safety/types";
+import type { AreaDetail, AreaVideo, CellSummary, MapCellsQuery, UploadTicket } from "@/lib/safety/types";
 import type { ReportInput } from "@/lib/validation/report";
 
 /** Django API base, e.g. http://localhost:8000. Unset = demo mode: synthetic data, nothing leaves the browser. */
@@ -45,6 +45,16 @@ export async function fetchArea(h3: string): Promise<AreaDetail | null> {
   }
 }
 
+/** GET /api/v1/areas/{h3}/videos — approved footage; empty in demo mode or on any error. */
+export async function fetchAreaVideos(h3: string): Promise<AreaVideo[]> {
+  if (!REPORTS_GO_TO_SERVER) return [];
+  try {
+    return (await getJson<{ videos: AreaVideo[] }>(`/areas/${encodeURIComponent(h3)}/videos`)).videos;
+  } catch {
+    return [];
+  }
+}
+
 /** GET /api/v1/areas?limit= — most active areas */
 export async function fetchTopAreas(limit: number): Promise<AreaDetail[]> {
   if (!REPORTS_GO_TO_SERVER) return demoTopAreas(limit);
@@ -62,11 +72,11 @@ export class ReportError extends Error {
   }
 }
 
-/** POST /api/v1/reports */
+/** POST /api/v1/reports. With `hasVideo`, the answer carries a signed upload ticket (when the server has video on). */
 export async function submitReport(
   input: ReportInput,
-  extra: { deviceId: string; turnstileToken?: string },
-): Promise<{ id: string }> {
+  extra: { deviceId: string; turnstileToken?: string; hasVideo?: boolean },
+): Promise<{ id: string; upload?: UploadTicket }> {
   if (!REPORTS_GO_TO_SERVER) {
     await new Promise((resolve) => setTimeout(resolve, 700));
     return { id: `demo-${input.h3}-${Date.now()}` };
@@ -76,14 +86,51 @@ export async function submitReport(
     res = await fetch(`${API_URL}/api/v1/reports`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...input, device_id: extra.deviceId, turnstile_token: extra.turnstileToken ?? "" }),
+      body: JSON.stringify({
+        ...input,
+        device_id: extra.deviceId,
+        turnstile_token: extra.turnstileToken ?? "",
+        has_video: Boolean(extra.hasVideo),
+      }),
     });
   } catch {
     throw new ReportError("network");
   }
-  if (res.ok) return (await res.json()) as { id: string };
+  if (res.ok) return (await res.json()) as { id: string; upload?: UploadTicket };
   const body = (await res.json().catch(() => ({}))) as { error?: string };
   throw new ReportError(body.error ?? (res.status === 429 ? "rate_limited" : "invalid"));
+}
+
+/**
+ * Uploads the footage straight to Cloudinary (never through our server), then tells the API it's there.
+ * XHR rather than fetch: it reports upload progress.
+ */
+export async function uploadVideo(
+  reportId: string,
+  ticket: UploadTicket,
+  file: File,
+  onProgress: (percent: number) => void,
+): Promise<void> {
+  if (file.size > ticket.maxBytes) throw new ReportError("too_large");
+  const form = new FormData();
+  for (const [k, v] of Object.entries(ticket.fields)) form.append(k, String(v));
+  form.append("file", file);
+
+  await new Promise<void>((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", ticket.url);
+    xhr.upload.onprogress = (e) => e.lengthComputable && onProgress(Math.round((e.loaded / e.total) * 100));
+    xhr.onload = () => (xhr.status < 300 ? resolve() : reject(new ReportError("upload")));
+    xhr.onerror = () => reject(new ReportError("network"));
+    xhr.send(form);
+  });
+
+  const res = await fetch(`${API_URL}/api/v1/reports/${encodeURIComponent(reportId)}/video`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token: ticket.attachToken }),
+  }).catch(() => null);
+  if (!res?.ok) throw new ReportError("upload");
 }
 
 /** POST /api/v1/knowledge/{id}/confirm — "I've seen this too". */

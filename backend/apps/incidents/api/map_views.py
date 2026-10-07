@@ -6,7 +6,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..selectors import cached, has_demo_data, load_rows, report_cells_for
+from ..selectors import approved_videos, cached, has_demo_data, load_rows, report_cells_for
 from ..services import aggregation
 
 ALLOWED_RES = {8, 9, 10}
@@ -65,6 +65,15 @@ class AreaView(APIView):
             return aggregation.area_detail(cell, rows, timezone.now(), is_demo=has_demo_data())
 
         return Response(cached(f"area:{cell}", compute))
+
+
+class AreaVideosView(APIView):
+    """GET /api/v1/areas/<h3>/videos — moderator-approved footage from this area, newest first."""
+
+    def get(self, request: Request, cell: str) -> Response:
+        if not h3.is_valid_cell(cell) or h3.get_resolution(cell) not in ALLOWED_RES:
+            return Response({"error": "not_found"}, status=404)
+        return Response({"videos": cached(f"videos:{cell}", lambda: approved_videos(report_cells_for(cell)))})
 
 
 class TopAreasView(APIView):

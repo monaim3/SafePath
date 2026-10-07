@@ -18,8 +18,8 @@ import {
   Users,
   UserX,
 } from "lucide-react";
-import type { Dictionary, Locale } from "@/i18n";
-import { ReportError, REPORTS_GO_TO_SERVER, submitReport } from "@/lib/api/safety";
+import { fill, type Dictionary, type Locale } from "@/i18n";
+import { ReportError, REPORTS_GO_TO_SERVER, submitReport, uploadVideo } from "@/lib/api/safety";
 import { getDeviceId } from "@/lib/device";
 import { CATEGORIES, type CategoryGroup } from "@/lib/safety/categories";
 import { TIME_BLOCKS } from "@/lib/safety/types";
@@ -30,6 +30,7 @@ import { CategoryIcon, FluentIcon } from "@/components/safety/CategoryIcon";
 import { LocationPicker } from "./LocationPicker";
 import { WhenPicker } from "./WhenPicker";
 import { Turnstile } from "./Turnstile";
+import { VideoPicker } from "./VideoPicker";
 
 const STEP_FIELDS: FieldPath<ReportInput>[][] = [
   ["kind", "category"],
@@ -160,12 +161,34 @@ export function QuickReport({
 
   const [captchaToken, setCaptchaToken] = useState("");
   const handleToken = useCallback((token: string) => setCaptchaToken(token), []);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [uploadPct, setUploadPct] = useState<number | null>(null);
+  const [videoResult, setVideoResult] = useState<"uploaded" | "failed" | null>(null);
   const submit = useMutation({
-    mutationFn: (input: ReportInput) =>
-      submitReport(
+    mutationFn: async (input: ReportInput) => {
+      const file = input.kind === "incident" ? videoFile : null;
+      const res = await submitReport(
         { ...input, description: redactPersonalInfo(input.description ?? "") },
-        { deviceId: getDeviceId(), turnstileToken: captchaToken },
-      ),
+        { deviceId: getDeviceId(), turnstileToken: captchaToken, hasVideo: Boolean(file) },
+      );
+      // The report is already saved; a failed upload must not turn it into an error.
+      if (file && REPORTS_GO_TO_SERVER) {
+        if (!res.upload) {
+          setVideoResult("failed");
+        } else {
+          setUploadPct(0);
+          try {
+            await uploadVideo(res.id, res.upload, file, setUploadPct);
+            setVideoResult("uploaded");
+          } catch {
+            setVideoResult("failed");
+          } finally {
+            setUploadPct(null);
+          }
+        }
+      }
+      return res;
+    },
   });
   const submitErrorCode = submit.error instanceof ReportError ? submit.error.code : submit.error ? "network" : null;
 
@@ -184,6 +207,17 @@ export function QuickReport({
         </span>
         <h1 className="mt-6 font-display text-3xl font-bold tracking-tight">{t.successTitle}</h1>
         <p className="mt-3 leading-relaxed text-ink-2">{t.successBody}</p>
+        {videoResult && (
+          <p
+            role={videoResult === "failed" ? "alert" : undefined}
+            className={cn(
+              "mt-4 rounded-xl px-4 py-3 text-sm",
+              videoResult === "failed" ? "bg-ral-4/10 font-medium text-ral-4" : "bg-positive-soft text-positive",
+            )}
+          >
+            {videoResult === "failed" ? t.video.failed : t.video.uploaded}
+          </p>
+        )}
         {!REPORTS_GO_TO_SERVER && <p className="mt-3 text-xs text-ink-3">{t.demoNote}</p>}
 
         {/* How reports are kept honest — only what the system actually does. */}
@@ -210,6 +244,8 @@ export function QuickReport({
             onClick={() => {
               reset();
               submit.reset();
+              setVideoFile(null);
+              setVideoResult(null);
               setStep(0);
             }}
           >
@@ -423,6 +459,7 @@ export function QuickReport({
                 {t.descHint}
               </p>
             </div>
+            {kind === "incident" && <VideoPicker dict={dict} file={videoFile} onChange={setVideoFile} />}
           </div>
         )}
       </div>
@@ -455,7 +492,11 @@ export function QuickReport({
         ) : (
           <Button key="submit" type="submit" size="lg" variant="accent" disabled={submit.isPending}>
             {submit.isPending && <Loader2 className="size-4 animate-spin" aria-hidden />}
-            {submit.isPending ? t.submitting : t.submit}
+            {uploadPct !== null
+              ? fill(locale, t.video.uploading, { p: uploadPct })
+              : submit.isPending
+                ? t.submitting
+                : t.submit}
           </Button>
         )}
       </div>

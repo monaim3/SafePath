@@ -13,25 +13,33 @@ from rest_framework.views import APIView
 
 from apps.audit.services import record
 from apps.incidents.models import Report
+from apps.incidents.services import video
 
 from ..models import Flag
-from ..services import mark_duplicate, reject_report, resolve_flag, verify_report
+from ..services import approve_video, mark_duplicate, reject_report, reject_video, resolve_flag, verify_report
 
 REJECT_REASONS = {"fake", "wrong_place", "spam", "offensive", "other"}
+REVIEWABLE_VIDEO = [Report.VideoStatus.PENDING, Report.VideoStatus.APPROVED]
 
 
 class QueueReportSerializer(serializers.ModelSerializer):
     reporter_trust = serializers.FloatField(source="device.trust")
     reporter_reports = serializers.IntegerField(source="device.reports_count")
     reporter_rejected = serializers.IntegerField(source="device.rejected_count")
+    video_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Report
         fields = [
             "id", "kind", "category", "h3", "date", "block", "hour", "days", "relation", "description",
             "status", "flags", "corroborations", "weight", "is_demo", "created_at",
-            "reporter_trust", "reporter_reports", "reporter_rejected",
+            "reporter_trust", "reporter_reports", "reporter_rejected", "video_status", "video_url",
         ]
+
+    def get_video_url(self, report: Report) -> str | None:
+        if report.video_status in REVIEWABLE_VIDEO and video.enabled():
+            return video.moderator_url(report.video_public_id)
+        return None
 
 
 class FlagSerializer(serializers.ModelSerializer):
@@ -85,6 +93,13 @@ class QueueView(APIView):
         pending = Report.objects.select_related("device").filter(status=Report.Status.PENDING).order_by("-created_at")
         flagged = [r for r in pending if r.flags][:100]
         others = [r for r in pending if not r.flags][:100]
+        # Footage waiting for review, whatever the report's own status (it may already be verified).
+        videos = (
+            Report.objects.select_related("device")
+            .filter(video_status=Report.VideoStatus.PENDING)
+            .exclude(status=Report.Status.REJECTED)
+            .order_by("-created_at")[:100]
+        )
         return Response(
             {
                 "flags": FlagSerializer(
@@ -92,6 +107,7 @@ class QueueView(APIView):
                 ).data,
                 "flagged": QueueReportSerializer(flagged, many=True).data,
                 "pending": QueueReportSerializer(others, many=True).data,
+                "videos": QueueReportSerializer(videos, many=True).data,
             }
         )
 
@@ -107,6 +123,7 @@ class StatsView(APIView):
                 "pending": reports.filter(status=Report.Status.PENDING).count(),
                 "flagged": reports.filter(status=Report.Status.PENDING).exclude(flags=[]).count(),
                 "areaAlerts": Flag.objects.filter(status=Flag.Status.OPEN, report__isnull=True).count(),
+                "videos": reports.filter(video_status=Report.VideoStatus.PENDING).exclude(status=Report.Status.REJECTED).count(),
                 "today": reports.filter(created_at__gte=since).count(),
                 "verified": reports.filter(status=Report.Status.VERIFIED).count(),
                 "rejected": reports.filter(status=Report.Status.REJECTED).count(),
@@ -133,6 +150,24 @@ class DecisionView(APIView):
             reject_report(report, actor=request.user, reason=reason)
         elif decision == "duplicate":
             mark_duplicate(report, actor=request.user)
+        else:
+            return Response({"error": "unknown_decision"}, status=400)
+        return Response(QueueReportSerializer(report).data)
+
+
+class VideoDecisionView(APIView):
+    """POST /api/v1/mod/reports/<id>/video/<approve|reject>. Audit-logged."""
+
+    permission_classes = [IsAdminUser]
+
+    def post(self, request: Request, report_id, decision: str) -> Response:
+        report = get_object_or_404(Report.objects.select_related("device"), pk=report_id)
+        if report.video_status != Report.VideoStatus.PENDING:
+            return Response({"error": "already_decided"}, status=409)
+        if decision == "approve":
+            approve_video(report, actor=request.user)
+        elif decision == "reject":
+            reject_video(report, actor=request.user)
         else:
             return Response({"error": "unknown_decision"}, status=400)
         return Response(QueueReportSerializer(report).data)

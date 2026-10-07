@@ -7,7 +7,7 @@ from apps.audit.services import record
 from apps.incidents import policy
 from apps.incidents.models import Device, Report
 from apps.incidents.selectors import bump_data_version
-from apps.incidents.services import abuse
+from apps.incidents.services import abuse, video
 from apps.incidents.services.submission import refresh_weight
 
 from .models import Flag
@@ -15,6 +15,16 @@ from .models import Flag
 
 def _resolve_flags(report: Report) -> None:
     Flag.objects.filter(report=report, status=Flag.Status.OPEN).update(status=Flag.Status.RESOLVED)
+
+
+def _drop_video(report: Report) -> None:
+    """Mark the report's video rejected and delete the file from Cloudinary after the commit."""
+    if report.video_status in ("", Report.VideoStatus.REJECTED):
+        return
+    report.video_status = Report.VideoStatus.REJECTED
+    report.save(update_fields=["video_status"])
+    public_id = report.video_public_id
+    transaction.on_commit(lambda: video.destroy(public_id))
 
 
 @transaction.atomic
@@ -59,11 +69,31 @@ def reject_report(report: Report, *, actor, reason: str = "") -> Report:
     refresh_weight(report)
     report.save(update_fields=["status", "weight"])
     _resolve_flags(report)
+    _drop_video(report)  # a rejected report's footage is not kept either
     transaction.on_commit(bump_data_version)
     record(
         action="report.reject", entity_type="report", entity_id=report.id, actor=actor,
         before=before, after={"status": report.status, "reason": reason},
     )
+    return report
+
+
+@transaction.atomic
+def approve_video(report: Report, *, actor) -> Report:
+    """Footage becomes public on the area page (audio removed)."""
+    report.video_status = Report.VideoStatus.APPROVED
+    report.save(update_fields=["video_status"])
+    transaction.on_commit(bump_data_version)
+    record(action="video.approve", entity_type="report", entity_id=report.id, actor=actor)
+    return report
+
+
+@transaction.atomic
+def reject_video(report: Report, *, actor) -> Report:
+    """The report stands on its own; only the footage is removed (and deleted from Cloudinary)."""
+    _drop_video(report)
+    transaction.on_commit(bump_data_version)
+    record(action="video.reject", entity_type="report", entity_id=report.id, actor=actor)
     return report
 
 

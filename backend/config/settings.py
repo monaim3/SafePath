@@ -151,6 +151,14 @@ if not DEBUG:
 SAFEPATH_HASH_SALT = env("SAFEPATH_HASH_SALT", "dev-only-salt")
 # Cloudflare Turnstile secret. Empty = verification skipped (local development only).
 TURNSTILE_SECRET = env("TURNSTILE_SECRET")
+# Optional CCTV/video evidence, stored on Cloudinary (never in our database).
+# cloudinary://<api_key>:<api_secret>@<cloud_name>, from the Cloudinary dashboard. Empty = video upload off.
+_cloudinary = urlparse(env("CLOUDINARY_URL"))
+CLOUDINARY = (
+    {"cloud": _cloudinary.hostname, "key": unquote(_cloudinary.username or ""), "secret": unquote(_cloudinary.password or "")}
+    if _cloudinary.scheme == "cloudinary" and _cloudinary.hostname and _cloudinary.password
+    else None
+)
 # Proxies whose X-Forwarded-For we trust (e.g. Caddy/Nginx in front of the app).
 TRUSTED_PROXY_COUNT = int(env("TRUSTED_PROXY_COUNT", "0"))
 # Header carrying the real client IP, set by an edge proxy that clients cannot spoof through.
