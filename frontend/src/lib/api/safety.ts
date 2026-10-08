@@ -3,7 +3,7 @@
  * Currently backed by synthetic demo data; each function documents the endpoint it will call.
  */
 import { demoArea, demoCityTimeProfile, demoMapCells, demoTopAreas } from "@/lib/safety/demo-data";
-import type { AreaDetail, AreaNews, AreaVideo, CellSummary, MapCellsQuery, UploadTicket } from "@/lib/safety/types";
+import type { AreaDetail, AreaNews, AreaVideo, CellSummary, MapCellsQuery, Period, UploadTicket } from "@/lib/safety/types";
 import type { ReportInput } from "@/lib/validation/report";
 
 /** Django API base, e.g. http://localhost:8000. Unset = demo mode: synthetic data, nothing leaves the browser. */
@@ -22,24 +22,24 @@ async function getJson<T>(path: string): Promise<T> {
   return (await res.json()) as T;
 }
 
-/** GET /api/v1/map/cells?hour=&res= */
+/** GET /api/v1/map/cells?hour=&res=&period= */
 export async function fetchMapCells(query: MapCellsQuery): Promise<CellSummary[]> {
   if (!REPORTS_GO_TO_SERVER) return demoMapCells(query);
-  const data = await getJson<{ cells: CellSummary[] }>(`/map/cells?res=${query.res}&hour=${query.hour}`);
+  const data = await getJson<{ cells: CellSummary[] }>(`/map/cells?res=${query.res}&hour=${query.hour}&period=${query.period ?? "all"}`);
   return data.cells;
 }
 
-/** GET /api/v1/map/time-profile — city-wide activity per hour of day (24 values). */
-export async function fetchCityTimeProfile(): Promise<number[]> {
+/** GET /api/v1/map/time-profile?period= — city-wide activity per hour of day (24 values). */
+export async function fetchCityTimeProfile(period: Period = "all"): Promise<number[]> {
   if (!REPORTS_GO_TO_SERVER) return demoCityTimeProfile();
-  return (await getJson<{ hours: number[] }>("/map/time-profile")).hours;
+  return (await getJson<{ hours: number[] }>(`/map/time-profile?period=${period}`)).hours;
 }
 
-/** GET /api/v1/areas/{h3} */
-export async function fetchArea(h3: string): Promise<AreaDetail | null> {
+/** GET /api/v1/areas/{h3}?period= */
+export async function fetchArea(h3: string, period: Period = "all"): Promise<AreaDetail | null> {
   if (!REPORTS_GO_TO_SERVER) return demoArea(h3);
   try {
-    return await getJson<AreaDetail>(`/areas/${encodeURIComponent(h3)}`);
+    return await getJson<AreaDetail>(`/areas/${encodeURIComponent(h3)}?period=${period}`);
   } catch {
     return null;
   }
@@ -56,10 +56,10 @@ export async function fetchAreaVideos(h3: string): Promise<AreaVideo[]> {
 }
 
 /** GET /api/v1/areas/{h3}/news — published news reports behind this area; empty in demo mode or on error. */
-export async function fetchAreaNews(h3: string): Promise<AreaNews[]> {
+export async function fetchAreaNews(h3: string, period: Period = "all"): Promise<AreaNews[]> {
   if (!REPORTS_GO_TO_SERVER) return [];
   try {
-    return (await getJson<{ news: AreaNews[] }>(`/areas/${encodeURIComponent(h3)}/news`)).news;
+    return (await getJson<{ news: AreaNews[] }>(`/areas/${encodeURIComponent(h3)}/news?period=${period}`)).news;
   } catch {
     return [];
   }

@@ -33,7 +33,18 @@ const POIS: { x: number; y: number; Icon: ComponentType<SVGProps<SVGSVGElement>>
   { x: 92, y: 168, Icon: Pill, bg: "#2cb468" },
 ];
 
-export function HeroVisual({ area, locale, dict }: { area: AreaDetail; locale: Locale; dict: Dictionary }) {
+export function HeroVisual({
+  area,
+  locale,
+  dict,
+  placeName = null,
+}: {
+  area: AreaDetail;
+  locale: Locale;
+  dict: Dictionary;
+  /** Neighbourhood name for real areas ("উলন, রামপুরা"); null shows the code. */
+  placeName?: string | null;
+}) {
   const n = (v: number) => formatNumber(locale, v);
   const peak = peakBlock(area.timeBlocks);
   const maxBlock = Math.max(...area.timeBlocks, 1);
@@ -166,7 +177,7 @@ export function HeroVisual({ area, locale, dict }: { area: AreaDetail; locale: L
       <div className="absolute -bottom-2 right-4 w-[min(19rem,82%)] rounded-3xl border border-line bg-surface p-5 shadow-soft sm:-right-8 lg:-bottom-10">
         <div className="flex items-center justify-between gap-3">
           <span className="text-sm font-semibold">
-            {area.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} {area.code}
+            {placeName ?? `${area.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${area.code}`}
           </span>
           <BandBadge band={area.band} label={dict.bands[area.band]} />
         </div>

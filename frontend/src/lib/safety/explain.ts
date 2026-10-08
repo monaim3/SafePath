@@ -4,7 +4,9 @@ import type { AreaDetail, Reason, TimeBlock } from "./types";
 export function explainArea(area: AreaDetail): Reason[] {
   if (area.insufficient) return [];
 
-  const reasons: Reason[] = [{ kind: "recent", n: area.counts.d30 }];
+  const reasons: Reason[] = [
+    area.counts.d30 > 0 ? { kind: "recent", n: area.counts.d30 } : { kind: "earlier", n: area.reportCount },
+  ];
 
   const peak = peakBlock(area.timeBlocks);
   if (peak !== null) reasons.push({ kind: "time", block: peak });

@@ -203,6 +203,7 @@ export const en = {
     awareCta: "Read the guide",
   },
   map: {
+    period: { label: "Time period", "30": "30 days", "90": "90 days", all: "All time" },
     searchPlaceholder: "Search an area or road",
     timeLabel: "Time of day",
     now: "Now",
@@ -243,6 +244,7 @@ export const en = {
     whyTitle: "Why this level?",
     reasons: {
       recent: "{n} reports in the last 30 days",
+      earlier: "No new reports in the last 30 days — {n} earlier reports",
       time: "Most reports between {block}",
       category: "{p}% involve {cat}",
       up: "Reports increased compared with last month",
@@ -266,6 +268,7 @@ export const en = {
     sourceTitle: "Where this comes from",
     reportHere: "Report in this area",
     notFound: "We couldn't find this area.",
+    codeLabel: "Area code {code}",
     newsTitle: "News sources",
     newsHint: "Published news reports counted in this area's level — tap to read the original.",
     videosTitle: "Footage from this area",

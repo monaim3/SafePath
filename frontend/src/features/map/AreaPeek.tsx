@@ -6,14 +6,17 @@ import { ArrowRight, X } from "lucide-react";
 import { formatNumber, type Dictionary, type Locale } from "@/i18n";
 import { fetchArea } from "@/lib/api/safety";
 import { scoreToBand } from "@/lib/safety/bands";
+import type { Period } from "@/lib/safety/types";
 import { CategoryIcon } from "@/components/safety/CategoryIcon";
 import { BandBadge, ConfidenceMeter } from "@/components/safety/BandBadge";
 import { buttonClass } from "@/components/ui/Button";
 import { hereAtLabel } from "./TimeDock";
+import { usePlaceName } from "@/lib/use-place-name";
 
 export function AreaPeek({
   h3,
   hour,
+  period = "all",
   locale,
   dict,
   onClose,
@@ -21,11 +24,14 @@ export function AreaPeek({
   h3: string;
   /** Selected hour on the map; the headline level follows it. */
   hour: number | "all";
+  period?: Period;
   locale: Locale;
   dict: Dictionary;
   onClose: () => void;
 }) {
-  const { data: area } = useQuery({ queryKey: ["area", h3], queryFn: () => fetchArea(h3) });
+  const { data: area } = useQuery({ queryKey: ["area", h3, period], queryFn: () => fetchArea(h3, period) });
+  const place = usePlaceName(h3, locale);
+  const placeName = area?.isDemo ? null : place;
   const n = (v: number) => formatNumber(locale, v);
   const score = area ? (hour === "all" ? area.score : area.hours[hour]) : 0;
   const band = scoreToBand(score);
@@ -38,8 +44,8 @@ export function AreaPeek({
         <>
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs text-ink-3">{dict.home.heroCardArea}</p>
-              <h2 className="font-display text-xl font-bold">{area.code}</h2>
+              <p className="text-xs text-ink-3">{placeName ? area.code : dict.home.heroCardArea}</p>
+              <h2 className="font-display text-xl font-bold">{placeName ?? area.code}</h2>
             </div>
             <button
               type="button"
@@ -83,7 +89,10 @@ export function AreaPeek({
             />
           </div>
 
-          <Link href={`/${locale}/area/${area.h3}`} className={buttonClass({ className: "mt-5 w-full" })}>
+          <Link
+            href={`/${locale}/area/${area.h3}${period === "all" ? "" : `?period=${period}`}`}
+            className={buttonClass({ className: "mt-5 w-full" })}
+          >
             {dict.map.openArea}
             <ArrowRight className="size-4" aria-hidden />
           </Link>

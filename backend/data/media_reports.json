@@ -66,6 +66,17 @@
   "place": "Jatrabari, Dhaka"
  },
  {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/law-and-crime/971246/",
+  "headline": "বাড্ডায় দুই জন গুলিবিদ্ধ, ছুরিকাঘাতে স্কুল শিক্ষার্থী আহত",
+  "incident_date": "2026-09-28",
+  "hour": 23,
+  "category": "weapon",
+  "lat": 23.771965,
+  "lng": 90.425658,
+  "place": "Merul Badda, Dhaka"
+ },
+ {
   "outlet": "Ajker Patrika",
   "url": "https://www.ajkerpatrika.com/bangladesh/dhaka/ajp5you0tticc",
   "headline": "ডিবি পরিচয়ে গাড়িচালকের মোবাইল ও টাকা ছিনতাই",
@@ -242,6 +253,17 @@
   "place": "Asad Gate, Dhaka"
  },
  {
+  "outlet": "Independent TV",
+  "url": "https://www.itvbd.com/country/dhaka/270121/",
+  "headline": "রাজধানীতে পুরোহিতের ওপর হামলা, ফোন ছিনতাই",
+  "incident_date": "2026-06-29",
+  "hour": 0,
+  "category": "on_foot",
+  "lat": 23.717072,
+  "lng": 90.419927,
+  "place": "Narinda Road, Wari, Dhaka"
+ },
+ {
   "outlet": "Bangla Tribune",
   "url": "https://www.banglatribune.com/law-and-crime/955214/",
   "headline": "ধানমন্ডিতে চাপাতি ঠেকিয়ে ছিনতাই, গ্রেফতার ৩",
@@ -385,6 +407,39 @@
   "place": "Chan Mia Housing, Mohammadpur, Dhaka"
  },
  {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/788410/",
+  "headline": "থানায় গিয়ে এসপি জানালেন তিনিও ছিনতাইয়ের শিকার",
+  "incident_date": "2026-05-09",
+  "hour": 20,
+  "category": "motorbike",
+  "lat": 23.741994,
+  "lng": 90.383036,
+  "place": "Labaid Specialized Hospital, Dhanmondi, Dhaka"
+ },
+ {
+  "outlet": "NTV",
+  "url": "https://www.ntvbd.com/bangladesh/crime/news-1734565",
+  "headline": "কামরাঙ্গীরচরে ছিনতাইকারীর হামলায় রিকশাচালক আহতের অভিযোগ",
+  "incident_date": "2026-05-08",
+  "hour": 23,
+  "category": "on_foot",
+  "lat": 23.734205,
+  "lng": 90.362949,
+  "place": "Lohar Bridge, Kamrangirchar, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/p4nhvmlcrm",
+  "headline": "রাজধানীতে শাশুড়ির চিকিৎসার টাকা নেওয়ার পথে ছিনতাইকারীর ছুরিকাঘাতে নারী আহত",
+  "incident_date": "2026-05-01",
+  "hour": 6,
+  "category": "weapon",
+  "lat": 23.77678,
+  "lng": 90.375126,
+  "place": "Islamic Foundation, Agargaon, Dhaka"
+ },
+ {
   "outlet": "Independent TV",
   "url": "https://www.itvbd.com/country/dhaka/266553/",
   "headline": "রাজধানীতে ছিনতাইকারীর ছুরিকাঘাতে স্বামী-স্ত্রী আহত",
@@ -405,6 +460,39 @@
   "lat": 23.732013,
   "lng": 90.420822,
   "place": "Arambagh, Motijheel, Dhaka"
+ },
+ {
+  "outlet": "Independent TV",
+  "url": "https://www.itvbd.com/country/dhaka/265983/",
+  "headline": "রাজধানীতে ব্যবসায়ীর মাথায় আঘাত করে ২ লাখ টাকা ছিনতাই",
+  "incident_date": "2026-04-24",
+  "hour": 0,
+  "category": "weapon",
+  "lat": 23.7169,
+  "lng": 90.46835,
+  "place": "Konapara, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Independent TV",
+  "url": "https://www.itvbd.com/country/dhaka/264794/",
+  "headline": "ঢামেকে চিকিৎসা নিতে এসে শহীদ মিনার এলাকায় ছুরিকাঘাতে আহত নারী",
+  "incident_date": "2026-04-13",
+  "hour": 9,
+  "category": "weapon",
+  "lat": 23.727211,
+  "lng": 90.396637,
+  "place": "Central Shaheed Minar, Dhaka"
+ },
+ {
+  "outlet": "Independent TV",
+  "url": "https://www.itvbd.com/country/dhaka/264477/",
+  "headline": "ছুরিকাঘাতে আহত যুবক পড়ে ছিলেন ঢাকার পাঁচতারকা হোটেলের সামনে",
+  "incident_date": "2026-04-10",
+  "hour": 3,
+  "category": "weapon",
+  "lat": 23.741239,
+  "lng": 90.397072,
+  "place": "InterContinental Dhaka, Shahbag, Dhaka"
  },
  {
   "outlet": "New Age",
@@ -462,6 +550,17 @@
   "place": "Khandakar Road, Shyampur, Dhaka"
  },
  {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/772332/",
+  "headline": "পল্লবীতে মুদি দোকানিকে গুলি, খিলক্ষেতে নির্মাণশ্রমিককে ছুরিকাঘাত",
+  "incident_date": "2026-01-29",
+  "hour": 5,
+  "category": "weapon",
+  "lat": 23.828243,
+  "lng": 90.420283,
+  "place": "Khilkhet Bus Stand, Dhaka"
+ },
+ {
   "outlet": "Ajker Patrika",
   "url": "https://www.ajkerpatrika.com/bangladesh/dhaka/ajpfjrggw11fp",
   "headline": "ছিনতাইয়ের মোবাইল ভাগাভাগির দ্বন্দ্বে ট্রেনের ছাদে যুবক খুন, দুই কিশোরসহ গ্রেপ্তার ৪",
@@ -471,6 +570,61 @@
   "lat": 23.85182,
   "lng": 90.408232,
   "place": "Airport Railway Station, Dhaka"
+ },
+ {
+  "outlet": "The Business Standard",
+  "url": "https://www.tbsnews.net/bangladesh/crime/trader-stabbed-death-muggers-jatrabari-1314986",
+  "headline": "Trader stabbed to death 'by muggers' in Jatrabari",
+  "incident_date": "2025-12-21",
+  "hour": 1,
+  "category": "weapon",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari Flyover, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/926223/",
+  "headline": "ব্যাগ ধরে টান দিলো ছিনতাইকারী, রিকশা থেকে ছিটকে পড়ে আহত ইডেন শিক্ষার্থী",
+  "incident_date": "2025-12-13",
+  "hour": 8,
+  "category": "rickshaw_cng",
+  "lat": 23.728075,
+  "lng": 90.419091,
+  "place": "Motijheel Metro Station, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/925344/",
+  "headline": "রাজধানীতে ছিনতাইকারীর ছুরিকাঘাতে ইন্টারনেট সংযোগকারী কর্মী আহত",
+  "incident_date": "2025-12-05",
+  "hour": 15,
+  "category": "weapon",
+  "lat": 23.7596,
+  "lng": 90.41384,
+  "place": "Madhubagh, Moghbazar, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/hnmg4fvl1c",
+  "headline": "কারওয়ান বাজারে ছিনতাইকারীর ছুরিকাঘাতে কাঁচামাল ব্যবসায়ী আহত",
+  "incident_date": "2025-11-27",
+  "hour": 1,
+  "category": "weapon",
+  "lat": 23.751266,
+  "lng": 90.392776,
+  "place": "Karwan Bazar, Dhaka"
+ },
+ {
+  "outlet": "Independent TV",
+  "url": "https://www.itvbd.com/country/dhaka/248318/",
+  "headline": "রাজধানীতে দিনে-দুপুরে এনজিওকর্মীকে ছুরিকাঘাত করে ছিনতাই",
+  "incident_date": "2025-11-26",
+  "hour": 14,
+  "category": "weapon",
+  "lat": 23.70462,
+  "lng": 90.434758,
+  "place": "Dholaipar, Jatrabari, Dhaka"
  },
  {
   "outlet": "Bangla Tribune",
@@ -506,6 +660,28 @@
   "place": "Jatiya Sangsad Bhaban, Dhaka"
  },
  {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/capital-city/922090/",
+  "headline": "রাজধানীতে পৃথক ছিনতাইয়ের ঘটনায় আহত ২",
+  "incident_date": "2025-11-08",
+  "hour": 0,
+  "category": "on_foot",
+  "lat": 23.733992,
+  "lng": 90.403941,
+  "place": "Matsya Bhaban, Ramna, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/920874/",
+  "headline": "মোহাম্মদপুরে ছিনতাইকারীর ছুরিকাঘাতে দুই বন্ধু আহত",
+  "incident_date": "2025-10-28",
+  "hour": 20,
+  "category": "weapon",
+  "lat": 23.756645,
+  "lng": 90.356204,
+  "place": "Tin Rastar Mor, Mohammadpur, Dhaka"
+ },
+ {
   "outlet": "The Business Standard",
   "url": "https://www.tbsnews.net/bangladesh/cid-constable-stabbed-robbed-wallet-and-mobile-jatrabari-1264951",
   "headline": "CID constable stabbed, robbed of wallet and phone in Jatrabari",
@@ -526,5 +702,445 @@
   "lat": 23.74763,
   "lng": 90.44813,
   "place": "Nandipara, Banasree, Dhaka"
+ },
+ {
+  "outlet": "Independent TV",
+  "url": "https://www.itvbd.com/country/dhaka/241171/",
+  "headline": "রাজধানীতে কলেজছাত্রকে কুপিয়ে আইফোন ও নগদ টাকা ছিনতাই",
+  "incident_date": "2025-10-07",
+  "hour": 2,
+  "category": "weapon",
+  "lat": 23.703661,
+  "lng": 90.45088,
+  "place": "Shonir Akhra, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/917783/",
+  "headline": "কেরানীগঞ্জে ছিনতাইকারীর ছুরিকাঘাতে এনজিওকর্মী আহত",
+  "incident_date": "2025-10-05",
+  "hour": 8,
+  "category": "weapon",
+  "lat": 23.681711,
+  "lng": 90.414003,
+  "place": "Hasnabad, Keraniganj, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/h2p8bixxwt",
+  "headline": "রাজধানীর মিরপুরে ধাওয়া করে দুই ছিনতাইকারীকে ধরল পুলিশ",
+  "incident_date": "2025-09-18",
+  "hour": 20,
+  "category": "weapon",
+  "lat": 23.801767,
+  "lng": 90.357241,
+  "place": "Directorate of Primary Education, Mirpur 2, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/l8egoldqff",
+  "headline": "মোহাম্মদপুরে ১১ সেকেন্ডে ছিনতাই, ভাইরাল ভিডিওতে দেখতে পাওয়া একজন গ্রেপ্তার",
+  "incident_date": "2025-09-06",
+  "hour": 11,
+  "category": "weapon",
+  "lat": 23.751143,
+  "lng": 90.33889,
+  "place": "40 Feet Road, Basila, Mohammadpur, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/capital-city/913615/",
+  "headline": "রাজধানীতে পৃথক ছিনতাইয়ের ঘটনায় দুজন আহত",
+  "incident_date": "2025-09-02",
+  "hour": 0,
+  "category": "weapon",
+  "lat": 23.74771,
+  "lng": 90.386142,
+  "place": "Dhaka Tower, Green Road, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/capital-city/912203/",
+  "headline": "যাত্রাবাড়ীতে ছুরিকাঘাতে সবজি ব্যবসায়ী আহত",
+  "incident_date": "2025-08-22",
+  "hour": 6,
+  "category": "weapon",
+  "lat": 23.709452,
+  "lng": 90.435019,
+  "place": "Kutubkhali, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/910880/",
+  "headline": "যাত্রাবাড়ীতে ছিনতাইকারীর ছুরিকাঘাতে পুলিশ সদস্য আহত",
+  "incident_date": "2025-08-12",
+  "hour": 6,
+  "category": "weapon",
+  "lat": 23.709452,
+  "lng": 90.435019,
+  "place": "Kutubkhali, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/743735/",
+  "headline": "মোহাম্মদপুরে ছিনতাইকারীর ছুরিতে যুবক নিহত",
+  "incident_date": "2025-07-26",
+  "hour": 11,
+  "category": "weapon",
+  "lat": 23.750818,
+  "lng": 90.357253,
+  "place": "Martyred Intellectuals Memorial, Rayerbazar, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/743504/",
+  "headline": "‘ছিনতাইকারীদের দেখিয়ে দিলেও কোমরে হাত দিয়ে দাঁড়িয়ে ছিলেন এএসআই আনারুল’",
+  "incident_date": "2025-07-24",
+  "hour": 23,
+  "category": "weapon",
+  "lat": 23.755431,
+  "lng": 90.363887,
+  "place": "Mohammadpur Police Station, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/905593/",
+  "headline": "ধানমন্ডিতে ছিনতাইকারীদের ছুরিকাঘাতে এইচএসসি পরীক্ষার্থী আহত",
+  "incident_date": "2025-07-03",
+  "hour": 5,
+  "category": "weapon",
+  "lat": 23.745252,
+  "lng": 90.389418,
+  "place": "Meherunnesa Girls School, Dhanmondi, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/capital/iq3jebznh0",
+  "headline": "ছিনতাইকারীর ছুরিকাঘাতে আহত শিক্ষার্থীর মৃত্যু",
+  "incident_date": "2025-06-30",
+  "hour": 21,
+  "category": "weapon",
+  "lat": 23.715323,
+  "lng": 90.395435,
+  "place": "Chawkbazar, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/ed6la6qwty",
+  "headline": "মালিবাগে ব্যবসায়ীকে কুপিয়ে ব্যাগ ছিনতাই",
+  "incident_date": "2025-06-26",
+  "hour": 3,
+  "category": "weapon",
+  "lat": 23.749697,
+  "lng": 90.412635,
+  "place": "Malibagh Railgate, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/ygjk2zrtoi",
+  "headline": "রামপুরায় ব্যবসায়ীকে ছুরিকাঘাত করে ২৫ হাজার টাকা ছিনতাই",
+  "incident_date": "2025-06-20",
+  "hour": 18,
+  "category": "weapon",
+  "lat": 23.762341,
+  "lng": 90.41742,
+  "place": "Bagicharteck, West Rampura, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/902968/",
+  "headline": "মতিঝিলে ছিনতাইকারীর ছুরিকাঘাতে দোকান কর্মচারী আহত",
+  "incident_date": "2025-06-15",
+  "hour": 5,
+  "category": "weapon",
+  "lat": 23.732013,
+  "lng": 90.420822,
+  "place": "Arambagh, Motijheel, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/4pgiubu3p7",
+  "headline": "মিরপুরে ব্যবসায়ীকে গুলি করে ২২ লাখ টাকা ছিনতাই",
+  "incident_date": "2025-05-27",
+  "hour": 10,
+  "category": "weapon",
+  "lat": 23.807713,
+  "lng": 90.367685,
+  "place": "Mirpur 10 Fire Service Station, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/733637/",
+  "headline": "মেট্রো স্টেশনের নিচে অস্ত্রের মুখে আইফোন ছিনতাই",
+  "incident_date": "2025-05-24",
+  "hour": 23,
+  "category": "weapon",
+  "lat": 23.826136,
+  "lng": 90.364242,
+  "place": "Pallabi Metro Station, Mirpur, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/ehp081d8q3",
+  "headline": "ঢাকার মগবাজারে প্রকাশ্য দিবালোকে চাপাতি হাতে ছিনতাই, ভিডিও ভাইরাল",
+  "incident_date": "2025-05-18",
+  "hour": 16,
+  "category": "weapon",
+  "lat": 23.747719,
+  "lng": 90.400918,
+  "place": "Moghbazar, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/732168/",
+  "headline": "যাত্রাবাড়ীতে কাভার্ডভ্যান চালককে কুপিয়ে ছিনতাই",
+  "incident_date": "2025-05-16",
+  "hour": 1,
+  "category": "weapon",
+  "lat": 23.71057,
+  "lng": 90.44138,
+  "place": "Kajla Bridge, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/3ueg312bt3",
+  "headline": "চলন্ত প্রাইভেটকারে ছিনতাইকারী এসে ছোঁ মেরে টান দিল ব্যাগ, টেনে নিয়ে গেল নারীকে",
+  "incident_date": "2025-04-26",
+  "hour": 7,
+  "category": "on_foot",
+  "lat": 23.743952,
+  "lng": 90.411399,
+  "place": "Siddheswari, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/1cegw5d0cf",
+  "headline": "রাজধানীর শেওড়াপাড়ায় চাপাতি ঠেকিয়ে ছিনতাই, ভিডিও ভাইরাল",
+  "incident_date": "2025-04-17",
+  "hour": 4,
+  "category": "weapon",
+  "lat": 23.791973,
+  "lng": 90.374087,
+  "place": "West Shewrapara, Mirpur, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/726464/",
+  "headline": "রাজধানীর যাত্রাবাড়ী-ভাটারায় ছিনতাইকারীর ছুরিকাঘাতে আহত ৩",
+  "incident_date": "2025-04-08",
+  "hour": 5,
+  "category": "weapon",
+  "lat": 23.712885,
+  "lng": 90.427565,
+  "place": "Janapath Mor, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/892584/#2025-04-02-sayedabad",
+  "headline": "রাজধানীতে পৃথক স্থানে ছিনতাইকারীর ছুরিকাঘাতে আহত ২",
+  "incident_date": "2025-04-02",
+  "hour": 7,
+  "category": "weapon",
+  "lat": 23.71535,
+  "lng": 90.427544,
+  "place": "Sayedabad Bus Terminal, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/892584/#2025-04-01-basila",
+  "headline": "রাজধানীতে পৃথক স্থানে ছিনতাইকারীর ছুরিকাঘাতে আহত ২",
+  "incident_date": "2025-04-01",
+  "hour": 23,
+  "category": "weapon",
+  "lat": 23.751143,
+  "lng": 90.33889,
+  "place": "Basila, Mohammadpur, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/capital-city/892159/#2025-03-28-satarkul",
+  "headline": "রাজধানীতে ছিনতাইকারীর ছুরিকাঘাতে আহত ২",
+  "incident_date": "2025-03-28",
+  "hour": 17,
+  "category": "weapon",
+  "lat": 23.78603,
+  "lng": 90.426149,
+  "place": "Satarkul, Badda, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/capital-city/892159/#2025-03-28-kamrangirchar",
+  "headline": "রাজধানীতে ছিনতাইকারীর ছুরিকাঘাতে আহত ২",
+  "incident_date": "2025-03-28",
+  "hour": 22,
+  "category": "weapon",
+  "lat": 23.71132,
+  "lng": 90.37168,
+  "place": "Sylhetia Bazar, Kamrangirchar, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/890119/",
+  "headline": "মতিঝিলে ছিনতাইকারীর হামলায় ব্যাংক কর্মকর্তা আহত",
+  "incident_date": "2025-03-13",
+  "hour": 22,
+  "category": "rickshaw_cng",
+  "lat": 23.728075,
+  "lng": 90.419091,
+  "place": "Motijheel Metro Station, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/887661/",
+  "headline": "রাজধানীর ওয়ারীতে ছিনতাইকারীর ছুরিকাঘাতে ব্যবসায়ী গুরুতর আহত",
+  "incident_date": "2025-02-25",
+  "hour": 19,
+  "category": "weapon",
+  "lat": 23.716793,
+  "lng": 90.420083,
+  "place": "Bonogram, Wari, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/9e9jha36cb",
+  "headline": "বনশ্রীতে বাসার সামনে স্বর্ণ ব্যবসায়ীকে গুলি, ‘২০০ ভরি স্বর্ণালংকার’ ছিনতাই",
+  "incident_date": "2025-02-23",
+  "hour": 22,
+  "category": "weapon",
+  "lat": 23.763451,
+  "lng": 90.431504,
+  "place": "Banasree D Block, Rampura, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/3cn0mj9qk3",
+  "headline": "মালিবাগে দিনের বেলায় শিক্ষার্থীকে কুপিয়ে টাকা ও মোবাইল ছিনতাই",
+  "incident_date": "2025-02-20",
+  "hour": 12,
+  "category": "weapon",
+  "lat": 23.744192,
+  "lng": 90.414246,
+  "place": "Malibagh Mor, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/886629/",
+  "headline": "উত্তরায় চলন্ত বাসে অস্ত্র ঠেকিয়ে ছিনতাই, আতঙ্কে যাত্রীরা",
+  "incident_date": "2025-02-19",
+  "hour": 8,
+  "category": "bus",
+  "lat": 23.873991,
+  "lng": 90.400441,
+  "place": "House Building, Uttara, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/884938/",
+  "headline": "মাতুয়াইলে ছিনতাইকারীর ছুরিকাঘাতে যুবক নিহত",
+  "incident_date": "2025-02-07",
+  "hour": 19,
+  "category": "weapon",
+  "lat": 23.69497,
+  "lng": 90.46639,
+  "place": "Matuail Madrasa, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/884706/",
+  "headline": "কাওরান বাজারে ছিনতাইকারীর ছুরিকাঘাতে ব্যবসায়ী আহত",
+  "incident_date": "2025-02-05",
+  "hour": 20,
+  "category": "rickshaw_cng",
+  "lat": 23.751266,
+  "lng": 90.392776,
+  "place": "Karwan Bazar Signal, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/tll1qntj0x",
+  "headline": "ভাড়ায় চালিত মোটরসাইকেলচালকের বেশে ইতালির নাগরিককে ছিনতাই, দুজন গ্রেপ্তার",
+  "incident_date": "2025-02-02",
+  "hour": 5,
+  "category": "rickshaw_cng",
+  "lat": 23.859755,
+  "lng": 90.365204,
+  "place": "Uttara Center Metro Station, Sector 15, Uttara, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/883824/",
+  "headline": "ছিনতাইকারীর ছুরিকাঘাতে যুবকের হাতের কব্জি বিচ্ছিন্ন",
+  "incident_date": "2025-01-30",
+  "hour": 14,
+  "category": "weapon",
+  "lat": 23.767534,
+  "lng": 90.357491,
+  "place": "Adabor Road 10, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/716398/",
+  "headline": "ব্যবসায়ীকে গুলি করে ৭০ ভরি স্বর্ণ ছিনতাইয়ের অভিযোগ",
+  "incident_date": "2025-01-23",
+  "hour": 23,
+  "category": "weapon",
+  "lat": 23.727542,
+  "lng": 90.371895,
+  "place": "Section, Hazaribagh, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/882426/",
+  "headline": "পল্টনে ছিনতাইকারীর ছুরিকাঘাতে যুবক নিহত",
+  "incident_date": "2025-01-21",
+  "hour": 2,
+  "category": "weapon",
+  "lat": 23.733206,
+  "lng": 90.411283,
+  "place": "Bijoynagar, Paltan, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/h467svcuq6",
+  "headline": "মতিঝিলে ভ্যানিটি ব্যাগ ছিনতাইয়ের সময় ৩ ছিনতাইকারী গ্রেপ্তার",
+  "incident_date": "2025-01-17",
+  "hour": 23,
+  "category": "rickshaw_cng",
+  "lat": 23.74244,
+  "lng": 90.416886,
+  "place": "Rajarbagh, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/rrzy90nh5k",
+  "headline": "ছিনতাইকারীদের কবলে পড়া ঢাবি অধ্যাপকের মুখে ভয়ানক পরিস্থিতির বিবরণ",
+  "incident_date": "2025-01-15",
+  "hour": 22,
+  "category": "rickshaw_cng",
+  "lat": 23.76519,
+  "lng": 90.37365,
+  "place": "Gonobhaban, Sher-e-Bangla Nagar, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/capital/fxbrupph9u#2025-01-02-goran",
+  "headline": "ঢাকায় ছিনতাইকারীদের ধারালো অস্ত্রের আঘাতে আহত ২",
+  "incident_date": "2025-01-02",
+  "hour": 6,
+  "category": "weapon",
+  "lat": 23.74974,
+  "lng": 90.433492,
+  "place": "Goran, Khilgaon, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/capital/fxbrupph9u#2025-01-01-kajla",
+  "headline": "ঢাকায় ছিনতাইকারীদের ধারালো অস্ত্রের আঘাতে আহত ২",
+  "incident_date": "2025-01-01",
+  "hour": 19,
+  "category": "weapon",
+  "lat": 23.71057,
+  "lng": 90.44138,
+  "place": "Kajla, Jatrabari, Dhaka"
  }
 ]

@@ -10,16 +10,21 @@ import { BANDS } from "@/lib/safety/bands";
 import { resForZoom, type GridRes } from "@/lib/safety/grid";
 import { cn } from "@/components/ui/cn";
 import { AreaPeek } from "./AreaPeek";
+import { usePlaceName } from "@/lib/use-place-name";
 import { Directions, type RouteOverlay } from "./Directions";
 import { PlaceSearch } from "./PlaceSearch";
 import { SafetyMap, type Basemap, type FitTarget, type FlyTarget } from "./SafetyMap";
 import { TimeDock } from "./TimeDock";
+import { PeriodSwitch } from "./PeriodSwitch";
+import type { Period } from "@/lib/safety/types";
 
 const GLASS = "border border-line bg-glass shadow-soft backdrop-blur-xl";
 const EMPTY_DAY: readonly number[] = new Array(24).fill(0);
 
 export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dictionary; header: ReactNode }) {
   const [hour, setHourState] = useState<number | "all">("all");
+  // Which reports count: last 30 / 90 days or all time (default).
+  const [period, setPeriod] = useState<Period>("all");
   // Tracked separately: comparing against the current hour during render would differ between server and client.
   const [isNow, setIsNow] = useState(false);
   const [basemap, setBasemap] = useState<Basemap>("satellite");
@@ -36,21 +41,25 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
   }, []);
 
   const { data: cells } = useQuery({
-    queryKey: ["map-cells", hour, res],
-    queryFn: () => fetchMapCells({ hour, res }),
+    queryKey: ["map-cells", hour, res, period],
+    queryFn: () => fetchMapCells({ hour, res, period }),
     placeholderData: keepPreviousData,
   });
-  const { data: cityProfile } = useQuery({ queryKey: ["city-time-profile"], queryFn: fetchCityTimeProfile });
+  const { data: cityProfile } = useQuery({
+    queryKey: ["city-time-profile", period],
+    queryFn: () => fetchCityTimeProfile(period),
+    placeholderData: keepPreviousData,
+  });
   const { data: selectedArea } = useQuery({
-    queryKey: ["area", selected],
-    queryFn: () => fetchArea(selected ?? ""),
+    queryKey: ["area", selected, period],
+    queryFn: () => fetchArea(selected ?? "", period),
     enabled: selected !== null,
   });
 
   // Route checks always use street-level cells, whatever the current zoom.
   const { data: streetCells, isError: streetCellsFailed } = useQuery({
-    queryKey: ["map-cells", hour, 10],
-    queryFn: () => fetchMapCells({ hour, res: 10 }),
+    queryKey: ["map-cells", hour, 10, period],
+    queryFn: () => fetchMapCells({ hour, res: 10, period }),
     enabled: directionsOpen,
   });
   const lookup = useMemo(() => {
@@ -80,9 +89,11 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
 
   // With an area selected, the time chart answers "how is it HERE at each hour?"
   const areaMode = selected !== null && selectedArea != null;
+  const place = usePlaceName(selected, locale);
+  const selectedPlace = selectedArea?.isDemo ? null : place;
 
   const peek = selected && (
-    <AreaPeek h3={selected} hour={hour} locale={locale} dict={dict} onClose={() => setSelected(null)} />
+    <AreaPeek h3={selected} hour={hour} period={period} locale={locale} dict={dict} onClose={() => setSelected(null)} />
   );
 
   const demoNote = USING_DEMO_DATA && (
@@ -150,6 +161,7 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
             </button>
           </div>
         )}
+        {!directionsOpen && <PeriodSwitch dict={dict} value={period} onChange={setPeriod} />}
         {!selected && !directionsOpen && (
           <p className="hidden items-center gap-2 self-start rounded-full bg-glass px-3 py-1.5 text-xs text-ink-2 backdrop-blur-xl lg:inline-flex">
             <Hand className="size-3.5" aria-hidden />
@@ -224,7 +236,7 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
           onPick={pickHour}
           values={areaMode ? selectedArea.hours : (cityProfile ?? EMPTY_DAY)}
           mode={areaMode ? "area" : "city"}
-          areaName={areaMode ? `${selectedArea.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${selectedArea.code}` : undefined}
+          areaName={areaMode ? (selectedPlace ?? `${selectedArea.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${selectedArea.code}`) : undefined}
           footer={demoNote}
         />
         </div>

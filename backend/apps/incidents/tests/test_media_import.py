@@ -71,6 +71,64 @@ def test_one_verified_news_report_makes_an_area_visible(tmp_path):
     assert [c["h3"] for c in cells] == [h3.latlng_to_cell(LAT, LNG, 10)]
 
 
+def test_older_news_kept_as_history_and_fades_slower(tmp_path):
+    from apps.incidents.services import aggregation as ag
+
+    cache.clear()
+    run(tmp_path, [item(500)])  # ~16 months old: allowed for news (up to 2 years)
+    assert Report.objects.count() == 1
+    cells = APIClient().get("/api/v1/map/cells?res=10&hour=all").json()["cells"]
+    assert len(cells) == 1  # still on the map as history
+
+    now = timezone.now()
+    row = dict(id="x", kind="incident", category="bus", h3="x", block=6, hour=None, days="", status="verified",
+               weight=1.0, corroborations=0, confirmations=0, device_id="d", created_at=now - timedelta(days=180))
+    assert round(ag.decay(ag.Row(**row, source="media"), now), 2) == 0.5  # six-month half-life
+    assert ag.decay(ag.Row(**row, source="community"), now) < 0.02  # community keeps the 30-day half-life
+
+
+def test_old_community_reports_still_drop_after_a_year():
+    from apps.incidents.models import Device
+
+    cache.clear()
+    devices = [Device.objects.create(device_hash=f"d-old-{i}") for i in range(2)]
+
+    def add(days):
+        for i in range(4):
+            Report.objects.create(kind="incident", category="bus", h3=h3.latlng_to_cell(LAT, LNG, 10), block=6,
+                                  status="verified", weight=1.0, device=devices[i % 2], ip_hash=f"ip{i}",
+                                  created_at=timezone.now() - timedelta(days=days))
+
+    add(400)  # older than a year: not counted
+    assert APIClient().get("/api/v1/map/cells?res=10&hour=all").json()["cells"] == []
+    cache.clear()
+    add(10)  # the same pattern recently is shown (proves the empty result above was the age limit)
+    assert len(APIClient().get("/api/v1/map/cells?res=10&hour=all").json()["cells"]) == 1
+
+
+def test_period_filter_limits_map_area_and_news(tmp_path):
+    cache.clear()
+    run(tmp_path, [item(5), item(60), item(200)])  # 5, 60 and 200 days ago, same spot
+    client = APIClient()
+    cell9 = h3.cell_to_parent(h3.latlng_to_cell(LAT, LNG, 10), 9)
+
+    def area(period):
+        return client.get(f"/api/v1/areas/{cell9}?period={period}").json()["reportCount"]
+
+    assert (area("30"), area("90"), area("all")) == (1, 2, 3)
+    assert client.get(f"/api/v1/areas/{cell9}").json()["reportCount"] == 3  # default = all time
+    assert len(client.get(f"/api/v1/areas/{cell9}/news?period=90").json()["news"]) == 2
+
+    run(tmp_path, [item(150, url="https://www.thedailystar.net/news/far", lat=23.86, lng=90.40)])  # Uttara, 150 days
+    cache.clear()
+    cells_30 = client.get("/api/v1/map/cells?res=9&hour=all&period=30").json()["cells"]
+    cells_all = client.get("/api/v1/map/cells?res=9&hour=all&period=all").json()["cells"]
+    assert len(cells_30) == 1 and len(cells_all) == 2
+
+    assert client.get("/api/v1/map/cells?res=9&period=7").status_code == 400
+    assert client.get("/api/v1/map/time-profile?period=bogus").status_code == 400
+
+
 def test_area_shows_media_count_and_source_links(tmp_path):
     cache.clear()
     run(tmp_path, [item(1), item(3), item(4)])

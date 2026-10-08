@@ -10,6 +10,8 @@ from ..selectors import approved_videos, cached, has_demo_data, load_rows, news_
 from ..services import aggregation
 
 ALLOWED_RES = {8, 9, 10}
+# ?period= on map endpoints: last 30 / 90 days, or everything still counted ("all", the default).
+PERIODS = {"30": 30, "90": 90, "all": None}
 
 
 def _parse_hour(raw: str | None) -> int | None:
@@ -21,13 +23,21 @@ def _parse_hour(raw: str | None) -> int | None:
     return hour
 
 
+def _parse_period(request: Request) -> int | None:
+    raw = request.query_params.get("period", "all") or "all"
+    if raw not in PERIODS:
+        raise ValueError
+    return PERIODS[raw]
+
+
 class MapCellsView(APIView):
-    """GET /api/v1/map/cells?res=8|9|10&hour=0-23|all"""
+    """GET /api/v1/map/cells?res=8|9|10&hour=0-23|all&period=30|90|all"""
 
     def get(self, request: Request) -> Response:
         try:
             res = int(request.query_params.get("res", "9"))
             hour = _parse_hour(request.query_params.get("hour"))
+            period = _parse_period(request)
         except ValueError:
             return Response({"error": "invalid_params"}, status=400)
         if res not in ALLOWED_RES:
@@ -35,36 +45,46 @@ class MapCellsView(APIView):
 
         def compute():
             now = timezone.now()
-            groups = aggregation.group_by_cell(load_rows(), res)
+            groups = aggregation.group_by_cell(load_rows(period_days=period), res)
             return [
                 aggregation.cell_summary(cell, rows, now, hour)
                 for cell, rows in groups.items()
                 if aggregation.is_public(rows)
             ]
 
-        return Response({"cells": cached(f"cells:{res}:{hour}", compute), "demo": has_demo_data()})
+        return Response({"cells": cached(f"cells:{res}:{hour}:{period}", compute), "demo": has_demo_data()})
 
 
 class TimeProfileView(APIView):
-    """GET /api/v1/map/time-profile — city-wide activity per hour (24 values)."""
+    """GET /api/v1/map/time-profile?period=30|90|all — city-wide activity per hour (24 values)."""
 
     def get(self, request: Request) -> Response:
-        profile = cached("profile", lambda: aggregation.city_time_profile(load_rows(), timezone.now()))
+        try:
+            period = _parse_period(request)
+        except ValueError:
+            return Response({"error": "invalid_params"}, status=400)
+        profile = cached(
+            f"profile:{period}", lambda: aggregation.city_time_profile(load_rows(period_days=period), timezone.now())
+        )
         return Response({"hours": profile})
 
 
 class AreaView(APIView):
-    """GET /api/v1/areas/<h3> — details for one cell (resolution 8–10)."""
+    """GET /api/v1/areas/<h3>?period=30|90|all — details for one cell (resolution 8–10)."""
 
     def get(self, request: Request, cell: str) -> Response:
         if not h3.is_valid_cell(cell) or h3.get_resolution(cell) not in ALLOWED_RES:
             return Response({"error": "not_found"}, status=404)
+        try:
+            period = _parse_period(request)
+        except ValueError:
+            return Response({"error": "invalid_params"}, status=400)
 
         def compute():
-            rows = load_rows(report_cells_for(cell))
+            rows = load_rows(report_cells_for(cell), period_days=period)
             return aggregation.area_detail(cell, rows, timezone.now(), is_demo=has_demo_data())
 
-        return Response(cached(f"area:{cell}", compute))
+        return Response(cached(f"area:{cell}:{period}", compute))
 
 
 class AreaVideosView(APIView):
@@ -77,16 +97,22 @@ class AreaVideosView(APIView):
 
 
 class AreaNewsView(APIView):
-    """GET /api/v1/areas/<h3>/news — published news reports counted in this area, with links."""
+    """GET /api/v1/areas/<h3>/news?period=30|90|all — published news reports counted in this area, with links."""
 
     def get(self, request: Request, cell: str) -> Response:
         if not h3.is_valid_cell(cell) or h3.get_resolution(cell) not in ALLOWED_RES:
             return Response({"error": "not_found"}, status=404)
-        return Response({"news": cached(f"news:{cell}", lambda: news_sources(report_cells_for(cell)))})
+        try:
+            period = _parse_period(request)
+        except ValueError:
+            return Response({"error": "invalid_params"}, status=400)
+        return Response(
+            {"news": cached(f"news:{cell}:{period}", lambda: news_sources(report_cells_for(cell), period_days=period))}
+        )
 
 
 class TopAreasView(APIView):
-    """GET /api/v1/areas?limit=N — most active neighbourhood-size areas (resolution 9)."""
+    """GET /api/v1/areas?limit=N — most active neighbourhood-size areas (resolution 9), all time."""
 
     def get(self, request: Request) -> Response:
         try:

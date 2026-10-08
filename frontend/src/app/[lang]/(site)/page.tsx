@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "@/i18n";
 import { fetchTopAreas } from "@/lib/api/safety";
 import { demoTopAreas } from "@/lib/safety/demo-data";
+import { areaPlaceName } from "@/lib/place-name";
 import { ButtonLink } from "@/components/ui/Button";
 import { HeroVisual } from "@/components/home/HeroVisual";
 import { HowItWorks } from "@/components/home/HowItWorks";
@@ -16,6 +17,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const [topArea] = await fetchTopAreas(1);
   // No reports yet (fresh server): illustrate with a synthetic area, labelled as a demo, not linked.
   const preview = topArea ?? demoTopAreas(1)[0];
+  const topPlace = topArea && !topArea.isDemo ? await areaPlaceName(topArea.h3, lang) : null;
 
   return (
     <>
@@ -48,10 +50,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             {topArea ? (
               <Link
                 href={`/${lang}/area/${topArea.h3}`}
-                aria-label={`${dict.home.heroCardArea} ${topArea.code}`}
+                aria-label={topPlace ?? `${dict.home.heroCardArea} ${topArea.code}`}
                 className="block transition-transform duration-300 hover:-translate-y-1"
               >
-                <HeroVisual area={topArea} locale={lang} dict={dict} />
+                <HeroVisual area={topArea} locale={lang} dict={dict} placeName={topPlace} />
               </Link>
             ) : (
               preview && <HeroVisual area={preview} locale={lang} dict={dict} />

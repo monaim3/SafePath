@@ -4,14 +4,22 @@ from datetime import timedelta
 
 import h3
 from django.core.cache import cache
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.utils import timezone
 
+from . import policy
 from .models import Report
 from .services.aggregation import Row
 
 PUBLIC_STATUSES = [Report.Status.PENDING, Report.Status.VERIFIED]
 LOOKBACK = timedelta(days=365)
+# News/official reports are kept longer as history (they fade more slowly, see aggregation.decay).
+HISTORY_LOOKBACK = timedelta(days=policy.HISTORY_MAX_AGE_DAYS)
+HISTORY_SOURCES = [Report.Source.MEDIA, Report.Source.OFFICIAL]
+
+
+def _in_window(now):
+    return Q(created_at__gte=now - LOOKBACK) | Q(source__in=HISTORY_SOURCES, created_at__gte=now - HISTORY_LOOKBACK)
 VERSION_KEY = "safepath:data-version"
 CACHE_SECONDS = 120
 
@@ -37,8 +45,12 @@ def cached(key: str, compute):
     return value
 
 
-def load_rows(cells: list[str] | None = None) -> list[Row]:
-    qs = Report.objects.filter(status__in=PUBLIC_STATUSES, created_at__gte=timezone.now() - LOOKBACK)
+def load_rows(cells: list[str] | None = None, period_days: int | None = None) -> list[Row]:
+    """Reports the public map counts. `period_days` limits them to the last N days (None = all time)."""
+    now = timezone.now()
+    qs = Report.objects.filter(_in_window(now), status__in=PUBLIC_STATUSES)
+    if period_days is not None:
+        qs = qs.filter(created_at__gte=now - timedelta(days=period_days))
     if cells is not None:
         qs = qs.filter(h3__in=cells)
     qs = qs.annotate(n_confirmations=Count("confirmations")).values(
@@ -66,10 +78,11 @@ def has_demo_data() -> bool:
     return Report.objects.filter(is_demo=True).exists()
 
 
-def news_sources(cells: list[str], limit: int = 8) -> list[dict]:
+def news_sources(cells: list[str], limit: int = 8, period_days: int | None = None) -> list[dict]:
     """Published news reports behind an area's level, newest first — so people can check them."""
+    since = timezone.now() - (timedelta(days=period_days) if period_days is not None else HISTORY_LOOKBACK)
     qs = Report.objects.filter(
-        h3__in=cells, source=Report.Source.MEDIA, status__in=PUBLIC_STATUSES, created_at__gte=timezone.now() - LOOKBACK
+        h3__in=cells, source=Report.Source.MEDIA, status__in=PUBLIC_STATUSES, created_at__gte=since
     ).order_by("-created_at")[:limit]
     return [
         {"outlet": r.source_name, "url": r.source_url, "date": r.date.isoformat() if r.date else None, "category": r.category}

@@ -6,10 +6,21 @@ import { ArrowRight, BellRing, Clock, Loader2, MapPin, ShieldCheck, X } from "lu
 import { fill, type Dictionary, type Locale } from "@/i18n";
 import { saveMyAreas } from "@/lib/api/watch";
 import { areaCode } from "@/lib/pwa";
+import { usePlaceName } from "@/lib/use-place-name";
 import { ButtonLink } from "@/components/ui/Button";
 import { errorText, MY_AREAS_KEY, useMyAreas } from "./FollowAreaButton";
 import { usePushSupport } from "./hooks";
 import { InstallCard } from "./InstallCard";
+
+function AreaName({ cell, locale, fallback }: { cell: string; locale: Locale; fallback: string }) {
+  const place = usePlaceName(cell, locale);
+  return (
+    <>
+      <span className="block truncate font-semibold">{place ?? fallback}</span>
+      {place && <span className="block text-xs text-ink-3">{areaCode(cell)}</span>}
+    </>
+  );
+}
 
 /** The "My areas" page: followed areas, unfollow, install, and how notifications work. */
 export function WatchManager({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -62,8 +73,8 @@ export function WatchManager({ locale, dict }: { locale: Locale; dict: Dictionar
                 <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
                   <MapPin className="size-5" aria-hidden />
                 </span>
-                <Link href={`/${locale}/area/${cell}`} className="min-w-0 flex-1 font-semibold hover:text-accent">
-                  {fill(locale, t.area, { code: areaCode(cell) })}
+                <Link href={`/${locale}/area/${cell}`} className="min-w-0 flex-1 hover:text-accent">
+                  <AreaName cell={cell} locale={locale} fallback={fill(locale, t.area, { code: areaCode(cell) })} />
                 </Link>
                 <button
                   type="button"

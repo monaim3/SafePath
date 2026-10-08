@@ -60,7 +60,8 @@ def score_from(weight: float, res: int) -> int:
 
 def decay(row: Row, now: datetime) -> float:
     days = max(0.0, (now - row.created_at).total_seconds() / 86400)
-    return 0.5 ** (days / HALF_LIFE_DAYS)
+    half_life = policy.HISTORY_HALF_LIFE_DAYS if row.source in ("media", "official") else HALF_LIFE_DAYS
+    return 0.5 ** (days / half_life)
 
 
 def effective_weight(row: Row, now: datetime) -> float:
@@ -193,7 +194,8 @@ def area_detail(cell: str, rows: list[Row], now: datetime, *, is_demo: bool) -> 
     return {
         **base,
         **summary,
-        "reportCount": len(_within(incidents, now, 0, 90)),
+        # Every report still counted here, including older news kept as history.
+        "reportCount": len(incidents),
         "verifiedPct": _verified_pct(incidents),
         "counts": {
             "d7": len(_within(incidents, now, 0, 7)),

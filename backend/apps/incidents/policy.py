@@ -14,6 +14,10 @@ CONFIRM_LIMIT_PER_DAY = 30
 
 # ---------- plausibility ----------
 MAX_REPORT_AGE_DAYS = 366
+# Verified news/official reports document longer-running hotspots, so they may be older
+# and fade more slowly than community reports (which describe what is happening now).
+HISTORY_MAX_AGE_DAYS = 730
+HISTORY_HALF_LIFE_DAYS = 180.0
 # The reporter's own location is never collected or compared with the incident location:
 # victims often report later, from home or a borrowed phone, because their phone was taken.
 

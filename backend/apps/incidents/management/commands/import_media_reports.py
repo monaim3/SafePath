@@ -46,8 +46,9 @@ def _check(item: dict, today) -> list[str]:
         problems.append(f"unknown category {item['category']}")
     try:
         day = datetime.strptime(item["incident_date"], "%Y-%m-%d").date()
-        if not abuse.date_is_plausible(day, today):
-            problems.append(f"date {day} outside the last {policy.MAX_REPORT_AGE_DAYS} days")
+        age = (today - day).days
+        if not 0 <= age <= policy.HISTORY_MAX_AGE_DAYS:
+            problems.append(f"date {day} outside the last {policy.HISTORY_MAX_AGE_DAYS} days")
     except ValueError:
         problems.append("bad incident_date")
     hour = item.get("hour")

@@ -205,6 +205,7 @@ export const bn: Dictionary = {
     awareCta: "গাইড পড়ুন",
   },
   map: {
+    period: { label: "সময়কাল", "30": "৩০ দিন", "90": "৯০ দিন", all: "সব সময়" },
     searchPlaceholder: "এলাকা বা রাস্তা খুঁজুন",
     timeLabel: "দিনের সময়",
     now: "এখন",
@@ -245,6 +246,7 @@ export const bn: Dictionary = {
     whyTitle: "কেন এই মাত্রা?",
     reasons: {
       recent: "গত ৩০ দিনে {n}টি রিপোর্ট",
+      earlier: "গত ৩০ দিনে নতুন রিপোর্ট নেই — আগের {n}টি রিপোর্ট",
       time: "বেশিরভাগ রিপোর্ট {block}",
       category: "{p}% রিপোর্ট {cat}",
       up: "গত মাসের তুলনায় রিপোর্ট বেড়েছে",
@@ -268,6 +270,7 @@ export const bn: Dictionary = {
     sourceTitle: "তথ্য কোথা থেকে",
     reportHere: "এই এলাকায় রিপোর্ট করুন",
     notFound: "এই এলাকাটি খুঁজে পাওয়া যায়নি।",
+    codeLabel: "এলাকা কোড {code}",
     newsTitle: "সংবাদ সূত্র",
     newsHint: "এই এলাকার মাত্রায় গোনা প্রকাশিত সংবাদ — মূল খবর পড়তে চাপুন।",
     videosTitle: "এই এলাকার ফুটেজ",

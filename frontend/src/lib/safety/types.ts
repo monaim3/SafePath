@@ -85,16 +85,23 @@ export interface UploadTicket {
   attachToken: string;
 }
 
+/** Time window the map counts: last 30 / 90 days, or everything still counted (default). */
+export type Period = "30" | "90" | "all";
+export const PERIODS: readonly Period[] = ["30", "90", "all"];
+
 export interface MapCellsQuery {
   /** Hour of day 0–23, or the whole day. */
   hour: number | "all";
   /** H3 resolution, chosen from the map zoom (see grid.ts). */
   res: GridRes;
+  period?: Period;
 }
 
 /** Structured explanation item; the UI turns it into localized text. */
 export type Reason =
   | { kind: "recent"; n: number }
+  /** Nothing in the last 30 days: the level comes from older reports (e.g. news history). */
+  | { kind: "earlier"; n: number }
   | { kind: "time"; block: TimeBlock }
   | { kind: "category"; pct: number; category: CategoryKey }
   | { kind: "up" }

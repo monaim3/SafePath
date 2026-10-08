@@ -20,7 +20,8 @@ import type { CategoryKey } from "@/lib/safety/categories";
 import { CategoryIcon } from "@/components/safety/CategoryIcon";
 import { explainArea } from "@/lib/safety/explain";
 import { formatReason } from "@/lib/safety/reason-text";
-import type { SourceKey } from "@/lib/safety/types";
+import { PERIODS, type Period, type SourceKey } from "@/lib/safety/types";
+import { PeriodSwitch } from "@/features/map/PeriodSwitch";
 import { BandBadge, ConfidenceMeter } from "@/components/safety/BandBadge";
 import { ScoreRing } from "@/components/safety/ScoreRing";
 import { TimeStrip } from "@/components/safety/TimeStrip";
@@ -28,13 +29,15 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardHint, CardTitle } from "@/components/ui/Card";
 import { KnowledgeList } from "@/features/area/KnowledgeList";
 import { FollowAreaButton } from "@/features/watch/FollowAreaButton";
+import { areaPlaceName } from "@/lib/place-name";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/area/[h3]">): Promise<Metadata> {
   const { lang, h3 } = await params;
   if (!hasLocale(lang)) return {};
-  const area = await fetchArea(h3);
+  const [area, place] = await Promise.all([fetchArea(h3), areaPlaceName(h3, lang)]);
   const home = getDictionary(lang).home;
-  return { title: area ? `${area.isDemo ? home.heroCardDemoArea : home.heroCardArea} ${area.code}` : undefined };
+  if (!area) return {};
+  return { title: area.isDemo || !place ? `${area.isDemo ? home.heroCardDemoArea : home.heroCardArea} ${area.code}` : place };
 }
 
 /** Which awareness section fits the way chhintai most often happens in an area. */
@@ -51,12 +54,21 @@ const SOURCE_STYLES: Record<SourceKey, string> = {
   official: "var(--ink)",
 };
 
-export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]">) {
+export default async function AreaPage({ params, searchParams }: PageProps<"/[lang]/area/[h3]">) {
   const { lang, h3 } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const [area, videos, news] = await Promise.all([fetchArea(h3), fetchAreaVideos(h3), fetchAreaNews(h3)]);
+  const raw = (await searchParams).period;
+  const period: Period = PERIODS.includes(raw as Period) ? (raw as Period) : "all";
+  const [area, videos, news, place] = await Promise.all([
+    fetchArea(h3, period),
+    fetchAreaVideos(h3),
+    fetchAreaNews(h3, period),
+    areaPlaceName(h3, lang),
+  ]);
   if (!area) notFound();
+  // Demo areas sit on synthetic points, so a real place name would mislead.
+  const placeName = area.isDemo ? null : place;
   const videoDate = new Intl.DateTimeFormat(lang === "bn" ? "bn-BD" : "en-GB", { day: "numeric", month: "short", year: "numeric" });
 
   const n = (v: number) => formatNumber(lang, v);
@@ -68,13 +80,20 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-8 sm:px-6">
-      <Link
-        href={`/${lang}/map`}
-        className="inline-flex items-center gap-1.5 text-sm text-ink-2 hover:text-ink"
-      >
-        <ArrowLeft className="size-4" aria-hidden />
-        {dict.nav.map}
-      </Link>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Link
+          href={`/${lang}/map`}
+          className="inline-flex items-center gap-1.5 text-sm text-ink-2 hover:text-ink"
+        >
+          <ArrowLeft className="size-4" aria-hidden />
+          {dict.nav.map}
+        </Link>
+        <PeriodSwitch
+          dict={dict}
+          value={period}
+          hrefFor={(p) => `/${lang}/area/${h3}${p === "all" ? "" : `?period=${p}`}`}
+        />
+      </div>
 
       {/* ---------- Header ---------- */}
       <header className="rise mt-6 flex flex-col gap-8 rounded-[2rem] border border-line bg-surface p-6 sm:p-8 md:flex-row md:items-center">
@@ -85,9 +104,10 @@ export default async function AreaPage({ params }: PageProps<"/[lang]/area/[h3]"
         />
         <div className="flex-1">
           <p className="text-sm text-ink-3">{dict.area.ralLabel}</p>
-          <h1 className="mt-1 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            {area.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} {area.code}
+          <h1 className="mt-1 text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            {placeName ?? `${area.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${area.code}`}
           </h1>
+          {placeName && <p className="mt-1 text-sm text-ink-3">{fill(lang, dict.area.codeLabel, { code: area.code })}</p>}
           {area.insufficient ? (
             <p className="mt-3 text-ink-2">
               {dict.common.insufficient}. {dict.common.insufficientHint}

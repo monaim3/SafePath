@@ -7,6 +7,8 @@ export function formatReason(reason: Reason, locale: Locale, dict: Dictionary): 
   switch (reason.kind) {
     case "recent":
       return fill(locale, r.recent, { n: reason.n });
+    case "earlier":
+      return fill(locale, r.earlier, { n: reason.n });
     case "time":
       return fill(locale, r.time, { block: dict.timeBlocks[reason.block] });
     case "category":
