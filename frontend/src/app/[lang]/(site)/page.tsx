@@ -23,8 +23,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     <>
       {/* ---------- Hero ---------- */}
       <section className="relative isolate">
-        {/* soft brand glow */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        {/* soft brand glow (clipped sideways so it can't widen the page on phones) */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-x-clip">
           <div className="absolute -left-40 -top-40 size-[34rem] rounded-full bg-brand-green/15 blur-3xl" />
           <div className="absolute -right-32 top-10 size-[30rem] rounded-full bg-brand-blue/15 blur-3xl" />
         </div>

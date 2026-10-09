@@ -44,6 +44,17 @@
   "place": "Zia Udyan, Sher-e-Bangla Nagar, Dhaka"
  },
  {
+  "outlet": "NTV",
+  "url": "https://www.ntvbd.com/bangladesh/news-1813501",
+  "headline": "যাত্রাবাড়ীতে ছিনতাইয়ের চেষ্টার অভিযোগে দুই যুবক গ্রেপ্তার",
+  "incident_date": "2026-10-02",
+  "hour": 22,
+  "category": "on_foot",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari Chowrasta, Dhaka"
+ },
+ {
   "outlet": "Ajker Patrika",
   "url": "https://www.ajkerpatrika.com/bangladesh/dhaka/ajp2lqm8h0irc",
   "headline": "ছিনতাইয়ের পর ট্রেনের ছাদ থেকে ফেলে দেওয়ার অভিযোগ, ঢামেকে যুবকের মৃত্যু",
@@ -77,6 +88,17 @@
   "place": "Merul Badda, Dhaka"
  },
  {
+  "outlet": "Jagonews24",
+  "url": "https://www.jagonews24.com/national/news/1162014",
+  "headline": "যাত্রাবাড়ীতে বাসে ছিনতাইয়ের চেষ্টাকালে গ্রেফতার ৩",
+  "incident_date": "2026-09-26",
+  "hour": 23,
+  "category": "bus",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari Chowrasta, Dhaka"
+ },
+ {
   "outlet": "Ajker Patrika",
   "url": "https://www.ajkerpatrika.com/bangladesh/dhaka/ajp5you0tticc",
   "headline": "ডিবি পরিচয়ে গাড়িচালকের মোবাইল ও টাকা ছিনতাই",
@@ -108,6 +130,17 @@
   "lat": 23.778621,
   "lng": 90.398129,
   "place": "Mohakhali Rail Gate, Dhaka"
+ },
+ {
+  "outlet": "Jagonews24",
+  "url": "https://www.jagonews24.com/national/news/1157017",
+  "headline": "যাত্রাবাড়ীতে সোনার চেইন ছিনতাই, হাতেনাতে ছিনতাইকারী ধরা",
+  "incident_date": "2026-09-13",
+  "hour": 20,
+  "category": "on_foot",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari Chowrasta, Dhaka"
  },
  {
   "outlet": "Ajker Patrika",
@@ -176,6 +209,17 @@
   "place": "Jatrabari Intersection, Dhaka"
  },
  {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/r3hay0ja6m",
+  "headline": "যাত্রাবাড়ীতে মাছ ব্যবসায়ীকে কুপিয়ে ২৮ হাজার টাকা ছিনতাই",
+  "incident_date": "2026-08-24",
+  "hour": 7,
+  "category": "weapon",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari Fish Market, Dhaka"
+ },
+ {
   "outlet": "The Financial Express",
   "url": "https://thefinancialexpress.com.bd/national/snatching-panic-grips-dhaka-as-commuters-pay-with-cash-sometimes-their-lives#2026-08-20",
   "headline": "Snatching panic grips Dhaka as commuters pay with cash, sometimes their lives",
@@ -207,6 +251,28 @@
   "lat": 23.8603,
   "lng": 90.39876,
   "place": "Crown Plaza, Airport Road, Uttara Sector 1, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/uniawpuyv6",
+  "headline": "যাত্রাবাড়ীতে শ্রমিককে ছুরিকাঘাত করে টাকা ছিনতাই",
+  "incident_date": "2026-08-06",
+  "hour": 20,
+  "category": "weapon",
+  "lat": 23.703109,
+  "lng": 90.435892,
+  "place": "Dholpur, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Jagonews24",
+  "url": "https://www.jagonews24.com/national/news/1144581",
+  "headline": "যাত্রাবাড়ীতে ছিনতাইকারী গ্রেফতার",
+  "incident_date": "2026-08-04",
+  "hour": 21,
+  "category": "rickshaw_cng",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari, Dhaka"
  },
  {
   "outlet": "Samakal",
@@ -484,6 +550,17 @@
   "place": "Central Shaheed Minar, Dhaka"
  },
  {
+  "outlet": "bdnews24.com",
+  "url": "https://bangla.bdnews24.com/bangladesh/bec4700668d1#2026-04-11-shyamoli-housing",
+  "headline": "হোম ডেলিভারি দিতে এসে আদাবরে 'ছিনতাইয়ের' শিকার ডেলিভারি ম্যান",
+  "incident_date": "2026-04-11",
+  "hour": 16,
+  "category": "weapon",
+  "lat": 23.767345,
+  "lng": 90.356429,
+  "place": "Shyamoli Housing, Adabor, Dhaka"
+ },
+ {
   "outlet": "Independent TV",
   "url": "https://www.itvbd.com/country/dhaka/264477/",
   "headline": "ছুরিকাঘাতে আহত যুবক পড়ে ছিলেন ঢাকার পাঁচতারকা হোটেলের সামনে",
@@ -493,6 +570,17 @@
   "lat": 23.741239,
   "lng": 90.397072,
   "place": "InterContinental Dhaka, Shahbag, Dhaka"
+ },
+ {
+  "outlet": "bdnews24.com",
+  "url": "https://bangla.bdnews24.com/bangladesh/bec4700668d1#2026-04-08-ekota",
+  "headline": "হোম ডেলিভারি দিতে এসে আদাবরে 'ছিনতাইয়ের' শিকার ডেলিভারি ম্যান",
+  "incident_date": "2026-04-08",
+  "hour": 18,
+  "category": "weapon",
+  "lat": 23.76065,
+  "lng": 90.33887,
+  "place": "Ekota Housing, Mohammadpur, Dhaka"
  },
  {
   "outlet": "New Age",
@@ -526,6 +614,17 @@
   "lat": 23.760197,
   "lng": 90.34671,
   "place": "Nabinagar Housing, Mohammadpur, Dhaka"
+ },
+ {
+  "outlet": "The Business Standard",
+  "url": "https://www.tbsnews.net/bangladesh/2-police-officials-mugged-mohammadpur-1-sustain-injuries-1367681",
+  "headline": "2 police officials mugged in Mohammadpur, 1 sustains injuries",
+  "incident_date": "2026-02-20",
+  "hour": 15,
+  "category": "weapon",
+  "lat": 23.750818,
+  "lng": 90.357253,
+  "place": "Martyred Intellectuals Memorial, Rayerbazar, Dhaka"
  },
  {
   "outlet": "Bangla Tribune",
@@ -572,6 +671,17 @@
   "place": "Airport Railway Station, Dhaka"
  },
  {
+  "outlet": "Dhaka Post",
+  "url": "https://www.dhakapost.com/national/419881",
+  "headline": "যাত্রাবাড়ীতে নারীর কানের দুল ছিঁড়ে নিয়ে গেল ছিনতাইকারীরা",
+  "incident_date": "2025-12-28",
+  "hour": 16,
+  "category": "rickshaw_cng",
+  "lat": 23.71057,
+  "lng": 90.44138,
+  "place": "Kajla, Jatrabari, Dhaka"
+ },
+ {
   "outlet": "The Business Standard",
   "url": "https://www.tbsnews.net/bangladesh/crime/trader-stabbed-death-muggers-jatrabari-1314986",
   "headline": "Trader stabbed to death 'by muggers' in Jatrabari",
@@ -583,6 +693,17 @@
   "place": "Jatrabari Flyover, Dhaka"
  },
  {
+  "outlet": "Dhaka Mail",
+  "url": "https://dhakamail.com/national/273822",
+  "headline": "যাত্রাবাড়ীতে ছিনতাইকারীদের ছুরিকাঘাতে যুবক খুন",
+  "incident_date": "2025-12-16",
+  "hour": 18,
+  "category": "weapon",
+  "lat": 23.71057,
+  "lng": 90.44138,
+  "place": "Nayanagar, Kajla, Jatrabari, Dhaka"
+ },
+ {
   "outlet": "Bangla Tribune",
   "url": "https://www.banglatribune.com/others/926223/",
   "headline": "ব্যাগ ধরে টান দিলো ছিনতাইকারী, রিকশা থেকে ছিটকে পড়ে আহত ইডেন শিক্ষার্থী",
@@ -592,6 +713,17 @@
   "lat": 23.728075,
   "lng": 90.419091,
   "place": "Motijheel Metro Station, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/925692",
+  "headline": "মোহাম্মদপুরে ব্যবসায়ীকে কুপিয়ে টাকা-মোবাইল ফোন ছিনতাই",
+  "incident_date": "2025-12-08",
+  "hour": 20,
+  "category": "weapon",
+  "lat": 23.756645,
+  "lng": 90.356204,
+  "place": "Tin Rastar Mor, Mohammadpur, Dhaka"
  },
  {
   "outlet": "Bangla Tribune",
@@ -704,6 +836,17 @@
   "place": "Nandipara, Banasree, Dhaka"
  },
  {
+  "outlet": "Amar Desh",
+  "url": "https://www.dailyamardesh.com/amar-desh-special/amdswvytdlanu",
+  "headline": "রাজধানীতে ছিনতাই বাড়ছে আশঙ্কাজনক হারে",
+  "incident_date": "2025-10-12",
+  "hour": 4,
+  "category": "on_foot",
+  "lat": 23.709636,
+  "lng": 90.434163,
+  "place": "Jatrabari Police Station, Dhaka"
+ },
+ {
   "outlet": "Independent TV",
   "url": "https://www.itvbd.com/country/dhaka/241171/",
   "headline": "রাজধানীতে কলেজছাত্রকে কুপিয়ে আইফোন ও নগদ টাকা ছিনতাই",
@@ -724,6 +867,17 @@
   "lat": 23.681711,
   "lng": 90.414003,
   "place": "Hasnabad, Keraniganj, Dhaka"
+ },
+ {
+  "outlet": "Ajker Patrika",
+  "url": "https://ajkerpatrika.com/bangladesh/ajpijywwsxbyo",
+  "headline": "ঢাকায় অপরাধের কেন্দ্র মোহাম্মদপুর-আদাবর",
+  "incident_date": "2025-10-01",
+  "hour": 16,
+  "category": "weapon",
+  "lat": 23.750818,
+  "lng": 90.357253,
+  "place": "Martyred Intellectuals Memorial, Rayerbazar, Dhaka"
  },
  {
   "outlet": "Prothom Alo",
@@ -801,6 +955,17 @@
   "lat": 23.755431,
   "lng": 90.363887,
   "place": "Mohammadpur Police Station, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/906813",
+  "headline": "শ্যামলীতে অস্ত্র ঠেকিয়ে ছিনতাই, খুলে নিয়ে গেলো জামা-জুতাও",
+  "incident_date": "2025-07-11",
+  "hour": 8,
+  "category": "motorbike",
+  "lat": 23.776832,
+  "lng": 90.366047,
+  "place": "Shyamoli Road 2, Dhaka"
  },
  {
   "outlet": "Bangla Tribune",
@@ -902,6 +1067,17 @@
   "place": "Kajla Bridge, Jatrabari, Dhaka"
  },
  {
+  "outlet": "bdnews24.com",
+  "url": "https://bangla.bdnews24.com/bangladesh/896288e32a75",
+  "headline": "মোহাম্মদপুরে আলোকচিত্রীকে ছুরি মেরে, জিগাতলায় শিক্ষার্থীকে কুপিয়ে",
+  "incident_date": "2025-05-16",
+  "hour": 20,
+  "category": "weapon",
+  "lat": 23.75061,
+  "lng": 90.36475,
+  "place": "Jafrabad, Mohammadpur, Dhaka"
+ },
+ {
   "outlet": "Prothom Alo",
   "url": "https://www.prothomalo.com/bangladesh/crime/3ueg312bt3",
   "headline": "চলন্ত প্রাইভেটকারে ছিনতাইকারী এসে ছোঁ মেরে টান দিল ব্যাগ, টেনে নিয়ে গেল নারীকে",
@@ -1001,6 +1177,17 @@
   "place": "Bonogram, Wari, Dhaka"
  },
  {
+  "outlet": "Dhaka Post",
+  "url": "https://www.dhakapost.com/national/346801",
+  "headline": "যাত্রাবাড়ীতে যুবককে গুলি করে মোবাইল-মানিব্যাগ ছিনতাই",
+  "incident_date": "2025-02-25",
+  "hour": 23,
+  "category": "weapon",
+  "lat": 23.706877,
+  "lng": 90.430274,
+  "place": "Suti Khalpar, Jatrabari, Dhaka"
+ },
+ {
   "outlet": "Prothom Alo",
   "url": "https://www.prothomalo.com/bangladesh/crime/9e9jha36cb",
   "headline": "বনশ্রীতে বাসার সামনে স্বর্ণ ব্যবসায়ীকে গুলি, ‘২০০ ভরি স্বর্ণালংকার’ ছিনতাই",
@@ -1034,6 +1221,17 @@
   "place": "House Building, Uttara, Dhaka"
  },
  {
+  "outlet": "Dhaka Mail",
+  "url": "https://dhakamail.com/national/212255",
+  "headline": "ব্যবসায়ীকে গুলি করে ছিনতাই, আটক ১",
+  "incident_date": "2025-02-08",
+  "hour": 18,
+  "category": "weapon",
+  "lat": 23.712885,
+  "lng": 90.427565,
+  "place": "Janapath Mor, Jatrabari, Dhaka"
+ },
+ {
   "outlet": "Bangla Tribune",
   "url": "https://www.banglatribune.com/others/884938/",
   "headline": "মাতুয়াইলে ছিনতাইকারীর ছুরিকাঘাতে যুবক নিহত",
@@ -1065,6 +1263,17 @@
   "lat": 23.859755,
   "lng": 90.365204,
   "place": "Uttara Center Metro Station, Sector 15, Uttara, Dhaka"
+ },
+ {
+  "outlet": "Prothom Alo",
+  "url": "https://www.prothomalo.com/bangladesh/crime/vw77fpkoka",
+  "headline": "ছিনতাইয়ের শিকার বিশ্ববিদ্যালয় শিক্ষকের বাসায় হাজির আসামির ছেলে, ভয়ে বাসাবদলের চিন্তা",
+  "incident_date": "2025-02-01",
+  "hour": 21,
+  "category": "bus",
+  "lat": 23.774444,
+  "lng": 90.365399,
+  "place": "Shyamoli Square, Dhaka"
  },
  {
   "outlet": "Bangla Tribune",
@@ -1142,5 +1351,82 @@
   "lat": 23.71057,
   "lng": 90.44138,
   "place": "Kajla, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Bangla Tribune",
+  "url": "https://www.banglatribune.com/others/878846/",
+  "headline": "ছিনতাইকারীদের ছুরিকাঘাতে ওয়াসার কর্মচারী গুরুতর আহত",
+  "incident_date": "2024-12-25",
+  "hour": 5,
+  "category": "weapon",
+  "lat": 23.709452,
+  "lng": 90.435019,
+  "place": "Kutubkhali, Jatrabari, Dhaka"
+ },
+ {
+  "outlet": "Ajker Patrika",
+  "url": "https://www.ajkerpatrika.com/bangladesh/dhaka/ajpi4nsohmung",
+  "headline": "যাত্রাবাড়ী ফ্লাইওভারে ছুরিকাঘাতে মৃত্যু, জড়িত ২ কিশোর ছিনতাইকারী গ্রেপ্তার",
+  "incident_date": "2024-12-18",
+  "hour": 20,
+  "category": "weapon",
+  "lat": 23.71221,
+  "lng": 90.429432,
+  "place": "Sayedabad, Dhaka"
+ },
+ {
+  "outlet": "Ittefaq",
+  "url": "https://www.ittefaq.com.bd/707108",
+  "headline": "মোহাম্মদপুরে ইত্তেফাকের সাংবাদিককে পিটিয়ে ক্যামেরা-মোবাইল ছিনতাই",
+  "incident_date": "2024-11-13",
+  "hour": 22,
+  "category": "weapon",
+  "lat": 23.756993,
+  "lng": 90.361736,
+  "place": "Mohammadpur Bus Stand, Dhaka"
+ },
+ {
+  "outlet": "Samakal",
+  "url": "https://samakal.com/crime/article/262277#2024-10-25-dhaka-udyan",
+  "headline": "আলো নিভলেই জেঁকে বসে ছিনতাই আতঙ্ক",
+  "incident_date": "2024-10-25",
+  "hour": 22,
+  "category": "weapon",
+  "lat": 23.76437,
+  "lng": 90.34783,
+  "place": "Dhaka Udyan, Mohammadpur, Dhaka"
+ },
+ {
+  "outlet": "Samakal",
+  "url": "https://samakal.com/crime/article/262277#2024-10-20-nobodoy",
+  "headline": "আলো নিভলেই জেঁকে বসে ছিনতাই আতঙ্ক",
+  "incident_date": "2024-10-20",
+  "hour": 6,
+  "category": "weapon",
+  "lat": 23.764712,
+  "lng": 90.351338,
+  "place": "Nobodoy Housing, Mohammadpur, Dhaka"
+ },
+ {
+  "outlet": "bdnews24.com",
+  "url": "https://bangla.bdnews24.com/bangladesh/1d9b3ce38c58",
+  "headline": "মধ্যবিত্তের মোহাম্মদপুর অপরাধীদের তীর্থক্ষেত্র হয়ে উঠল কেন?",
+  "incident_date": "2024-10-19",
+  "hour": 15,
+  "category": "weapon",
+  "lat": 23.751143,
+  "lng": 90.33889,
+  "place": "Basila 40 Feet Road, Mohammadpur, Dhaka"
+ },
+ {
+  "outlet": "The Business Standard",
+  "url": "https://www.tbsnews.net/bangladesh/mugging-murders-and-teen-gangs-unnerve-mohammadpur-982921",
+  "headline": "Mugging, murders and teen gangs unnerve Mohammadpur",
+  "incident_date": "2024-10-18",
+  "hour": 22,
+  "category": "rickshaw_cng",
+  "lat": 23.751143,
+  "lng": 90.33889,
+  "place": "Basila 40 Feet Road, Mohammadpur, Dhaka"
  }
 ]

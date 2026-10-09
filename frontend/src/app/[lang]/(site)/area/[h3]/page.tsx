@@ -188,7 +188,14 @@ export default async function AreaPage({ params, searchParams }: PageProps<"/[la
             <CardTitle>{dict.area.whenTitle}</CardTitle>
             <CardHint>{dict.area.whenHint}</CardHint>
             <div className="mt-5">
-              <TimeStrip values={area.timeBlocks} labels={dict.timeBlocks} bandLabels={dict.bands} />
+              <TimeStrip
+                values={area.timeBlocks}
+                shares={area.blockShares}
+                labels={dict.timeBlocks}
+                bandLabels={dict.bands}
+                locale={lang}
+                peakLabel={dict.area.whenPeak}
+              />
             </div>
           </Card>
 
@@ -241,7 +248,10 @@ export default async function AreaPage({ params, searchParams }: PageProps<"/[la
               )}
             </div>
             <ul className="mt-4 space-y-2 text-sm">
-              {(Object.keys(area.sources) as SourceKey[]).map((k) => (
+              {/* only sources this area actually has */}
+              {(Object.keys(area.sources) as SourceKey[])
+                .filter((k) => area.sources[k] > 0)
+                .map((k) => (
                 <li key={k} className="flex items-center gap-2">
                   <span className="size-2.5 rounded-full" style={{ background: SOURCE_STYLES[k] }} />
                   <span className="text-ink-2">{dict.sources[k]}</span>

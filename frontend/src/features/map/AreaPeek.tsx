@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, X } from "lucide-react";
-import { formatNumber, type Dictionary, type Locale } from "@/i18n";
+import { fill, formatNumber, type Dictionary, type Locale } from "@/i18n";
 import { fetchArea } from "@/lib/api/safety";
 import { scoreToBand } from "@/lib/safety/bands";
 import type { Period } from "@/lib/safety/types";
@@ -67,8 +67,9 @@ export function AreaPeek({
 
           <dl className="mt-4 grid grid-cols-2 gap-3 border-t border-line pt-4 text-sm">
             <div>
-              <dt className="text-xs text-ink-3">{dict.map.reports30}</dt>
-              <dd className="font-semibold tabular-nums">{n(area.counts.d30)}</dd>
+              {/* Same period as the map, so the count matches the colours. */}
+              <dt className="text-xs text-ink-3">{fill(locale, dict.map.reportsIn, { p: dict.map.period[period] })}</dt>
+              <dd className="font-semibold tabular-nums">{n(area.reportCount)}</dd>
             </div>
             {area.topCategory && (
               <div>

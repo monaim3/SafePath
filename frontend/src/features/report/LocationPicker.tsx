@@ -18,7 +18,7 @@ const MOHAMMADPUR: LngLat = [90.3605, 23.7625];
 
 /**
  * Google-style "drop a pin": search or move the map so the fixed centre pin is on the spot,
- * see the address under it, then confirm. Only the ~150 m cell is stored.
+ * with the address under it. Only the ~150 m cell is stored.
  */
 export function LocationPicker({
   dict,
@@ -40,7 +40,18 @@ export function LocationPicker({
 
   const fly = (to: LngLat, zoom = 16.5) => setFlyTo({ center: to, zoom, key: Date.now() });
 
-  const handleCenter = useCallback((c: LngLat) => setCenter(c), []);
+  // Once the map has been moved off the starting spot (pan, tap, search, "my location"),
+  // the pin is the answer: the spot follows it, so "Next" works without an extra confirm.
+  // Left untouched, the default spot needs the explicit button, so it can't be sent by accident.
+  const startCell = latLngToCell(MOHAMMADPUR[1], MOHAMMADPUR[0], REPORT_RES);
+  const handleCenter = useCallback(
+    (c: LngLat) => {
+      setCenter(c);
+      const cell = latLngToCell(c[1], c[0], REPORT_RES);
+      if (cell !== startCell) onChange(cell);
+    },
+    [onChange, startCell],
+  );
 
   // Round so tiny pans don't trigger new lookups.
   const key = center ? [center[0].toFixed(4), center[1].toFixed(4)] : null;
@@ -143,7 +154,7 @@ export function LocationPicker({
               onClick={() => centerCell && onChange(centerCell)}
               className="shrink-0 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white shadow-soft disabled:opacity-50"
             >
-              {value ? t.changeHere : t.chooseHere}
+              {t.chooseHere}
             </button>
           )}
         </div>

@@ -8,7 +8,7 @@ const ICON_COLORS = ["#2cb468", "#00a99d", "#0a8fd6", "#0a6fd6"];
 
 /** Frosted glass: translucent fill, blur, hairline border and a lit top edge. */
 const GLASS =
-  "bg-white/[0.12] backdrop-blur-2xl ring-1 ring-white/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_24px_48px_-24px_rgb(2_12_40/0.55)]";
+  "bg-white/[0.12] backdrop-blur-2xl ring-1 ring-white/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.2),0_8px_20px_-14px_rgb(2_12_40/0.35)]";
 
 export function Principles({ dict }: { dict: Dictionary }) {
   const h = dict.home;
@@ -17,10 +17,10 @@ export function Principles({ dict }: { dict: Dictionary }) {
       <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#062a5e] p-6 text-white sm:p-10 lg:p-12">
         {/* ---------- brand mesh background ---------- */}
         <div aria-hidden className="absolute inset-0 -z-10">
-          <div className="absolute -left-24 -bottom-40 size-[30rem] rounded-full bg-[#4cbb3f] opacity-70 blur-[110px]" />
-          <div className="absolute left-[30%] top-[20%] size-[26rem] rounded-full bg-[#00b8b0] opacity-70 blur-[110px]" />
-          <div className="absolute -right-24 -top-40 size-[30rem] rounded-full bg-[#12b5ea] opacity-70 blur-[110px]" />
-          <div className="absolute -bottom-24 right-[10%] size-[24rem] rounded-full bg-[#0a6fd6] opacity-90 blur-[100px]" />
+          <div className="absolute -left-24 -bottom-40 size-[30rem] rounded-full bg-[#4cbb3f] opacity-30 blur-[120px]" />
+          <div className="absolute left-[30%] top-[20%] size-[26rem] rounded-full bg-[#00b8b0] opacity-35 blur-[120px]" />
+          <div className="absolute -right-24 -top-40 size-[30rem] rounded-full bg-[#12b5ea] opacity-30 blur-[120px]" />
+          <div className="absolute -bottom-24 right-[10%] size-[24rem] rounded-full bg-[#0a6fd6] opacity-50 blur-[110px]" />
           {/* faint grid texture, fading toward the edges */}
           <div className="absolute inset-0 bg-[linear-gradient(rgb(255_255_255/0.07)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255/0.07)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]" />
         </div>
@@ -31,7 +31,7 @@ export function Principles({ dict }: { dict: Dictionary }) {
             <span className={`self-start rounded-full px-3 py-1 text-xs font-semibold ${GLASS}`}>
               {h.principlesEyebrow}
             </span>
-            <h2 className="mt-4 text-balance font-display text-3xl font-extrabold tracking-tight drop-shadow-sm sm:text-[40px] sm:leading-[1.1]">
+            <h2 className="mt-4 text-balance font-display text-3xl font-extrabold tracking-tight sm:text-[40px] sm:leading-[1.1]">
               {h.principlesTitle}
             </h2>
             <p className="mt-4 leading-relaxed text-white/85">{h.principlesBody}</p>
@@ -64,7 +64,7 @@ export function Principles({ dict }: { dict: Dictionary }) {
                   key={p.title}
                   className={`flex flex-col rounded-3xl p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.18] ${GLASS}`}
                 >
-                  <span className="grid size-11 place-items-center rounded-2xl bg-white shadow-lg">
+                  <span className="grid size-11 place-items-center rounded-2xl bg-white shadow-sm">
                     <Icon className="size-5" style={{ color: ICON_COLORS[i] }} aria-hidden />
                   </span>
                   <h3 className="mt-4 font-display text-lg font-bold tracking-tight">{p.title}</h3>

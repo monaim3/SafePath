@@ -69,6 +69,16 @@ def test_hour_filter_changes_score():
     assert night > morning
 
 
+def test_block_shares_show_when_reports_cluster():
+    client = APIClient()
+    make(6, 3, block=7)  # all at 21:00–24:00
+    area = client.get(f"/api/v1/areas/{CELL}").json()
+    shares = area["blockShares"]
+    assert len(shares) == 8 and 98 <= sum(shares) <= 102
+    assert shares.index(max(shares)) == 7 and shares[7] > 50
+    assert shares[3] == 0  # 9 AM–12 PM: nothing reported
+
+
 def test_area_detail_shape_and_privacy():
     client = APIClient()
     make(1, 2)

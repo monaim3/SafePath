@@ -1,11 +1,20 @@
 "use client";
 
 import { useCallback, useMemo, useState, type ReactNode } from "react";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { latLngToCell } from "h3-js";
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { gridDisk, gridDistance, latLngToCell } from "h3-js";
 import { Hand, Layers, Navigation } from "lucide-react";
 import type { Dictionary, Locale } from "@/i18n";
-import { fetchArea, fetchCityTimeProfile, fetchMapCells, USING_DEMO_DATA } from "@/lib/api/safety";
+import {
+  fetchArea,
+  fetchCityTimeProfile,
+  fetchMapCells,
+  USING_DEMO_DATA,
+} from "@/lib/api/safety";
 import { BANDS } from "@/lib/safety/bands";
 import { resForZoom, type GridRes } from "@/lib/safety/grid";
 import { cn } from "@/components/ui/cn";
@@ -13,15 +22,47 @@ import { AreaPeek } from "./AreaPeek";
 import { usePlaceName } from "@/lib/use-place-name";
 import { Directions, type RouteOverlay } from "./Directions";
 import { PlaceSearch } from "./PlaceSearch";
-import { SafetyMap, type Basemap, type FitTarget, type FlyTarget } from "./SafetyMap";
+import {
+  SafetyMap,
+  type Basemap,
+  type FitTarget,
+  type FlyTarget,
+} from "./SafetyMap";
 import { TimeDock } from "./TimeDock";
 import { PeriodSwitch } from "./PeriodSwitch";
-import type { Period } from "@/lib/safety/types";
+import type { CellSummary, Period } from "@/lib/safety/types";
 
 const GLASS = "border border-line bg-glass shadow-soft backdrop-blur-xl";
 const EMPTY_DAY: readonly number[] = new Array(24).fill(0);
+/** How far a search looks for an area with reports: 4 street cells ≈ 500 m. */
+const SEARCH_RINGS = 4;
 
-export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dictionary; header: ReactNode }) {
+/** The searched cell if it has reports, else the closest one within SEARCH_RINGS. */
+function nearestReported(
+  origin: string,
+  cells: CellSummary[] | undefined,
+): string | null {
+  if (!cells) return null;
+  const shown = new Set(cells.filter((c) => !c.insufficient).map((c) => c.h3));
+  let best: string | null = null;
+  let bestDist = Infinity;
+  for (const h of gridDisk(origin, SEARCH_RINGS)) {
+    if (!shown.has(h)) continue;
+    const d = gridDistance(origin, h);
+    if (d < bestDist) [best, bestDist] = [h, d];
+  }
+  return best;
+}
+
+export function MapScreen({
+  locale,
+  dict,
+  header,
+}: {
+  locale: Locale;
+  dict: Dictionary;
+  header: ReactNode;
+}) {
   const [hour, setHourState] = useState<number | "all">("all");
   // Which reports count: last 30 / 90 days or all time (default).
   const [period, setPeriod] = useState<Period>("all");
@@ -34,6 +75,7 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
   const [directionsOpen, setDirectionsOpen] = useState(false);
   const [overlay, setOverlay] = useState<RouteOverlay | null>(null);
   const [fitTo, setFitTo] = useState<FitTarget | null>(null);
+  const queryClient = useQueryClient();
 
   const pickHour = useCallback((next: number | "all", now = false) => {
     setHourState(next);
@@ -72,20 +114,28 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
   const handleOverlay = useCallback((next: RouteOverlay | null) => {
     setOverlay(next);
     if (!next) return;
-    // Keep the route clear of the panels: left panel on desktop, top panel + bottom dock on mobile.
+    // Keep the route clear of the panels: left panel on desktop, top panel + folded bottom dock on mobile.
     const desktop = window.innerWidth >= 1024;
     setFitTo({
       bounds: next.bounds,
       key: next.key,
       padding: desktop
         ? { top: 110, bottom: 320, left: 430, right: 80 }
-        : { top: Math.round(window.innerHeight * 0.5), bottom: 330, left: 30, right: 30 },
+        : {
+            top: Math.round(window.innerHeight * 0.5),
+            bottom: 110,
+            left: 30,
+            right: 30,
+          },
     });
   }, []);
 
   const handleSelect = useCallback((h3: string | null) => setSelected(h3), []);
   // Finer cells as you zoom in: neighbourhood → block → street segment.
-  const handleZoom = useCallback((zoom: number) => setRes(resForZoom(zoom)), []);
+  const handleZoom = useCallback(
+    (zoom: number) => setRes(resForZoom(zoom)),
+    [],
+  );
 
   // With an area selected, the time chart answers "how is it HERE at each hour?"
   const areaMode = selected !== null && selectedArea != null;
@@ -93,7 +143,14 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
   const selectedPlace = selectedArea?.isDemo ? null : place;
 
   const peek = selected && (
-    <AreaPeek h3={selected} hour={hour} period={period} locale={locale} dict={dict} onClose={() => setSelected(null)} />
+    <AreaPeek
+      h3={selected}
+      hour={hour}
+      period={period}
+      locale={locale}
+      dict={dict}
+      onClose={() => setSelected(null)}
+    />
   );
 
   const demoNote = USING_DEMO_DATA && (
@@ -143,10 +200,23 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
             <div className="min-w-0 flex-1">
               <PlaceSearch
                 placeholder={dict.map.searchPlaceholder}
-                onSelect={(place) => {
+                onSelect={async (place) => {
                   setFlyTo({ center: place.center, zoom: 15, key: Date.now() });
-                  const h3 = latLngToCell(place.center[1], place.center[0], resForZoom(15));
-                  setSelected(cells?.some((c) => c.h3 === h3 && !c.insufficient) ? h3 : null);
+                  setSelected(null);
+                  // Open the closest area with reports, so searching a place always shows something.
+                  const res15 = resForZoom(15);
+                  const near = await queryClient
+                    .fetchQuery({
+                      queryKey: ["map-cells", hour, res15, period],
+                      queryFn: () => fetchMapCells({ hour, res: res15, period }),
+                    })
+                    .catch(() => undefined);
+                  setSelected(
+                    nearestReported(
+                      latLngToCell(place.center[1], place.center[0], res15),
+                      near,
+                    ),
+                  );
                 }}
               />
             </div>
@@ -154,14 +224,19 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
               type="button"
               onClick={() => setDirectionsOpen(true)}
               title={dict.route.open}
-              className={cn("grid size-12 shrink-0 place-items-center rounded-2xl text-white", "bg-brand shadow-soft")}
+              className={cn(
+                "grid size-12 shrink-0 place-items-center rounded-2xl text-white",
+                "bg-brand shadow-soft",
+              )}
             >
               <Navigation className="size-5" aria-hidden />
               <span className="sr-only">{dict.route.open}</span>
             </button>
           </div>
         )}
-        {!directionsOpen && <PeriodSwitch dict={dict} value={period} onChange={setPeriod} />}
+        {!directionsOpen && (
+          <PeriodSwitch dict={dict} value={period} onChange={setPeriod} />
+        )}
         {!selected && !directionsOpen && (
           <p className="hidden items-center gap-2 self-start rounded-full bg-glass px-3 py-1.5 text-xs text-ink-2 backdrop-blur-xl lg:inline-flex">
             <Hand className="size-3.5" aria-hidden />
@@ -171,12 +246,21 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
 
         {/* legend: bottom of the left column, hidden while directions use the space */}
         {!directionsOpen && (
-          <aside className={cn("mt-auto hidden w-64 rounded-2xl p-4 lg:block", GLASS)}>
+          <aside
+            className={cn(
+              "mt-auto hidden w-64 rounded-2xl p-4 lg:block",
+              GLASS,
+            )}
+          >
             <p className="text-xs font-semibold">{dict.map.legendTitle}</p>
             <p className="text-[11px] text-ink-3">{dict.map.legendNote}</p>
             <div className="mt-3 flex h-2 gap-0.5" aria-hidden>
               {BANDS.map((b, i) => (
-                <span key={b} className="flex-1 first:rounded-l-full last:rounded-r-full" style={{ background: `var(--ral-${i})` }} />
+                <span
+                  key={b}
+                  className="flex-1 first:rounded-l-full last:rounded-r-full"
+                  style={{ background: `var(--ral-${i})` }}
+                />
               ))}
             </div>
             <div className="mt-1.5 flex justify-between text-[11px] text-ink-3">
@@ -202,7 +286,9 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
       {/* ---------- basemap toggle (like Google Maps "Layers") ---------- */}
       <button
         type="button"
-        onClick={() => setBasemap((b) => (b === "satellite" ? "map" : "satellite"))}
+        onClick={() =>
+          setBasemap((b) => (b === "satellite" ? "map" : "satellite"))
+        }
         className={cn(
           "absolute right-3 top-[8.75rem] z-20 flex items-center gap-2 rounded-2xl p-1.5 pr-3 text-xs font-semibold lg:top-[5.25rem]",
           directionsOpen && "max-lg:hidden",
@@ -222,23 +308,33 @@ export function MapScreen({ locale, dict, header }: { locale: Locale; dict: Dict
       </button>
 
       {/* ---------- desktop: area peek ---------- */}
-      {peek && <div className="absolute right-3 top-[9rem] z-30 hidden w-80 lg:block">{peek}</div>}
+      {peek && (
+        <div className="absolute right-3 top-[9rem] z-30 hidden w-80 lg:block">
+          {peek}
+        </div>
+      )}
 
       {/* ---------- bottom: peek (mobile) + time dock ---------- */}
       <div className="absolute inset-x-3 bottom-3 z-20 lg:bottom-5 lg:left-[calc(24rem+1.5rem)] lg:right-16">
         <div className="mx-auto flex max-w-xl flex-col gap-2">
-        {peek && <div className="lg:hidden">{peek}</div>}
-        <TimeDock
-          locale={locale}
-          dict={dict}
-          hour={hour}
-          isNow={isNow}
-          onPick={pickHour}
-          values={areaMode ? selectedArea.hours : (cityProfile ?? EMPTY_DAY)}
-          mode={areaMode ? "area" : "city"}
-          areaName={areaMode ? (selectedPlace ?? `${selectedArea.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${selectedArea.code}`) : undefined}
-          footer={demoNote}
-        />
+          {peek && <div className="lg:hidden">{peek}</div>}
+          <TimeDock
+            locale={locale}
+            dict={dict}
+            hour={hour}
+            isNow={isNow}
+            onPick={pickHour}
+            values={areaMode ? selectedArea.hours : (cityProfile ?? EMPTY_DAY)}
+            mode={areaMode ? "area" : "city"}
+            areaName={
+              areaMode
+                ? (selectedPlace ??
+                  `${selectedArea.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${selectedArea.code}`)
+                : undefined
+            }
+            footer={demoNote}
+            compact={directionsOpen || selected !== null}
+          />
         </div>
       </div>
     </div>

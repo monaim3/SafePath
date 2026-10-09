@@ -17,7 +17,9 @@ from .. import policy
 
 BANDS = (("very_low", 15), ("low", 30), ("moderate", 50), ("elevated", 65), ("high", 80), ("very_high", 100))
 # Weight that gives score ≈ 63 at each resolution, so a score reflects density, not cell size.
-SCORE_SCALE = {8: 22.0, 9: 7.0, 10: 2.6}
+# Calibrated (Oct 2026) on ~130 verified news reports: the densest hotspots read high/very high,
+# a single fresh report on one street stays at "moderate". Raise again as community reports grow.
+SCORE_SCALE = {8: 8.8, 9: 2.8, 10: 1.6}
 HALF_LIFE_DAYS = 30.0
 # Local-knowledge reports describe patterns; they shape the time-of-day profile more than the level.
 KNOWLEDGE_FACTOR = 0.5
@@ -119,13 +121,43 @@ def _within(rows: list[Row], now: datetime, start_days: float, end_days: float) 
     return [r for r in rows if start_days <= (now - r.created_at).total_seconds() / 86400 < end_days]
 
 
+def _cap_sparse(scores: list[int], incidents: list[Row], now: datetime, res: int) -> list[int]:
+    """Too few reports to show a real time-of-day pattern: no hour rates above the overall level."""
+    if len(incidents) >= policy.MIN_PATTERN_REPORTS:
+        return scores
+    overall = score_from(sum(effective_weight(r, now) for r in incidents), res)
+    return [min(s, overall) for s in scores]
+
+
+def hour_scores(incidents: list[Row], now: datetime, res: int) -> list[int]:
+    hourly = smooth(hour_weights(incidents, now))
+    return _cap_sparse([score_from(w * 24, res) for w in hourly], incidents, now, res)
+
+
+def block_scores(incidents: list[Row], now: datetime, res: int) -> list[int]:
+    hourly = smooth(hour_weights(incidents, now))
+    return _cap_sparse([score_from(sum(hourly[b * 3 : b * 3 + 3]) * 8, res) for b in range(8)], incidents, now, res)
+
+
+def block_shares(incidents: list[Row], now: datetime) -> list[int]:
+    """
+    Share of reports (%) in each 3-hour block. Unlike block_scores, which saturate at busy spots
+    (every block of a very-high area reads "very high"), this shows when reports cluster.
+    """
+    hourly = smooth(hour_weights(incidents, now))
+    total = sum(hourly)
+    if total <= 0:
+        return [0] * 8
+    return [round(100 * sum(hourly[b * 3 : b * 3 + 3]) / total) for b in range(8)]
+
+
 def cell_summary(cell: str, rows: list[Row], now: datetime, hour: int | None) -> dict:
     res = h3.get_resolution(cell)
     incidents = [r for r in rows if r.kind != "positive"]
     if hour is None:
         score = score_from(sum(effective_weight(r, now) for r in incidents), res)
     else:
-        score = score_from(smooth(hour_weights(incidents, now))[hour] * 24, res)
+        score = hour_scores(incidents, now, res)[hour]
     verified_pct = _verified_pct(incidents)
     top = Counter(r.category for r in incidents).most_common(1)
     return {
@@ -159,7 +191,7 @@ def area_detail(cell: str, rows: list[Row], now: datetime, *, is_demo: bool) -> 
         return {
             **base, "score": 0, "band": "very_low", "confidence": "low", "reports30": 0, "topCategory": None,
             "insufficient": True, "reportCount": 0, "verifiedPct": 0, "counts": {"d7": 0, "d30": 0, "d90": 0},
-            "categories": [], "timeBlocks": [0] * 8, "hours": [0] * 24,
+            "categories": [], "timeBlocks": [0] * 8, "blockShares": [0] * 8, "hours": [0] * 24,
             "trend": {"prev": 0, "curr": 0, "direction": "flat"}, "knowledge": [], "positives": [],
             "sources": {"community": 0, "verified": 0, "media": 0, "official": 0}, "busyArea": False,
         }
@@ -168,9 +200,8 @@ def area_detail(cell: str, rows: list[Row], now: datetime, *, is_demo: bool) -> 
     positives = [r for r in rows if r.kind == "positive"]
     summary = cell_summary(cell, rows, now, None)
 
-    hourly = smooth(hour_weights(incidents, now))
-    hours = [score_from(w * 24, res) for w in hourly]
-    blocks = [score_from(sum(hourly[b * 3 : b * 3 + 3]) * 8, res) for b in range(8)]
+    hours = hour_scores(incidents, now, res)
+    blocks = block_scores(incidents, now, res)
 
     d30 = len(_within(incidents, now, 0, 30))
     prev = len(_within(incidents, now, 30, 60))
@@ -204,6 +235,7 @@ def area_detail(cell: str, rows: list[Row], now: datetime, *, is_demo: bool) -> 
         },
         "categories": [{"key": k, "count": n} for k, n in Counter(r.category for r in incidents).most_common()],
         "timeBlocks": blocks,
+        "blockShares": block_shares(incidents, now),
         "hours": hours,
         "trend": {"prev": prev, "curr": d30, "direction": direction},
         "knowledge": knowledge,

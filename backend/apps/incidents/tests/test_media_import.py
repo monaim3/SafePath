@@ -129,6 +129,22 @@ def test_period_filter_limits_map_area_and_news(tmp_path):
     assert client.get("/api/v1/map/time-profile?period=bogus").status_code == 400
 
 
+def test_single_report_cannot_make_one_hour_high(tmp_path):
+    cache.clear()
+    run(tmp_path, [item(2, hour=6)])  # one recent report at 6 am
+    client = APIClient()
+    cell10 = h3.latlng_to_cell(LAT, LNG, 10)
+    area = client.get(f"/api/v1/areas/{cell10}").json()
+    assert max(area["hours"]) <= area["score"] and max(area["timeBlocks"]) <= area["score"]
+    at6 = client.get("/api/v1/map/cells?res=10&hour=6").json()["cells"][0]["score"]
+    assert at6 <= area["score"]  # the map's 6 am view agrees
+
+    cache.clear()
+    run(tmp_path, [item(3, hour=6, url="https://x.test/a"), item(4, hour=6, url="https://x.test/b")])
+    area = client.get(f"/api/v1/areas/{cell10}").json()
+    assert area["hours"][6] > area["score"]  # with 3 reports the 6 am peak shows
+
+
 def test_area_shows_media_count_and_source_links(tmp_path):
     cache.clear()
     run(tmp_path, [item(1), item(3), item(4)])

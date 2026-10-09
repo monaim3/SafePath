@@ -101,8 +101,9 @@
   --color-ral-4: var(--ral-4);
   --color-ral-5: var(--ral-5);
 
-  --font-sans: var(--font-body), var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display-latin), var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), var(--font-bangla-digits), var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-latin), var(--font-bangla-digits), var(--font-bangla), ui-sans-serif, system-ui,
+    sans-serif;
 
   --shadow-soft: var(--shadow);
   --radius-4xl: 2rem;
@@ -123,6 +124,7 @@
 html {
   background: var(--bg);
   color-scheme: light;
+  overflow-x: clip; /* body's own clip is handed to the viewport and ignored by mobile browsers */
 }
 [data-theme="dark"] {
   color-scheme: dark;

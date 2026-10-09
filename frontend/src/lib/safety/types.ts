@@ -50,6 +50,8 @@ export interface AreaDetail extends CellSummary {
   categories: CategoryCount[];
   /** Reported Activity Level per time block. */
   timeBlocks: number[];
+  /** Share of reports (%) per time block, adds up to ~100. Older API responses may lack it. */
+  blockShares?: number[];
   /** Reported Activity Level per hour of day (24 values, lightly smoothed). */
   hours: number[];
   trend: { prev: number; curr: number; direction: "up" | "down" | "flat" };

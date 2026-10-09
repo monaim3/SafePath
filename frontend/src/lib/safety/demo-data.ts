@@ -217,6 +217,8 @@ function aggregate(h3: string, list: Incident[]): AreaDetail {
   // A block's level = how the area would score if every 3 hours looked like this one.
   const timeBlocks = blockWeights.map((w) => scoreFrom(w * 8, res));
   const hours = smoothHours(hourWeights(list)).map((w) => scoreFrom(w * 24, res));
+  const weightTotal = blockWeights.reduce((s, w) => s + w, 0);
+  const blockShares = blockWeights.map((w) => (weightTotal > 0 ? Math.round((100 * w) / weightTotal) : 0));
 
   const methodCounts = new Map<CategoryKey, number>();
   for (const i of list) methodCounts.set(i.method, (methodCounts.get(i.method) ?? 0) + 1);
@@ -262,6 +264,7 @@ function aggregate(h3: string, list: Incident[]): AreaDetail {
     counts: { d7, d30, d90 },
     categories,
     timeBlocks,
+    blockShares,
     hours,
     trend: { prev, curr: d30, direction },
     knowledge,

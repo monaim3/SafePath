@@ -47,6 +47,11 @@ BURST_MIN_REPORTS = 6
 # Flag when the reports come from this many devices or fewer.
 BURST_MAX_DEVICES = 2
 
+# ---------- time-of-day pattern ----------
+# With fewer reports than this, one report at 6am would otherwise make 6am look "high":
+# no single hour is then rated above the area's overall level.
+MIN_PATTERN_REPORTS = 3
+
 # ---------- public map ----------
 K_ANONYMITY_REPORTS = 3
 K_ANONYMITY_DEVICES = 2

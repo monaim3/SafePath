@@ -8,7 +8,8 @@ export function explainArea(area: AreaDetail): Reason[] {
     area.counts.d30 > 0 ? { kind: "recent", n: area.counts.d30 } : { kind: "earlier", n: area.reportCount },
   ];
 
-  const peak = peakBlock(area.timeBlocks);
+  // Shares, not levels: at a busy spot every block's level is near the top, hiding the real peak.
+  const peak = peakBlock(area.blockShares ?? area.timeBlocks);
   if (peak !== null) reasons.push({ kind: "time", block: peak });
 
   const total = area.categories.reduce((sum, c) => sum + c.count, 0);

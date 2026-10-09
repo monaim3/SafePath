@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { Geist, Hind_Siliguri, Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import { getDictionary, hasLocale, locales } from "@/i18n";
 import { Providers } from "@/components/layout/Providers";
 import "../globals.css";
@@ -23,8 +25,18 @@ const bangla = Hind_Siliguri({
   weight: ["400", "500", "600", "700"],
 });
 
-/** Runs before paint so there is no light→dark flash. */
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})()`;
+// Hind Siliguri draws ১ with an unusual hook, so Bangla digits (০–৯) come from a tiny
+// Noto Sans Bengali subset instead. unicode-range keeps it to digits only.
+const banglaDigits = localFont({
+  src: "../fonts/bangla-digits.woff2",
+  variable: "--font-bangla-digits",
+  weight: "400 800",
+  display: "swap",
+  declarations: [{ prop: "unicode-range", value: "U+09E6-09EF" }],
+});
+
+/** Runs before paint so there is no flash. Dark is the default until the visitor picks a theme. */
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}})()`;
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -54,11 +66,15 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html
       lang={lang}
+      // Server default; the script below (first load) and ThemeSync (language switch) apply the saved choice.
+      data-theme="dark"
       suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${bangla.variable} h-full`}
+      className={`${display.variable} ${body.variable} ${bangla.variable} ${banglaDigits.variable} h-full`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <Script id="theme" strategy="beforeInteractive">
+          {themeScript}
+        </Script>
       </head>
       <body className="min-h-full">
         <Providers>{children}</Providers>
