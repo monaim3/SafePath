@@ -2,7 +2,7 @@ export const en = {
   meta: {
     title: "SafePath — Know the lower-risk way before you go",
     description:
-      "Community-powered chhintai (snatching) awareness for Dhaka. See where and when snatching is reported, understand why, and share what you know.",
+      "A map of chhintai (snatching) in Bangladesh, built from people's reports. See where and when it happens most, understand why, and share what you know.",
   },
   nav: {
     map: "Map",
@@ -171,6 +171,9 @@ export const en = {
         body: "Pick a lower-risk route or time. If you see something, you can report it in a few taps, with no name needed.",
       },
     ],
+    hero3dLabel: "3D map of Dhaka. Where more snatching is reported, the columns rise taller and redder.",
+    hero3dHint: "Tap any column to see that area in detail",
+    hero3dTime: "Risk changes with the time of day",
     principlesEyebrow: "Our promises",
     principlesTitle: "Built on four promises",
     principlesBody: "Shown carelessly, safety information can scare people for no reason or make them trust the wrong place. So everything on SafePath follows these four rules.",
@@ -300,6 +303,7 @@ export const en = {
     chooseHere: "Choose this spot",
     chosen: "Spot chosen",
     findingAddress: "Finding address…",
+    outsideBangladesh: "This spot is outside Bangladesh. Move the pin inside Bangladesh.",
     unnamedPlace: "Unnamed spot on the map",
     whenQ: "When did it happen?",
     when: {
@@ -356,6 +360,7 @@ export const en = {
       invalid_time: "That date or time isn't possible. Please check it.",
       invalid: "Something in the report isn't valid. Please check and try again.",
       network: "Couldn't send. Check your connection and try again.",
+      outside_bangladesh: "That spot is outside Bangladesh. You can only report places inside Bangladesh.",
     },
     checkTitle: "How reports are kept honest",
     checkPoints: [
@@ -513,13 +518,12 @@ export const en = {
     installed: "SafePath is installed on your phone.",
   },
   footer: {
-    tagline: "A free map of snatching in Dhaka for everyone, built from people's reports.",
+    tagline: "A free map of snatching in Bangladesh for everyone, built from people's reports.",
     notOfficial: "This isn't an emergency service or an official crime record.",
     explore: "Explore",
     about: "SafePath",
     rules: "Reporting rules",
     contact: "Contact",
-    emergency: "In an emergency, call 999",
     rights: "© {year} SafePath",
   },
   notFound: {

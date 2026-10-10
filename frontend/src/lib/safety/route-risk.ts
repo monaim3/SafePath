@@ -145,10 +145,21 @@ export function analyzeRoute(route: RouteOption, lookup: CellLookup): RouteAnaly
 }
 
 /** Index of the route with the least reported activity along it. */
-export function lowestRiskIndex(analyses: readonly RouteAnalysis[]): number {
-  let best = 0;
+/** A suggested route may take at most this much longer than the fastest one (both limits apply). */
+const MAX_EXTRA_SHARE = 0.2;
+const MAX_EXTRA_SECONDS = 8 * 60;
+
+/**
+ * Index of the route to suggest: the lowest-risk one among routes that aren't a big detour.
+ * Without the limit, a route through side lanes far from the main road could win just because
+ * nobody has reported anything there yet.
+ */
+export function lowestRiskIndex(analyses: readonly RouteAnalysis[], routes: readonly RouteOption[]): number {
+  const fastest = Math.min(...routes.map((r) => r.duration));
+  const limit = Math.min(fastest * (1 + MAX_EXTRA_SHARE), fastest + MAX_EXTRA_SECONDS);
+  let best = routes.findIndex((r) => r.duration === fastest);
   analyses.forEach((a, i) => {
-    if (a.riskIndex < analyses[best].riskIndex) best = i;
+    if (routes[i].duration <= limit && a.riskIndex < analyses[best].riskIndex) best = i;
   });
   return best;
 }

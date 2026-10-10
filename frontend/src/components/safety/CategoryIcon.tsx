@@ -27,7 +27,7 @@ const SIZES = {
 export type IconName = CategoryKey | "kind_incident" | "kind_knowledge" | "kind_positive";
 
 /** Custom SafePath illustrations (SVG, drawn for this project) — no stock icon fits these ideas. */
-const CUSTOM_SVG: ReadonlySet<IconName> = new Set(["kind_incident", "kind_knowledge", "kind_positive"]);
+const CUSTOM_SVG: ReadonlySet<IconName> = new Set(["kind_incident", "kind_knowledge", "kind_positive", "cctv"]);
 
 /** Fluent 3D icon on a soft tinted tile. */
 export function FluentIcon({

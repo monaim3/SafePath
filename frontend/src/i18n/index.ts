@@ -52,6 +52,11 @@ export function formatHour(locale: Locale, dict: Dictionary, hour: number, at = 
 }
 
 /** Replaces `{key}` placeholders. Numbers are formatted with locale digits. */
+/** A year in locale digits, without the thousands separator ("২০২৬", not "২,০২৬"). */
+export function formatYear(locale: Locale, year: number): string {
+  return new Intl.NumberFormat(locale === "bn" ? "bn-BD" : "en-US", { useGrouping: false }).format(year);
+}
+
 export function fill(
   locale: Locale,
   template: string,

@@ -327,7 +327,7 @@ export function SafetyMap({
       style: styleFor(basemapRef.current, themeRef.current),
       center: initialCenter,
       zoom: initialZoom,
-      minZoom: 9,
+      minZoom: 6, // all of Bangladesh fits, so long routes (Dhaka → Bogura) can be shown whole
       maxZoom: 18,
       attributionControl: { compact: true },
       interactive,

@@ -102,9 +102,11 @@ export function Directions({
     () => (routes && lookup ? routes.map((r) => analyzeRoute(r, lookup)) : null),
     [routes, lookup],
   );
-  const recommended = analyses ? lowestRiskIndex(analyses) : 0;
+  const recommended = analyses && routes ? lowestRiskIndex(analyses, routes) : 0;
   const fastest = routes ? routes.reduce((best, r, i) => (r.duration < routes[best].duration ? i : best), 0) : 0;
-  const selected = routes && picked !== null && picked < routes.length ? picked : recommended;
+  // The usual (fastest) route is drawn first, since that's the way people actually go; the
+  // lower-report route stays labelled as an option to tap.
+  const selected = routes && picked !== null && picked < routes.length ? picked : fastest;
 
   useEffect(() => {
     onOverlay(routes && analyses ? buildOverlay(routes, analyses, selected) : null);
@@ -130,7 +132,8 @@ export function Directions({
         setLocating(false);
       },
       () => setLocating(false),
-      { enableHighAccuracy: false, timeout: 10_000 },
+      // Precise fix (GPS on phones): a rough Wi-Fi/IP guess can put the start on the wrong street.
+      { enableHighAccuracy: true, timeout: 15_000, maximumAge: 30_000 },
     );
   }
 

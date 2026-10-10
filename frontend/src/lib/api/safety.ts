@@ -174,6 +174,8 @@ interface PhotonFeature {
     district?: string;
     city?: string;
     locality?: string;
+    /** ISO country code, e.g. "BD". */
+    countrycode?: string;
   };
 }
 
@@ -200,11 +202,14 @@ export async function reversePlace(
   return { name, context };
 }
 
-/** Free OSM geocoder (Photon), limited to Bangladesh. Swap for self-hosted Photon in prod. */
+/**
+ * Free OSM geocoder (Photon), limited to Bangladesh. The box around the country also covers parts of
+ * India and Myanmar, so results are filtered by country code too. Swap for self-hosted Photon in prod.
+ */
 export async function searchPlaces(q: string, signal?: AbortSignal): Promise<PlaceResult[]> {
   const url = new URL("https://photon.komoot.io/api/");
   url.searchParams.set("q", q);
-  url.searchParams.set("limit", "6");
+  url.searchParams.set("limit", "12"); // some get dropped below
   url.searchParams.set("bbox", "88.0,20.5,92.7,26.7");
   url.searchParams.set("lat", "23.7808");
   url.searchParams.set("lon", "90.4093");
@@ -212,7 +217,8 @@ export async function searchPlaces(q: string, signal?: AbortSignal): Promise<Pla
   if (!res.ok) throw new Error(`Search failed (${res.status})`);
   const data = (await res.json()) as { features: PhotonFeature[] };
   return data.features
-    .filter((f) => f.properties.name)
+    .filter((f) => f.properties.name && (f.properties.countrycode ?? "BD") === "BD")
+    .slice(0, 6)
     .map((f, i) => ({
       id: `${f.properties.osm_id}-${i}`,
       name: f.properties.name ?? "",

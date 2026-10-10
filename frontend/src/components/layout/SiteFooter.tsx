@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { BellRing, Phone } from "lucide-react";
-import { fill, type Dictionary, type Locale } from "@/i18n";
+import { BellRing } from "lucide-react";
+import { fill, formatYear, type Dictionary, type Locale } from "@/i18n";
 import { Logo } from "@/components/ui/Logo";
 
 /*
@@ -35,13 +35,6 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
           <div className="space-y-3">
             <Logo />
             <p className="max-w-sm text-sm leading-relaxed text-ink-2">{f.tagline}</p>
-            <a
-              href="tel:999"
-              className="inline-flex items-center gap-2 rounded-full bg-ral-4/10 px-3 py-1.5 text-xs font-semibold text-ral-4 hover:bg-ral-4/15"
-            >
-              <Phone className="size-3.5" aria-hidden />
-              {f.emergency}
-            </a>
           </div>
 
           {columns.map((col) => (
@@ -69,7 +62,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
             <p>{dict.common.disclaimer}</p>
             <p className="font-medium text-ink-2">{f.notOfficial}</p>
           </div>
-          <p className="shrink-0">{fill(locale, f.rights, { year: new Date().getFullYear() })}</p>
+          <p className="shrink-0">{fill(locale, f.rights, { year: formatYear(locale, new Date().getFullYear()) })}</p>
         </div>
       </div>
     </footer>

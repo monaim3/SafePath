@@ -31,6 +31,10 @@ const STEP_ICONS: LucideIcon[] = [MapPin, PhoneCall, Smartphone, CreditCard, Fil
 const GLASS =
   "bg-white/[0.12] backdrop-blur-2xl ring-1 ring-white/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_24px_48px_-24px_rgb(2_12_40/0.55)]";
 
+/** Step cards: see-through gradient glass, bright top edge, soft lift on hover. */
+const GLASS_CARD =
+  "bg-gradient-to-br from-white/[0.18] via-white/[0.08] to-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 shadow-[inset_0_1px_0_rgb(255_255_255/0.45),inset_0_-1px_0_rgb(255_255_255/0.06),0_16px_40px_-20px_rgb(2_12_40/0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-white/35 hover:from-white/[0.24]";
+
 function BrandMesh() {
   return (
     <div aria-hidden className="absolute inset-0 -z-10">
@@ -189,18 +193,20 @@ export default async function SafetyPage({ params }: PageProps<"/[lang]/safety">
             const Icon = STEP_ICONS[i] ?? FileText;
             const last = i === s.after.length - 1;
             return (
-              <li key={step} className={`flex flex-col rounded-3xl p-5 ${GLASS}`}>
-                <div className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-2xl bg-white text-[#062a5e]">
-                    <Icon className="size-5" aria-hidden />
-                  </span>
-                  <span className="font-display text-3xl font-extrabold text-white/30">{n(i + 1)}</span>
-                </div>
-                <p className="mt-4 leading-relaxed">{step}</p>
+              <li key={step} className={`group relative flex flex-col overflow-hidden rounded-3xl p-5 ${GLASS_CARD}`}>
+                {/* light catching the top-right corner of the glass */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-white/25 blur-2xl transition-opacity duration-300 group-hover:opacity-80"
+                />
+                <span className="relative grid size-11 place-items-center rounded-2xl bg-white/20 text-white ring-1 ring-white/40 shadow-[inset_0_1px_0_rgb(255_255_255/0.5)] backdrop-blur-md">
+                  <Icon className="size-5" aria-hidden />
+                </span>
+                <p className="relative mt-4 leading-relaxed">{step}</p>
                 {last && (
                   <Link
                     href={`/${lang}/report`}
-                    className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#062a5e] transition-transform hover:translate-x-0.5"
+                    className="relative mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#062a5e] transition-transform hover:translate-x-0.5"
                   >
                     {dict.home.ctaReport}
                     <ArrowRight className="size-4" aria-hidden />

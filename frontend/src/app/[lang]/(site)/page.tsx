@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MousePointerClick } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getDictionary, hasLocale } from "@/i18n";
+import { formatHour, getDictionary, hasLocale } from "@/i18n";
 import { fetchTopAreas } from "@/lib/api/safety";
 import { demoTopAreas } from "@/lib/safety/demo-data";
 import { areaPlaceName } from "@/lib/place-name";
 import { ButtonLink } from "@/components/ui/Button";
-import { HeroVisual } from "@/components/home/HeroVisual";
+import { Hero3DMapLazy } from "@/components/home/Hero3DMapLazy";
+import { HERO_HOURS, type Hotspot } from "@/components/home/hero-hours";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { Principles } from "@/components/home/Principles";
 
@@ -14,22 +15,45 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const [topArea] = await fetchTopAreas(1);
+  const top = await fetchTopAreas(3);
+  const topArea = top[0];
   // No reports yet (fresh server): illustrate with a synthetic area, labelled as a demo, not linked.
   const preview = topArea ?? demoTopAreas(1)[0];
-  const topPlace = topArea && !topArea.isDemo ? await areaPlaceName(topArea.h3, lang) : null;
+  const names = await Promise.all(top.map((a) => (a.isDemo ? null : areaPlaceName(a.h3, lang))));
+  // Name tags on the 3D map for the busiest areas.
+  const hotspots: Hotspot[] = top.map((a, i) => ({
+    h3: a.h3,
+    name: names[i] ?? `${a.isDemo ? dict.home.heroCardDemoArea : dict.home.heroCardArea} ${a.code}`,
+    score: a.score,
+    band: a.band,
+  }));
 
   return (
     <>
-      {/* ---------- Hero ---------- */}
-      <section className="relative isolate">
+      {/* ---------- Hero: text over a slowly turning 3D map of Dhaka ---------- */}
+      <section className="relative isolate flex flex-col overflow-x-clip lg:block">
         {/* soft brand glow (clipped sideways so it can't widen the page on phones) */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-x-clip">
           <div className="absolute -left-40 -top-40 size-[34rem] rounded-full bg-brand-green/15 blur-3xl" />
-          <div className="absolute -right-32 top-10 size-[30rem] rounded-full bg-brand-blue/15 blur-3xl" />
         </div>
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-8 pt-10 lg:items-start sm:px-6 md:pt-14 lg:grid-cols-[1.05fr_1fr]">
-          <div className="rise">
+
+        {/*
+          Phones: the map is a rounded tile under the text.
+          lg+: it fills the right side of the hero and fades into the page on the left and bottom.
+        */}
+        <div className="relative mx-4 mt-2 h-[22rem] overflow-hidden rounded-[2rem] ring-1 ring-line sm:mx-6 sm:h-[26rem] lg:absolute lg:inset-y-0 lg:right-0 lg:m-0 lg:h-auto lg:w-[62%] lg:rounded-none lg:ring-0 lg:[mask-composite:intersect] lg:[mask-image:linear-gradient(to_right,transparent,#000_30%),linear-gradient(to_bottom,#000_78%,transparent)] max-lg:order-last">
+          <Hero3DMapLazy
+            locale={lang}
+            hotspots={hotspots}
+            hourLabels={HERO_HOURS.map((h) => formatHour(lang, dict, h))}
+            timeTitle={dict.home.hero3dTime}
+            ariaLabel={dict.home.hero3dLabel}
+            className="absolute inset-0"
+          />
+        </div>
+
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-4 pb-8 pt-10 sm:px-6 md:pt-14 lg:pointer-events-none lg:min-h-[36rem] lg:grid-cols-[1fr_1fr] lg:pb-16 max-lg:-order-1 [&>*]:pointer-events-auto">
+          <div className="rise relative z-10">
             <h1 className="font-display text-[40px] font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-[64px]">
               <span className="block text-balance">{dict.home.titleA}</span>
               <span className="block text-balance text-brand">{dict.home.titleB}</span>
@@ -44,20 +68,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                 {dict.home.ctaReport}
               </ButtonLink>
             </div>
-          </div>
-
-          <div className="rise [animation-delay:150ms]">
-            {topArea ? (
-              <Link
-                href={`/${lang}/area/${topArea.h3}`}
-                aria-label={topPlace ?? `${dict.home.heroCardArea} ${topArea.code}`}
-                className="block transition-transform duration-300 hover:-translate-y-1"
-              >
-                <HeroVisual area={topArea} locale={lang} dict={dict} placeName={topPlace} />
-              </Link>
-            ) : (
-              preview && <HeroVisual area={preview} locale={lang} dict={dict} />
-            )}
+            <p className="mt-8 hidden items-center gap-2 text-sm text-ink-3 lg:flex">
+              <MousePointerClick className="size-4" aria-hidden />
+              {dict.home.hero3dHint}
+            </p>
           </div>
         </div>
       </section>
@@ -67,7 +81,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <Principles dict={dict} />
 
       {/* ---------- Awareness teaser ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+      {/* no own top/bottom padding: the section above and the footer's margin already space it */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6">
         <Link
           href={`/${lang}/safety`}
           className="group flex flex-col justify-between gap-6 rounded-[2rem] border border-line bg-[linear-gradient(115deg,var(--positive-soft),var(--accent-soft))] p-6 sm:flex-row sm:items-center sm:p-10"

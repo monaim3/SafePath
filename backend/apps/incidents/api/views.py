@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..models import Report
-from ..services import turnstile, video
+from ..services import geo, turnstile, video
 from ..services.submission import SubmissionRejected, confirm_knowledge, submit_report
 from .serializers import ConfirmSerializer, ReportInputSerializer, VideoAttachSerializer
 
@@ -53,6 +53,9 @@ class ReportCreateView(APIView):
         data = dict(serializer.validated_data)
         ip = client_ip(request)
 
+        # Checked before the CAPTCHA so an out-of-country spot doesn't cost a Turnstile call.
+        if not geo.cell_in_bangladesh(data["h3"]):
+            return rejected("outside_bangladesh")
         if not turnstile.verify(data.pop("turnstile_token", ""), ip):
             return rejected("captcha")
         device_id = data.pop("device_id")

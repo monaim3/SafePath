@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Street CCTV: a bullet camera on a wall bracket, lens forward-left, red recording light -->
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#c3ccd8"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a97a8"/>
+      <stop offset="1" stop-color="#5f6b7a"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="0.38" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#6fb7ff"/>
+      <stop offset="0.45" stop-color="#1a4f8f"/>
+      <stop offset="1" stop-color="#0b1d36"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="32" cy="58" rx="18" ry="3.5" fill="#5f6b7a" opacity="0.2"/>
+
+  <!-- wall plate and arm -->
+  <rect x="48" y="30" width="9" height="22" rx="3" fill="url(#shade)"/>
+  <path d="M52.5 33 V26 C52.5 23.8 51 22.5 48.8 22.5 H44" fill="none" stroke="#7d8a9b" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- camera body, tilted down toward the street -->
+  <g transform="rotate(14 32 20)">
+    <rect x="12" y="11" width="36" height="18" rx="6" fill="url(#body)"/>
+    <!-- sun hood -->
+    <path d="M9 10.5 H44 C46.2 10.5 47.5 12 47.5 14 H12 C10.3 14 9 12.7 9 10.5 Z" fill="url(#shade)"/>
+    <!-- lens -->
+    <circle cx="13" cy="20.5" r="7.5" fill="#2b3442"/>
+    <circle cx="13" cy="20.5" r="5.6" fill="url(#lens)"/>
+    <circle cx="11.2" cy="18.6" r="1.6" fill="#ffffff" opacity="0.85"/>
+    <!-- recording light -->
+    <circle cx="40" cy="22.5" r="2.6" fill="#e53935"/>
+    <circle cx="40" cy="22.5" r="4.4" fill="#e53935" opacity="0.25"/>
+    <!-- top highlight -->
+    <path d="M20 15.5 H42" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+  </g>
+</svg>

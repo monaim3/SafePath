@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { cellToLatLng, latLngToCell } from "h3-js";
-import { Check, Loader2, LocateFixed, MapPin } from "lucide-react";
+import { Check, Loader2, LocateFixed, MapPin, MapPinOff } from "lucide-react";
 import type { Dictionary } from "@/i18n";
 import { reversePlace } from "@/lib/api/safety";
+import { cellInBangladesh } from "@/lib/safety/bangladesh";
 import { REPORT_RES } from "@/lib/safety/grid";
 import { cn } from "@/components/ui/cn";
 import { PlaceSearch } from "@/features/map/PlaceSearch";
@@ -43,12 +44,21 @@ export function LocationPicker({
   // Once the map has been moved off the starting spot (pan, tap, search, "my location"),
   // the pin is the answer: the spot follows it, so "Next" works without an extra confirm.
   // Left untouched, the default spot needs the explicit button, so it can't be sent by accident.
+  // Spots outside Bangladesh can't be chosen (the API refuses them too).
   const startCell = latLngToCell(MOHAMMADPUR[1], MOHAMMADPUR[0], REPORT_RES);
+  const [outside, setOutside] = useState(false);
+  const latestCell = useRef<string | null>(null);
   const handleCenter = useCallback(
     (c: LngLat) => {
       setCenter(c);
       const cell = latLngToCell(c[1], c[0], REPORT_RES);
-      if (cell !== startCell) onChange(cell);
+      latestCell.current = cell;
+      void cellInBangladesh(cell).then((inside) => {
+        if (latestCell.current !== cell) return; // the map has moved on since
+        setOutside(!inside);
+        if (!inside) onChange("");
+        else if (cell !== startCell) onChange(cell);
+      });
     },
     [onChange, startCell],
   );
@@ -150,7 +160,7 @@ export function LocationPicker({
           ) : (
             <button
               type="button"
-              disabled={!centerCell}
+              disabled={!centerCell || outside}
               onClick={() => centerCell && onChange(centerCell)}
               className="shrink-0 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white shadow-soft disabled:opacity-50"
             >
@@ -159,10 +169,17 @@ export function LocationPicker({
           )}
         </div>
       </div>
-      <p className="mt-2 flex items-center gap-1.5 text-xs text-ink-3">
-        <MapPin className="size-3.5 shrink-0 text-[#e53935]" aria-hidden />
-        {t.moveHint}
-      </p>
+      {outside ? (
+        <p role="alert" className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ral-4">
+          <MapPinOff className="size-3.5 shrink-0" aria-hidden />
+          {t.outsideBangladesh}
+        </p>
+      ) : (
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-ink-3">
+          <MapPin className="size-3.5 shrink-0 text-[#e53935]" aria-hidden />
+          {t.moveHint}
+        </p>
+      )}
     </div>
   );
 }
