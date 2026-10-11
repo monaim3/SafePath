@@ -30,7 +30,8 @@ import { CategoryIcon, FluentIcon } from "@/components/safety/CategoryIcon";
 import { LocationPicker, type ExactSpot } from "./LocationPicker";
 import { WhenPicker } from "./WhenPicker";
 import { CAPTCHA_ON, Turnstile } from "./Turnstile";
-import { VideoPicker } from "./VideoPicker";
+import { GuideVideoButton } from "@/features/help/GuideVideo";
+import { isVideoLink, VideoPicker } from "./VideoPicker";
 
 const STEP_FIELDS: FieldPath<ReportInput>[][] = [
   ["kind", "category"],
@@ -170,17 +171,21 @@ export function QuickReport({
   // Exact pin + its name: sent with the report for moderators only (the public sees the ~150 m area).
   const [spot, setSpot] = useState<ExactSpot | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoLink, setVideoLink] = useState("");
   const [uploadPct, setUploadPct] = useState<number | null>(null);
   const [videoResult, setVideoResult] = useState<"uploaded" | "failed" | null>(null);
+  const linkBlocksSubmit = kind === "incident" && videoLink.trim() !== "" && !isVideoLink(videoLink);
   const submit = useMutation({
     mutationFn: async (input: ReportInput) => {
       const file = input.kind === "incident" ? videoFile : null;
+      const link = input.kind === "incident" && !file ? videoLink.trim() : "";
       const token = captchaToken;
       freshCaptcha(); // this token is now spent, whatever the answer
       const res = await submitReport(
         { ...input, description: redactPersonalInfo(input.description ?? "") },
-        { deviceId: getDeviceId(), turnstileToken: token, hasVideo: Boolean(file), spot },
+        { deviceId: getDeviceId(), turnstileToken: token, hasVideo: Boolean(file), videoLink: link, spot },
       );
+      if (link && REPORTS_GO_TO_SERVER) setVideoResult("uploaded"); // nothing to upload: the link went with the report
       // The report is already saved; a failed upload must not turn it into an error.
       if (file && REPORTS_GO_TO_SERVER) {
         if (!res.upload) {
@@ -258,6 +263,7 @@ export function QuickReport({
               submit.reset();
               freshCaptcha();
               setVideoFile(null);
+              setVideoLink("");
               setVideoResult(null);
               setStep(0);
             }}
@@ -277,6 +283,7 @@ export function QuickReport({
     <div className="mx-auto mb-8 max-w-2xl">
       <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">{t.title}</h1>
       <p className="mt-3 text-lg text-ink-2">{t.subtitle}</p>
+      <GuideVideoButton locale={locale} dict={dict} variant="pill" label={dict.help.reportGuide} className="mt-4" />
     </div>
     <form
       onSubmit={(e) => {
@@ -477,7 +484,15 @@ export function QuickReport({
                 {t.descHint}
               </p>
             </div>
-            {kind === "incident" && <VideoPicker dict={dict} file={videoFile} onChange={setVideoFile} />}
+            {kind === "incident" && (
+              <VideoPicker
+                dict={dict}
+                file={videoFile}
+                onChange={setVideoFile}
+                link={videoLink}
+                onLinkChange={setVideoLink}
+              />
+            )}
           </div>
         )}
       </div>
@@ -510,7 +525,7 @@ export function QuickReport({
             <ArrowRight className="size-4" aria-hidden />
           </Button>
         ) : (
-          <Button key="submit" type="submit" size="lg" variant="accent" disabled={submit.isPending || waitingForCaptcha}>
+          <Button key="submit" type="submit" size="lg" variant="accent" disabled={submit.isPending || waitingForCaptcha || linkBlocksSubmit}>
             {(submit.isPending || waitingForCaptcha) && <Loader2 className="size-4 animate-spin" aria-hidden />}
             {uploadPct !== null
               ? fill(locale, t.video.uploading, { p: uploadPct })

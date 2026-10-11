@@ -1,0 +1,65 @@
+# Weekly encrypted backup of the production database (Neon).
+#
+# The repository is public, so the backup is always encrypted (AES-256) before it leaves the job;
+# only someone with BACKUP_PASSPHRASE can open it. Kept 90 days as a workflow artifact (~12 backups).
+# Restore steps: DEPLOY.md → "Database backups".
+#
+# Needs two repository secrets (Settings → Secrets and variables → Actions):
+#   NEON_DATABASE_URL   the production DATABASE_URL (from the safepath-api Vercel project)
+#   BACKUP_PASSPHRASE   a long passphrase kept in a password manager — without it backups can't be opened
+name: Database backup
+
+on:
+  schedule:
+    - cron: "0 21 * * 5" # Fridays 21:00 UTC = Saturdays 03:00 in Bangladesh
+  workflow_dispatch: # "Run workflow" button for a backup on demand
+
+permissions:
+  contents: read
+
+concurrency:
+  group: db-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PGURL: ${{ secrets.NEON_DATABASE_URL }}
+      PASS: ${{ secrets.BACKUP_PASSPHRASE }}
+    steps:
+      - name: Check secrets are set
+        run: |
+          [ -n "$PGURL" ] || { echo "::error::NEON_DATABASE_URL secret is missing"; exit 1; }
+          [ ${#PASS} -ge 16 ] || { echo "::error::BACKUP_PASSPHRASE secret is missing or shorter than 16 characters"; exit 1; }
+
+      - name: Dump the database
+        run: |
+          stamp=$(date -u +%Y-%m-%d)
+          echo "STAMP=$stamp" >> "$GITHUB_ENV"
+          # PostgreSQL 16 client, matching Neon's server version
+          docker run --rm -e PGURL -v "$PWD:/w" postgres:16-alpine \
+            pg_dump --format=custom --no-owner --no-privileges --file=/w/safepath.dump "$PGURL"
+          echo "Dump size: $(du -h safepath.dump | cut -f1)"
+
+      - name: Encrypt and verify
+        run: |
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$PASS" \
+            --symmetric --cipher-algo AES256 -o "safepath-$STAMP.dump.gpg" safepath.dump
+          rm safepath.dump
+          # Prove the encrypted file opens and is a complete, readable backup.
+          gpg --batch --pinentry-mode loopback --passphrase "$PASS" -d "safepath-$STAMP.dump.gpg" 2>/dev/null > check.dump
+          docker run --rm -v "$PWD:/w" postgres:16-alpine pg_restore --list /w/check.dump > toc.txt
+          tables=$(grep -c " TABLE DATA " toc.txt)
+          rm check.dump toc.txt
+          echo "Backup verified: $tables tables"
+          [ "$tables" -ge 20 ] || { echo "::error::Backup looks incomplete ($tables tables)"; exit 1; }
+
+      - name: Keep the encrypted backup (90 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: safepath-db-${{ env.STAMP }}
+          path: safepath-${{ env.STAMP }}.dump.gpg
+          retention-days: 90
+          if-no-files-found: error

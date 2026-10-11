@@ -35,10 +35,11 @@ class QueueReportSerializer(serializers.ModelSerializer):
             "date", "block", "hour", "days", "relation", "description",
             "status", "flags", "corroborations", "weight", "is_demo", "created_at",
             "reporter_trust", "reporter_reports", "reporter_rejected", "video_status", "video_url",
+            "video_link",
         ]
 
     def get_video_url(self, report: Report) -> str | None:
-        if report.video_status in REVIEWABLE_VIDEO and video.enabled():
+        if report.video_status in REVIEWABLE_VIDEO and report.video_public_id and video.enabled():
             return video.moderator_url(report.video_public_id)
         return None
 

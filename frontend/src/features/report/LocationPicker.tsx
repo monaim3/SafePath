@@ -125,6 +125,7 @@ export function LocationPicker({
       <div className="flex gap-2">
         <div className="min-w-0 flex-1">
           <PlaceSearch
+            labels={dict.net}
             id="report-place"
             variant="inline"
             placeholder={t.searchPlace}

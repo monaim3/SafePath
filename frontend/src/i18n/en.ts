@@ -11,6 +11,31 @@ export const en = {
     methodology: "How it works",
     reportCta: "Report a chhintai",
   },
+  help: {
+    howItWorks: "How it works",
+    reportGuide: "How to report? Watch the video",
+    videoTitle: "How SafePath works",
+    videoSub: "Full guide · just over a minute",
+    play: "Play",
+    pause: "Pause",
+    replay: "Watch again",
+    mute: "Mute",
+    unmute: "Unmute",
+    fullscreen: "Full screen",
+    close: "Close",
+    loading: "Loading video…",
+    failed: "The video can't play right now. Check your internet connection and try again.",
+  },
+  net: {
+    offline: "No internet connection. Everything reloads by itself when you're back online.",
+    online: "Back online",
+    zonesFailed: "Couldn't load the area data. The connection may be weak.",
+    retrying: "Trying again automatically…",
+    retry: "Try again",
+    searchFailed: "Search isn't working right now. Please try again shortly.",
+    noResults: "Nothing found. Try writing it differently.",
+    noColours: "Area data didn't load, so risk colours can't be shown on the route.",
+  },
   common: {
     demoBanner: "This is sample data, not real reports. It's only here to show how the site looks.",
     disclaimer:
@@ -102,6 +127,8 @@ export const en = {
     tripGpsDenied: "Location permission was not given. Allow location for this site in your browser settings.",
     tripNoData: "Report data isn't available right now.",
     tripClear: "No higher-report areas just ahead.",
+    tripInside: "You are now inside a high-risk area.",
+    tripInsideTip: "Chhintai reports are high here. Keep your phone and bag safe and stay on busy, well-lit streets.",
     tripSpeech: "The area ahead has {level} chhintai reports at this time. Keep your phone and bag safe.",
     tripLevel: { high: "many", very_high: "very many" },
     tripMute: "Mute",
@@ -293,7 +320,10 @@ export const en = {
     newsTitle: "News sources",
     newsHint: "News stories counted in this area's level. Tap one to read the full story.",
     videosTitle: "Footage from this area",
-    videosHint: "Shared by people who reported here and checked by a moderator. Sound removed. May be distressing to watch.",
+    videosHint:
+      "Shared by people who reported here and checked by a moderator. Uploaded clips have their sound removed. May be distressing to watch.",
+    videoLinkTitle: "Video on {host}",
+    videoLinkOpen: "Opens on another site",
   },
   report: {
     title: "Report a chhintai",
@@ -364,6 +394,11 @@ export const en = {
       uploading: "Uploading video… {p}%",
       uploaded: "Your video was received. It will appear after a moderator reviews it.",
       failed: "Your report was received, but the video couldn't be uploaded. Check your connection and try a shorter clip.",
+      or: "or",
+      linkLabel: "Larger than 90 MB? Paste a link",
+      linkHint:
+        "Upload it to YouTube (as Unlisted), Google Drive or Facebook, then paste the link here. Make sure anyone with the link can view it.",
+      linkInvalid: "Paste a link from YouTube, Google Drive, Facebook, Instagram, TikTok, Vimeo, Dropbox or OneDrive.",
     },
     submit: "Submit report",
     submitting: "Sending…",
@@ -511,6 +546,9 @@ export const en = {
     rejectVideo: "Delete video",
     videoNote:
       "Watch it with sound. Approve only if it shows the incident and doesn't unfairly expose a victim or bystander. The public sees it without sound.",
+    videoLinkNote:
+      "Hosted elsewhere, so it can't be muted or edited. Approve only if it shows the incident and doesn't unfairly expose a victim or bystander. The public gets the same link.",
+    openVideoLink: "Open link",
     reportStatus: { pending: "Report pending", verified: "Report verified", duplicate: "Duplicate report" },
     empty: "All done. There's nothing to review right now.",
     viewArea: "View area",
@@ -703,7 +741,7 @@ export const en = {
         key: "video",
         title: "Adding a video",
         points: [
-          "You can add a video to a snatching report if you have one. It must be under 90 MB.",
+          "You can add a video to a snatching report if you have one. It must be under 90 MB; for a bigger clip, upload it to YouTube or Google Drive and paste the link.",
           "A moderator watches every video first. If it's fine, it appears on the area page, without sound.",
           "If a video is rejected, it's deleted for good.",
         ],

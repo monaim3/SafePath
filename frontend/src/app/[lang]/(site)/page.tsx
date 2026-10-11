@@ -10,6 +10,7 @@ import { Hero3DMapLazy } from "@/components/home/Hero3DMapLazy";
 import { HERO_HOURS, type Hotspot } from "@/components/home/hero-hours";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { Principles } from "@/components/home/Principles";
+import { GuideVideoButton } from "@/features/help/GuideVideo";
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -64,9 +65,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                 {dict.home.ctaMap}
                 <ArrowRight className="size-4" aria-hidden />
               </ButtonLink>
-              <ButtonLink href={`/${lang}/report`} size="lg" variant="outline">
-                {dict.home.ctaReport}
-              </ButtonLink>
+              {/* the guide video (reporting stays one tap away in the header) */}
+              <GuideVideoButton locale={lang} dict={dict} />
             </div>
             <p className="mt-8 hidden items-center gap-2 text-sm text-ink-3 lg:flex">
               <MousePointerClick className="size-4" aria-hidden />

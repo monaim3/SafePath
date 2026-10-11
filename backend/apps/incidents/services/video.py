@@ -33,6 +33,23 @@ def enabled() -> bool:
     return settings.CLOUDINARY is not None
 
 
+# ---------- links (clips too large to upload, hosted elsewhere) ----------
+# Only well-known video hosts, so a link shown on an area page can't point anywhere else.
+LINK_HOSTS = (
+    "youtube.com", "youtu.be", "drive.google.com", "facebook.com", "fb.watch", "instagram.com",
+    "tiktok.com", "vimeo.com", "dropbox.com", "onedrive.live.com", "1drv.ms", "streamable.com",
+)
+
+
+def link_host(url: str) -> str | None:
+    """The allowed host this link points to (e.g. "youtube.com"), or None if it isn't one."""
+    parts = parse.urlsplit(url.strip())
+    if parts.scheme not in ("http", "https") or parts.username or parts.password:
+        return None
+    host = (parts.hostname or "").lower()
+    return next((h for h in LINK_HOSTS if host == h or host.endswith(f".{h}")), None)
+
+
 def _cfg() -> dict:
     return settings.CLOUDINARY
 

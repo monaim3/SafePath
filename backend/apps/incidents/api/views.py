@@ -70,13 +70,19 @@ class ReportCreateView(APIView):
         if not turnstile.verify(data.pop("turnstile_token", ""), ip):
             return rejected("captcha")
         wants_video = data.pop("has_video", False)
+        video_link = data.pop("video_link", "")
         try:
             report = submit_report(data=data, device_id=device_id, ip=ip)
         except SubmissionRejected as exc:
             return rejected(exc.code, exc.retry_after)
         # Deliberately minimal: never reveal flags, weight or trust.
         body = {"id": str(report.id), "status": "received"}
-        if wants_video and report.kind == Report.Kind.INCIDENT and video.enabled():
+        if video_link and report.kind == Report.Kind.INCIDENT:
+            # Nothing to upload or confirm: straight to the moderators' video queue.
+            report.video_status = Report.VideoStatus.PENDING
+            report.video_link = video_link
+            report.save(update_fields=["video_status", "video_link"])
+        elif wants_video and report.kind == Report.Kind.INCIDENT and video.enabled():
             # One upload per accepted report, so the report rate limits also cap uploads.
             report.video_status = Report.VideoStatus.AWAITING
             report.video_public_id = video.public_id_for(report.id)

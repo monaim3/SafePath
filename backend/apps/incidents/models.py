@@ -92,6 +92,9 @@ class Report(models.Model):
     # Optional video evidence. The file lives on Cloudinary; only its id is kept here.
     video_status = models.CharField(max_length=16, choices=VideoStatus.choices, default=VideoStatus.NONE, blank=True, db_index=True)
     video_public_id = models.CharField(max_length=128, blank=True)
+    # Or, for clips too large to upload, a link to where the reporter put it (YouTube, Drive, …).
+    # Reviewed like an upload; set instead of video_public_id, never together.
+    video_link = models.URLField(max_length=500, blank=True)
     # Synthetic rows from `manage.py seed_demo`. The UI labels any area containing them.
     is_demo = models.BooleanField(default=False, db_index=True)
     # Set by the intake service from the same clock its rate-limit and burst checks use.

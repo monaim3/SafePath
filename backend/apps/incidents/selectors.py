@@ -91,21 +91,21 @@ def news_sources(cells: list[str], limit: int = 8, period_days: int | None = Non
 
 
 def approved_videos(cells: list[str], limit: int = 6) -> list[dict]:
-    """Public footage: approved by a moderator, from reports that still count. Audio is stripped."""
+    """
+    Public footage: approved by a moderator, from reports that still count. Uploads have their audio
+    stripped; footage hosted elsewhere is listed as a link to it.
+    """
     from .services import video  # settings-dependent; imported lazily
 
+    qs = Report.objects.filter(h3__in=cells, status__in=PUBLIC_STATUSES, video_status=Report.VideoStatus.APPROVED)
     if not video.enabled():
-        return []
-    qs = Report.objects.filter(
-        h3__in=cells, status__in=PUBLIC_STATUSES, video_status=Report.VideoStatus.APPROVED
-    ).order_by("-created_at")[:limit]
-    return [
-        {
-            "id": str(r.id),
-            "url": video.public_url(r.video_public_id),
-            "poster": video.poster_url(r.video_public_id),
-            "category": r.category,
-            "date": r.date.isoformat() if r.date else None,
-        }
-        for r in qs
-    ]
+        qs = qs.exclude(video_link="")
+    items = []
+    for r in qs.order_by("-created_at")[:limit]:
+        item = {"id": str(r.id), "category": r.category, "date": r.date.isoformat() if r.date else None}
+        if r.video_link:
+            item.update(link=r.video_link, host=video.link_host(r.video_link))
+        else:
+            item.update(url=video.public_url(r.video_public_id), poster=video.poster_url(r.video_public_id))
+        items.append(item)
+    return items

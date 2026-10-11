@@ -62,14 +62,15 @@ export interface AreaDetail extends CellSummary {
   isDemo: boolean;
 }
 
-/** Response item of GET /api/v1/areas/{h3}/videos — moderator-approved footage, sound removed. */
-export interface AreaVideo {
+/**
+ * Response item of GET /api/v1/areas/{h3}/videos — moderator-approved footage: an upload (sound
+ * removed, `url` + `poster`) or a link to where it's hosted (`link` + `host`, e.g. "youtube.com").
+ */
+export type AreaVideo = {
   id: string;
-  url: string;
-  poster: string;
   category: CategoryKey;
   date: string | null;
-}
+} & ({ url: string; poster: string } | { link: string; host: string });
 
 /** Response item of GET /api/v1/areas/{h3}/news — a published news report counted in this area. */
 export interface AreaNews {

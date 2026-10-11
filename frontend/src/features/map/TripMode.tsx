@@ -9,7 +9,15 @@ import { scoreToBand } from "@/lib/safety/bands";
 import { lineLength, remainingRoute } from "@/lib/safety/reroute";
 import { metres, type RouteOption, type TravelMode } from "@/lib/safety/route-risk";
 import { findSaferRoute, type SaferRoute } from "./safer-route";
-import { arrivalWatcher, bearingDeg, cellsAhead, nextAlert, quietZone, type TripAlert } from "@/lib/safety/trip-alerts";
+import {
+  arrivalWatcher,
+  bearingDeg,
+  cellsAhead,
+  insideAlert,
+  nextAlert,
+  quietZone,
+  type TripAlert,
+} from "@/lib/safety/trip-alerts";
 import { BandBadge } from "@/components/safety/BandBadge";
 import { Button } from "@/components/ui/Button";
 
@@ -212,6 +220,22 @@ export function TripMode({
     const scores = new Map(cells.map((c) => [c.h3, c.score]));
     return (h3: string) => scores.get(h3);
   }, [cells]);
+  // Whole-day levels too, for "you're inside a red area": the map often shows the whole day,
+  // and someone standing in a red patch must not be told all is clear because this hour is quieter.
+  const { data: dayCells } = useQuery({
+    queryKey: ["map-cells", "all", 10],
+    queryFn: () => fetchMapCells({ hour: "all", res: 10 }),
+    staleTime: 10 * 60_000,
+  });
+  const dayLookup = useMemo(() => {
+    if (!dayCells) return null;
+    const scores = new Map(dayCells.map((c) => [c.h3, c.score]));
+    return (h3: string) => scores.get(h3);
+  }, [dayCells]);
+  const inside = useMemo(
+    () => (position ? insideAlert(position, [lookup, dayLookup]) : null),
+    [position, lookup, dayLookup],
+  );
 
   // Arrival check for the selected route (a fresh one if the route changes mid-trip).
   const [arrived, setArrived] = useState(false);
@@ -299,6 +323,17 @@ export function TripMode({
     const id = setTimeout(() => latest.current.onArrive(), 4000); // long enough for the spoken line
     return () => clearTimeout(id);
   }, [arrived, announcer, t]);
+
+  // Stepping into a red area: say so once per area (unless it was just announced as ahead).
+  const insideSaid = useRef(new Set<string>());
+  useEffect(() => {
+    if (!inside || arrived || insideSaid.current.has(inside.cell)) return;
+    quietZone(inside.cell).forEach((c) => insideSaid.current.add(c));
+    if (announced.current.has(inside.cell)) return; // the "ahead" alert already covered it
+    quietZone(inside.cell).forEach((c) => announced.current.add(c));
+    lastAt.current = Date.now();
+    announcer.announce(t.tripInside, muted);
+  }, [inside, announcer, muted, t, arrived]);
 
   useEffect(() => {
     if (!position || !lookup || arrived) return;
@@ -408,6 +443,15 @@ export function TripMode({
             <Loader2 className="size-4 animate-spin" aria-hidden />
             {t.tripWaitingGps}
           </p>
+        ) : inside ? (
+          <div className="flex items-start gap-2 rounded-xl border border-ral-4/40 bg-ral-4/15 p-3">
+            <AlertTriangle className="mt-0.5 size-4 shrink-0 text-ral-4" aria-hidden />
+            <span className="flex-1 leading-snug">
+              <span className="block font-semibold text-ral-4">{t.tripInside}</span>
+              <span className="mt-0.5 block text-ink-2">{t.tripInsideTip}</span>
+            </span>
+            <BandBadge band={inside.band} label={dict.bands[inside.band]} />
+          </div>
         ) : isError ? (
           <p className="text-ink-3">{t.tripNoData}</p>
         ) : alert ? (

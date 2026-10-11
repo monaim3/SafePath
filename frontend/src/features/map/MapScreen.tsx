@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { gridDisk, gridDistance, latLngToCell } from "h3-js";
-import { Hand, Layers, Navigation } from "lucide-react";
+import { Hand, Layers, Navigation, RotateCw, WifiOff } from "lucide-react";
 import type { Dictionary, Locale } from "@/i18n";
 import {
   fetchArea,
@@ -34,6 +34,11 @@ import { PeriodSwitch } from "./PeriodSwitch";
 import type { CellSummary, Period } from "@/lib/safety/types";
 
 const GLASS = "border border-line bg-glass shadow-soft backdrop-blur-xl";
+/** While map data keeps failing, try again this often (on top of the reload when the phone reconnects). */
+const RETRY_EVERY_MS = 15_000;
+const retryWhileFailing = (q: { state: { status: string } }) => (q.state.status === "error" ? RETRY_EVERY_MS : false);
+/** Lookup used before (or without) area data: every place reads as "no reports". */
+const NO_RISK_DATA = (): number | undefined => undefined;
 const EMPTY_DAY: readonly number[] = new Array(24).fill(0);
 /** How far a search looks for an area with reports: 4 street cells ≈ 500 m. */
 const SEARCH_RINGS = 4;
@@ -83,15 +88,23 @@ export function MapScreen({
     setIsNow(now);
   }, []);
 
-  const { data: cells } = useQuery({
+  // After a failed load (weak connection, API waking up), keep trying quietly in the background.
+  const {
+    data: cells,
+    isError: cellsFailed,
+    isFetching: cellsLoading,
+    refetch: refetchCells,
+  } = useQuery({
     queryKey: ["map-cells", hour, res, period],
     queryFn: () => fetchMapCells({ hour, res, period }),
     placeholderData: keepPreviousData,
+    refetchInterval: retryWhileFailing,
   });
   const { data: cityProfile } = useQuery({
     queryKey: ["city-time-profile", period],
     queryFn: () => fetchCityTimeProfile(period),
     placeholderData: keepPreviousData,
+    refetchInterval: retryWhileFailing,
   });
   const { data: selectedArea } = useQuery({
     queryKey: ["area", selected, period],
@@ -104,13 +117,15 @@ export function MapScreen({
     queryKey: ["map-cells", hour, 10, period],
     queryFn: () => fetchMapCells({ hour, res: 10, period }),
     enabled: directionsOpen,
+    refetchInterval: retryWhileFailing,
   });
   const lookup = useMemo(() => {
-    // Activity data unavailable (API down): still show the route, just without risk colours.
-    if (!streetCells) return streetCellsFailed ? () => undefined : null;
+    // Activity data still loading or unavailable: show the route straight away, without risk
+    // colours; they appear as soon as the data arrives (never a blank route panel while waiting).
+    if (!streetCells) return NO_RISK_DATA;
     const scores = new Map(streetCells.map((c) => [c.h3, c.score]));
     return (h3: string) => scores.get(h3);
-  }, [streetCells, streetCellsFailed]);
+  }, [streetCells]);
 
   // Keep the route / live dot clear of the panels: left panel on desktop, top panel + folded bottom dock on mobile.
   const panelPadding = useCallback(() => {
@@ -200,11 +215,13 @@ export function MapScreen({
             onClose={() => setDirectionsOpen(false)}
             onOverlay={handleOverlay}
             onTripPosition={setMe}
+            riskDataFailed={streetCellsFailed && !streetCells}
           />
         ) : (
           <div className="flex gap-2">
             <div className="min-w-0 flex-1">
               <PlaceSearch
+                labels={dict.net}
                 placeholder={dict.map.searchPlaceholder}
                 onSelect={async (place) => {
                   setFlyTo({ center: place.center, zoom: 15, key: Date.now() });
@@ -242,6 +259,24 @@ export function MapScreen({
         )}
         {!directionsOpen && (
           <PeriodSwitch dict={dict} value={period} onChange={setPeriod} />
+        )}
+        {cellsFailed && (
+          <div role="alert" className={cn("flex items-start gap-3 self-start rounded-2xl px-4 py-3 text-sm lg:max-w-sm", GLASS)}>
+            <WifiOff className="mt-0.5 size-4 shrink-0 text-ral-4" aria-hidden />
+            <div className="min-w-0">
+              <p className="font-medium">{dict.net.zonesFailed}</p>
+              <p className="mt-0.5 text-xs text-ink-3">{dict.net.retrying}</p>
+              <button
+                type="button"
+                onClick={() => void refetchCells()}
+                disabled={cellsLoading}
+                className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1.5 text-xs font-semibold text-accent disabled:opacity-60"
+              >
+                <RotateCw className={cn("size-3.5", cellsLoading && "animate-spin")} aria-hidden />
+                {dict.net.retry}
+              </button>
+            </div>
+          </div>
         )}
         {!selected && !directionsOpen && (
           <p className="hidden items-center gap-2 self-start rounded-full bg-glass px-3 py-1.5 text-xs text-ink-2 backdrop-blur-xl lg:inline-flex">

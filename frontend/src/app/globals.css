@@ -181,6 +181,9 @@ html:lang(bn) body {
 @keyframes hero-clock-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .hero-clock-bar { animation: hero-clock-bar linear forwards; }
 
+/* Guide video pop-up */
+@keyframes guide-in { from { transform: scale(0.96) translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
 /* "Install the app" popup on phones: slides up, with a bar counting down its auto-close. */
 @keyframes install-up { from { transform: translateY(120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes install-countdown { from { transform: scaleX(1); } to { transform: scaleX(0); } }

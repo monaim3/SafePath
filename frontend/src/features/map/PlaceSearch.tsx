@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, MapPin, Search, X } from "lucide-react";
+import { Loader2, MapPin, RotateCw, Search, WifiOff, X } from "lucide-react";
 import { searchPlaces, type PlaceResult } from "@/lib/api/safety";
 import { cn } from "@/components/ui/cn";
 
@@ -14,7 +14,10 @@ export function PlaceSearch({
   icon,
   initialText = "",
   id = "place",
+  labels,
 }: {
+  /** Messages for a failed search / no results (from dict.net). */
+  labels: { searchFailed: string; noResults: string; retry: string };
   placeholder: string;
   onSelect: (place: PlaceResult) => void;
   onClear?: () => void;
@@ -33,14 +36,18 @@ export function PlaceSearch({
     return () => clearTimeout(t);
   }, [text]);
 
-  const { data, isFetching, isError } = useQuery({
+  const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ["places", query],
     queryFn: ({ signal }) => searchPlaces(query, signal),
     enabled: open && query.length >= 2,
     staleTime: 5 * 60_000,
+    retry: 1, // someone is waiting on the dropdown: say it failed soon rather than retry for long
   });
 
-  const results = open && query.length >= 2 ? (data ?? []) : [];
+  const searching = open && query.length >= 2;
+  const results = searching ? (data ?? []) : [];
+  const failed = searching && isError && !isFetching;
+  const empty = searching && !isError && !isFetching && data !== undefined && data.length === 0;
   const listId = `${id}-results`;
 
   return (
@@ -94,13 +101,38 @@ export function PlaceSearch({
         )}
       </label>
 
-      {(results.length > 0 || (open && isError)) && (
+      {(failed || empty) && (
+        <div
+          role="status"
+          className="absolute inset-x-0 top-full z-40 mt-1.5 rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-ink-2 shadow-soft"
+        >
+          {failed ? (
+            <span className="flex flex-wrap items-center justify-between gap-2">
+              <span className="flex items-center gap-2">
+                <WifiOff className="size-4 shrink-0 text-ral-4" aria-hidden />
+                {labels.searchFailed}
+              </span>
+              <button
+                type="button"
+                onClick={() => void refetch()}
+                className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1.5 text-xs font-semibold text-accent"
+              >
+                <RotateCw className="size-3.5" aria-hidden />
+                {labels.retry}
+              </button>
+            </span>
+          ) : (
+            labels.noResults
+          )}
+        </div>
+      )}
+
+      {results.length > 0 && (
         <ul
           id={listId}
           role="listbox"
           className="absolute inset-x-0 top-full z-40 mt-1.5 overflow-hidden rounded-2xl border border-line bg-surface py-1 shadow-soft"
         >
-          {isError && <li className="px-4 py-3 text-sm text-ink-3">Search unavailable</li>}
           {results.map((place) => (
             <li key={place.id} role="option" aria-selected={false}>
               <button

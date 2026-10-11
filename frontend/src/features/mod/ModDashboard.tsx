@@ -15,6 +15,7 @@ import {
   LogOut,
   MapPin,
   MessageSquareQuote,
+  PlayCircle,
   ShieldCheck,
   Trash2,
   Users,
@@ -175,6 +176,30 @@ function ReportCard({
             <p className="mt-2 flex gap-2 text-xs leading-relaxed text-ink-3">
               <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden />
               {t.videoNote}
+            </p>
+          )}
+        </div>
+      )}
+
+      {report.video_link && (
+        <div className="mt-3">
+          <a
+            href={report.video_link}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="flex items-center gap-2.5 rounded-xl bg-surface-2 px-3 py-2.5 text-sm hover:text-accent"
+          >
+            <PlayCircle className="size-4 shrink-0 text-accent" aria-hidden />
+            <span className="min-w-0 flex-1 truncate font-medium">{report.video_link}</span>
+            <span className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-accent">
+              {t.openVideoLink}
+              <ExternalLink className="size-3" aria-hidden />
+            </span>
+          </a>
+          {onVideo && (
+            <p className="mt-2 flex gap-2 text-xs leading-relaxed text-ink-3">
+              <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden />
+              {t.videoLinkNote}
             </p>
           )}
         </div>

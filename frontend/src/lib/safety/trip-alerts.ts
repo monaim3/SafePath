@@ -73,8 +73,21 @@ export interface TripAlert {
   band: Band;
 }
 
-function cellAt([lng, lat]: LngLat): string {
+export function cellAt([lng, lat]: LngLat): string {
   return latLngToCell(lat, lng, REPORT_RES);
+}
+
+/**
+ * The alert-level area the person is standing in right now, or null. Takes the higher of the
+ * scores given (e.g. this hour and the whole day), so it agrees with whichever the map shows.
+ */
+export function insideAlert(position: LngLat, lookups: readonly (CellLookup | null)[]): TripAlert | null {
+  const cell = cellAt(position);
+  const scores = lookups.map((l) => l?.(cell)).filter((s): s is number => s !== undefined);
+  if (scores.length === 0) return null;
+  const score = Math.max(...scores);
+  const band = scoreToBand(score);
+  return ALERT_BANDS.has(band) ? { cell, score, band } : null;
 }
 
 /** Cells the person will reach soon: along the route ahead, or a ~150 m ring when off-route. */

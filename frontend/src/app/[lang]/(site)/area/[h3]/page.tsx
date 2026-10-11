@@ -12,6 +12,7 @@ import {
   Info,
   Minus,
   Phone,
+  PlayCircle,
   Plus,
 } from "lucide-react";
 import { fill, formatNumber, getDictionary, hasLocale } from "@/i18n";
@@ -319,15 +320,36 @@ export default async function AreaPage({ params, searchParams }: PageProps<"/[la
           <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {videos.map((v) => (
               <li key={v.id}>
-                <video
-                  src={v.url}
-                  poster={v.poster}
-                  controls
-                  muted
-                  preload="none"
-                  playsInline
-                  className="aspect-video w-full rounded-2xl bg-black"
-                />
+                {"link" in v ? (
+                  // Hosted elsewhere (too large to upload): link out, never embed.
+                  <a
+                    href={v.link}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="group grid aspect-video w-full place-items-center rounded-2xl border border-line bg-surface-2 p-4 text-center transition-colors hover:border-accent"
+                  >
+                    <span>
+                      <PlayCircle className="mx-auto size-10 text-ink-3 group-hover:text-accent" aria-hidden />
+                      <span className="mt-2 block text-sm font-semibold group-hover:text-accent">
+                        {fill(lang, dict.area.videoLinkTitle, { host: v.host })}
+                      </span>
+                      <span className="mt-0.5 inline-flex items-center gap-1 text-xs text-ink-3">
+                        {dict.area.videoLinkOpen}
+                        <ExternalLink className="size-3" aria-hidden />
+                      </span>
+                    </span>
+                  </a>
+                ) : (
+                  <video
+                    src={v.url}
+                    poster={v.poster}
+                    controls
+                    muted
+                    preload="none"
+                    playsInline
+                    className="aspect-video w-full rounded-2xl bg-black"
+                  />
+                )}
                 <p className="mt-2 flex items-center gap-2 text-sm text-ink-2">
                   <CategoryIcon category={v.category} size="sm" />
                   <span className="truncate">{dict.categories[v.category]}</span>

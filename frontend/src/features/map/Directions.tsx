@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
+  RotateCw,
+  WifiOff,
   ArrowDownUp,
   ArrowLeft,
   Car,
@@ -110,11 +112,14 @@ export function Directions({
   onClose,
   onOverlay,
   onTripPosition,
+  riskDataFailed = false,
 }: {
   locale: Locale;
   dict: Dictionary;
   hour: number | "all";
   lookup: CellLookup | null;
+  /** Area data couldn't be loaded: routes still show, without risk colours (and we say so). */
+  riskDataFailed?: boolean;
   onClose: () => void;
   onOverlay: (overlay: RouteOverlay | null) => void;
   /** GPS fixes while a trip runs (null when it stops), for the moving dot on the map. */
@@ -136,7 +141,7 @@ export function Directions({
   const [arrivedFor, setArrivedFor] = useState<string | null>(null);
   const placesKey = `${from?.center.join()}>${to?.center.join()}`;
 
-  const { data: baseRoutes, isFetching, isError } = useQuery({
+  const { data: baseRoutes, isFetching, isError, refetch } = useQuery({
     queryKey: ["routes", from?.center, to?.center, mode],
     queryFn: ({ signal }) => fetchRoutes(from!.center, to!.center, mode, signal),
     enabled: from !== null && to !== null,
@@ -321,6 +326,7 @@ export function Directions({
         <div className="flex items-center gap-2">
           <div className="min-w-0 flex-1 space-y-2">
             <PlaceSearch
+              labels={dict.net}
               key={`from-${version}`}
               id="route-from"
               variant="inline"
@@ -335,6 +341,7 @@ export function Directions({
               onClear={() => setFrom(null)}
             />
             <PlaceSearch
+              labels={dict.net}
               key={`to-${version}`}
               id="route-to"
               variant="inline"
@@ -406,7 +413,25 @@ export function Directions({
             {t.searching}
           </p>
         )}
-        {from && to && isError && !isFetching && <p className="text-sm text-ral-4">{t.error}</p>}
+        {from && to && isError && !isFetching && (
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-ral-4/10 px-3 py-2.5" role="alert">
+            <p className="text-sm text-ral-4">{t.error}</p>
+            <button
+              type="button"
+              onClick={() => void refetch()}
+              className="inline-flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-xs font-semibold text-accent"
+            >
+              <RotateCw className="size-3.5" aria-hidden />
+              {dict.net.retry}
+            </button>
+          </div>
+        )}
+        {routes && !isFetching && riskDataFailed && (
+          <p className="mb-3 flex items-start gap-2 rounded-xl bg-surface-2 px-3 py-2 text-xs text-ink-2">
+            <WifiOff className="mt-0.5 size-3.5 shrink-0 text-ral-4" aria-hidden />
+            {dict.net.noColours}
+          </p>
+        )}
 
         {routes && analyses && !isFetching && (
           <>

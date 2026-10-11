@@ -93,6 +93,8 @@ export async function submitReport(
     deviceId: string;
     turnstileToken?: string;
     hasVideo?: boolean;
+    /** Or a link to footage hosted elsewhere (too large to upload); goes straight to review. */
+    videoLink?: string;
     /** Exact pin + name, for moderators only. The server keeps it only if it lies in `input.h3`. */
     spot?: { lngLat: [number, number]; label: string } | null;
   },
@@ -111,6 +113,7 @@ export async function submitReport(
         device_id: extra.deviceId,
         turnstile_token: extra.turnstileToken ?? "",
         has_video: Boolean(extra.hasVideo),
+        ...(extra.videoLink && { video_link: extra.videoLink }),
         ...(extra.spot && {
           lat: extra.spot.lngLat[1],
           lng: extra.spot.lngLat[0],

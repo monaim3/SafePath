@@ -142,6 +142,46 @@ def test_rejecting_video_deletes_it_but_keeps_report(django_capture_on_commit_ca
     assert cloudinary["destroyed"] == [r.video_public_id]
 
 
+def test_link_hosts():
+    assert video.link_host("https://youtu.be/abc123") == "youtu.be"
+    assert video.link_host("https://m.youtube.com/watch?v=abc") == "youtube.com"
+    assert video.link_host("https://drive.google.com/file/d/x/view") == "drive.google.com"
+    assert video.link_host("https://evil-youtube.com/x") is None
+    assert video.link_host("https://youtube.com.evil.net/x") is None
+    assert video.link_host("javascript:alert(1)") is None
+    assert video.link_host("https://user:pw@youtube.com/x") is None
+
+
+def test_video_link_goes_to_review_then_public_as_link(settings):
+    settings.CLOUDINARY = None  # links work without Cloudinary
+    client = APIClient()
+    assert submit(client, video_link="https://example.com/clip.mp4").status_code == 400
+    assert submit(client, video_link="https://youtu.be/x", has_video=True).status_code == 400
+
+    body = submit(client, video_link="https://youtu.be/abc123").json()
+    assert "upload" not in body
+    r = Report.objects.get(pk=body["id"])
+    assert (r.video_status, r.video_link, r.video_public_id) == ("pending", "https://youtu.be/abc123", "")
+
+    mod = mod_client()
+    [queued] = mod.get("/api/v1/mod/queue").json()["videos"]
+    assert (queued["video_link"], queued["video_url"]) == ("https://youtu.be/abc123", None)
+    assert public_videos(client) == []
+
+    assert mod.post(f"/api/v1/mod/reports/{r.id}/video/approve").status_code == 200
+    [shown] = public_videos(client)
+    assert (shown["link"], shown["host"]) == ("https://youtu.be/abc123", "youtu.be")
+
+
+def test_rejecting_video_link_forgets_it(django_capture_on_commit_callbacks, cloudinary):
+    body = submit(APIClient(), video_link="https://www.facebook.com/watch?v=1").json()
+    with django_capture_on_commit_callbacks(execute=True):
+        assert mod_client().post(f"/api/v1/mod/reports/{body['id']}/video/reject").status_code == 200
+    r = Report.objects.get(pk=body["id"])
+    assert (r.video_status, r.video_link) == ("rejected", "")
+    assert cloudinary["destroyed"] == []
+
+
 def test_rejecting_report_also_deletes_its_video(django_capture_on_commit_callbacks, cloudinary):
     r = pending_video_report()
     with django_capture_on_commit_callbacks(execute=True):

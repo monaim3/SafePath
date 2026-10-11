@@ -29,13 +29,15 @@ def _notify_watchers(h3_cell: str) -> None:
 
 
 def _drop_video(report: Report) -> None:
-    """Mark the report's video rejected and delete the file from Cloudinary after the commit."""
+    """Mark the report's video rejected: forget a link, or delete the file from Cloudinary after the commit."""
     if report.video_status in ("", Report.VideoStatus.REJECTED):
         return
     report.video_status = Report.VideoStatus.REJECTED
-    report.save(update_fields=["video_status"])
+    report.video_link = ""
+    report.save(update_fields=["video_status", "video_link"])
     public_id = report.video_public_id
-    transaction.on_commit(lambda: video.destroy(public_id))
+    if public_id:
+        transaction.on_commit(lambda: video.destroy(public_id))
 
 
 @transaction.atomic
@@ -94,7 +96,7 @@ def reject_report(report: Report, *, actor, reason: str = "") -> Report:
 
 @transaction.atomic
 def approve_video(report: Report, *, actor) -> Report:
-    """Footage becomes public on the area page (audio removed)."""
+    """Footage becomes public on the area page (an upload with audio removed; a link as a link)."""
     report.video_status = Report.VideoStatus.APPROVED
     report.save(update_fields=["video_status"])
     transaction.on_commit(bump_data_version)

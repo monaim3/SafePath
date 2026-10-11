@@ -120,6 +120,40 @@ Do **not** run `seed_demo` on the server — production starts with real reports
    - the API's `CORS_ALLOWED_ORIGINS` (then redeploy the API; on the Oracle stack: `FRONTEND_ORIGIN`, then restart the api container)
    - the Turnstile widget's hostnames in Cloudflare
 
+## Database backups
+
+`.github/workflows/db-backup.yml` copies the Neon database every Saturday 03:00 (Bangladesh time),
+encrypts it with AES-256 and keeps it 90 days as a workflow artifact. The repository is public, so
+backups are **never** stored unencrypted.
+
+**Set up once** (GitHub → repository → Settings → Secrets and variables → Actions → New repository secret):
+
+| Secret | Value |
+|---|---|
+| `NEON_DATABASE_URL` | the production `DATABASE_URL` (Vercel → safepath-api → Settings → Environment Variables) |
+| `BACKUP_PASSPHRASE` | a long passphrase (20+ characters). **Save it in a password manager** — without it no backup can be opened |
+
+Then Actions → "Database backup" → **Run workflow** once, and check it ends green.
+
+- GitHub emails you if a scheduled backup fails.
+- In a public repository GitHub pauses scheduled jobs after **60 days without any commit**; it emails a
+  warning first. Re-enable it on the Actions tab (or push any commit).
+- If you change the database password on Neon, update `NEON_DATABASE_URL` too.
+
+**Restore** (Docker installed; e.g. into a new Neon database or a local one):
+
+```bash
+# 1. Download the artifact "safepath-db-YYYY-MM-DD" from the Actions run and unzip it.
+# 2. Decrypt (asks for BACKUP_PASSPHRASE):
+gpg -d -o safepath.dump safepath-YYYY-MM-DD.dump.gpg
+# 3. Restore into an EMPTY database (never over the live one):
+docker run --rm -v "$PWD:/w" postgres:16-alpine \
+  pg_restore --no-owner --no-privileges --exit-on-error -d "postgresql://USER:PASSWORD@HOST/DBNAME" /w/safepath.dump
+# 4. Point DATABASE_URL at it and run `python manage.py migrate` (applies anything newer than the backup).
+```
+
+Delete the decrypted `safepath.dump` when done — it contains report data and moderator-only exact locations.
+
 ## Before announcing it publicly
 
 - Map tiles/geocoding/routing use free public servers (OpenFreeMap, Photon, OSRM, Esri imagery) with fair-use limits — fine for launch, self-host when traffic grows (see the master prompt §27).

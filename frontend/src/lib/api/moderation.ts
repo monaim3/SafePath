@@ -37,6 +37,8 @@ export interface QueueReport {
   video_status: "" | "awaiting" | "pending" | "approved" | "rejected";
   /** Original footage with sound, for review. Null when there is nothing to review. */
   video_url: string | null;
+  /** Or a link to footage hosted elsewhere (YouTube, Drive, …); empty when there is none. */
+  video_link: string;
 }
 
 export interface AreaFlag {

@@ -7,6 +7,7 @@ import { getDictionary, hasLocale, locales } from "@/i18n";
 import { Providers } from "@/components/layout/Providers";
 import { InstallPopup } from "@/features/watch/InstallPopup";
 import { VisitTracker } from "@/components/layout/VisitTracker";
+import { NetworkStatus } from "@/components/layout/NetworkStatus";
 import "../globals.css";
 
 // Geometric heavy sans, matching the logo wordmark.
@@ -87,6 +88,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
           <InstallPopup dict={getDictionary(lang)} />
           {/* anonymous visitor counts for moderators */}
           <VisitTracker />
+          <NetworkStatus dict={getDictionary(lang)} />
         </Providers>
       </body>
     </html>

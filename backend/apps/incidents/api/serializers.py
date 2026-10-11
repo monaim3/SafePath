@@ -4,6 +4,7 @@ import h3
 from rest_framework import serializers
 
 from ..models import Report
+from ..services import video
 
 PHONE = re.compile(r"(?:\+?88)?0?1[3-9]\d{2}[\s-]?\d{6}")
 EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
@@ -33,6 +34,8 @@ class ReportInputSerializer(serializers.Serializer):
     place_label = serializers.CharField(max_length=160, required=False, allow_blank=True, default="")
     # The reporter has footage to upload; the response then carries a signed upload ticket.
     has_video = serializers.BooleanField(required=False, default=False)
+    # Or a link to footage hosted elsewhere (too large to upload). Reviewed the same way.
+    video_link = serializers.URLField(max_length=500, required=False, allow_blank=True, default="")
 
     # Not stored: used only for checks.
     device_id = serializers.CharField(min_length=16, max_length=64)
@@ -49,6 +52,12 @@ class ReportInputSerializer(serializers.Serializer):
     def validate_place_label(self, value: str) -> str:
         return redact(" ".join(value.split()))
 
+    def validate_video_link(self, value: str) -> str:
+        value = value.strip()
+        if value and video.link_host(value) is None:
+            raise serializers.ValidationError("unsupported host")
+        return value
+
     def validate(self, attrs):
         positive = attrs["category"] in Report.POSITIVE_CATEGORIES
         if positive != (attrs["kind"] == Report.Kind.POSITIVE):
@@ -57,6 +66,8 @@ class ReportInputSerializer(serializers.Serializer):
             raise serializers.ValidationError({"date": "required for incidents"})
         if "hour" in attrs and attrs["hour"] // 3 != attrs["block"]:
             raise serializers.ValidationError({"hour": "does not match block"})
+        if attrs.get("has_video") and attrs.get("video_link"):
+            raise serializers.ValidationError({"video_link": "upload a file or give a link, not both"})
         # The exact pin is kept only if it really lies in the reported cell; otherwise it's dropped
         # (with its label), and the report still goes through on the cell alone.
         lat, lng = attrs.pop("lat", None), attrs.pop("lng", None)
