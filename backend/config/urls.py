@@ -6,4 +6,6 @@ urlpatterns = [
     path("api/v1/", include("apps.incidents.api.urls")),
     path("api/v1/mod/", include("apps.moderation.api.urls")),
     path("api/v1/", include("apps.watch.api.urls")),
+    path("api/v1/", include("apps.analytics.urls")),
+    path("api/v1/", include("apps.contact.urls")),
 ]

@@ -35,7 +35,9 @@ def payload(**extra) -> dict:
 
 
 def submit(client, **extra):
-    return client.post("/api/v1/reports", payload(**extra), format="json")
+    # a different device on a different network each time, so the 1-per-30-min limit doesn't interfere
+    ip = f"198.51.100.{Report.objects.count() + 1}"
+    return client.post("/api/v1/reports", payload(**extra), format="json", REMOTE_ADDR=ip)
 
 
 def test_sign_matches_cloudinary_algorithm():

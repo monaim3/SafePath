@@ -6,8 +6,10 @@ RiskConfig without touching the logic. See docs/SAFEPATH_MASTER_PROMPT.md §12.
 from datetime import timedelta
 
 # ---------- rate limits (per device hash and per IP hash) ----------
+# One report per 30 minutes, at most 5 a day. The user-facing texts quote these numbers
+# (frontend i18n: report.submitErrors.rate_limited_wait and the rules page) — keep them in step.
 RATE_LIMITS: tuple[tuple[timedelta, int], ...] = (
-    (timedelta(minutes=10), 2),
+    (timedelta(minutes=30), 1),
     (timedelta(days=1), 5),
 )
 CONFIRM_LIMIT_PER_DAY = 30
@@ -51,6 +53,11 @@ BURST_MAX_DEVICES = 2
 # With fewer reports than this, one report at 6am would otherwise make 6am look "high":
 # no single hour is then rated above the area's overall level.
 MIN_PATTERN_REPORTS = 3
+
+# ---------- exact location (moderators only) ----------
+# The reporter's exact pin and picked place name help moderators check a report; after this
+# many days they're wiped and only the ~150 m cell remains (master prompt §25).
+EXACT_LOCATION_DAYS = 90
 
 # ---------- public map ----------
 K_ANONYMITY_REPORTS = 3

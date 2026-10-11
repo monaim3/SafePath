@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { cellToLatLng, latLngToCell } from "h3-js";
 import { Check, Loader2, LocateFixed, MapPin, MapPinOff } from "lucide-react";
 import type { Dictionary } from "@/i18n";
-import { reversePlace } from "@/lib/api/safety";
+import { reversePlace, type PlaceResult } from "@/lib/api/safety";
+import { metres } from "@/lib/safety/route-risk";
 import { cellInBangladesh } from "@/lib/safety/bangladesh";
 import { REPORT_RES } from "@/lib/safety/grid";
 import { cn } from "@/components/ui/cn";
@@ -21,14 +22,26 @@ const MOHAMMADPUR: LngLat = [90.3605, 23.7625];
  * Google-style "drop a pin": search or move the map so the fixed centre pin is on the spot,
  * with the address under it. Only the ~150 m cell is stored.
  */
+export interface ExactSpot {
+  lngLat: LngLat;
+  /** The name under the pin: the searched place if the pin is still on it, else the address there. */
+  label: string;
+}
+
+/** A searched place still counts as "the spot" while the pin stays this close to it (metres). */
+const SEARCH_STICK_M = 60;
+
 export function LocationPicker({
   dict,
   value,
   onChange,
+  onSpot,
 }: {
   dict: Dictionary;
   value: string;
   onChange: (h3: string) => void;
+  /** The exact pin and its name once a spot is chosen (null otherwise). Shown to moderators only. */
+  onSpot?: (spot: ExactSpot | null) => void;
 }) {
   const t = dict.report;
   const [center, setCenter] = useState<LngLat | null>(null);
@@ -75,6 +88,25 @@ export function LocationPicker({
   const centerCell = center ? latLngToCell(center[1], center[0], REPORT_RES) : null;
   const confirmed = value !== "" && value === centerCell;
 
+  // What to call the exact spot (for moderators): the place the person searched for, while the
+  // pin is still on it; otherwise the address the map shows under the pin.
+  const [searched, setSearched] = useState<PlaceResult | null>(null);
+  const join = (...parts: (string | undefined)[]) => parts.filter(Boolean).join(", ");
+  const label =
+    searched && center && metres(center, searched.center) <= SEARCH_STICK_M
+      ? join(searched.name, searched.context)
+      : address
+        ? join(address.name, address.context)
+        : "";
+  const spotRef = useRef(onSpot);
+  useEffect(() => {
+    spotRef.current = onSpot;
+  });
+  const [lng, lat] = center ?? [0, 0];
+  useEffect(() => {
+    spotRef.current?.(confirmed ? { lngLat: [lng, lat], label: label.slice(0, 160) } : null);
+  }, [confirmed, lng, lat, label]);
+
   function locateMe() {
     if (!navigator.geolocation) return;
     setLocating(true);
@@ -96,7 +128,10 @@ export function LocationPicker({
             id="report-place"
             variant="inline"
             placeholder={t.searchPlace}
-            onSelect={(p) => fly(p.center)}
+            onSelect={(p) => {
+              setSearched(p);
+              fly(p.center);
+            }}
           />
         </div>
         <button
@@ -109,7 +144,8 @@ export function LocationPicker({
         </button>
       </div>
 
-      <div className="relative mt-3 h-[24rem] overflow-hidden rounded-3xl border border-line">
+      {/* Shorter on phones so there's always page left to swipe past it. */}
+      <div className="relative mt-3 h-[20rem] overflow-hidden rounded-3xl border border-line sm:h-[24rem]">
         <SafetyMap
           className="absolute inset-0"
           selected={value || null}
@@ -119,6 +155,8 @@ export function LocationPicker({
           initialCenter={MOHAMMADPUR}
           initialZoom={14}
           basemap="satellite"
+          // Scrolling the form past the map must not drag the chosen spot away.
+          scrollFriendly={t.mapGesture}
           ariaLabel={t.whereQ}
         />
 

@@ -61,8 +61,13 @@ class Report(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     kind = models.CharField(max_length=16, choices=Kind.choices)
     category = models.CharField(max_length=24, choices=CATEGORY_CHOICES)
-    # Public location: H3 cell (~150 m). Exact coordinates are never stored.
+    # Public location: H3 cell (~150 m). Everything public is built from this.
     h3 = models.CharField(max_length=16, db_index=True)
+    # Restricted: the exact pin and the place name the reporter picked, for moderators only (never in
+    # any public response). Wiped after policy.EXACT_LOCATION_DAYS; the cell above stays.
+    exact_lat = models.FloatField(null=True, blank=True)
+    exact_lng = models.FloatField(null=True, blank=True)
+    place_label = models.CharField(max_length=160, blank=True)
     date = models.DateField(null=True, blank=True)
     block = models.PositiveSmallIntegerField()  # 0–7 (3-hour blocks)
     hour = models.PositiveSmallIntegerField(null=True, blank=True)

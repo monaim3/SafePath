@@ -22,14 +22,20 @@ interface OsrmRoute {
   legs: { steps: OsrmStep[] }[];
 }
 
+/**
+ * Routes from → to. With `via`, one route forced through that point (used to try a detour
+ * around a risky area; OSRM gives no alternatives when there's a via point).
+ */
 export async function fetchRoutes(
   from: [lng: number, lat: number],
   to: [lng: number, lat: number],
   mode: TravelMode,
   signal?: AbortSignal,
+  via?: [lng: number, lat: number],
 ): Promise<RouteOption[]> {
-  const url = new URL(`${BASE[mode]}/route/v1/driving/${from.join(",")};${to.join(",")}`);
-  url.searchParams.set("alternatives", "3");
+  const points = via ? [from, via, to] : [from, to];
+  const url = new URL(`${BASE[mode]}/route/v1/driving/${points.map((p) => p.join(",")).join(";")}`);
+  url.searchParams.set("alternatives", via ? "false" : "3");
   url.searchParams.set("overview", "full");
   url.searchParams.set("geometries", "geojson");
   url.searchParams.set("steps", "true");
@@ -40,7 +46,7 @@ export async function fetchRoutes(
   if (data.code !== "Ok" || !data.routes?.length) throw new Error(`Routing failed (${data.code})`);
 
   return data.routes.map((r, i) => ({
-    id: `${mode}-${i}`,
+    id: via ? `${mode}-via-${via.map((n) => n.toFixed(4)).join(",")}` : `${mode}-${i}`,
     distance: r.distance,
     duration: r.duration,
     coordinates: r.geometry.coordinates,

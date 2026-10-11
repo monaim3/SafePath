@@ -1,8 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowDownUp, ArrowLeft, Car, Circle, Footprints, Loader2, LocateFixed, MapPin, Navigation, Route } from "lucide-react";
+import {
+  ArrowDownUp,
+  ArrowLeft,
+  Car,
+  Circle,
+  Flag,
+  Footprints,
+  Loader2,
+  LocateFixed,
+  MapPin,
+  Navigation,
+  Pencil,
+  Route,
+  ShieldCheck,
+} from "lucide-react";
 import { fill, formatHour, type Dictionary, type Locale } from "@/i18n";
 import type { PlaceResult } from "@/lib/api/safety";
 import { fetchRoutes } from "@/lib/api/routing";
@@ -17,8 +31,11 @@ import {
 } from "@/lib/safety/route-risk";
 import { BandBadge } from "@/components/safety/BandBadge";
 import { cn } from "@/components/ui/cn";
+import { travelledPart } from "@/lib/safety/trip-alerts";
+import { AVOID_SCORE, peakAlongWay } from "@/lib/safety/reroute";
 import { PlaceSearch } from "./PlaceSearch";
-import { Announcer, TripMode } from "./TripMode";
+import { findSaferRoute } from "./safer-route";
+import { Announcer, TripMode, type TripFix } from "./TripMode";
 
 /** Google-style route blue for stretches with no reports. */
 export const ROUTE_BLUE = "#1a73e8";
@@ -29,15 +46,29 @@ export interface RouteOverlay {
   features: GeoJSON.FeatureCollection;
   bounds: [LngLat, LngLat];
   key: string;
+  /** False while a trip runs: the camera is following the person, so don't zoom out to the route. */
+  fit: boolean;
 }
 
-function buildOverlay(routes: RouteOption[], analyses: RouteAnalysis[], selected: number): RouteOverlay {
+function buildOverlay(
+  routes: RouteOption[],
+  analyses: RouteAnalysis[],
+  selected: number,
+  here: LngLat | null,
+  /** A safer way being offered during a trip: drawn as a dashed green preview. */
+  suggest: RouteOption | null = null,
+  /** Keeps the key stable (no re-fit of the camera) while a trip is following the person. */
+  fixedKey?: string,
+): RouteOverlay {
   const features: GeoJSON.Feature[] = [];
   routes.forEach((r, i) => {
     if (i !== selected) {
       features.push({ type: "Feature", properties: { kind: "alt", index: i }, geometry: { type: "LineString", coordinates: r.coordinates } });
     }
   });
+  if (suggest) {
+    features.push({ type: "Feature", properties: { kind: "suggest" }, geometry: { type: "LineString", coordinates: suggest.coordinates } });
+  }
   const sel = routes[selected];
   features.push({ type: "Feature", properties: { kind: "casing" }, geometry: { type: "LineString", coordinates: sel.coordinates } });
   for (const seg of analyses[selected].segments) {
@@ -46,6 +77,11 @@ function buildOverlay(routes: RouteOption[], analyses: RouteAnalysis[], selected
       properties: { kind: "seg", color: seg.band ? BAND_COLORS[seg.band] : ROUTE_BLUE },
       geometry: { type: "LineString", coordinates: seg.coordinates },
     });
+  }
+  // During a trip, the stretch already driven/walked turns grey, like Google Maps.
+  const passed = here ? travelledPart(here, sel.coordinates) : null;
+  if (passed) {
+    features.push({ type: "Feature", properties: { kind: "passed" }, geometry: { type: "LineString", coordinates: passed } });
   }
   const first = sel.coordinates[0];
   const last = sel.coordinates[sel.coordinates.length - 1];
@@ -61,7 +97,8 @@ function buildOverlay(routes: RouteOption[], analyses: RouteAnalysis[], selected
       [Math.min(...lngs), Math.min(...lats)],
       [Math.max(...lngs), Math.max(...lats)],
     ],
-    key: `${sel.id}-${routes.length}-${first.join()}-${last.join()}`,
+    key: fixedKey ?? `${sel.id}-${routes.length}-${first.join()}-${last.join()}`,
+    fit: fixedKey === undefined,
   };
 }
 
@@ -72,6 +109,7 @@ export function Directions({
   lookup,
   onClose,
   onOverlay,
+  onTripPosition,
 }: {
   locale: Locale;
   dict: Dictionary;
@@ -79,6 +117,8 @@ export function Directions({
   lookup: CellLookup | null;
   onClose: () => void;
   onOverlay: (overlay: RouteOverlay | null) => void;
+  /** GPS fixes while a trip runs (null when it stops), for the moving dot on the map. */
+  onTripPosition: (fix: TripFix | null) => void;
 }) {
   const t = dict.route;
   const [from, setFrom] = useState<PlaceResult | null>(null);
@@ -89,14 +129,53 @@ export function Directions({
   const [version, setVersion] = useState(0); // remounts the inputs after swap / my-location
   // Set while a trip is running (voice alerts on). Created inside the tap so audio is allowed.
   const [trip, setTrip] = useState<Announcer | null>(null);
+  // Phones: once both places are set, the inputs fold into one summary row so the routes and
+  // "start trip" fit on screen. Tapping the row brings the inputs back. (Desktop always shows them.)
+  const [folded, setFolded] = useState(false);
+  // The start→end pair whose trip ended by reaching the destination (shows a short "arrived" note).
+  const [arrivedFor, setArrivedFor] = useState<string | null>(null);
+  const placesKey = `${from?.center.join()}>${to?.center.join()}`;
 
-  const { data: routes, isFetching, isError } = useQuery({
+  const { data: baseRoutes, isFetching, isError } = useQuery({
     queryKey: ["routes", from?.center, to?.center, mode],
     queryFn: ({ signal }) => fetchRoutes(from!.center, to!.center, mode, signal),
     enabled: from !== null && to !== null,
     staleTime: 10 * 60_000,
     retry: 1,
   });
+
+  // When every route the router offers crosses a high-report area, also try a detour around the
+  // worst one, so there's a genuinely safer option to suggest.
+  const baseAnalyses = useMemo(
+    () => (baseRoutes && lookup ? baseRoutes.map((r) => analyzeRoute(r, lookup)) : null),
+    [baseRoutes, lookup],
+  );
+  const bestBase = baseRoutes && baseAnalyses ? lowestRiskIndex(baseAnalyses, baseRoutes) : 0;
+  const needDetour =
+    !!baseRoutes && !!lookup && peakAlongWay(baseRoutes[bestBase].coordinates, lookup) >= AVOID_SCORE;
+  const { data: detour } = useQuery({
+    queryKey: ["safer-detour", from?.center, to?.center, mode, hour],
+    queryFn: ({ signal }) =>
+      findSaferRoute({
+        from: from!.center,
+        to: to!.center,
+        mode,
+        current: baseRoutes![bestBase].coordinates,
+        currentDuration: Math.min(...baseRoutes!.map((r) => r.duration)),
+        lookup: lookup!,
+        signal,
+        aheadM: Infinity,
+        alternatives: false,
+      }),
+    enabled: needDetour && lookup !== null && from !== null && to !== null,
+    staleTime: 10 * 60_000,
+    retry: 0,
+  });
+  const routes = useMemo(
+    () => (baseRoutes && detour ? [...baseRoutes, detour.choice.route] : baseRoutes),
+    [baseRoutes, detour],
+  );
+  const detourIndex = baseRoutes && detour ? baseRoutes.length : -1;
 
   const analyses = useMemo(
     () => (routes && lookup ? routes.map((r) => analyzeRoute(r, lookup)) : null),
@@ -108,9 +187,36 @@ export function Directions({
   // lower-report route stays labelled as an option to tap.
   const selected = routes && picked !== null && picked < routes.length ? picked : fastest;
 
+  // Latest GPS fix of the running trip (greys out the travelled part of the route).
+  const [here, setHere] = useState<LngLat | null>(null);
+  const handleFix = useCallback(
+    (fix: TripFix | null) => {
+      setHere(fix?.lngLat ?? null);
+      onTripPosition(fix);
+    },
+    [onTripPosition],
+  );
+
+  // During a trip: the route actually being followed (switches when a safer way is taken),
+  // and a safer way currently on offer (previewed on the map).
+  const [tripRoute, setTripRoute] = useState<RouteOption | null>(null);
+  const [offered, setOffered] = useState<RouteOption | null>(null);
+  const activeRoute = routes ? (trip && tripRoute ? tripRoute : routes[selected]) : null;
+  const routeInfo = useMemo(() => (activeRoute ? { duration: activeRoute.duration, mode } : null), [activeRoute, mode]);
+  const endTrip = () => {
+    setTrip(null);
+    setTripRoute(null);
+    setOffered(null);
+  };
+
   useEffect(() => {
-    onOverlay(routes && analyses ? buildOverlay(routes, analyses, selected) : null);
-  }, [routes, analyses, selected, onOverlay]);
+    if (!routes || !analyses || !lookup) return onOverlay(null);
+    if (trip && tripRoute) {
+      onOverlay(buildOverlay([tripRoute], [analyzeRoute(tripRoute, lookup)], 0, here, offered, "trip"));
+      return;
+    }
+    onOverlay(buildOverlay(routes, analyses, selected, trip ? here : null, trip ? offered : null, trip ? "trip" : undefined));
+  }, [routes, analyses, lookup, selected, onOverlay, trip, here, tripRoute, offered]);
 
   useEffect(() => () => onOverlay(null), [onOverlay]);
 
@@ -130,6 +236,7 @@ export function Directions({
         setPicked(null);
         setVersion((v) => v + 1);
         setLocating(false);
+        if (to) setFolded(true);
       },
       () => setLocating(false),
       // Precise fix (GPS on phones): a rough Wi-Fi/IP guess can put the start on the wrong street.
@@ -137,41 +244,78 @@ export function Directions({
     );
   }
 
+  const backButton = (
+    <button
+      type="button"
+      onClick={onClose}
+      className="grid size-8 shrink-0 place-items-center rounded-full text-ink-2 hover:bg-surface-2 hover:text-ink"
+    >
+      <ArrowLeft className="size-4" aria-hidden />
+      <span className="sr-only">{dict.common.close}</span>
+    </button>
+  );
+
+  const modeToggle = (
+    <div className="flex shrink-0 rounded-full bg-surface-2 p-0.5">
+      {(["drive", "walk"] as const).map((m) => (
+        <button
+          key={m}
+          type="button"
+          onClick={() => {
+            setMode(m);
+            setPicked(null);
+          }}
+          aria-pressed={mode === m}
+          title={m === "drive" ? t.modeDrive : t.modeWalk}
+          className={cn(
+            "grid h-7 w-9 place-items-center rounded-full transition-colors",
+            mode === m ? "bg-surface text-accent shadow-sm" : "text-ink-3 hover:text-ink",
+          )}
+        >
+          {m === "drive" ? <Car className="size-4" aria-hidden /> : <Footprints className="size-4" aria-hidden />}
+          <span className="sr-only">{m === "drive" ? t.modeDrive : t.modeWalk}</span>
+        </button>
+      ))}
+    </div>
+  );
+
+  const showFolded = folded && from !== null && to !== null;
+  const canStart = routes && analyses && !isFetching && !trip;
+
   return (
     <div className="flex max-h-[46dvh] flex-col overflow-hidden rounded-3xl border border-line bg-glass shadow-soft backdrop-blur-xl lg:max-h-[calc(100dvh-6.5rem)]">
-      {/* ---------- inputs ---------- */}
-      <div className="border-b border-line p-4">
-        <div className="mb-3 flex items-center gap-2">
+      {/* ---------- phones: folded summary "A → B" ---------- */}
+      {showFolded && (
+        <div className="flex items-center gap-2 border-b border-line px-3 py-2.5 lg:hidden">
+          {backButton}
           <button
             type="button"
-            onClick={onClose}
-            className="grid size-8 place-items-center rounded-full text-ink-2 hover:bg-surface-2 hover:text-ink"
+            onClick={() => setFolded(false)}
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-xl px-1.5 py-1 text-left hover:bg-surface-2"
           >
-            <ArrowLeft className="size-4" aria-hidden />
-            <span className="sr-only">{dict.common.close}</span>
+            <span className="min-w-0 flex-1">
+              <span className="flex items-center gap-1.5 text-sm font-semibold">
+                <Circle className="size-3 shrink-0 text-ink-3" strokeWidth={3} aria-hidden />
+                <span className="truncate">{from?.name}</span>
+              </span>
+              <span className="mt-0.5 flex items-center gap-1.5 text-sm font-semibold">
+                <MapPin className="size-3.5 shrink-0 text-[#e53935]" aria-hidden />
+                <span className="truncate">{to?.name}</span>
+              </span>
+            </span>
+            <Pencil className="size-4 shrink-0 text-accent" aria-hidden />
+            <span className="sr-only">{t.editPlaces}</span>
           </button>
+          {modeToggle}
+        </div>
+      )}
+
+      {/* ---------- inputs ---------- */}
+      <div className={cn("border-b border-line p-4", showFolded && "hidden lg:block")}>
+        <div className="mb-3 flex items-center gap-2">
+          {backButton}
           <h2 className="text-sm font-semibold">{t.title}</h2>
-          <div className="ml-auto flex rounded-full bg-surface-2 p-0.5">
-            {(["drive", "walk"] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                onClick={() => {
-                  setMode(m);
-                  setPicked(null);
-                }}
-                aria-pressed={mode === m}
-                title={m === "drive" ? t.modeDrive : t.modeWalk}
-                className={cn(
-                  "grid h-7 w-9 place-items-center rounded-full transition-colors",
-                  mode === m ? "bg-surface text-accent shadow-sm" : "text-ink-3 hover:text-ink",
-                )}
-              >
-                {m === "drive" ? <Car className="size-4" aria-hidden /> : <Footprints className="size-4" aria-hidden />}
-                <span className="sr-only">{m === "drive" ? t.modeDrive : t.modeWalk}</span>
-              </button>
-            ))}
-          </div>
+          <div className="ml-auto">{modeToggle}</div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -186,6 +330,7 @@ export function Directions({
               onSelect={(p) => {
                 setFrom(p);
                 setPicked(null);
+                if (to) setFolded(true);
               }}
               onClear={() => setFrom(null)}
             />
@@ -199,6 +344,7 @@ export function Directions({
               onSelect={(p) => {
                 setTo(p);
                 setPicked(null);
+                if (from) setFolded(true);
               }}
               onClear={() => setTo(null)}
             />
@@ -234,10 +380,24 @@ export function Directions({
           <TripMode
             locale={locale}
             dict={dict}
-            route={routes?.[selected]?.coordinates ?? null}
+            route={activeRoute?.coordinates ?? null}
+            routeInfo={routeInfo}
             announcer={trip}
-            onStop={() => setTrip(null)}
+            onStop={endTrip}
+            onPosition={handleFix}
+            onArrive={() => {
+              endTrip();
+              setArrivedFor(placesKey);
+            }}
+            onSuggest={setOffered}
+            onSwitch={setTripRoute}
           />
+        )}
+        {arrivedFor === placesKey && !trip && (
+          <p className="mb-4 flex items-center gap-2 rounded-2xl bg-positive-soft p-3 text-sm font-semibold text-positive" role="status">
+            <Flag className="size-4 shrink-0" aria-hidden />
+            {t.tripArrived}
+          </p>
         )}
         {(!from || !to) && <p className="text-sm text-ink-3">{t.pickBoth}</p>}
         {from && to && isFetching && (
@@ -250,6 +410,33 @@ export function Directions({
 
         {routes && analyses && !isFetching && (
           <>
+            {/* the lower-report way, suggested when the one shown isn't it */}
+            {!trip && recommended !== selected && (
+              <div className="mb-3 rounded-2xl border border-positive/40 bg-positive-soft p-3 text-sm">
+                <p className="flex items-center gap-2 font-semibold text-positive">
+                  <ShieldCheck className="size-4 shrink-0" aria-hidden />
+                  {t.saferPickTitle}
+                </p>
+                <p className="mt-1 leading-snug text-ink-2">
+                  {fill(locale, t.saferPickBody, {
+                    n: Math.max(1, Math.round(routes[recommended].duration / 60)),
+                    extra:
+                      routes[recommended].duration - routes[selected].duration >= 60
+                        ? fill(locale, t.saferExtraMore, {
+                            n: Math.round((routes[recommended].duration - routes[selected].duration) / 60),
+                          })
+                        : t.saferExtraSame,
+                  })}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setPicked(recommended)}
+                  className="mt-2 rounded-full bg-positive px-4 py-1.5 text-xs font-semibold text-white"
+                >
+                  {t.saferPickButton}
+                </button>
+              </div>
+            )}
             <ul className="space-y-2">
               {routes.map((r, i) => {
                 const a = analyses[i];
@@ -274,6 +461,11 @@ export function Directions({
                           · {fill(locale, t.km, { n: Number((r.distance / 1000).toFixed(1)) })}
                         </span>
                         <span className="ml-auto flex gap-1">
+                          {i === detourIndex && (
+                            <span className="rounded-full bg-surface-2 px-2 py-0.5 text-[11px] font-semibold text-ink-2">
+                              {t.detour}
+                            </span>
+                          )}
                           {i === recommended && (
                             <span className="rounded-full bg-positive-soft px-2 py-0.5 text-[11px] font-semibold text-positive">
                               {t.lowerRisk}
@@ -318,17 +510,6 @@ export function Directions({
               })}
             </ul>
 
-            {!trip && (
-              <button
-                type="button"
-                onClick={() => setTrip(new Announcer(locale))}
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-soft transition-transform active:scale-[0.98]"
-              >
-                <Navigation className="size-4" aria-hidden />
-                {t.tripStart}
-              </button>
-            )}
-
             {/* roads on the selected route */}
             <h3 className="mt-5 text-xs font-semibold text-ink-2">{fill(locale, t.roadsTitle, { time: timeLabel })}</h3>
             <ol className="mt-2 space-y-1.5">
@@ -355,6 +536,26 @@ export function Directions({
           </>
         )}
       </div>
+
+      {/* pinned under the list so it never needs scrolling to find */}
+      {canStart && (
+        <div className="border-t border-line p-3">
+          <button
+            type="button"
+            onClick={() => {
+              setTrip(new Announcer(locale));
+              setTripRoute(null);
+              setOffered(null);
+              setArrivedFor(null);
+              setFolded(true);
+            }}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-soft transition-transform active:scale-[0.98]"
+          >
+            <Navigation className="size-4" aria-hidden />
+            {t.tripStart}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

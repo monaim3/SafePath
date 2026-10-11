@@ -18,9 +18,14 @@ interface Address {
   village?: string;
 }
 
-/** "quarter, suburb" — e.g. "উলন, রামপুরা"; skips the suburb when the first part already contains it. */
-export function formatPlace(a: Address): string | null {
-  const local = a.quarter ?? a.neighbourhood;
+/**
+ * "quarter, suburb" — e.g. "উলন, রামপুরা"; skips the suburb when the first part already contains it.
+ * With `street`, small areas are named by their road instead ("রামপুরা-বনশ্রী রোড, বনশ্রী"):
+ * OpenStreetMap's neighbourhood borders in Dhaka often spill over main roads (C Block Banasree
+ * came out as "মেরুল বাড্ডা"), while the road a ~150 m area sits on is unambiguous.
+ */
+export function formatPlace(a: Address, street = false): string | null {
+  const local = street && a.road ? a.road : (a.quarter ?? a.neighbourhood);
   const wide = a.suburb ?? a.city_district ?? a.town ?? a.village;
   if (local && wide) return local.includes(wide) ? local : `${local}, ${wide}`;
   return local ?? wide ?? a.road ?? null;
@@ -46,7 +51,8 @@ export async function areaPlaceName(h3: string, locale: string): Promise<string 
     });
     if (!res.ok) return null;
     const data = (await res.json()) as { address?: Address };
-    return data.address ? formatPlace(data.address) : null;
+    // Street-level areas (resolution 10, the size of one report's area) are named by their road.
+    return data.address ? formatPlace(data.address, getResolution(h3) >= 10) : null;
   } catch {
     return null;
   }

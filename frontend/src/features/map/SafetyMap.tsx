@@ -1,21 +1,39 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   GeolocateControl,
   Map as MapLibreMap,
+  Marker,
   NavigationControl,
   setWorkerUrl,
   type GeoJSONSource,
+  type PaddingOptions,
   type StyleSpecification,
 } from "maplibre-gl";
 import { cellToBoundary } from "h3-js";
+import { LocateFixed } from "lucide-react";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { BAND_COLORS } from "@/lib/safety/bands";
 import { DHAKA_CENTER } from "@/lib/safety/demo-data";
 import type { CellSummary } from "@/lib/safety/types";
 
 export type Basemap = "map" | "satellite";
+
+export interface MePosition {
+  lngLat: [lng: number, lat: number];
+  /** GPS accuracy radius, metres. */
+  accuracy: number;
+  /** Direction of travel (0 = north), null when unknown. */
+  heading: number | null;
+  /** Same for every fix of one trip — following restarts for each new trip. */
+  trip: string;
+}
+
+/** How long the dot glides from one fix to the next (GPS updates about once a second). */
+const GLIDE_MS = 800;
+/** Zoom the map uses when it starts following someone. */
+const FOLLOW_ZOOM = 16.5;
 type Theme = "light" | "dark";
 
 const VECTOR_STYLES: Record<Theme, string> = {
@@ -237,6 +255,17 @@ interface SafetyMapProps {
   initialZoom?: number;
   initialCenter?: [lng: number, lat: number];
   interactive?: boolean;
+  /**
+   * For maps inside a scrolling page: one finger / the mouse wheel scroll the page, two fingers
+   * (or Ctrl+scroll) move the map, and these hints explain it. Taps still work as usual.
+   */
+  scrollFriendly?: { mobile: string; windows: string; mac: string };
+  /** The person's live position during a trip: drawn as a moving blue dot the map follows. */
+  me?: MePosition | null;
+  /** Room to leave around the followed dot for panels covering the map (read when needed). */
+  followPadding?: () => PaddingOptions;
+  /** Label of the "back to my location" button shown after the map is dragged away. */
+  recenterLabel?: string;
   className?: string;
   ariaLabel: string;
 }
@@ -284,6 +313,31 @@ function hatchImage(): { width: number; height: number; data: Uint8Array } {
   return { width: size, height: size, data };
 }
 
+/** The live-position dot: blue dot, soft pulse, and a cone showing the direction of travel. */
+function meElement(): HTMLElement {
+  const el = document.createElement("div");
+  el.className = "sp-me";
+  el.innerHTML = '<span class="sp-me-cone"></span><span class="sp-me-pulse"></span><span class="sp-me-dot"></span>';
+  return el;
+}
+
+/** Accuracy circle in real metres: circle-radius is pixels, so scale it with zoom. */
+function drawAccuracy(map: MapLibreMap, me: MePosition) {
+  const source = map.getSource("me-accuracy") as GeoJSONSource | undefined;
+  if (!source) return;
+  source.setData({ type: "Feature", properties: {}, geometry: { type: "Point", coordinates: me.lngLat } });
+  const metresPerPixelZ22 = (156543.03392 * Math.cos((me.lngLat[1] * Math.PI) / 180)) / 2 ** 22;
+  map.setPaintProperty("me-accuracy", "circle-radius", [
+    "interpolate",
+    ["exponential", 2],
+    ["zoom"],
+    0,
+    0,
+    22,
+    Math.min(me.accuracy, 500) / metresPerPixelZ22,
+  ]);
+}
+
 function currentTheme(): Theme {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
@@ -302,6 +356,10 @@ export function SafetyMap({
   initialZoom = 12,
   initialCenter = DHAKA_CENTER,
   interactive = true,
+  scrollFriendly,
+  me,
+  followPadding,
+  recenterLabel,
   className,
   ariaLabel,
 }: SafetyMapProps) {
@@ -318,6 +376,20 @@ export function SafetyMap({
     handlersRef.current = { onSelect, onPick, onZoomChange, onCenterChange };
   }, [onSelect, onPick, onZoomChange, onCenterChange]);
 
+  // ---------- live position (trip) ----------
+  const meRef = useRef(me);
+  const meMarker = useRef<Marker | null>(null);
+  const glideRaf = useRef(0);
+  const zoomGoal = useRef<number | null>(null);
+  const paddingRef = useRef(followPadding);
+  useEffect(() => {
+    paddingRef.current = followPadding;
+  });
+  // The trip whose dot the person dragged away from (map stops following until "recenter").
+  const [detachedTrip, setDetachedTrip] = useState<string | null>(null);
+  const detachedRef = useRef<string | null>(null);
+  const following = !!me && detachedTrip !== me.trip;
+
   // ---------- init ----------
   useEffect(() => {
     if (!containerRef.current) return;
@@ -331,6 +403,14 @@ export function SafetyMap({
       maxZoom: 18,
       attributionControl: { compact: true },
       interactive,
+      ...(scrollFriendly && {
+        cooperativeGestures: true,
+        locale: {
+          "CooperativeGesturesHandler.MobileHelpText": scrollFriendly.mobile,
+          "CooperativeGesturesHandler.WindowsHelpText": scrollFriendly.windows,
+          "CooperativeGesturesHandler.MacHelpText": scrollFriendly.mac,
+        },
+      }),
     });
     mapRef.current = map;
 
@@ -401,6 +481,19 @@ export function SafetyMap({
         layout: { "line-cap": "round", "line-join": "round" },
         paint: { "line-color": "#9aa4b2", "line-opacity": 0.9, "line-width": ["interpolate", ["linear"], ["zoom"], 10, 3.5, 16, 7] },
       });
+      // during a trip: a safer way on offer, dashed green until the person takes it
+      map.addLayer({
+        id: "route-suggest",
+        type: "line",
+        source: "route",
+        filter: kind("suggest"),
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#16a34a",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 10, 4, 16, 8],
+          "line-dasharray": [1.2, 1.4],
+        },
+      });
       map.addLayer({
         id: "route-casing",
         type: "line",
@@ -416,6 +509,15 @@ export function SafetyMap({
         filter: kind("seg"),
         layout: { "line-cap": "round", "line-join": "round" },
         paint: { "line-color": ["get", "color"], "line-width": ["interpolate", ["linear"], ["zoom"], 10, 4.5, 16, 9] },
+      });
+      // during a trip: the part already travelled, greyed out over the coloured route
+      map.addLayer({
+        id: "route-passed",
+        type: "line",
+        source: "route",
+        filter: kind("passed"),
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": "#9aa4b2", "line-width": ["interpolate", ["linear"], ["zoom"], 10, 4.5, 16, 9] },
       });
       map.addLayer({
         id: "route-start",
@@ -441,7 +543,32 @@ export function SafetyMap({
           "line-width": 3,
         },
       });
+
+      // GPS accuracy around the live dot (the dot itself is an HTML marker so it can glide)
+      map.addSource("me-accuracy", { type: "geojson", data: EMPTY });
+      map.addLayer({
+        id: "me-accuracy",
+        type: "circle",
+        source: "me-accuracy",
+        paint: {
+          "circle-color": "#1a73e8",
+          "circle-opacity": 0.12,
+          "circle-stroke-color": "#1a73e8",
+          "circle-stroke-opacity": 0.35,
+          "circle-stroke-width": 1,
+          "circle-pitch-alignment": "map",
+        },
+      });
+      if (meRef.current) drawAccuracy(map, meRef.current);
     };
+
+    // Dragging the map during a trip means "let me look around": stop following until recentred.
+    map.on("dragstart", (e) => {
+      const trip = meRef.current?.trip;
+      if (!e.originalEvent || !trip) return;
+      detachedRef.current = trip;
+      setDetachedTrip(trip);
+    });
 
     map.on("style.load", addLayers);
     map.on("load", () => handlersRef.current.onZoomChange?.(map.getZoom()));
@@ -523,10 +650,82 @@ export function SafetyMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fitTo?.key]);
 
+  // Live dot: glide to each new fix and (unless the person dragged the map away) keep it in view.
+  useEffect(() => {
+    meRef.current = me;
+    const map = mapRef.current;
+    if (!map) return;
+    cancelAnimationFrame(glideRaf.current);
+    if (!me) {
+      meMarker.current?.remove();
+      meMarker.current = null;
+      (map.getSource("me-accuracy") as GeoJSONSource | undefined)?.setData(EMPTY);
+      return;
+    }
+
+    let marker = meMarker.current;
+    const first = !marker;
+    if (!marker) {
+      marker = new Marker({ element: meElement(), rotationAlignment: "map", pitchAlignment: "map" }).setLngLat(me.lngLat).addTo(map);
+      meMarker.current = marker;
+    }
+    marker.getElement().classList.toggle("has-heading", me.heading !== null);
+    if (me.heading !== null) marker.setRotation(me.heading);
+    drawAccuracy(map, me);
+
+    if (!first) {
+      const from = marker.getLngLat();
+      const [toLng, toLat] = me.lngLat;
+      const start = performance.now();
+      const step = (now: number) => {
+        const k = Math.min(1, (now - start) / GLIDE_MS);
+        marker.setLngLat([from.lng + (toLng - from.lng) * k, from.lat + (toLat - from.lat) * k]);
+        if (k < 1) glideRaf.current = requestAnimationFrame(step);
+      };
+      glideRaf.current = requestAnimationFrame(step);
+    }
+
+    if (detachedRef.current !== me.trip) {
+      // Zoom in to street level when following starts. The next fix often arrives before that
+      // zoom finishes, so keep aiming for it until reached; after that the person's own zoom stays.
+      if (first) zoomGoal.current = Math.max(map.getZoom(), FOLLOW_ZOOM);
+      if (zoomGoal.current !== null && map.getZoom() >= zoomGoal.current - 0.05) zoomGoal.current = null;
+      map.easeTo({
+        center: me.lngLat,
+        zoom: zoomGoal.current ?? undefined,
+        padding: paddingRef.current?.(),
+        duration: first ? 1200 : GLIDE_MS,
+        // linear between fixes so the camera moves at the same steady pace as the dot
+        ...(!first && { easing: (t: number) => t }),
+      });
+    }
+  }, [me]);
+
+  useEffect(() => () => cancelAnimationFrame(glideRaf.current), []);
+
+  const recenter = () => {
+    const map = mapRef.current;
+    if (!map || !me) return;
+    detachedRef.current = null;
+    setDetachedTrip(null);
+    zoomGoal.current = Math.max(map.getZoom(), FOLLOW_ZOOM);
+    map.easeTo({ center: me.lngLat, zoom: zoomGoal.current, padding: paddingRef.current?.(), duration: 800 });
+  };
+
   // MapLibre's CSS sets `position: relative` on its container, so layout classes go on a wrapper.
   return (
     <div className={className} role="region" aria-label={ariaLabel}>
       <div ref={containerRef} className="h-full w-full" />
+      {me && !following && (
+        <button
+          type="button"
+          onClick={recenter}
+          className="absolute bottom-28 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-surface px-4 py-2.5 text-sm font-semibold text-accent shadow-soft ring-1 ring-line lg:bottom-56 lg:left-auto lg:right-3 lg:translate-x-0"
+        >
+          <LocateFixed className="size-4" aria-hidden />
+          {recenterLabel}
+        </button>
+      )}
     </div>
   );
 }

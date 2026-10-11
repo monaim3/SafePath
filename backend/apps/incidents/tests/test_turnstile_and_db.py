@@ -24,9 +24,10 @@ def payload(token: str = "") -> dict:
 
 
 def fake_cloudflare(success: bool):
+    # a fresh response per call (a BytesIO can only be read once)
     return mock.patch(
         "apps.incidents.services.turnstile.request.urlopen",
-        return_value=io.BytesIO(json.dumps({"success": success}).encode()),
+        side_effect=lambda *a, **k: io.BytesIO(json.dumps({"success": success}).encode()),
     )
 
 
@@ -45,6 +46,22 @@ def test_captcha_fails_closed_when_cloudflare_unreachable(settings):
     with mock.patch("apps.incidents.services.turnstile.request.urlopen", side_effect=OSError):
         res = APIClient().post("/api/v1/reports", payload("token"), format="json")
     assert res.status_code == 400
+
+
+def test_over_the_limit_hears_the_limit_with_wait_not_captcha(settings):
+    """1 report per 30 min: the 2nd is told to wait (with how long), before any CAPTCHA call."""
+    settings.TURNSTILE_SECRET = "secret"
+    client = APIClient()
+    with fake_cloudflare(True):
+        assert client.post("/api/v1/reports", payload("t1"), format="json").status_code == 201
+    with mock.patch("apps.incidents.services.turnstile.request.urlopen") as cloudflare:
+        res = client.post("/api/v1/reports", payload("t2"), format="json")
+    assert res.status_code == 429
+    body = res.json()
+    assert body["error"] == "rate_limited"
+    assert 0 < body["retry_after"] <= 1800
+    assert res["Retry-After"] == str(body["retry_after"])
+    cloudflare.assert_not_called()  # no Turnstile verification spent on a refused request
 
 
 @pytest.mark.skipif(connection.vendor != "postgresql", reason="database trigger exists on PostgreSQL only")

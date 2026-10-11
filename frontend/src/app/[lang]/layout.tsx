@@ -5,6 +5,8 @@ import { Geist, Hind_Siliguri, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import { getDictionary, hasLocale, locales } from "@/i18n";
 import { Providers } from "@/components/layout/Providers";
+import { InstallPopup } from "@/features/watch/InstallPopup";
+import { VisitTracker } from "@/components/layout/VisitTracker";
 import "../globals.css";
 
 // Geometric heavy sans, matching the logo wordmark.
@@ -49,6 +51,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   return {
     title: { default: dict.meta.title, template: "%s · SafePath" },
     description: dict.meta.description,
+    // iPhone/iPad "Add to Home Screen": open full-screen like an app, named "SafePath" under the icon.
+    appleWebApp: { capable: true, title: "SafePath", statusBarStyle: "black-translucent" },
   };
 }
 
@@ -77,7 +81,13 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         </Script>
       </head>
       <body className="min-h-full">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          {/* phones only: "Install the app" offer, a few seconds after arriving */}
+          <InstallPopup dict={getDictionary(lang)} />
+          {/* anonymous visitor counts for moderators */}
+          <VisitTracker />
+        </Providers>
       </body>
     </html>
   );

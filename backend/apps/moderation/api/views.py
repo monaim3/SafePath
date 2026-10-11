@@ -31,7 +31,8 @@ class QueueReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         fields = [
-            "id", "kind", "category", "h3", "date", "block", "hour", "days", "relation", "description",
+            "id", "kind", "category", "h3", "exact_lat", "exact_lng", "place_label",
+            "date", "block", "hour", "days", "relation", "description",
             "status", "flags", "corroborations", "weight", "is_demo", "created_at",
             "reporter_trust", "reporter_reports", "reporter_rejected", "video_status", "video_url",
         ]

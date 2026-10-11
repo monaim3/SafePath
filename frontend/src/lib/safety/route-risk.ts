@@ -144,10 +144,14 @@ export function analyzeRoute(route: RouteOption, lookup: CellLookup): RouteAnaly
   };
 }
 
-/** Index of the route with the least reported activity along it. */
-/** A suggested route may take at most this much longer than the fastest one (both limits apply). */
-const MAX_EXTRA_SHARE = 0.2;
-const MAX_EXTRA_SECONDS = 8 * 60;
+/**
+ * Longest a suggested (lower-report) route may take, given the usual one's duration in seconds:
+ * 20% or 5 minutes extra, whichever is more (20% of a short trip is only a minute or two),
+ * but never more than 8 minutes extra. The extra time is always shown to the person.
+ */
+export function maxSuggestedDuration(usual: number): number {
+  return usual + Math.min(Math.max(usual * 0.2, 5 * 60), 8 * 60);
+}
 
 /**
  * Index of the route to suggest: the lowest-risk one among routes that aren't a big detour.
@@ -156,7 +160,7 @@ const MAX_EXTRA_SECONDS = 8 * 60;
  */
 export function lowestRiskIndex(analyses: readonly RouteAnalysis[], routes: readonly RouteOption[]): number {
   const fastest = Math.min(...routes.map((r) => r.duration));
-  const limit = Math.min(fastest * (1 + MAX_EXTRA_SHARE), fastest + MAX_EXTRA_SECONDS);
+  const limit = maxSuggestedDuration(fastest);
   let best = routes.findIndex((r) => r.duration === fastest);
   analyses.forEach((a, i) => {
     if (routes[i].duration <= limit && a.riskIndex < analyses[best].riskIndex) best = i;

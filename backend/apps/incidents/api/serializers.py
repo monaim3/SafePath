@@ -27,6 +27,10 @@ class ReportInputSerializer(serializers.Serializer):
     days = serializers.ChoiceField(choices=["every_day", "weekdays", "weekends"], required=False)
     relation = serializers.ChoiceField(choices=["experienced", "witnessed", "heard"], required=False)
     description = serializers.CharField(max_length=500, required=False, allow_blank=True, default="")
+    # The exact pin and the place name shown under it. Optional; for moderators only.
+    lat = serializers.FloatField(required=False, min_value=-90, max_value=90)
+    lng = serializers.FloatField(required=False, min_value=-180, max_value=180)
+    place_label = serializers.CharField(max_length=160, required=False, allow_blank=True, default="")
     # The reporter has footage to upload; the response then carries a signed upload ticket.
     has_video = serializers.BooleanField(required=False, default=False)
 
@@ -42,6 +46,9 @@ class ReportInputSerializer(serializers.Serializer):
     def validate_description(self, value: str) -> str:
         return redact(value.strip())
 
+    def validate_place_label(self, value: str) -> str:
+        return redact(" ".join(value.split()))
+
     def validate(self, attrs):
         positive = attrs["category"] in Report.POSITIVE_CATEGORIES
         if positive != (attrs["kind"] == Report.Kind.POSITIVE):
@@ -50,6 +57,13 @@ class ReportInputSerializer(serializers.Serializer):
             raise serializers.ValidationError({"date": "required for incidents"})
         if "hour" in attrs and attrs["hour"] // 3 != attrs["block"]:
             raise serializers.ValidationError({"hour": "does not match block"})
+        # The exact pin is kept only if it really lies in the reported cell; otherwise it's dropped
+        # (with its label), and the report still goes through on the cell alone.
+        lat, lng = attrs.pop("lat", None), attrs.pop("lng", None)
+        if lat is not None and lng is not None and h3.latlng_to_cell(lat, lng, REPORT_RES) == attrs["h3"]:
+            attrs["exact_lat"], attrs["exact_lng"] = round(lat, 6), round(lng, 6)
+        else:
+            attrs["place_label"] = ""
         return attrs
 
 

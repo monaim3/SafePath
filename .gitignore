@@ -19,3 +19,6 @@ db.sqlite3
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# Explainer video project (kept local only)
+video/

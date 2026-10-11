@@ -15,6 +15,10 @@ export interface QueueReport {
   kind: "incident" | "knowledge" | "positive";
   category: CategoryKey;
   h3: string;
+  /** Exact pin and the place name the reporter picked (moderators only; cleared after 90 days). */
+  exact_lat: number | null;
+  exact_lng: number | null;
+  place_label: string;
   date: string | null;
   block: number;
   hour: number | null;
@@ -59,6 +63,24 @@ export interface ModStats {
   today: number;
   verified: number;
   rejected: number;
+}
+
+export interface KeyCount {
+  key: string;
+  count: number;
+}
+
+/** Visitor numbers (daily-unique visitors: no cookies, so a person is one visitor per day). */
+export interface Traffic {
+  online: number;
+  onlinePages: KeyCount[];
+  today: { visitors: number; views: number };
+  week: { visitors: number; views: number };
+  month: { visitors: number; views: number };
+  devicesToday: KeyCount[];
+  pagesToday: KeyCount[];
+  pagesWeek: KeyCount[];
+  days: { date: string; visitors: number; views: number }[];
 }
 
 export class ModError extends Error {
@@ -122,6 +144,7 @@ export async function logout(): Promise<void> {
 export const fetchMe = () => call<{ username: string }>("/me");
 export const fetchQueue = () => call<Queue>("/queue");
 export const fetchStats = () => call<ModStats>("/stats");
+export const fetchTraffic = () => call<Traffic>("/traffic");
 
 export const decide = (id: string, decision: Decision, reason?: RejectReason) =>
   call<QueueReport>(`/reports/${id}/${decision}`, { method: "POST", body: JSON.stringify(reason ? { reason } : {}) });

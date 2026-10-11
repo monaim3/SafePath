@@ -46,7 +46,7 @@ Uses SQLite by default; set `DATABASE_URL=postgres://…` for PostgreSQL (see `.
 |---|---|
 | Turnstile CAPTCHA | `apps/incidents/services/turnstile.py` |
 | Salted hashes of device ID and IP (raw values never stored) | `services/abuse.py · hash_identifier` |
-| Rate limits per device **and** per IP (2 / 10 min, 5 / day) | `services/submission.py · _check_rate_limits` |
+| Rate limits per device **and** per IP (1 / 30 min, 5 / day) | `services/submission.py · _check_rate_limits` |
 | Impossible dates/times rejected; copy-pasted text flagged quietly. Reporter location is never collected — victims often report later, from home or a borrowed phone | `services/submission.py` |
 | Low weight until reviewed (pending 0.3×) | `services/abuse.py · report_weight` |
 | Corroboration only from independent device **and** network, same event shape | `services/abuse.py · corroborates` |

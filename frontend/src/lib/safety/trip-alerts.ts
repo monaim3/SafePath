@@ -18,6 +18,55 @@ export const LOOKAHEAD_M = 200;
 const OFF_ROUTE_M = 80;
 const SAMPLE_M = 30;
 
+/** Within this distance of the route's end (metres, allowing for GPS drift) the trip is over. */
+export const ARRIVE_M = 60;
+/** Arrival only counts after the person has been at least this far from the end, so a trip
+ *  started right at the destination doesn't end at once. */
+const DEPART_M = 150;
+
+/**
+ * Tracks one trip's progress toward its destination. Feed it every GPS fix; it returns true
+ * once the person has set off and then come within ARRIVE_M of the route's last point.
+ */
+export function arrivalWatcher(route: readonly LngLat[]) {
+  const end = route[route.length - 1];
+  let departed = false;
+  return (position: LngLat): boolean => {
+    const d = metres(position, end);
+    if (d > DEPART_M) departed = true;
+    return departed && d <= ARRIVE_M;
+  };
+}
+
+/** Compass direction from a to b, in degrees (0 = north, 90 = east). */
+export function bearingDeg(a: LngLat, b: LngLat): number {
+  const toRad = Math.PI / 180;
+  const [lat1, lat2] = [a[1] * toRad, b[1] * toRad];
+  const dLng = (b[0] - a[0]) * toRad;
+  const y = Math.sin(dLng) * Math.cos(lat2);
+  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+  return ((Math.atan2(y, x) / toRad) + 360) % 360;
+}
+
+/**
+ * The part of the route already travelled: from the start up to the point on the route nearest
+ * the person. Null when they are off the route (then nothing is greyed out).
+ */
+export function travelledPart(position: LngLat, route: readonly LngLat[]): LngLat[] | null {
+  if (route.length < 2) return null;
+  let nearest = 0;
+  let best = Infinity;
+  route.forEach((p, i) => {
+    const d = metres(position, p);
+    if (d < best) {
+      best = d;
+      nearest = i;
+    }
+  });
+  if (best > OFF_ROUTE_M || nearest === 0) return null;
+  return route.slice(0, nearest + 1);
+}
+
 export interface TripAlert {
   cell: string;
   score: number;

@@ -181,8 +181,44 @@ html:lang(bn) body {
 @keyframes hero-clock-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .hero-clock-bar { animation: hero-clock-bar linear forwards; }
 
+/* "Install the app" popup on phones: slides up, with a bar counting down its auto-close. */
+@keyframes install-up { from { transform: translateY(120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes install-countdown { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* Live position during a trip (Google Maps style): blue dot, soft pulse, direction cone. */
+.sp-me { position: relative; width: 22px; height: 22px; }
+.sp-me-dot {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #1a73e8;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.45);
+}
+.sp-me-pulse {
+  position: absolute;
+  inset: -9px;
+  border-radius: 9999px;
+  background: rgb(26 115 232 / 0.28);
+  animation: sp-me-pulse 2s ease-out infinite;
+}
+@keyframes sp-me-pulse { from { transform: scale(0.5); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+.sp-me-cone {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  width: 44px;
+  height: 46px;
+  margin-left: -22px;
+  background: linear-gradient(to top, rgb(26 115 232 / 0.55), rgb(26 115 232 / 0));
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+.sp-me.has-heading .sp-me-cone { display: block; }
+
 @media (prefers-reduced-motion: reduce) {
   .rise { animation: none; }
+  .sp-me-pulse { animation: none; opacity: 0.5; }
 }
 
 /* ---------- MapLibre overrides ---------- */

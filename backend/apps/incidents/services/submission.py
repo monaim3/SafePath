@@ -26,9 +26,12 @@ from . import abuse
 class SubmissionRejected(Exception):
     """The request is refused. `code` is safe to return; it never reveals detection details."""
 
-    def __init__(self, code: str):
+    def __init__(self, code: str, retry_after: int | None = None):
         super().__init__(code)
         self.code = code
+        # Seconds until a plain rate limit lifts. Never set for a restricted device, so a
+        # restriction still looks exactly like an ordinary limit with no countdown.
+        self.retry_after = retry_after
 
 
 @dataclass(frozen=True)
@@ -47,11 +50,34 @@ def _device(identity: Identity) -> Device:
     return device
 
 
-def _check_rate_limits(device: Device, ip_hash: str, now: datetime) -> None:
+def _check_rate_limits(device: Device | None, ip_hash: str, now: datetime) -> None:
+    waits: list[int] = []
+    mine = Q(ip_hash=ip_hash) | Q(device=device) if device else Q(ip_hash=ip_hash)
     for window, limit in policy.RATE_LIMITS:
-        recent = Report.objects.filter(Q(device=device) | Q(ip_hash=ip_hash), created_at__gte=now - window)
-        if recent.count() >= limit:
-            raise SubmissionRejected("rate_limited")
+        times = list(
+            Report.objects.filter(mine, created_at__gte=now - window)
+            .order_by("created_at")
+            .values_list("created_at", flat=True)
+        )
+        if len(times) >= limit:
+            # Space frees up when enough of the oldest reports in the window have aged out.
+            frees_at = times[len(times) - limit] + window
+            waits.append(max(1, int((frees_at - now).total_seconds())))
+    if waits:
+        raise SubmissionRejected("rate_limited", retry_after=max(waits))
+
+
+def check_can_submit(*, device_id: str, ip: str, now: datetime | None = None) -> None:
+    """
+    Cheap pre-check before the CAPTCHA: refuses a device or network that may not report right now,
+    so people hear the real reason (and how long to wait) instead of a failed security check.
+    """
+    now = now or timezone.now()
+    identity = identify(device_id, ip)
+    device = Device.objects.filter(device_hash=identity.device_hash).first()
+    if device and device.restricted_until and device.restricted_until > now:
+        raise SubmissionRejected("rate_limited")  # same answer as a rate limit — don't reveal restriction
+    _check_rate_limits(device, identity.ip_hash, now)
 
 
 def refresh_weight(report: Report) -> None:
@@ -157,6 +183,9 @@ def submit_report(
         days=data.get("days", ""),
         relation=data.get("relation", ""),
         description=data.get("description", ""),
+        exact_lat=data.get("exact_lat"),
+        exact_lng=data.get("exact_lng"),
+        place_label=data.get("place_label", ""),
         flags=[str(f) for f in flags],
         device=device,
         ip_hash=identity.ip_hash,
@@ -175,8 +204,22 @@ def submit_report(
         record(action="report.flagged", entity_type="report", entity_id=report.id, after={"flags": report.flags})
 
     _detect_burst(report, now)
+    purge_exact_locations(now)
     transaction.on_commit(bump_data_version)
     return report
+
+
+def purge_exact_locations(now: datetime | None = None) -> int:
+    """
+    Wipe exact pins and picked place names older than the retention period (the cell stays).
+    Runs with every new report, so it needs no scheduler; also `manage.py purge_exact_locations`.
+    """
+    cutoff = (now or timezone.now()) - timedelta(days=policy.EXACT_LOCATION_DAYS)
+    return (
+        Report.objects.filter(created_at__lt=cutoff)
+        .filter(Q(exact_lat__isnull=False) | ~Q(place_label=""))
+        .update(exact_lat=None, exact_lng=None, place_label="")
+    )
 
 
 @transaction.atomic

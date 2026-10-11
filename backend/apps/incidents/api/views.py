@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 
 from ..models import Report
 from ..services import geo, turnstile, video
-from ..services.submission import SubmissionRejected, confirm_knowledge, submit_report
+from ..services.submission import SubmissionRejected, check_can_submit, confirm_knowledge, submit_report
 from .serializers import ConfirmSerializer, ReportInputSerializer, VideoAttachSerializer
 
 log = logging.getLogger(__name__)
@@ -40,8 +40,13 @@ def client_ip(request: Request) -> str:
     return request.META.get("REMOTE_ADDR", "")
 
 
-def rejected(code: str) -> Response:
-    return Response({"error": code}, status=REJECTION_STATUS.get(code, status.HTTP_400_BAD_REQUEST))
+def rejected(code: str, retry_after: int | None = None) -> Response:
+    body: dict = {"error": code}
+    headers = {}
+    if retry_after:
+        body["retry_after"] = retry_after
+        headers["Retry-After"] = str(retry_after)
+    return Response(body, status=REJECTION_STATUS.get(code, status.HTTP_400_BAD_REQUEST), headers=headers)
 
 
 class ReportCreateView(APIView):
@@ -53,17 +58,22 @@ class ReportCreateView(APIView):
         data = dict(serializer.validated_data)
         ip = client_ip(request)
 
-        # Checked before the CAPTCHA so an out-of-country spot doesn't cost a Turnstile call.
+        # Checked before the CAPTCHA so an out-of-country spot doesn't cost a Turnstile call,
+        # and so someone over the limit is told that (with the wait), not "security check failed".
         if not geo.cell_in_bangladesh(data["h3"]):
             return rejected("outside_bangladesh")
+        device_id = data.pop("device_id")
+        try:
+            check_can_submit(device_id=device_id, ip=ip)
+        except SubmissionRejected as exc:
+            return rejected(exc.code, exc.retry_after)
         if not turnstile.verify(data.pop("turnstile_token", ""), ip):
             return rejected("captcha")
-        device_id = data.pop("device_id")
         wants_video = data.pop("has_video", False)
         try:
             report = submit_report(data=data, device_id=device_id, ip=ip)
         except SubmissionRejected as exc:
-            return rejected(exc.code)
+            return rejected(exc.code, exc.retry_after)
         # Deliberately minimal: never reveal flags, weight or trust.
         body = {"id": str(report.id), "status": "received"}
         if wants_video and report.kind == Report.Kind.INCIDENT and video.enabled():

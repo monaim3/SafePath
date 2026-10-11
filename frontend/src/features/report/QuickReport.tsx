@@ -27,9 +27,9 @@ import { redactPersonalInfo, reportSchema, type ReportInput } from "@/lib/valida
 import { Button, buttonClass } from "@/components/ui/Button";
 import { cn } from "@/components/ui/cn";
 import { CategoryIcon, FluentIcon } from "@/components/safety/CategoryIcon";
-import { LocationPicker } from "./LocationPicker";
+import { LocationPicker, type ExactSpot } from "./LocationPicker";
 import { WhenPicker } from "./WhenPicker";
-import { Turnstile } from "./Turnstile";
+import { CAPTCHA_ON, Turnstile } from "./Turnstile";
 import { VideoPicker } from "./VideoPicker";
 
 const STEP_FIELDS: FieldPath<ReportInput>[][] = [
@@ -159,17 +159,27 @@ export function QuickReport({
   const h3 = useWatch({ control, name: "h3" });
   const [whenValue, dateValue, blockValue, hourValue] = useWatch({ control, name: ["when", "date", "block", "hour"] });
 
+  // A Turnstile token is single-use: every attempt (and "report again") gets a fresh widget.
   const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaRound, setCaptchaRound] = useState(0);
   const handleToken = useCallback((token: string) => setCaptchaToken(token), []);
+  const freshCaptcha = () => {
+    setCaptchaToken("");
+    setCaptchaRound((n) => n + 1);
+  };
+  // Exact pin + its name: sent with the report for moderators only (the public sees the ~150 m area).
+  const [spot, setSpot] = useState<ExactSpot | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [uploadPct, setUploadPct] = useState<number | null>(null);
   const [videoResult, setVideoResult] = useState<"uploaded" | "failed" | null>(null);
   const submit = useMutation({
     mutationFn: async (input: ReportInput) => {
       const file = input.kind === "incident" ? videoFile : null;
+      const token = captchaToken;
+      freshCaptcha(); // this token is now spent, whatever the answer
       const res = await submitReport(
         { ...input, description: redactPersonalInfo(input.description ?? "") },
-        { deviceId: getDeviceId(), turnstileToken: captchaToken, hasVideo: Boolean(file) },
+        { deviceId: getDeviceId(), turnstileToken: token, hasVideo: Boolean(file), spot },
       );
       // The report is already saved; a failed upload must not turn it into an error.
       if (file && REPORTS_GO_TO_SERVER) {
@@ -191,6 +201,8 @@ export function QuickReport({
     },
   });
   const submitErrorCode = submit.error instanceof ReportError ? submit.error.code : submit.error ? "network" : null;
+  const retryMinutes = submit.error instanceof ReportError ? submit.error.retryAfterMinutes : null;
+  const waitingForCaptcha = CAPTCHA_ON && !captchaToken;
 
   const group: CategoryGroup = kind === "positive" ? "positive" : "chhintai";
   const last = STEP_FIELDS.length - 1;
@@ -244,6 +256,7 @@ export function QuickReport({
             onClick={() => {
               reset();
               submit.reset();
+              freshCaptcha();
               setVideoFile(null);
               setVideoResult(null);
               setStep(0);
@@ -358,7 +371,12 @@ export function QuickReport({
               {t.whereHint}
             </p>
             <div className="mt-4">
-              <LocationPicker dict={dict} value={h3} onChange={(cell) => setValue("h3", cell, { shouldValidate: true })} />
+              <LocationPicker
+                dict={dict}
+                value={h3}
+                onChange={(cell) => setValue("h3", cell, { shouldValidate: true })}
+                onSpot={setSpot}
+              />
             </div>
             <FieldError message={formState.errors.h3?.message} dict={dict} />
           </div>
@@ -464,10 +482,12 @@ export function QuickReport({
         )}
       </div>
 
-      {step === last && <Turnstile onToken={handleToken} locale={locale} />}
+      {step === last && <Turnstile key={captchaRound} onToken={handleToken} locale={locale} />}
       {submitErrorCode && (
         <p role="alert" className="mt-4 rounded-xl bg-ral-4/10 px-4 py-3 text-sm font-medium text-ral-4">
-          {t.submitErrors[submitErrorCode as keyof typeof t.submitErrors] ?? t.submitErrors.network}
+          {submitErrorCode === "rate_limited" && retryMinutes
+            ? fill(locale, t.submitErrors.rate_limited_wait, { n: retryMinutes })
+            : (t.submitErrors[submitErrorCode as keyof typeof t.submitErrors] ?? t.submitErrors.network)}
         </p>
       )}
 
@@ -490,13 +510,15 @@ export function QuickReport({
             <ArrowRight className="size-4" aria-hidden />
           </Button>
         ) : (
-          <Button key="submit" type="submit" size="lg" variant="accent" disabled={submit.isPending}>
-            {submit.isPending && <Loader2 className="size-4 animate-spin" aria-hidden />}
+          <Button key="submit" type="submit" size="lg" variant="accent" disabled={submit.isPending || waitingForCaptcha}>
+            {(submit.isPending || waitingForCaptcha) && <Loader2 className="size-4 animate-spin" aria-hidden />}
             {uploadPct !== null
               ? fill(locale, t.video.uploading, { p: uploadPct })
               : submit.isPending
                 ? t.submitting
-                : t.submit}
+                : waitingForCaptcha
+                  ? t.checkingDevice
+                  : t.submit}
           </Button>
         )}
       </div>

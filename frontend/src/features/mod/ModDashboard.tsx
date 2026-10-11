@@ -13,6 +13,7 @@ import {
   Flag,
   Loader2,
   LogOut,
+  MapPin,
   MessageSquareQuote,
   ShieldCheck,
   Trash2,
@@ -38,6 +39,7 @@ import {
 import { CategoryIcon } from "@/components/safety/CategoryIcon";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/components/ui/cn";
+import { TrafficPanel } from "./TrafficPanel";
 
 type Tab = "flagged" | "pending" | "videos" | "alerts";
 const REASONS: RejectReason[] = ["fake", "wrong_place", "spam", "offensive", "other"];
@@ -187,6 +189,28 @@ function ReportCard({
             </li>
           ))}
         </ul>
+      )}
+
+      {report.exact_lat !== null && report.exact_lng !== null && (
+        <div className="mt-3 flex items-start gap-2.5 rounded-xl bg-surface-2 px-3 py-2.5 text-sm">
+          <MapPin className="mt-0.5 size-4 shrink-0 text-[#e53935]" aria-hidden />
+          <div className="min-w-0">
+            <p className="text-[11px] text-ink-3">{t.exactSpot}</p>
+            <p className="font-semibold">{report.place_label || t.exactSpotUnnamed}</p>
+            <p className="mt-0.5 flex flex-wrap items-center gap-x-3 text-[11px] text-ink-3">
+              <a
+                href={`https://www.openstreetmap.org/?mlat=${report.exact_lat}&mlon=${report.exact_lng}#map=18/${report.exact_lat}/${report.exact_lng}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+              >
+                {t.exactSpotOpen}
+                <ExternalLink className="size-3" aria-hidden />
+              </a>
+              <span>{t.exactSpotNote}</span>
+            </p>
+          </div>
+        </div>
       )}
 
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-3">
@@ -404,6 +428,8 @@ function Dashboard({
           </div>
         ))}
       </dl>
+
+      <TrafficPanel locale={locale} dict={dict} />
 
       <div className="mt-8 flex gap-1 rounded-full bg-surface-2 p-1" role="tablist">
         {(["flagged", "pending", "videos", "alerts"] as const).map((key) => (

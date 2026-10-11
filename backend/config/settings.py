@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "apps.incidents",
     "apps.moderation",
     "apps.watch",
+    "apps.analytics",
+    "apps.contact",
 ]
 
 MIDDLEWARE = [
@@ -127,7 +129,8 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "DEFAULT_THROTTLE_RATES": {"mod_login": "5/min", "watch": "30/hour"},
+    # hit: page views + a still-here ping every 90 s from each open tab (a shared network may have many)
+    "DEFAULT_THROTTLE_RATES": {"mod_login": "5/min", "watch": "30/hour", "hit": "600/hour", "contact": "5/hour"},
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
 }
@@ -165,6 +168,18 @@ CLOUDINARY = (
     if _cloudinary.scheme == "cloudinary" and _cloudinary.hostname and _cloudinary.password
     else None
 )
+# Contact form → the owner's inbox, sent through Gmail (free). GMAIL_APP_PASSWORD is a 16-letter
+# Google "App password" (Google Account → Security → 2-Step Verification → App passwords), never the
+# real password. Empty = messages are only saved in the database (and printed locally).
+CONTACT_TO = env("CONTACT_TO", "monaimmukul75@gmail.com")
+EMAIL_HOST_USER = env("GMAIL_USER", CONTACT_TO)
+EMAIL_HOST_PASSWORD = env("GMAIL_APP_PASSWORD").replace(" ", "")
+if EMAIL_HOST_PASSWORD:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_TIMEOUT = "smtp.gmail.com", 587, True, 10
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = f"SafePath <{EMAIL_HOST_USER}>"
 # Proxies whose X-Forwarded-For we trust (e.g. Caddy/Nginx in front of the app).
 TRUSTED_PROXY_COUNT = int(env("TRUSTED_PROXY_COUNT", "0"))
 # Header carrying the real client IP, set by an edge proxy that clients cannot spoof through.

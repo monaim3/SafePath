@@ -77,7 +77,11 @@ export async function fetchTopAreas(limit: number): Promise<AreaDetail[]> {
 
 /** Error code from the API: "rate_limited" | "captcha" | "invalid_time" | "invalid" | "network". */
 export class ReportError extends Error {
-  constructor(public code: string) {
+  constructor(
+    public code: string,
+    /** For "rate_limited": whole minutes until another report is accepted, when the server says. */
+    public retryAfterMinutes: number | null = null,
+  ) {
     super(code);
   }
 }
@@ -85,7 +89,13 @@ export class ReportError extends Error {
 /** POST /api/v1/reports. With `hasVideo`, the answer carries a signed upload ticket (when the server has video on). */
 export async function submitReport(
   input: ReportInput,
-  extra: { deviceId: string; turnstileToken?: string; hasVideo?: boolean },
+  extra: {
+    deviceId: string;
+    turnstileToken?: string;
+    hasVideo?: boolean;
+    /** Exact pin + name, for moderators only. The server keeps it only if it lies in `input.h3`. */
+    spot?: { lngLat: [number, number]; label: string } | null;
+  },
 ): Promise<{ id: string; upload?: UploadTicket }> {
   if (!REPORTS_GO_TO_SERVER) {
     await new Promise((resolve) => setTimeout(resolve, 700));
@@ -101,14 +111,20 @@ export async function submitReport(
         device_id: extra.deviceId,
         turnstile_token: extra.turnstileToken ?? "",
         has_video: Boolean(extra.hasVideo),
+        ...(extra.spot && {
+          lat: extra.spot.lngLat[1],
+          lng: extra.spot.lngLat[0],
+          place_label: extra.spot.label,
+        }),
       }),
     });
   } catch {
     throw new ReportError("network");
   }
   if (res.ok) return (await res.json()) as { id: string; upload?: UploadTicket };
-  const body = (await res.json().catch(() => ({}))) as { error?: string };
-  throw new ReportError(body.error ?? (res.status === 429 ? "rate_limited" : "invalid"));
+  const body = (await res.json().catch(() => ({}))) as { error?: string; retry_after?: number };
+  const wait = typeof body.retry_after === "number" && body.retry_after > 0 ? Math.ceil(body.retry_after / 60) : null;
+  throw new ReportError(body.error ?? (res.status === 429 ? "rate_limited" : "invalid"), wait);
 }
 
 /**

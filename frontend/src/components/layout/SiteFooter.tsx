@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BellRing } from "lucide-react";
 import { fill, formatYear, type Dictionary, type Locale } from "@/i18n";
 import { Logo } from "@/components/ui/Logo";
+import { InstallFooterButton } from "@/features/watch/InstallFooterButton";
 
 /*
  * Map credits (© OpenStreetMap, OpenFreeMap, Esri) are shown inside every map, as their licences
@@ -35,6 +36,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
           <div className="space-y-3">
             <Logo />
             <p className="max-w-sm text-sm leading-relaxed text-ink-2">{f.tagline}</p>
+            <InstallFooterButton dict={dict} />
           </div>
 
           {columns.map((col) => (

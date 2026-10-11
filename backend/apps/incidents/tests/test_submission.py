@@ -96,16 +96,34 @@ def test_rejects_impossible_reports(client, overrides):
 # ---------- rate limits ----------
 def test_rate_limit_per_device(client):
     data = payload()
-    for _ in range(2):
-        assert post(client, {**data}, ip=f"203.0.113.{next(_ids)}").status_code == 201
+    assert post(client, {**data}, ip=f"203.0.113.{next(_ids)}").status_code == 201
+    # same device on a different network (e.g. switched to a VPN) is still limited
     assert post(client, {**data}, ip="203.0.113.250").status_code == 429
 
 
 def test_rate_limit_per_ip_catches_new_device_ids(client):
-    for _ in range(2):
-        assert post(client, payload(), ip="203.0.113.9").status_code == 201
+    assert post(client, payload(), ip="203.0.113.9").status_code == 201
     # a "fresh" device from the same network is still limited
     assert post(client, payload(), ip="203.0.113.9").status_code == 429
+
+
+def test_one_report_per_30_minutes_then_allowed_again(client):
+    data = payload()
+    first = post(client, {**data}, ip="203.0.113.77")
+    assert first.status_code == 201
+    refused = post(client, {**data}, ip="203.0.113.77")
+    assert refused.status_code == 429 and 1700 <= refused.json()["retry_after"] <= 1800
+    # 31 minutes later the same device and network may report again
+    Report.objects.update(created_at=timezone.now() - timedelta(minutes=31))
+    assert post(client, {**data}, ip="203.0.113.77").status_code == 201
+
+
+def test_at_most_five_a_day(client):
+    data = payload()
+    for i in range(5):
+        assert post(client, {**data}, ip="203.0.113.88").status_code == 201
+        Report.objects.update(created_at=timezone.now() - timedelta(minutes=31 * (5 - i)))
+    assert post(client, {**data}, ip="203.0.113.88").status_code == 429
 
 
 # ---------- corroboration ----------
@@ -153,9 +171,10 @@ def test_burst_from_few_devices_is_flagged_once():
     start = timezone.now() - timedelta(hours=2)
     data = {"kind": "incident", "category": "motorbike", "h3": CELL, "when": "yesterday",
             "date": timezone.localdate() - timedelta(days=1), "block": 7}
+    # two devices taking turns, each reporting every 32 min (just past the 30-min limit)
     for i in range(policy.BURST_MIN_REPORTS + 2):
         submit_report(data=dict(data), device_id=devices[i % 2], ip=f"198.51.100.{i}",
-                      now=start + timedelta(minutes=15 * i))
+                      now=start + timedelta(minutes=16 * i))
     flags = Flag.objects.filter(reason=Flag.Reason.BURST, h3=CELL)
     assert flags.count() == 1
     assert AuditLog.objects.filter(action="flag.burst").exists()

@@ -27,6 +27,7 @@ import {
   type Basemap,
   type FitTarget,
   type FlyTarget,
+  type MePosition,
 } from "./SafetyMap";
 import { TimeDock } from "./TimeDock";
 import { PeriodSwitch } from "./PeriodSwitch";
@@ -111,24 +112,25 @@ export function MapScreen({
     return (h3: string) => scores.get(h3);
   }, [streetCells, streetCellsFailed]);
 
-  const handleOverlay = useCallback((next: RouteOverlay | null) => {
-    setOverlay(next);
-    if (!next) return;
-    // Keep the route clear of the panels: left panel on desktop, top panel + folded bottom dock on mobile.
+  // Keep the route / live dot clear of the panels: left panel on desktop, top panel + folded bottom dock on mobile.
+  const panelPadding = useCallback(() => {
     const desktop = window.innerWidth >= 1024;
-    setFitTo({
-      bounds: next.bounds,
-      key: next.key,
-      padding: desktop
-        ? { top: 110, bottom: 320, left: 430, right: 80 }
-        : {
-            top: Math.round(window.innerHeight * 0.5),
-            bottom: 110,
-            left: 30,
-            right: 30,
-          },
-    });
+    return desktop
+      ? { top: 110, bottom: 320, left: 430, right: 80 }
+      : { top: Math.round(window.innerHeight * 0.5), bottom: 110, left: 30, right: 30 };
   }, []);
+
+  const handleOverlay = useCallback(
+    (next: RouteOverlay | null) => {
+      setOverlay(next);
+      if (!next || !next.fit) return;
+      setFitTo({ bounds: next.bounds, key: next.key, padding: panelPadding() });
+    },
+    [panelPadding],
+  );
+
+  // Live GPS position while a trip runs: the map shows it as a moving dot and follows it.
+  const [me, setMe] = useState<MePosition | null>(null);
 
   const handleSelect = useCallback((h3: string | null) => setSelected(h3), []);
   // Finer cells as you zoom in: neighbourhood → block → street segment.
@@ -174,6 +176,9 @@ export function MapScreen({
         // Slightly south of the city centre so Dhaka sits above the time panel.
         initialCenter={[90.41, 23.7]}
         onZoomChange={handleZoom}
+        me={me}
+        followPadding={panelPadding}
+        recenterLabel={dict.route.recenter}
         ariaLabel={dict.map.legendTitle}
       />
 
@@ -194,6 +199,7 @@ export function MapScreen({
             lookup={lookup}
             onClose={() => setDirectionsOpen(false)}
             onOverlay={handleOverlay}
+            onTripPosition={setMe}
           />
         ) : (
           <div className="flex gap-2">

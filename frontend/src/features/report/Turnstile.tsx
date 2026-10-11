@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+/** True when the bot check is on (a token is needed before a report can be sent). */
+export const CAPTCHA_ON = SITE_KEY !== "";
 const SCRIPT = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 
 interface TurnstileApi {
@@ -30,7 +32,10 @@ function loadScript(): Promise<void> {
   return loading;
 }
 
-/** Cloudflare Turnstile (free CAPTCHA). Renders nothing when no site key is configured. */
+/**
+ * Cloudflare Turnstile (free CAPTCHA). Renders nothing when no site key is configured.
+ * Each token works for one submission only: remount (change `key`) to get a fresh one.
+ */
 export function Turnstile({ onToken, locale }: { onToken: (token: string) => void; locale: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
