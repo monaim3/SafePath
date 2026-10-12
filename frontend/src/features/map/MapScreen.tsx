@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   keepPreviousData,
   useQuery,
@@ -81,6 +81,13 @@ export function MapScreen({
   const [directionsOpen, setDirectionsOpen] = useState(false);
   const [overlay, setOverlay] = useState<RouteOverlay | null>(null);
   const [fitTo, setFitTo] = useState<FitTarget | null>(null);
+  // A search or route field has focus. On phones the keyboard then shrinks the screen and the
+  // bottom panels would ride up over the field and its results, so they step aside while typing.
+  const [typing, setTyping] = useState(false);
+  // Leaving the field (a tap on a search result) waits a moment before the panels come back,
+  // or they'd reappear under the finger mid-tap — while the keyboard still fills the screen —
+  // and catch the tap meant for the result.
+  const typingEnd = useRef<ReturnType<typeof setTimeout>>(undefined);
   const queryClient = useQueryClient();
 
   const pickHour = useCallback((next: number | "all", now = false) => {
@@ -177,7 +184,19 @@ export function MapScreen({
   );
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden bg-surface-2">
+    <div
+      className="relative h-dvh w-full overflow-hidden bg-surface-2"
+      onFocusCapture={(e) => {
+        if (!(e.target instanceof HTMLInputElement) || e.target.type === "range") return;
+        clearTimeout(typingEnd.current);
+        setTyping(true);
+      }}
+      onBlurCapture={(e) => {
+        if (!(e.target instanceof HTMLInputElement)) return;
+        clearTimeout(typingEnd.current);
+        typingEnd.current = setTimeout(() => setTyping(false), 400);
+      }}
+    >
       <SafetyMap
         className="absolute inset-0"
         cells={cells}
@@ -356,7 +375,12 @@ export function MapScreen({
       )}
 
       {/* ---------- bottom: peek (mobile) + time dock ---------- */}
-      <div className="absolute inset-x-3 bottom-3 z-20 lg:bottom-5 lg:left-[calc(24rem+1.5rem)] lg:right-16">
+      <div
+        className={cn(
+          "absolute inset-x-3 bottom-3 z-20 lg:bottom-5 lg:left-[calc(24rem+1.5rem)] lg:right-16",
+          typing && "max-lg:hidden",
+        )}
+      >
         <div className="mx-auto flex max-w-xl flex-col gap-2">
           {peek && <div className="lg:hidden">{peek}</div>}
           <TimeDock
