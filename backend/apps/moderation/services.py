@@ -45,11 +45,12 @@ def verify_report(report: Report, *, actor) -> Report:
     before = {"status": report.status, "weight": report.weight}
     device: Device = report.device
     report.status = Report.Status.VERIFIED
+    report.reviewed_at = timezone.now()
     device.trust = abuse.clamp_trust(device.trust + policy.TRUST_ON_VERIFIED)
     device.verified_count += 1
     device.save(update_fields=["trust", "verified_count"])
     refresh_weight(report)
-    report.save(update_fields=["status", "weight"])
+    report.save(update_fields=["status", "weight", "reviewed_at"])
     _resolve_flags(report)
     transaction.on_commit(bump_data_version)
     if not report.is_demo and report.kind != Report.Kind.POSITIVE:
@@ -69,6 +70,8 @@ def reject_report(report: Report, *, actor, reason: str = "") -> Report:
     device: Device = report.device
     now = timezone.now()
     report.status = Report.Status.REJECTED
+    report.reject_reason = reason
+    report.reviewed_at = now
     device.trust = abuse.clamp_trust(device.trust + policy.TRUST_ON_REJECTED)
     device.rejected_count += 1
 
@@ -83,7 +86,7 @@ def reject_report(report: Report, *, actor, reason: str = "") -> Report:
     device.save(update_fields=["trust", "rejected_count", "restricted_until"])
 
     refresh_weight(report)
-    report.save(update_fields=["status", "weight"])
+    report.save(update_fields=["status", "weight", "reject_reason", "reviewed_at"])
     _resolve_flags(report)
     _drop_video(report)  # a rejected report's footage is not kept either
     transaction.on_commit(bump_data_version)
@@ -118,8 +121,9 @@ def mark_duplicate(report: Report, *, actor) -> Report:
     """Same incident reported twice. Stops counting, but is not the reporter's fault — no trust penalty."""
     before = {"status": report.status, "weight": report.weight}
     report.status = Report.Status.DUPLICATE
+    report.reviewed_at = timezone.now()
     refresh_weight(report)
-    report.save(update_fields=["status", "weight"])
+    report.save(update_fields=["status", "weight", "reviewed_at"])
     _resolve_flags(report)
     transaction.on_commit(bump_data_version)
     record(

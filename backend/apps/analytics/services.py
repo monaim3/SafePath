@@ -20,7 +20,7 @@ KEEP_VISITOR_DAYS = 2
 KEEP_PRESENCE = timedelta(hours=1)
 
 # Site sections, so area pages etc. are grouped ("/bn/area/8a3c…" → "/area").
-SECTIONS = ("map", "report", "safety", "area", "watch", "rules", "contact")
+SECTIONS = ("map", "report", "safety", "area", "watch", "track", "rules", "contact")
 BOT = re.compile(r"bot|crawl|spider|slurp|preview|headless|lighthouse|monitor|curl|wget|python|httpx", re.I)
 PHONE = re.compile(r"mobi|android|iphone|ipad|ipod", re.I)
 

@@ -36,6 +36,7 @@ class Report(models.Model):
         VERIFIED = "verified"
         REJECTED = "rejected"
         DUPLICATE = "duplicate"
+        WITHDRAWN = "withdrawn"  # taken back by the reporter (code + same phone) while still pending
 
     CATEGORY_CHOICES = [
         (c, c)
@@ -80,6 +81,14 @@ class Report(models.Model):
     flags = models.JSONField(default=list, blank=True)
     corroborations = models.PositiveIntegerField(default=0)
     weight = models.FloatField(default=0)
+    # The moderator's reject reason (moderation REJECT_REASONS); reporters see a gentler wording.
+    reject_reason = models.CharField(max_length=16, blank=True)
+    # When a moderator decided, or the reporter withdrew it.
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    # Keyed hash of the tracking code handed to the reporter once (services/tracking.py). The code
+    # itself is never stored, so even a database leak can't be used to look reports up.
+    # Null for reports from before tracking, media imports and demo data.
+    tracking_hash = models.CharField(max_length=64, null=True, blank=True, unique=True)
 
     device = models.ForeignKey(Device, on_delete=models.PROTECT, related_name="reports")
     ip_hash = models.CharField(max_length=64, db_index=True)

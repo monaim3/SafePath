@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CheckCircle2, Mail, Phone, Send, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Mail, Phone, Send } from "lucide-react";
 import { getDictionary, hasLocale } from "@/i18n";
 import { ContactForm } from "@/features/contact/ContactForm";
 import { CopyEmail } from "@/features/contact/CopyEmail";
@@ -81,10 +81,6 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
               {lang === "bn" ? "৯৯৯" : "999"}
             </a>
           </section>
-          <p className="flex gap-2.5 rounded-3xl bg-surface-2 p-5 text-sm leading-relaxed text-ink-2">
-            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
-            {t.privacyNote}
-          </p>
         </div>
       </div>
     </div>

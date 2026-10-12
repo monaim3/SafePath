@@ -130,7 +130,9 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ],
     # hit: page views + a still-here ping every 90 s from each open tab (a shared network may have many)
-    "DEFAULT_THROTTLE_RATES": {"mod_login": "5/min", "watch": "30/hour", "hit": "600/hour", "contact": "5/hour"},
+    "DEFAULT_THROTTLE_RATES": {"mod_login": "5/min", "watch": "30/hour", "hit": "600/hour", "contact": "5/hour",
+                               # Report tracking lookups: plenty for one person, hopeless for guessing codes.
+                               "track": "60/hour"},
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
 }

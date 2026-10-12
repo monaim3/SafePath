@@ -234,7 +234,7 @@ def confirm_knowledge(*, report_id, device_id: str, ip: str, now: datetime | Non
         Report.objects.select_for_update()
         .select_related("device")
         .filter(pk=report_id, kind=Report.Kind.KNOWLEDGE)
-        .exclude(status__in=[Report.Status.REJECTED, Report.Status.DUPLICATE])
+        .exclude(status__in=[Report.Status.REJECTED, Report.Status.DUPLICATE, Report.Status.WITHDRAWN])
         .first()
     )
     if report is None:

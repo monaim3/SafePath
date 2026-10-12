@@ -13,6 +13,7 @@ import {
   Check,
   Hourglass,
   Layers3,
+  ListChecks,
   Loader2,
   ShieldCheck,
   Users,
@@ -21,6 +22,8 @@ import {
 import { fill, type Dictionary, type Locale } from "@/i18n";
 import { ReportError, REPORTS_GO_TO_SERVER, submitReport, uploadVideo } from "@/lib/api/safety";
 import { getDeviceId } from "@/lib/device";
+import { saveMyReport } from "@/lib/my-reports";
+import { TrackingCodeCard } from "@/features/track/TrackingCodeCard";
 import { CATEGORIES, type CategoryGroup } from "@/lib/safety/categories";
 import { TIME_BLOCKS } from "@/lib/safety/types";
 import { redactPersonalInfo, reportSchema, type ReportInput } from "@/lib/validation/report";
@@ -185,6 +188,8 @@ export function QuickReport({
         { ...input, description: redactPersonalInfo(input.description ?? "") },
         { deviceId: getDeviceId(), turnstileToken: token, hasVideo: Boolean(file), videoLink: link, spot },
       );
+      // Saved before any upload, so a closed tab mid-upload still leaves the code in "My reports".
+      if (res.code) saveMyReport({ code: res.code, category: input.category, place: spot?.label || undefined });
       if (link && REPORTS_GO_TO_SERVER) setVideoResult("uploaded"); // nothing to upload: the link went with the report
       // The report is already saved; a failed upload must not turn it into an error.
       if (file && REPORTS_GO_TO_SERVER) {
@@ -204,6 +209,8 @@ export function QuickReport({
       }
       return res;
     },
+    // The success screen is shorter than the form: start it at the top, where the tracking code is.
+    onSuccess: () => window.scrollTo({ top: 0, behavior: "smooth" }),
   });
   const submitErrorCode = submit.error instanceof ReportError ? submit.error.code : submit.error ? "network" : null;
   const retryMinutes = submit.error instanceof ReportError ? submit.error.retryAfterMinutes : null;
@@ -236,6 +243,7 @@ export function QuickReport({
           </p>
         )}
         {!REPORTS_GO_TO_SERVER && <p className="mt-3 text-xs text-ink-3">{t.demoNote}</p>}
+        {submit.data?.code && <TrackingCodeCard code={submit.data.code} locale={locale} dict={dict} />}
 
         {/* How reports are kept honest — only what the system actually does. */}
         <section className="mt-8 rounded-3xl border border-line bg-surface p-5 text-left">
@@ -255,7 +263,13 @@ export function QuickReport({
             })}
           </ul>
         </section>
-        <div className="mt-8 flex justify-center gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {submit.data?.code && (
+            <Link href={`/${locale}/track`} className={buttonClass({ variant: "outline" })}>
+              <ListChecks className="size-4" aria-hidden />
+              {dict.track.checkStatus}
+            </Link>
+          )}
           <Button
             variant="outline"
             onClick={() => {
@@ -283,7 +297,16 @@ export function QuickReport({
     <div className="mx-auto mb-8 max-w-2xl">
       <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">{t.title}</h1>
       <p className="mt-3 text-lg text-ink-2">{t.subtitle}</p>
-      <GuideVideoButton locale={locale} dict={dict} variant="pill" label={dict.help.reportGuide} className="mt-4" />
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <GuideVideoButton locale={locale} dict={dict} variant="pill" label={dict.help.reportGuide} />
+        <Link
+          href={`/${locale}/track`}
+          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-ink-2 transition-colors hover:border-ink-3 hover:text-ink"
+        >
+          <ListChecks className="size-4 text-accent" aria-hidden />
+          {dict.track.link}
+        </Link>
+      </div>
     </div>
     <form
       onSubmit={(e) => {

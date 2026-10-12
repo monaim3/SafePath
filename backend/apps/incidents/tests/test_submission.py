@@ -59,7 +59,7 @@ def client() -> APIClient:
 def test_accepts_valid_report_with_minimal_response(client):
     res = post(client, payload())
     assert res.status_code == 201
-    assert set(res.json()) == {"id", "status"}  # never reveals flags, weight or trust
+    assert set(res.json()) == {"id", "status", "code"}  # never reveals flags, weight or trust
     report = Report.objects.get()
     assert report.status == "pending"
     assert report.weight == pytest.approx(policy.STATUS_WEIGHT["pending"] * policy.TRUST_START)
@@ -152,7 +152,7 @@ def test_copy_pasted_text_is_flagged_quietly(client):
     text = "Two men on a bike grabbed a phone near the bridge"
     post(client, payload(description=text), ip="203.0.113.15")
     res = post(client, payload(description=text.upper() + "!!"), ip="203.0.113.16")
-    assert res.status_code == 201 and set(res.json()) == {"id", "status"}
+    assert res.status_code == 201 and set(res.json()) == {"id", "status", "code"}
     assert Flag.objects.filter(reason=Flag.Reason.TEXT_DUPLICATE).count() == 1
 
 

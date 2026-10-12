@@ -4,12 +4,13 @@ from django.conf import settings
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 
 from ..models import Report
-from ..services import geo, turnstile, video
-from ..services.submission import SubmissionRejected, check_can_submit, confirm_knowledge, submit_report
-from .serializers import ConfirmSerializer, ReportInputSerializer, VideoAttachSerializer
+from ..services import geo, tracking, turnstile, video
+from ..services.submission import SubmissionRejected, check_can_submit, confirm_knowledge, identify, submit_report
+from .serializers import ConfirmSerializer, ReportInputSerializer, TrackSerializer, VideoAttachSerializer, WithdrawSerializer
 
 log = logging.getLogger(__name__)
 
@@ -21,6 +22,7 @@ REJECTION_STATUS = {
     "not_uploaded": status.HTTP_409_CONFLICT,
     "too_large": status.HTTP_400_BAD_REQUEST,
     "unavailable": status.HTTP_503_SERVICE_UNAVAILABLE,
+    "already_decided": status.HTTP_409_CONFLICT,
 }
 
 
@@ -75,8 +77,8 @@ class ReportCreateView(APIView):
             report = submit_report(data=data, device_id=device_id, ip=ip)
         except SubmissionRejected as exc:
             return rejected(exc.code, exc.retry_after)
-        # Deliberately minimal: never reveal flags, weight or trust.
-        body = {"id": str(report.id), "status": "received"}
+        # Deliberately minimal: never reveal flags, weight or trust. The tracking code is shown once.
+        body = {"id": str(report.id), "status": "received", "code": tracking.issue(report)}
         if video_link and report.kind == Report.Kind.INCIDENT:
             # Nothing to upload or confirm: straight to the moderators' video queue.
             report.video_status = Report.VideoStatus.PENDING
@@ -131,3 +133,35 @@ class ConfirmView(APIView):
             return rejected(exc.code)
         # Same answer whether or not it counted, so it can't be probed.
         return Response({"ok": True})
+
+
+class TrackView(APIView):
+    """
+    POST /api/v1/track {codes: [...]} — statuses of the reporter's own reports, by tracking code.
+    POST, not GET, so codes stay out of URLs and server logs. Unknown codes are simply missing.
+    """
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "track"
+
+    def post(self, request: Request) -> Response:
+        serializer = TrackSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response({"reports": tracking.lookup(serializer.validated_data["codes"])})
+
+
+class WithdrawView(APIView):
+    """POST /api/v1/track/withdraw {code, device_id} — only from the phone that sent the report."""
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "track"
+
+    def post(self, request: Request) -> Response:
+        serializer = WithdrawSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        device_hash = identify(data["device_id"], client_ip(request)).device_hash
+        try:
+            return Response(tracking.withdraw(raw_code=data["code"], device_hash=device_hash))
+        except tracking.TrackingError as exc:
+            return rejected(exc.code)

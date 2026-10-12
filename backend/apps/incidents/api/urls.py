@@ -1,10 +1,12 @@
 from django.urls import path
 
 from .map_views import AreaNewsView, AreaVideosView, AreaView, MapCellsView, TimeProfileView, TopAreasView
-from .views import ConfirmView, ReportCreateView, VideoAttachView
+from .views import ConfirmView, ReportCreateView, TrackView, VideoAttachView, WithdrawView
 
 urlpatterns = [
     path("reports", ReportCreateView.as_view(), name="report-create"),
+    path("track", TrackView.as_view(), name="track"),
+    path("track/withdraw", WithdrawView.as_view(), name="track-withdraw"),
     path("reports/<uuid:report_id>/video", VideoAttachView.as_view(), name="report-video"),
     path("knowledge/<uuid:report_id>/confirm", ConfirmView.as_view(), name="knowledge-confirm"),
     path("map/cells", MapCellsView.as_view(), name="map-cells"),

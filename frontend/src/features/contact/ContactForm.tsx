@@ -171,14 +171,13 @@ export function ContactForm({ locale, dict }: { locale: Locale; dict: Dictionary
           "message",
           t.message,
           <textarea
-            {...a11y("message", t.messageHint)}
+            {...a11y("message")}
             className={cn(input, "min-h-36 resize-y")}
             value={fields.message}
             onChange={set("message")}
             maxLength={3000}
             rows={6}
           />,
-          t.messageHint,
         )}
       </div>
 

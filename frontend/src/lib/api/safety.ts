@@ -86,7 +86,10 @@ export class ReportError extends Error {
   }
 }
 
-/** POST /api/v1/reports. With `hasVideo`, the answer carries a signed upload ticket (when the server has video on). */
+/**
+ * POST /api/v1/reports. With `hasVideo`, the answer carries a signed upload ticket (when the server has video on).
+ * The answer's `code` is the tracking code, shown once (the server keeps only a hash of it).
+ */
 export async function submitReport(
   input: ReportInput,
   extra: {
@@ -98,7 +101,7 @@ export async function submitReport(
     /** Exact pin + name, for moderators only. The server keeps it only if it lies in `input.h3`. */
     spot?: { lngLat: [number, number]; label: string } | null;
   },
-): Promise<{ id: string; upload?: UploadTicket }> {
+): Promise<{ id: string; code?: string; upload?: UploadTicket }> {
   if (!REPORTS_GO_TO_SERVER) {
     await new Promise((resolve) => setTimeout(resolve, 700));
     return { id: `demo-${input.h3}-${Date.now()}` };
@@ -124,7 +127,7 @@ export async function submitReport(
   } catch {
     throw new ReportError("network");
   }
-  if (res.ok) return (await res.json()) as { id: string; upload?: UploadTicket };
+  if (res.ok) return (await res.json()) as { id: string; code?: string; upload?: UploadTicket };
   const body = (await res.json().catch(() => ({}))) as { error?: string; retry_after?: number };
   const wait = typeof body.retry_after === "number" && body.retry_after > 0 ? Math.ceil(body.retry_after / 60) : null;
   throw new ReportError(body.error ?? (res.status === 429 ? "rate_limited" : "invalid"), wait);

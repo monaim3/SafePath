@@ -24,7 +24,11 @@ HISTORY_HALF_LIFE_DAYS = 180.0
 # victims often report later, from home or a borrowed phone, because their phone was taken.
 
 # ---------- weighting ----------
-STATUS_WEIGHT = {"pending": 0.3, "verified": 1.0, "rejected": 0.0, "duplicate": 0.0}
+STATUS_WEIGHT = {"pending": 0.3, "verified": 1.0, "rejected": 0.0, "duplicate": 0.0, "withdrawn": 0.0}
+
+# ---------- report tracking ----------
+# Codes one status lookup may ask about at once (a phone's "My reports" list).
+TRACK_MAX_CODES = 30
 TRUST_MIN, TRUST_MAX, TRUST_START = 0.5, 1.5, 0.8
 # Each independent corroboration adds this much, up to the cap.
 CORROBORATION_STEP, CORROBORATION_CAP = 0.15, 0.6

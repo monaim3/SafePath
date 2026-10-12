@@ -3,6 +3,7 @@ import re
 import h3
 from rest_framework import serializers
 
+from .. import policy
 from ..models import Report
 from ..services import video
 
@@ -84,3 +85,14 @@ class ConfirmSerializer(serializers.Serializer):
 
 class VideoAttachSerializer(serializers.Serializer):
     token = serializers.CharField(max_length=128)
+
+
+class TrackSerializer(serializers.Serializer):
+    codes = serializers.ListField(
+        child=serializers.CharField(max_length=32), min_length=1, max_length=policy.TRACK_MAX_CODES
+    )
+
+
+class WithdrawSerializer(serializers.Serializer):
+    code = serializers.CharField(max_length=32)
+    device_id = serializers.CharField(min_length=16, max_length=64)

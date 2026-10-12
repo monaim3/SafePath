@@ -17,6 +17,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: Dictionary 
         { href: "/map", label: dict.nav.map },
         { href: "/safety", label: dict.nav.safety },
         { href: "/report", label: dict.home.ctaReport },
+        { href: "/track", label: dict.track.link },
       ],
     },
     {
