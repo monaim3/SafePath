@@ -3,6 +3,7 @@
  * Bangladesh extract for production — see docs/SAFEPATH_MASTER_PROMPT.md §17.
  */
 import type { RouteOption, TravelMode } from "@/lib/safety/route-risk";
+import { withTimeout } from "./timeout";
 
 const BASE: Record<TravelMode, string> = {
   drive: "https://routing.openstreetmap.de/routed-car",
@@ -40,7 +41,7 @@ export async function fetchRoutes(
   url.searchParams.set("geometries", "geojson");
   url.searchParams.set("steps", "true");
 
-  const res = await fetch(url, { signal });
+  const res = await fetch(url, { signal: withTimeout(signal) });
   if (!res.ok) throw new Error(`Routing failed (${res.status})`);
   const data = (await res.json()) as { code: string; routes?: OsrmRoute[] };
   if (data.code !== "Ok" || !data.routes?.length) throw new Error(`Routing failed (${data.code})`);

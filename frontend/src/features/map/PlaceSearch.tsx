@@ -41,7 +41,9 @@ export function PlaceSearch({
     queryFn: ({ signal }) => searchPlaces(query, signal),
     enabled: open && query.length >= 2,
     staleTime: 5 * 60_000,
-    retry: 1, // someone is waiting on the dropdown: say it failed soon rather than retry for long
+    // Someone is waiting on the dropdown: a few quick retries (1 s, 2 s, 4 s) cover a patchy signal,
+    // then say it failed rather than spin for long.
+    retry: 3,
   });
 
   const searching = open && query.length >= 2;

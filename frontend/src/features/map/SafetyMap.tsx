@@ -494,6 +494,19 @@ export function SafetyMap({
           "line-dasharray": [1.2, 1.4],
         },
       });
+      // during a trip, when off the route: dotted line from the person to the route
+      map.addLayer({
+        id: "route-approach",
+        type: "line",
+        source: "route",
+        filter: kind("approach"),
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#1a73e8",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 10, 3, 16, 6],
+          "line-dasharray": [0.1, 2],
+        },
+      });
       map.addLayer({
         id: "route-casing",
         type: "line",

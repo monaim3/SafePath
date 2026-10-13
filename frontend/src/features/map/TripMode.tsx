@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { AlertTriangle, Flag, Loader2, LocateOff, Navigation, ShieldCheck, Square, Volume2, VolumeX } from "lucide-react";
-import { fill, type Dictionary, type Locale } from "@/i18n";
-import { fetchMapCells } from "@/lib/api/safety";
+import { createPortal } from "react-dom";
+import { AlertTriangle, Flag, Loader2, LocateOff, Navigation, Route, ShieldCheck, Square, Volume2, VolumeX, X } from "lucide-react";
+import { fill, formatClock, type Dictionary, type Locale } from "@/i18n";
+import { streetLookup, useStreetDay } from "@/lib/safety/street-day";
 import { scoreToBand } from "@/lib/safety/bands";
 import { lineLength, remainingRoute } from "@/lib/safety/reroute";
 import { metres, type RouteOption, type TravelMode } from "@/lib/safety/route-risk";
@@ -16,6 +16,7 @@ import {
   insideAlert,
   nextAlert,
   quietZone,
+  routeJoinPoint,
   type TripAlert,
 } from "@/lib/safety/trip-alerts";
 import { BandBadge } from "@/components/safety/BandBadge";
@@ -196,6 +197,7 @@ export function TripMode({
 }) {
   const t = dict.route;
   const [hour, setHour] = useState(() => new Date().getHours());
+  const [now, setNow] = useState(() => Date.now()); // for the arrival time, refreshed each minute
   // Client-only component (created by a tap), so navigator is available here.
   const [gps, setGps] = useState<GpsState>(() => (navigator.geolocation ? "waiting" : "denied"));
   const [position, setPosition] = useState<LngLat | null>(null);
@@ -206,36 +208,27 @@ export function TripMode({
 
   // Alerts follow the clock, not the map's time slider.
   useEffect(() => {
-    const id = setInterval(() => setHour(new Date().getHours()), 60_000);
+    const id = setInterval(() => {
+      setHour(new Date().getHours());
+      setNow(Date.now());
+    }, 60_000);
     return () => clearInterval(id);
   }, []);
 
-  const { data: cells, isError } = useQuery({
-    queryKey: ["map-cells", hour, 10],
-    queryFn: () => fetchMapCells({ hour, res: 10 }),
-    refetchInterval: 10 * 60_000,
-  });
-  const lookup = useMemo(() => {
-    if (!cells) return null;
-    const scores = new Map(cells.map((c) => [c.h3, c.score]));
-    return (h3: string) => scores.get(h3);
-  }, [cells]);
+  // Every hour of the day in one download, kept on the phone: after the first load, warnings work
+  // with a weak signal or none at all (GPS needs no internet), and a new hour needs no new request.
+  const { data: streetDay, isError: dayFailed } = useStreetDay();
+  const isError = dayFailed && !streetDay;
+  const lookup = useMemo(() => streetLookup(streetDay, hour), [streetDay, hour]);
   // Whole-day levels too, for "you're inside a red area": the map often shows the whole day,
   // and someone standing in a red patch must not be told all is clear because this hour is quieter.
-  const { data: dayCells } = useQuery({
-    queryKey: ["map-cells", "all", 10],
-    queryFn: () => fetchMapCells({ hour: "all", res: 10 }),
-    staleTime: 10 * 60_000,
-  });
-  const dayLookup = useMemo(() => {
-    if (!dayCells) return null;
-    const scores = new Map(dayCells.map((c) => [c.h3, c.score]));
-    return (h3: string) => scores.get(h3);
-  }, [dayCells]);
+  const dayLookup = useMemo(() => streetLookup(streetDay, "all"), [streetDay]);
   const inside = useMemo(
     () => (position ? insideAlert(position, [lookup, dayLookup]) : null),
     [position, lookup, dayLookup],
   );
+  // Away from the route (the map shows a dotted line to it).
+  const offRoute = useMemo(() => !!position && !!route && routeJoinPoint(position, route) !== null, [position, route]);
 
   // Arrival check for the selected route (a fresh one if the route changes mid-trip).
   const [arrived, setArrived] = useState(false);
@@ -392,6 +385,14 @@ export function TripMode({
       });
   }, [position, lookup, route, routeInfo, offer, arrived, announcer]);
 
+  // What's left of the route, for the bottom bar (like Google Maps: time left · distance · arrival).
+  const left = useMemo(() => {
+    if (!route || route.length < 2 || !routeInfo) return null;
+    const total = Math.max(1, lineLength(route));
+    const metresLeft = position ? lineLength(remainingRoute(position, route)) : total;
+    return { metres: metresLeft, seconds: routeInfo.duration * (metresLeft / total) };
+  }, [route, routeInfo, position]);
+
   const takeOffer = () => {
     if (!offer) return;
     onSwitch?.(offer.choice.route);
@@ -408,7 +409,12 @@ export function TripMode({
   };
 
   return (
-    <section className="mb-4 rounded-2xl border border-accent bg-surface p-4 shadow-sm" aria-live="assertive">
+    <>
+    {/* Phones: a slim banner on top (the map gets the screen); desktop: the full card in the panel. */}
+    <section
+      className="mb-4 rounded-2xl border border-accent bg-surface p-4 shadow-sm max-lg:mb-0 max-lg:rounded-3xl max-lg:border-0 max-lg:p-3 max-lg:shadow-none"
+      aria-live="assertive"
+    >
       <div className="flex items-center gap-2">
         <span className="relative grid size-8 place-items-center rounded-full bg-accent text-accent-ink">
           <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-accent/40 [animation-duration:2s]" />
@@ -470,6 +476,13 @@ export function TripMode({
         )}
       </div>
 
+      {offRoute && !arrived && gps === "ok" && (
+        <p className="mt-2 flex items-start gap-2 text-xs leading-snug text-ink-2">
+          <Route className="mt-0.5 size-3.5 shrink-0 text-accent" aria-hidden />
+          {t.tripOffRoute}
+        </p>
+      )}
+
       {offer && !arrived && (
         <div className="mt-3 rounded-xl border border-positive/40 bg-positive-soft p-3 text-sm" role="alert">
           <p className="flex items-center gap-2 font-semibold text-positive">
@@ -502,16 +515,50 @@ export function TripMode({
         </p>
       )}
 
-      <ul className="mt-3 space-y-1 text-[11px] leading-relaxed text-ink-3">
+      <ul className="mt-3 space-y-1 text-[11px] leading-relaxed text-ink-3 max-lg:hidden">
         <li>{t.tripKeepOpen}</li>
         {!hasVoice && <li>{t.tripNoVoice}</li>}
         <li>{t.tripPrivacy}</li>
       </ul>
+      {!hasVoice && <p className="mt-2 text-[11px] leading-relaxed text-ink-3 lg:hidden">{t.tripNoVoice}</p>}
 
-      <Button type="button" variant="outline" className="mt-3 w-full" onClick={onStop}>
+      <Button type="button" variant="outline" className="mt-3 w-full max-lg:hidden" onClick={onStop}>
         <Square className="size-3.5" aria-hidden />
         {t.tripStop}
       </Button>
     </section>
+
+    {/* Phones: time left, distance and arrival time at the bottom, with End — like Google Maps.
+        A portal: the panel above has a backdrop filter, which would trap a fixed element inside it. */}
+    {createPortal(
+      <div className="fixed inset-x-3 bottom-3 z-40 flex items-center gap-3 rounded-3xl border border-line bg-surface/95 p-3 pl-5 shadow-soft backdrop-blur-xl lg:hidden">
+        <div className="min-w-0 flex-1">
+          {left && !arrived ? (
+            <>
+              <p className="font-display text-2xl font-bold leading-tight text-positive">
+                {fill(locale, t.minutes, { n: Math.max(1, Math.round(left.seconds / 60)) })}
+              </p>
+              <p className="truncate text-xs text-ink-2">
+                {fill(locale, t.km, { n: Number((left.metres / 1000).toFixed(1)) })}
+                {" · "}
+                {fill(locale, t.tripEta, { time: formatClock(locale, dict, new Date(now + left.seconds * 1000)) })}
+              </p>
+            </>
+          ) : (
+            <p className="text-sm font-semibold">{arrived ? t.tripArrived : t.tripActive}</p>
+          )}
+        </div>
+        <button
+          type="button"
+          onClick={onStop}
+          className="inline-flex h-12 shrink-0 items-center gap-2 rounded-full bg-ral-4 px-5 text-sm font-semibold text-white shadow-soft active:scale-[0.97]"
+        >
+          <X className="size-4" aria-hidden />
+          {t.tripEnd}
+        </button>
+      </div>,
+      document.body,
+    )}
+    </>
   );
 }

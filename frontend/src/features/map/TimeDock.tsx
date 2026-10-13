@@ -2,6 +2,7 @@
 
 import {
   useState,
+  useSyncExternalStore,
   type ComponentType,
   type ReactNode,
   type SVGProps,
@@ -64,6 +65,14 @@ function Segment({
   );
 }
 
+/** Below Tailwind's `lg` breakpoint: the layout where panels stack over the map. */
+const NARROW = "(max-width: 1023px)";
+function subscribeNarrow(cb: () => void) {
+  const mq = window.matchMedia(NARROW);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+
 export interface TimeDockProps {
   locale: Locale;
   dict: Dictionary;
@@ -91,14 +100,17 @@ export function TimeDock({
   footer,
   compact = false,
 }: TimeDockProps) {
-  const [expanded, setExpanded] = useState(false);
-  // Fold again each time compact mode starts (adjusting state during render, as React recommends).
+  // The person's own fold/unfold choice; null = automatic (folded while another panel needs room).
+  const [choice, setChoice] = useState<boolean | null>(null);
+  // Back to automatic each time compact mode changes (adjusting state during render, as React recommends).
   const [wasCompact, setWasCompact] = useState(compact);
   if (compact !== wasCompact) {
     setWasCompact(compact);
-    if (compact) setExpanded(false);
+    setChoice(null);
   }
-  const folded = compact && !expanded;
+  // Automatic folding is for phones; a desktop has room to keep the chart open.
+  const narrow = useSyncExternalStore(subscribeNarrow, () => window.matchMedia(NARROW).matches, () => false);
+  const folded = choice ?? (compact && narrow);
   const max = Math.max(...values, 1);
   const selectedValue = hour === "all" ? null : (values[hour] ?? 0);
   const label =
@@ -108,7 +120,7 @@ export function TimeDock({
     <section
       className={cn(
         "rounded-3xl border border-line bg-glass p-4 shadow-soft backdrop-blur-xl",
-        folded && "max-lg:p-3",
+        folded && "p-3",
       )}
       aria-label={dict.map.timeLabel}
     >
@@ -146,29 +158,27 @@ export function TimeDock({
             {dict.map.allDay}
           </Segment>
         </div>
-        {compact && (
-          <button
-            type="button"
-            onClick={() => setExpanded((e) => !e)}
-            aria-expanded={!folded}
-            title={folded ? dict.map.showChart : dict.map.hideChart}
-            className="grid size-8 shrink-0 place-items-center rounded-full bg-surface-2 text-ink-2 hover:text-ink lg:hidden"
-          >
-            <ChevronUp
-              className={cn(
-                "size-4 transition-transform",
-                !folded && "rotate-180",
-              )}
-              aria-hidden
-            />
-            <span className="sr-only">
-              {folded ? dict.map.showChart : dict.map.hideChart}
-            </span>
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={() => setChoice(!folded)}
+          aria-expanded={!folded}
+          title={folded ? dict.map.showChart : dict.map.hideChart}
+          className="grid size-8 shrink-0 place-items-center rounded-full bg-surface-2 text-ink-2 hover:text-ink"
+        >
+          <ChevronUp
+            className={cn(
+              "size-4 transition-transform",
+              !folded && "rotate-180",
+            )}
+            aria-hidden
+          />
+          <span className="sr-only">
+            {folded ? dict.map.showChart : dict.map.hideChart}
+          </span>
+        </button>
       </div>
 
-      <div className={cn(folded && "max-lg:hidden")}>
+      <div className={cn(folded && "hidden")}>
         {/* ---------- 24-hour chart with a drag/tap scrubber ---------- */}
         <div className="relative mt-3 h-16">
           <div className="flex h-full items-end gap-[2px]" aria-hidden>

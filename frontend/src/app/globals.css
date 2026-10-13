@@ -241,3 +241,8 @@ html:lang(bn) body {
   font-size: 10px;
 }
 .maplibregl-ctrl-attrib a { color: var(--ink-2) !important; }
+/* Phones during a trip: zoom / locate buttons sit above the time-left bar (TripMode). */
+@media (max-width: 1023px) {
+  .trip-on .maplibregl-ctrl-bottom-right,
+  .trip-on .maplibregl-ctrl-bottom-left { bottom: 88px; }
+}

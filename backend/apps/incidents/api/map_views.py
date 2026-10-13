@@ -55,6 +55,27 @@ class MapCellsView(APIView):
         return Response({"cells": cached(f"cells:{res}:{hour}:{period}", compute), "demo": has_demo_data()})
 
 
+class StreetDayView(APIView):
+    """
+    GET /api/v1/map/street-day?period=30|90|all — every street-level area with its level for each
+    hour of the day and for the whole day, in one small download. Trips and route checks keep it on
+    the phone, so warnings keep working when the connection drops.
+    """
+
+    def get(self, request: Request) -> Response:
+        try:
+            period = _parse_period(request)
+        except ValueError:
+            return Response({"error": "invalid_params"}, status=400)
+
+        def compute():
+            now = timezone.now()
+            groups = aggregation.group_by_cell(load_rows(period_days=period), 10)
+            return [aggregation.street_day(cell, rows, now) for cell, rows in groups.items() if aggregation.is_public(rows)]
+
+        return Response({"cells": cached(f"street-day:{period}", compute)})
+
+
 class TimeProfileView(APIView):
     """GET /api/v1/map/time-profile?period=30|90|all — city-wide activity per hour (24 values)."""
 

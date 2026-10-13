@@ -67,6 +67,27 @@ export function travelledPart(position: LngLat, route: readonly LngLat[]): LngLa
   return route.slice(0, nearest + 1);
 }
 
+/** Farther than this from the route, the trip says "you're off the route" and shows the way back. */
+const APPROACH_M = 120;
+
+/**
+ * When the person is clearly off the route (e.g. the trip started away from its first point),
+ * the nearest point of the route to head for; null while they're on it.
+ */
+export function routeJoinPoint(position: LngLat, route: readonly LngLat[]): LngLat | null {
+  if (route.length < 2) return null;
+  let nearest = route[0];
+  let best = Infinity;
+  for (const p of route) {
+    const d = metres(position, p);
+    if (d < best) {
+      best = d;
+      nearest = p;
+    }
+  }
+  return best > APPROACH_M ? nearest : null;
+}
+
 export interface TripAlert {
   cell: string;
   score: number;

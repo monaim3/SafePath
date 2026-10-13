@@ -51,6 +51,15 @@ export function formatHour(locale: Locale, dict: Dictionary, hour: number, at = 
   return at ? `at ${label}` : label;
 }
 
+/** Clock time: bn "দুপুর ১:৫৬", en "1:56 PM". */
+export function formatClock(locale: Locale, dict: Dictionary, date: Date): string {
+  const hour = date.getHours();
+  const h12 = hour % 12 || 12;
+  const mm = new Intl.NumberFormat(locale === "bn" ? "bn-BD" : "en-US", { minimumIntegerDigits: 2 }).format(date.getMinutes());
+  if (locale === "bn") return `${dict.clock.periods[periodOf(hour)]} ${formatNumber(locale, h12)}:${mm}`;
+  return `${h12}:${mm} ${hour < 12 ? "AM" : "PM"}`;
+}
+
 /** Replaces `{key}` placeholders. Numbers are formatted with locale digits. */
 /** A year in locale digits, without the thousands separator ("২০২৬", not "২,০২৬"). */
 export function formatYear(locale: Locale, year: number): string {

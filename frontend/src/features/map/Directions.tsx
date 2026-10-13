@@ -33,7 +33,7 @@ import {
 } from "@/lib/safety/route-risk";
 import { BandBadge } from "@/components/safety/BandBadge";
 import { cn } from "@/components/ui/cn";
-import { travelledPart } from "@/lib/safety/trip-alerts";
+import { routeJoinPoint, travelledPart } from "@/lib/safety/trip-alerts";
 import { AVOID_SCORE, peakAlongWay } from "@/lib/safety/reroute";
 import { PlaceSearch } from "./PlaceSearch";
 import { findSaferRoute } from "./safer-route";
@@ -85,6 +85,11 @@ function buildOverlay(
   if (passed) {
     features.push({ type: "Feature", properties: { kind: "passed" }, geometry: { type: "LineString", coordinates: passed } });
   }
+  // Off the route (e.g. started away from it): a dotted line from the person to where they can join it.
+  const join = here ? routeJoinPoint(here, sel.coordinates) : null;
+  if (here && join) {
+    features.push({ type: "Feature", properties: { kind: "approach" }, geometry: { type: "LineString", coordinates: [here, join] } });
+  }
   const first = sel.coordinates[0];
   const last = sel.coordinates[sel.coordinates.length - 1];
   features.push({ type: "Feature", properties: { kind: "start" }, geometry: { type: "Point", coordinates: first } });
@@ -112,6 +117,8 @@ export function Directions({
   onClose,
   onOverlay,
   onTripPosition,
+  onTripChange,
+  onTripEnded,
   riskDataFailed = false,
 }: {
   locale: Locale;
@@ -124,6 +131,10 @@ export function Directions({
   onOverlay: (overlay: RouteOverlay | null) => void;
   /** GPS fixes while a trip runs (null when it stops), for the moving dot on the map. */
   onTripPosition: (fix: TripFix | null) => void;
+  /** A trip started or stopped (phones then give the map the screen). */
+  onTripChange?: (on: boolean) => void;
+  /** The person ended the trip ("End"): leave directions and go back to the map. */
+  onTripEnded?: () => void;
 }) {
   const t = dict.route;
   const [from, setFrom] = useState<PlaceResult | null>(null);
@@ -146,7 +157,7 @@ export function Directions({
     queryFn: ({ signal }) => fetchRoutes(from!.center, to!.center, mode, signal),
     enabled: from !== null && to !== null,
     staleTime: 10 * 60_000,
-    retry: 1,
+    retry: 3, // quick retries cover a patchy signal before showing an error
   });
 
   // When every route the router offers crosses a high-report area, also try a detour around the
@@ -225,6 +236,9 @@ export function Directions({
 
   useEffect(() => () => onOverlay(null), [onOverlay]);
 
+  useEffect(() => onTripChange?.(trip !== null), [trip, onTripChange]);
+  useEffect(() => () => onTripChange?.(false), [onTripChange]);
+
   const timeLabel = hour === "all" ? dict.map.allDay : formatHour(locale, dict, hour);
 
   function locateMe() {
@@ -291,7 +305,7 @@ export function Directions({
     <div className="flex max-h-[46dvh] flex-col overflow-hidden rounded-3xl border border-line bg-glass shadow-soft backdrop-blur-xl lg:max-h-[calc(100dvh-6.5rem)]">
       {/* ---------- phones: folded summary "A → B" ---------- */}
       {showFolded && (
-        <div className="flex items-center gap-2 border-b border-line px-3 py-2.5 lg:hidden">
+        <div className={cn("flex items-center gap-2 border-b border-line px-3 py-2.5 lg:hidden", trip && "hidden")}>
           {backButton}
           <button
             type="button"
@@ -382,7 +396,7 @@ export function Directions({
       </div>
 
       {/* ---------- results ---------- */}
-      <div className="min-h-0 flex-1 overflow-y-auto p-4" aria-live="polite">
+      <div className={cn("min-h-0 flex-1 overflow-y-auto p-4", trip && "max-lg:p-0")} aria-live="polite">
         {trip && (
           <TripMode
             locale={locale}
@@ -390,7 +404,10 @@ export function Directions({
             route={activeRoute?.coordinates ?? null}
             routeInfo={routeInfo}
             announcer={trip}
-            onStop={endTrip}
+            onStop={() => {
+              endTrip();
+              (onTripEnded ?? onClose)();
+            }}
             onPosition={handleFix}
             onArrive={() => {
               endTrip();
@@ -400,6 +417,8 @@ export function Directions({
             onSwitch={setTripRoute}
           />
         )}
+        {/* Phones during a trip: only the trip banner above; routes and roads step aside for the map. */}
+        <div className={cn(trip && "max-lg:hidden")}>
         {arrivedFor === placesKey && !trip && (
           <p className="mb-4 flex items-center gap-2 rounded-2xl bg-positive-soft p-3 text-sm font-semibold text-positive" role="status">
             <Flag className="size-4 shrink-0" aria-hidden />
@@ -560,6 +579,7 @@ export function Directions({
             <p className="mt-4 text-[11px] leading-relaxed text-ink-3">{t.disclaimer}</p>
           </>
         )}
+        </div>
       </div>
 
       {/* pinned under the list so it never needs scrolling to find */}

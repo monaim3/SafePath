@@ -60,6 +60,37 @@ def test_aggregates_to_coarser_resolutions():
         assert [c["h3"] for c in result] == [h3.cell_to_parent(CELL, res)]
 
 
+def test_street_day_matches_the_hourly_map():
+    # The one-download day data (kept on the phone for trips) must agree with the per-hour map.
+    client = APIClient()
+    make(3, 2, block=7)
+    make(2, 1, block=2, category="on_foot")
+    [day] = client.get("/api/v1/map/street-day").json()["cells"]
+    assert day["h3"] == CELL and len(day["hours"]) == 24
+    assert day["day"] == cells(client, res=10)[0]["score"]
+    for hour in (2, 7, 22):
+        assert day["hours"][hour] == cells(client, res=10, hour=hour)[0]["score"]
+    make(1, 1, cell=h3.cell_to_children(h3.cell_to_parent(CELL, 8), 10)[0])  # below the privacy threshold
+    cache.clear()
+    assert [c["h3"] for c in client.get("/api/v1/map/street-day").json()["cells"]] == [CELL]
+
+
+def test_zoomed_out_cell_reads_as_its_busiest_street():
+    # One hotspot street plus many quiet streets in the same neighbourhood.
+    client = APIClient()
+    make(3, 2)  # the hotspot: 6 reports on CELL
+    parent = h3.cell_to_parent(CELL, 8)
+    quiet = [c for c in h3.cell_to_children(parent, 10) if c != CELL][:12]
+    for c in quiet:
+        make(1, 1, cell=c)  # one report each: no quiet street is busy on its own
+    street = {c["h3"]: c["score"] for c in cells(client, res=10)}
+    for res in (8, 9):
+        [big] = [c for c in cells(client, res=res) if c["h3"] == h3.cell_to_parent(CELL, res)]
+        # Not the whole neighbourhood added up (which read redder than any street),
+        # and not diluted either: exactly the level zooming in shows at the hotspot.
+        assert big["score"] == street[CELL]
+
+
 def test_hour_filter_changes_score():
     client = APIClient()
     make(4, 2, block=7)  # all at 21:00–24:00

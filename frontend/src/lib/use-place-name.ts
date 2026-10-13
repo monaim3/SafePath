@@ -7,7 +7,8 @@ export function usePlaceName(h3: string | null | undefined, locale: string): str
   const { data } = useQuery({
     queryKey: ["place-name", h3, locale],
     queryFn: async () => {
-      const res = await fetch(`/api/place?h3=${encodeURIComponent(h3!)}&lang=${locale}`);
+      // `v`: bump when the name format changes, so month-old cached names aren't served.
+      const res = await fetch(`/api/place?h3=${encodeURIComponent(h3!)}&lang=${locale}&v=2`);
       return res.ok ? ((await res.json()) as { name: string | null }).name : null;
     },
     enabled: Boolean(h3),

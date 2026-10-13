@@ -6,9 +6,9 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { gridDisk, gridDistance, latLngToCell } from "h3-js";
+import { cellToLatLng, getResolution, gridDisk, gridDistance, latLngToCell } from "h3-js";
 import { Hand, Layers, Navigation, RotateCw, WifiOff } from "lucide-react";
-import type { Dictionary, Locale } from "@/i18n";
+import { fill, formatClock, type Dictionary, type Locale } from "@/i18n";
 import {
   fetchArea,
   fetchCityTimeProfile,
@@ -17,6 +17,7 @@ import {
 } from "@/lib/api/safety";
 import { BANDS } from "@/lib/safety/bands";
 import { resForZoom, type GridRes } from "@/lib/safety/grid";
+import { streetLookup, useStreetDay } from "@/lib/safety/street-day";
 import { cn } from "@/components/ui/cn";
 import { AreaPeek } from "./AreaPeek";
 import { usePlaceName } from "@/lib/use-place-name";
@@ -40,6 +41,10 @@ const retryWhileFailing = (q: { state: { status: string } }) => (q.state.status 
 /** Lookup used before (or without) area data: every place reads as "no reports". */
 const NO_RISK_DATA = (): number | undefined => undefined;
 const EMPTY_DAY: readonly number[] = new Array(24).fill(0);
+/** The opening view: slightly south of the city centre so Dhaka sits above the time panel. */
+const HOME_VIEW = { center: [90.41, 23.7] as [number, number], zoom: 10 };
+/** Zoom a tapped neighbourhood cell opens at: street-level cells, with the whole neighbourhood in view. */
+const CELL_ZOOM_IN = 14.3;
 /** How far a search looks for an area with reports: 4 street cells ≈ 500 m. */
 const SEARCH_RINGS = 4;
 
@@ -101,6 +106,8 @@ export function MapScreen({
     isError: cellsFailed,
     isFetching: cellsLoading,
     refetch: refetchCells,
+    fetchStatus: cellsFetchStatus,
+    dataUpdatedAt: cellsUpdatedAt,
   } = useQuery({
     queryKey: ["map-cells", hour, res, period],
     queryFn: () => fetchMapCells({ hour, res, period }),
@@ -119,27 +126,28 @@ export function MapScreen({
     enabled: selected !== null,
   });
 
-  // Route checks always use street-level cells, whatever the current zoom.
-  const { data: streetCells, isError: streetCellsFailed } = useQuery({
-    queryKey: ["map-cells", hour, 10, period],
-    queryFn: () => fetchMapCells({ hour, res: 10, period }),
-    enabled: directionsOpen,
-    refetchInterval: retryWhileFailing,
-  });
-  const lookup = useMemo(() => {
-    // Activity data still loading or unavailable: show the route straight away, without risk
-    // colours; they appear as soon as the data arrives (never a blank route panel while waiting).
-    if (!streetCells) return NO_RISK_DATA;
-    const scores = new Map(streetCells.map((c) => [c.h3, c.score]));
-    return (h3: string) => scores.get(h3);
-  }, [streetCells]);
+  // Route checks always use street-level cells, whatever the current zoom: every hour in one
+  // download, kept on the phone, so changing the hour or losing the signal needs no new request.
+  const { data: streetDay, isError: streetDayFailed } = useStreetDay(period, directionsOpen);
+  // Activity data still loading or unavailable: show the route straight away, without risk
+  // colours; they appear as soon as the data arrives (never a blank route panel while waiting).
+  const lookup = useMemo(() => streetLookup(streetDay, hour) ?? NO_RISK_DATA, [streetDay, hour]);
 
   // Keep the route / live dot clear of the panels: left panel on desktop, top panel + folded bottom dock on mobile.
+  // A trip is running: on phones the map takes the screen (slim status on top, time-left bar below).
+  const [tripOn, setTripOn] = useState(false);
+  const tripOnRef = useRef(false);
+  const handleTripChange = useCallback((on: boolean) => {
+    tripOnRef.current = on;
+    setTripOn(on);
+  }, []);
+
   const panelPadding = useCallback(() => {
     const desktop = window.innerWidth >= 1024;
-    return desktop
-      ? { top: 110, bottom: 320, left: 430, right: 80 }
-      : { top: Math.round(window.innerHeight * 0.5), bottom: 110, left: 30, right: 30 };
+    if (desktop) return { top: 110, bottom: 320, left: 430, right: 80 };
+    // During a trip the dot sits low, leaving room to see the road ahead (like Google Maps).
+    if (tripOnRef.current) return { top: Math.round(window.innerHeight * 0.4), bottom: 120, left: 30, right: 30 };
+    return { top: Math.round(window.innerHeight * 0.5), bottom: 110, left: 30, right: 30 };
   }, []);
 
   const handleOverlay = useCallback(
@@ -154,7 +162,18 @@ export function MapScreen({
   // Live GPS position while a trip runs: the map shows it as a moving dot and follows it.
   const [me, setMe] = useState<MePosition | null>(null);
 
-  const handleSelect = useCallback((h3: string | null) => setSelected(h3), []);
+  // Only street-level cells are ever selected, so the card and its place name describe one street.
+  // A tap on a zoomed-out cell zooms into it instead (like map clusters): its colour comes from its
+  // busiest street, so zooming in shows where that is.
+  const handleSelect = useCallback((h3: string | null) => {
+    if (h3 && getResolution(h3) < 10) {
+      const [lat, lng] = cellToLatLng(h3);
+      setSelected(null);
+      setFlyTo({ center: [lng, lat], zoom: CELL_ZOOM_IN, key: Date.now() });
+      return;
+    }
+    setSelected(h3);
+  }, []);
   // Finer cells as you zoom in: neighbourhood → block → street segment.
   const handleZoom = useCallback(
     (zoom: number) => setRes(resForZoom(zoom)),
@@ -185,7 +204,7 @@ export function MapScreen({
 
   return (
     <div
-      className="relative h-dvh w-full overflow-hidden bg-surface-2"
+      className={cn("relative h-dvh w-full overflow-hidden bg-surface-2", tripOn && "trip-on")}
       onFocusCapture={(e) => {
         if (!(e.target instanceof HTMLInputElement) || e.target.type === "range") return;
         clearTimeout(typingEnd.current);
@@ -206,9 +225,8 @@ export function MapScreen({
         basemap={basemap}
         overlay={overlay?.features}
         fitTo={fitTo}
-        initialZoom={10}
-        // Slightly south of the city centre so Dhaka sits above the time panel.
-        initialCenter={[90.41, 23.7]}
+        initialZoom={HOME_VIEW.zoom}
+        initialCenter={HOME_VIEW.center}
         onZoomChange={handleZoom}
         me={me}
         followPadding={panelPadding}
@@ -234,7 +252,14 @@ export function MapScreen({
             onClose={() => setDirectionsOpen(false)}
             onOverlay={handleOverlay}
             onTripPosition={setMe}
-            riskDataFailed={streetCellsFailed && !streetCells}
+            onTripChange={handleTripChange}
+            onTripEnded={() => {
+              // "End" closes directions and returns to the opening view of the city.
+              setDirectionsOpen(false);
+              setSelected(null);
+              setFlyTo({ ...HOME_VIEW, key: Date.now() });
+            }}
+            riskDataFailed={streetDayFailed && !streetDay}
           />
         ) : (
           <div className="flex gap-2">
@@ -279,7 +304,17 @@ export function MapScreen({
         {!directionsOpen && (
           <PeriodSwitch dict={dict} value={period} onChange={setPeriod} />
         )}
-        {cellsFailed && (
+        {/* Weak or no connection but a saved copy is showing: a quiet note, not an error. */}
+        {cells && (cellsFailed || cellsFetchStatus === "paused") && (
+          <p role="status" className={cn("inline-flex items-center gap-2 self-start rounded-full px-3 py-1.5 text-xs text-ink-2", GLASS)}>
+            <WifiOff className="size-3.5 shrink-0 text-ral-3" aria-hidden />
+            {/* No time for a stand-in (another hour's colours kept on screen while this one can't load). */}
+            {cellsUpdatedAt > 0
+              ? fill(locale, dict.net.savedData, { time: formatClock(locale, dict, new Date(cellsUpdatedAt)) })
+              : dict.net.savedDataOlder}
+          </p>
+        )}
+        {cellsFailed && !cells && (
           <div role="alert" className={cn("flex items-start gap-3 self-start rounded-2xl px-4 py-3 text-sm lg:max-w-sm", GLASS)}>
             <WifiOff className="mt-0.5 size-4 shrink-0 text-ral-4" aria-hidden />
             <div className="min-w-0">
@@ -378,7 +413,7 @@ export function MapScreen({
       <div
         className={cn(
           "absolute inset-x-3 bottom-3 z-20 lg:bottom-5 lg:left-[calc(24rem+1.5rem)] lg:right-16",
-          typing && "max-lg:hidden",
+          (typing || tripOn) && "max-lg:hidden",
         )}
       >
         <div className="mx-auto flex max-w-xl flex-col gap-2">

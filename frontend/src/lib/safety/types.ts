@@ -13,6 +13,15 @@ export function currentTimeBlock(date = new Date()): TimeBlock {
 
 export type SourceKey = "community" | "verified" | "media" | "official";
 
+/** Response item of GET /api/v1/map/street-day: one street-level area, whole day and per hour. */
+export interface StreetDay {
+  h3: string;
+  /** Whole-day level, 0–100. */
+  day: number;
+  /** Level at each hour of the day (24 values). */
+  hours: number[];
+}
+
 /** Response item of GET /api/v1/map/cells */
 export interface CellSummary {
   h3: string;

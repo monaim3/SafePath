@@ -151,13 +151,21 @@ def block_shares(incidents: list[Row], now: datetime) -> list[int]:
     return [round(100 * sum(hourly[b * 3 : b * 3 + 3]) / total) for b in range(8)]
 
 
+def _street_score(incidents: list[Row], now: datetime, hour: int | None) -> int:
+    """Level of one street-level (resolution 10) cell, overall or at `hour`."""
+    if hour is None:
+        return score_from(sum(effective_weight(r, now) for r in incidents), 10)
+    return hour_scores(incidents, now, 10)[hour]
+
+
 def cell_summary(cell: str, rows: list[Row], now: datetime, hour: int | None) -> dict:
     res = h3.get_resolution(cell)
     incidents = [r for r in rows if r.kind != "positive"]
-    if hour is None:
-        score = score_from(sum(effective_weight(r, now) for r in incidents), res)
-    else:
-        score = hour_scores(incidents, now, res)[hour]
+    # A zoomed-out cell takes the level of its busiest street. Adding up a whole neighbourhood
+    # coloured areas red that had no red street in them (and hid a lone hotspot among quiet
+    # streets), so zooming in showed something different. Now red means "a red street is in here".
+    streets = group_by_cell(incidents, 10)
+    score = max((_street_score(street, now, hour) for street in streets.values()), default=0)
     verified_pct = _verified_pct(incidents)
     top = Counter(r.category for r in incidents).most_common(1)
     return {
@@ -169,6 +177,12 @@ def cell_summary(cell: str, rows: list[Row], now: datetime, hour: int | None) ->
         "topCategory": top[0][0] if top else None,
         "insufficient": False,
     }
+
+
+def street_day(cell: str, rows: list[Row], now: datetime) -> dict:
+    """One street-level cell's level for the whole day (`day`) and for each hour (`hours`, 24 values)."""
+    incidents = [r for r in rows if r.kind != "positive"]
+    return {"h3": cell, "day": _street_score(incidents, now, None), "hours": hour_scores(incidents, now, 10)}
 
 
 def _verified_pct(rows: list[Row]) -> int:

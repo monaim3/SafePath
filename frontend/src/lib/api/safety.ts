@@ -3,8 +3,9 @@
  * Currently backed by synthetic demo data; each function documents the endpoint it will call.
  */
 import { demoArea, demoCityTimeProfile, demoMapCells, demoTopAreas } from "@/lib/safety/demo-data";
-import type { AreaDetail, AreaNews, AreaVideo, CellSummary, MapCellsQuery, Period, UploadTicket } from "@/lib/safety/types";
+import type { AreaDetail, AreaNews, AreaVideo, CellSummary, MapCellsQuery, Period, StreetDay, UploadTicket } from "@/lib/safety/types";
 import type { ReportInput } from "@/lib/validation/report";
+import { withTimeout } from "./timeout";
 
 /** Django API base, e.g. http://localhost:8000. Unset = demo mode: synthetic data, nothing leaves the browser. */
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
@@ -17,9 +18,26 @@ export const REPORTS_GO_TO_SERVER = API_URL !== "";
 export const USING_DEMO_DATA = process.env.NEXT_PUBLIC_DEMO_NOTICE !== "off";
 
 async function getJson<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_URL}/api/v1${path}`, { next: { revalidate: 60 } });
+  const res = await fetch(`${API_URL}/api/v1${path}`, { next: { revalidate: 60 }, signal: withTimeout() });
   if (!res.ok) throw new Error(`API ${path} failed (${res.status})`);
   return (await res.json()) as T;
+}
+
+/**
+ * GET /api/v1/map/street-day?period= — every street-level area's level for each hour and the whole
+ * day, in one download. Trips and route checks keep it on the phone, so they work offline after it.
+ */
+export async function fetchStreetDay(period: Period = "all"): Promise<StreetDay[]> {
+  if (!REPORTS_GO_TO_SERVER) {
+    const byHour = Array.from({ length: 24 }, (_, hour) => demoMapCells({ hour, res: 10, period }));
+    const all = demoMapCells({ hour: "all", res: 10, period });
+    return all.map((c) => ({
+      h3: c.h3,
+      day: c.score,
+      hours: byHour.map((cells) => cells.find((x) => x.h3 === c.h3)?.score ?? 0),
+    }));
+  }
+  return (await getJson<{ cells: StreetDay[] }>(`/map/street-day?period=${period}`)).cells;
 }
 
 /** GET /api/v1/map/cells?hour=&res=&period= */
@@ -210,7 +228,7 @@ export async function reversePlace(
   url.searchParams.set("lon", String(lng));
   url.searchParams.set("lat", String(lat));
   url.searchParams.set("limit", "1");
-  const res = await fetch(url, { signal });
+  const res = await fetch(url, { signal: withTimeout(signal) });
   if (!res.ok) return null;
   const data = (await res.json()) as { features: PhotonFeature[] };
   const p = data.features[0]?.properties;
@@ -235,7 +253,7 @@ export async function searchPlaces(q: string, signal?: AbortSignal): Promise<Pla
   url.searchParams.set("bbox", "88.0,20.5,92.7,26.7");
   url.searchParams.set("lat", "23.7808");
   url.searchParams.set("lon", "90.4093");
-  const res = await fetch(url, { signal });
+  const res = await fetch(url, { signal: withTimeout(signal) });
   if (!res.ok) throw new Error(`Search failed (${res.status})`);
   const data = (await res.json()) as { features: PhotonFeature[] };
   return data.features
