@@ -133,7 +133,12 @@ class AreaNewsView(APIView):
 
 
 class TopAreasView(APIView):
-    """GET /api/v1/areas?limit=N — most active neighbourhood-size areas (resolution 9), all time."""
+    """
+    GET /api/v1/areas?limit=N — the most active neighbourhoods (resolution 9, so the list spreads
+    across the city), each described by its busiest street (resolution 10): the name, pin and
+    numbers then point at the street where the reports are, not at the neighbourhood's centre
+    (which named Road 1, C Block, Banasree as "Ananda Nagar, Aftabnagar").
+    """
 
     def get(self, request: Request) -> Response:
         try:
@@ -145,11 +150,13 @@ class TopAreasView(APIView):
             now = timezone.now()
             groups = aggregation.group_by_cell(load_rows(), 9)
             demo = has_demo_data()
-            areas = [
-                aggregation.area_detail(cell, rows, now, is_demo=demo)
-                for cell, rows in groups.items()
-                if aggregation.is_public(rows)
-            ]
+            areas = []
+            for rows in groups.values():
+                if not aggregation.is_public(rows):
+                    continue
+                street = aggregation.busiest_street(rows, now)
+                if street:
+                    areas.append(aggregation.area_detail(street[0], street[1], now, is_demo=demo))
             return sorted(areas, key=lambda a: -a["score"])[:20]
 
         return Response({"areas": cached("top", compute)[:limit]})

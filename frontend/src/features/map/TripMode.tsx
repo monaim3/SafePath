@@ -12,20 +12,16 @@ import { findSaferRoute, type SaferRoute } from "./safer-route";
 import {
   arrivalWatcher,
   bearingDeg,
-  cellsAhead,
+  dangerAhead,
   insideAlert,
-  nextAlert,
+  pickAheadAlert,
   quietZone,
   routeJoinPoint,
-  type TripAlert,
 } from "@/lib/safety/trip-alerts";
 import { BandBadge } from "@/components/safety/BandBadge";
 import { Button } from "@/components/ui/Button";
 
 type LngLat = [lng: number, lat: number];
-
-/** Seconds between two alerts, so one busy stretch doesn't talk non-stop. */
-const COOLDOWN_MS = 30_000;
 
 /** Recorded lines in public/audio/trip/<clip>-<locale>.mp3 (made from real voice recordings). */
 export type TripClip = "alert-high" | "alert-very_high" | "arrived";
@@ -160,6 +156,13 @@ export interface TripFix {
   trip: string;
 }
 
+/** The higher of two levels for an area (either may be missing). */
+function maxScore(a: number | undefined, b: number | undefined): number | undefined {
+  if (a === undefined) return b;
+  if (b === undefined) return a;
+  return Math.max(a, b);
+}
+
 /** Below this movement between fixes, the direction is GPS noise. */
 const HEADING_MIN_M = 8;
 
@@ -201,7 +204,6 @@ export function TripMode({
   // Client-only component (created by a tap), so navigator is available here.
   const [gps, setGps] = useState<GpsState>(() => (navigator.geolocation ? "waiting" : "denied"));
   const [position, setPosition] = useState<LngLat | null>(null);
-  const [alert, setAlert] = useState<TripAlert | null>(null);
   const [muted, setMuted] = useState(false);
   const announced = useRef(new Set<string>());
   const lastAt = useRef(0);
@@ -223,6 +225,13 @@ export function TripMode({
   // Whole-day levels too, for "you're inside a red area": the map often shows the whole day,
   // and someone standing in a red patch must not be told all is clear because this hour is quieter.
   const dayLookup = useMemo(() => streetLookup(streetDay, "all"), [streetDay]);
+  // The warning BEFORE an area uses the same rule as the one inside it (the higher of this hour and
+  // the whole day). With this hour alone, an area that's red on the map but quieter right now got
+  // no warning ahead, then "you're inside" fired on arrival.
+  const alertLookup = useMemo(
+    () => (lookup && dayLookup ? (h3: string) => maxScore(lookup(h3), dayLookup(h3)) : lookup),
+    [lookup, dayLookup],
+  );
   const inside = useMemo(
     () => (position ? insideAlert(position, [lookup, dayLookup]) : null),
     [position, lookup, dayLookup],
@@ -328,16 +337,28 @@ export function TripMode({
     announcer.announce(t.tripInside, muted);
   }, [inside, announcer, muted, t, arrived]);
 
+  // The status line follows what's ahead at every GPS fix (the spoken warnings are once or twice per area).
+  const ahead = useMemo(
+    () => (position && alertLookup && !arrived ? dangerAhead(position, route, alertLookup) : null),
+    [position, route, alertLookup, arrived],
+  );
+
+  // Each area ahead is announced twice: about 200 m before, then again about 100 m before.
+  const nearSaid = useRef(new Set<string>());
   useEffect(() => {
     if (!position || !lookup || arrived) return;
-    const found = nextAlert(cellsAhead(position, route), lookup, announced.current);
-    if (!found || Date.now() - lastAt.current < COOLDOWN_MS) return;
-    quietZone(found.cell).forEach((c) => announced.current.add(c));
+    const found = pickAheadAlert(
+      position,
+      route,
+      alertLookup ?? lookup,
+      { far: announced.current, near: nearSaid.current },
+      Date.now() - lastAt.current,
+    );
+    if (!found) return;
     lastAt.current = Date.now();
-    setAlert(found);
     const level = found.band as "high" | "very_high";
     announcer.announce(fill(locale, t.tripSpeech, { level: t.tripLevel[level] }), muted, `alert-${level}`);
-  }, [position, lookup, route, announcer, muted, locale, t, arrived]);
+  }, [position, lookup, alertLookup, route, announcer, muted, locale, t, arrived]);
 
   // ---------- safer way: when a high-report area lies ahead (at this hour), offer a way round ----------
   const [offer, setOffer] = useState<SaferRoute | null>(null);
@@ -460,13 +481,17 @@ export function TripMode({
           </div>
         ) : isError ? (
           <p className="text-ink-3">{t.tripNoData}</p>
-        ) : alert ? (
+        ) : ahead ? (
           <div className="flex items-start gap-2 rounded-xl bg-ral-4/10 p-3">
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-ral-4" aria-hidden />
             <span className="flex-1 leading-snug">
-              {fill(locale, t.tripSpeech, { level: t.tripLevel[alert.band as "high" | "very_high"] })}
+              {fill(locale, t.tripAhead, {
+                // Rounded to 10 m: GPS isn't more precise, and a jittering number reads as noise.
+                n: Math.max(10, Math.round(ahead.metres / 10) * 10),
+                level: t.tripLevel[ahead.band as "high" | "very_high"],
+              })}
             </span>
-            <BandBadge band={alert.band} label={dict.bands[alert.band]} />
+            <BandBadge band={ahead.band} label={dict.bands[ahead.band]} />
           </div>
         ) : (
           <p className="flex items-center gap-2 text-positive">

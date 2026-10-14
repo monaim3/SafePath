@@ -136,6 +136,7 @@ export const en = {
     tripInsideTip: "Chhintai reports are high here. Keep your phone and bag safe and stay on busy, well-lit streets.",
     tripSpeech: "The area ahead has {level} chhintai reports at this time. Keep your phone and bag safe.",
     tripLevel: { high: "many", very_high: "very many" },
+    tripAhead: "An area with {level} snatching reports is about {n} m ahead. Keep your phone and bag close.",
     tripMute: "Mute",
     tripUnmute: "Unmute",
     tripKeepOpen: "Keep the screen on. Alerts stop if the phone locks.",

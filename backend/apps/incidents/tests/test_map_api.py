@@ -75,6 +75,17 @@ def test_street_day_matches_the_hourly_map():
     assert [c["h3"] for c in client.get("/api/v1/map/street-day").json()["cells"]] == [CELL]
 
 
+def test_top_areas_point_at_the_busiest_street():
+    # A neighbourhood with one busy street and a quieter one: the list names and pins the busy street.
+    client = APIClient()
+    make(3, 2)  # busy street: CELL
+    quiet = next(c for c in h3.cell_to_children(h3.cell_to_parent(CELL, 9), 10) if c != CELL)
+    make(3, 1, cell=quiet)
+    [top] = client.get("/api/v1/areas?limit=5").json()["areas"]
+    assert top["h3"] == CELL
+    assert top["score"] == {c["h3"]: c["score"] for c in cells(client, res=10)}[CELL]
+
+
 def test_zoomed_out_cell_reads_as_its_busiest_street():
     # One hotspot street plus many quiet streets in the same neighbourhood.
     client = APIClient()

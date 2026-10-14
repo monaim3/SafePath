@@ -10,14 +10,15 @@ import {
   type GeoJSONSource,
   type StyleSpecification,
 } from "maplibre-gl";
-import { cellToBoundary, cellToLatLng } from "h3-js";
+import { cellToBoundary, cellToLatLng, cellToParent } from "h3-js";
 import { Clock } from "lucide-react";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Locale } from "@/i18n";
-import { fetchMapCells } from "@/lib/api/safety";
-import { BAND_COLORS } from "@/lib/safety/bands";
+import { fetchMapCells, fetchStreetDay } from "@/lib/api/safety";
+import { BAND_COLORS, type Band } from "@/lib/safety/bands";
 import { DHAKA_CENTER } from "@/lib/safety/demo-data";
-import type { CellSummary } from "@/lib/safety/types";
+import { metres } from "@/lib/safety/route-risk";
+import type { CellSummary, StreetDay } from "@/lib/safety/types";
 import { cn } from "@/components/ui/cn";
 import { HERO_HOURS, type Hotspot } from "./hero-hours";
 
@@ -117,11 +118,13 @@ function styleFor(theme: Theme, locale: Locale): StyleSpecification {
 
 const height = (score: number) => 120 + score * 24;
 
-/** One area's column: its height and colour at each hero hour. */
+/** One area's column: its height, colour, level and band at each hero hour. */
 interface Column {
   h3: string;
   heights: number[];
   colors: string[];
+  scores: number[];
+  bands: Band[];
 }
 
 /** One hexagonal column per area that has reports at any of the hero hours. */
@@ -134,9 +137,13 @@ function columns(byHour: CellSummary[][]): { cols: Column[]; geojson: GeoJSON.Fe
         h3: c.h3,
         heights: byHour.map(() => 0),
         colors: byHour.map(() => BAND_COLORS.very_low),
+        scores: byHour.map(() => 0),
+        bands: byHour.map((): Band => "very_low"),
       };
       col.heights[i] = c.score > 0 ? height(c.score) : 0;
       col.colors[i] = BAND_COLORS[c.band];
+      col.scores[i] = c.score;
+      col.bands[i] = c.band;
       byCell.set(c.h3, col);
     }
   });
@@ -174,6 +181,75 @@ function setColumns(map: MapLibreMap, cols: Column[], a: number, b: number, t: n
   }
 }
 
+/** Red pillars get a name tag; at most this many (they'd crowd), one on phones. */
+const MAX_TAGS = 4;
+/** Tags closer than this would overlap on screen: only the higher one is named. */
+const TAG_SPACING_M = 1500;
+const TAGGED: ReadonlySet<Band> = new Set<Band>(["high", "very_high"]);
+
+interface Tag {
+  /** The pillar's busiest street at that hour: named, pinned and linked. */
+  street: string;
+  score: number;
+  band: Band;
+}
+
+/**
+ * Which pillars to name at hour index `i`: the red ones (or, in a quiet hour, the two tallest),
+ * highest first, spaced apart, each pointed at its busiest street at that hour.
+ */
+function tagsFor(cols: Column[], streets: StreetDay[], i: number, max: number): Tag[] {
+  const ranked = [...cols].filter((c) => c.scores[i] > 0).sort((a, b) => b.scores[i] - a.scores[i]);
+  const red = ranked.filter((c) => TAGGED.has(c.bands[i]));
+  const pool = red.length ? red : ranked.slice(0, 2);
+  const hour = HERO_HOURS[i];
+  const chosen: Tag[] = [];
+  const at: [number, number][] = [];
+  for (const col of pool) {
+    if (chosen.length >= max) break;
+    const busiest = streets
+      .filter((s) => cellToParent(s.h3, 9) === col.h3)
+      .sort((a, b) => (b.hours[hour] ?? 0) - (a.hours[hour] ?? 0))[0];
+    const street = busiest?.h3 ?? col.h3;
+    const [lat, lng] = cellToLatLng(street);
+    if (at.some((p) => metres(p, [lng, lat]) < TAG_SPACING_M)) continue;
+    at.push([lng, lat]);
+    chosen.push({ street, score: col.scores[i], band: col.bands[i] });
+  }
+  return chosen;
+}
+
+/**
+ * A check, run a few times a second as the camera turns: labels whose chips would overlap another
+ * label get the small style. Overlap is judged at the labels' normal size (measured once), so a
+ * label that has shrunk doesn't grow back the moment it fits, and then flicker.
+ */
+function shrinkOverlapping(markers: Marker[]) {
+  const tags = markers.map((m) => {
+    const el = m.getElement();
+    const chip = el.firstElementChild as HTMLElement;
+    const stem = el.lastElementChild as HTMLElement;
+    return { el, w: chip.offsetWidth, h: chip.offsetHeight, stem: stem.offsetHeight };
+  });
+  const GAP = 4; // px of breathing room between chips
+  return () => {
+    const boxes = tags.map((t) => {
+      const r = t.el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const bottom = r.bottom - t.stem; // the chip sits on top of the stem
+      return { l: cx - t.w / 2, r: cx + t.w / 2, top: bottom - t.h, b: bottom };
+    });
+    const small = boxes.map(() => false);
+    for (let i = 0; i < boxes.length; i++) {
+      for (let j = i + 1; j < boxes.length; j++) {
+        const [a, b] = [boxes[i], boxes[j]];
+        if (a.l < b.r + GAP && b.l < a.r + GAP && a.top < b.b + GAP && b.top < a.b + GAP) small[i] = small[j] = true;
+      }
+    }
+    tags.forEach((t, i) => t.el.classList.toggle("is-small", small[i]));
+  };
+}
+
 const currentTheme = (): Theme => (document.documentElement.dataset.theme === "dark" ? "dark" : "light");
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -203,6 +279,9 @@ export function Hero3DMap({
   const mapRef = useRef<MapLibreMap | null>(null);
   const shownRef = useRef(-1); // hour index the columns currently show (-1 = not grown yet)
   const colsRef = useRef<Column[]>([]);
+  const streetsRef = useRef<StreetDay[]>([]);
+  const glowRef = useRef<GeoJSON.FeatureCollection>({ type: "FeatureCollection", features: [] });
+  const namesRef = useRef(new Map<string, string | null>()); // street → place name, fetched once
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const [dataReady, setDataReady] = useState(false);
@@ -239,7 +318,8 @@ export function Hero3DMap({
 
     let data: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
     colsRef.current = [];
-    const glow: GeoJSON.FeatureCollection = {
+    // Until the hour's pillars are known, glow under the busiest areas of the whole day.
+    glowRef.current = {
       type: "FeatureCollection",
       features: hotspots.map((s) => {
         const [lat, lng] = cellToLatLng(s.h3);
@@ -249,7 +329,7 @@ export function Hero3DMap({
 
     const addLayers = () => {
       if (map.getSource("cols")) return;
-      map.addSource("glow", { type: "geojson", data: glow });
+      map.addSource("glow", { type: "geojson", data: glowRef.current });
       map.addSource("cols", { type: "geojson", data, promoteId: "h3" });
       map.addLayer({
         // red bloom on the ground under the worst areas
@@ -292,44 +372,20 @@ export function Hero3DMap({
     // Theme switch rebuilds the style; put our layers back once it's loaded.
     map.on("style.load", addLayers);
 
-    Promise.all(HERO_HOURS.map((h) => fetchMapCells({ hour: h, res: 9, period: "all" })))
-      .then((byHour) => {
+    Promise.all([
+      Promise.all(HERO_HOURS.map((h) => fetchMapCells({ hour: h, res: 9, period: "all" }))),
+      // Street levels for every hour: the name tags point at each pillar's busiest street.
+      fetchStreetDay("all").catch(() => [] as StreetDay[]),
+    ])
+      .then(([byHour, streets]) => {
         const built = columns(byHour);
         data = built.geojson;
         colsRef.current = built.cols;
+        streetsRef.current = streets;
         map.getSource<GeoJSONSource>("cols")?.setData(data);
         setDataReady(true);
       })
       .catch(() => {}); // API down: the city still turns, just without columns
-
-    // ---------- name tags on the busiest areas ----------
-    // Phones have room for one tag; neighbouring tags would overlap.
-    const tagged = el.clientWidth < 640 ? hotspots.slice(0, 1) : hotspots;
-    const markers = tagged.map((s) => {
-      const tag = document.createElement("div");
-      tag.className = "hero-tag";
-      const chip = document.createElement("span");
-      chip.className = "hero-tag-chip";
-      const dot = document.createElement("i");
-      dot.style.background = BAND_COLORS[s.band];
-      const label = document.createElement("b");
-      label.textContent = s.name;
-      const score = document.createElement("em");
-      score.textContent = new Intl.NumberFormat(locale === "bn" ? "bn-BD" : "en-US").format(s.score);
-      chip.append(dot, label, score);
-      const stem = document.createElement("span");
-      stem.className = "hero-tag-stem";
-      tag.append(chip, stem);
-      tag.addEventListener("click", (e) => {
-        e.stopPropagation();
-        router.push(`/${locale}/area/${s.h3}`);
-      });
-      const [lat, lng] = cellToLatLng(s.h3);
-      // Sub-pixel placement: tags glide with the turning camera instead of jumping pixel to pixel.
-      return new Marker({ element: tag, anchor: "bottom", subpixelPositioning: true })
-        .setLngLat([lng, lat])
-        .addTo(map);
-    });
 
     // ---------- camera: slow orbit, lean toward the pointer, tilt with scroll ----------
     let visible = true;
@@ -418,7 +474,6 @@ export function Hero3DMap({
       el.removeEventListener("pointerleave", onLeave);
       el.removeEventListener("click", onClick);
       el.removeEventListener("mousemove", onMove);
-      markers.forEach((m) => m.remove());
       map.remove();
       mapRef.current = null;
       shownRef.current = -1;
@@ -451,6 +506,75 @@ export function Hero3DMap({
       shownRef.current = to;
     };
   }, [hour, ready, dataReady]);
+
+  // ---------- name tags on the red pillars of the hour shown ----------
+  useEffect(() => {
+    const map = mapRef.current;
+    const el = ref.current;
+    if (!map || !el || !ready || !dataReady) return;
+    let live = true;
+    let markers: Marker[] = [];
+    let shrinkTimer = 0;
+    // Phones have room for one tag; more would overlap.
+    const tags = tagsFor(colsRef.current, streetsRef.current, hour, el.clientWidth < 640 ? 1 : MAX_TAGS);
+    // The red bloom on the ground follows the same pillars, so it never glows under a calm one.
+    // (Kept in a ref: a theme switch rebuilds the layers from it.)
+    glowRef.current = {
+      type: "FeatureCollection",
+      features: tags.map((t) => {
+        const [lat, lng] = cellToLatLng(t.street);
+        return { type: "Feature", properties: { color: BAND_COLORS[t.band] }, geometry: { type: "Point", coordinates: [lng, lat] } };
+      }),
+    };
+    map.getSource<GeoJSONSource>("glow")?.setData(glowRef.current);
+    const nameOf = async (street: string): Promise<string | null> => {
+      const cache = namesRef.current;
+      if (cache.has(street)) return cache.get(street) ?? null;
+      try {
+        const res = await fetch(`/api/place?h3=${encodeURIComponent(street)}&lang=${locale}&v=2`);
+        const name = res.ok ? ((await res.json()) as { name: string | null }).name : null;
+        cache.set(street, name);
+        return name;
+      } catch {
+        return null;
+      }
+    };
+    void Promise.all(tags.map(async (t) => ({ ...t, name: await nameOf(t.street) }))).then((named) => {
+      if (!live) return;
+      const number = new Intl.NumberFormat(locale === "bn" ? "bn-BD" : "en-US");
+      markers = named
+        .filter((t): t is Tag & { name: string } => !!t.name) // no name known: no tag rather than a code
+        .map((t) => {
+          const tag = document.createElement("div");
+          tag.className = "hero-tag";
+          const chip = document.createElement("span");
+          chip.className = "hero-tag-chip";
+          const dot = document.createElement("i");
+          dot.style.background = BAND_COLORS[t.band];
+          const label = document.createElement("b");
+          label.textContent = t.name;
+          const score = document.createElement("em");
+          score.textContent = number.format(t.score);
+          chip.append(dot, label, score);
+          const stem = document.createElement("span");
+          stem.className = "hero-tag-stem";
+          tag.append(chip, stem);
+          tag.addEventListener("click", (e) => {
+            e.stopPropagation();
+            router.push(`/${locale}/area/${t.street}`);
+          });
+          const [lat, lng] = cellToLatLng(t.street);
+          // Sub-pixel placement: tags glide with the turning camera instead of jumping pixel to pixel.
+          return new Marker({ element: tag, anchor: "bottom", subpixelPositioning: true }).setLngLat([lng, lat]).addTo(map);
+        });
+      shrinkTimer = window.setInterval(shrinkOverlapping(markers), 200);
+    });
+    return () => {
+      live = false;
+      window.clearInterval(shrinkTimer);
+      markers.forEach((m) => m.remove());
+    };
+  }, [hour, ready, dataReady, locale, router]);
 
   // ---------- cycle through the day until someone picks an hour ----------
   useEffect(() => {

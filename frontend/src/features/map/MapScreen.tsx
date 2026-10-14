@@ -412,11 +412,12 @@ export function MapScreen({
       {/* ---------- bottom: peek (mobile) + time dock ---------- */}
       <div
         className={cn(
-          "absolute inset-x-3 bottom-3 z-20 lg:bottom-5 lg:left-[calc(24rem+1.5rem)] lg:right-16",
+          // Wider than the panel it centres: taps on its empty sides must reach the map's hexagons.
+          "pointer-events-none absolute inset-x-3 bottom-3 z-20 lg:bottom-5 lg:left-[calc(24rem+1.5rem)] lg:right-16",
           (typing || tripOn) && "max-lg:hidden",
         )}
       >
-        <div className="mx-auto flex max-w-xl flex-col gap-2">
+        <div className="mx-auto flex max-w-xl flex-col gap-2 [&>*]:pointer-events-auto">
           {peek && <div className="lg:hidden">{peek}</div>}
           <TimeDock
             locale={locale}

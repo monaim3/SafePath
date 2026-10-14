@@ -179,6 +179,22 @@ def cell_summary(cell: str, rows: list[Row], now: datetime, hour: int | None) ->
     }
 
 
+def busiest_street(rows: list[Row], now: datetime) -> tuple[str, list[Row]] | None:
+    """The street-level cell (with its rows) that sets a neighbourhood's level: its busiest street
+    that is itself public, so its own page can be shown. None when no street is public on its own."""
+    streets = [
+        (cell, street_rows)
+        for cell, street_rows in group_by_cell(rows, 10).items()
+        if is_public(street_rows)
+    ]
+    if not streets:
+        return None
+    return max(
+        streets,
+        key=lambda s: _street_score([r for r in s[1] if r.kind != "positive"], now, None),
+    )
+
+
 def street_day(cell: str, rows: list[Row], now: datetime) -> dict:
     """One street-level cell's level for the whole day (`day`) and for each hour (`hours`, 24 values)."""
     incidents = [r for r in rows if r.kind != "positive"]

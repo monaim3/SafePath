@@ -165,8 +165,12 @@ html:lang(bn) body {
   color: var(--ink);
   font-size: 12px;
   white-space: nowrap;
-  transition: transform 0.2s;
+  transition: transform 0.2s, font-size 0.25s, padding 0.25s, gap 0.25s;
 }
+/* Labels that would overlap another one (many red pillars close together) shrink while they do. */
+.hero-tag.is-small .hero-tag-chip { font-size: 10px; gap: 4px; padding: 3px 7px 3px 6px; }
+.hero-tag.is-small .hero-tag-chip i { width: 6px; height: 6px; }
+.hero-tag.is-small .hero-tag-chip b { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; }
 .hero-tag:hover .hero-tag-chip { transform: translateY(-2px); }
 .hero-tag-chip i { width: 8px; height: 8px; border-radius: 9999px; box-shadow: 0 0 8px currentColor; }
 .hero-tag-chip b { font-weight: 600; }
